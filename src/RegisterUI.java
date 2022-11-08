@@ -5,4 +5,5 @@ public class RegisterUI {
     public static void main(String[] args) {
         RegisterFrame f = new RegisterFrame();
     }
+
 }

@@ -76,6 +76,7 @@ public class AccountLoginFrame extends JFrame implements ActionListener {
     }
 
 
+
     //TODO: Now it is just a simple test way to do the LoginSuccess case, we need more things on it.
     public boolean LoginSuccess(){
         return UserName.getText().equals(PassWord.getText());

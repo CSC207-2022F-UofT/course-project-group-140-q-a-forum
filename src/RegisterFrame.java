@@ -95,6 +95,7 @@ public class RegisterFrame extends JFrame {
             this.setVisible(true);
 
 
+
         }
     }
 
