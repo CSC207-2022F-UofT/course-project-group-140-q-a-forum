@@ -87,4 +87,5 @@ public class Post {
     public void setTopic(String topic) {
         this.topic = topic;
     }
+
 }
