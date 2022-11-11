@@ -1,6 +1,6 @@
 package use_cases;
-import src.entities.Course;
-import src.use_cases.DataBaseAccess.CourseDataInterface;
+import entities.Course;
+import use_cases.DataBaseAccess.CourseDataInterface;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

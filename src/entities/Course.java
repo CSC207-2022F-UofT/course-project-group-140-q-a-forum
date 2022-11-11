@@ -5,12 +5,12 @@ import java.util.Date;
 
 public class Course {
 
-    private String Name;
-    private String CourseCode;
-    private String Description;
-    private String Instructor;
-    private Date[] Semester;
-    private ArrayList<User> Students;
+    private String name;
+    private String courseCode;
+    private String description;
+    private String instructor;
+    private Date[] semester;
+    private ArrayList<User> students;
 
     /**
      *
@@ -25,39 +25,39 @@ public class Course {
      * @param code
      * @param description
      * @param semester
-     * @param Instructor
+     * @param instructor
      */
 
-    public Course(String name, String code, String description, Date[] semester,String Instructor){
-        this.Name = name;
-        this.CourseCode = code;
-        this.Description = description;
-        this.Semester = semester;
-        this.Instructor = Instructor;
-        this.Students = new ArrayList<>();
+    public Course(String name, String code, String description, Date[] semester,String instructor){
+        this.name = name;
+        this.courseCode = code;
+        this.description = description;
+        this.semester = semester;
+        this.instructor = instructor;
+        this.students = new ArrayList<>();
     }
 
     /**
      * Getter methods
      */
     public String getName() {
-        return Name;
+        return this.name;
     }
 
     public String getCode() {
-        return CourseCode;
+        return this.courseCode;
     }
 
     public String getDescription() {
-        return Description;
+        return this.description;
     }
 
     public Date[] getSemester() {
-        return Semester;
+        return this.semester;
     }
 
     public String getInstructor() {
-        return Instructor;
+        return this.instructor;
     }
 
     /**
@@ -65,12 +65,12 @@ public class Course {
      */
 
     public void addStudent(User student){
-        Students.add(student);
+        this.students.add(student);
     }
 
     public void removeStudent(User student){
-        if(Students.indexOf(student) != -1){
-            Students.remove(student);
+        if(this.students.indexOf(student) != -1){
+            this.students.remove(student);
         }
         // TODO: If the user is not in the course, generate an error message!
     }

@@ -3,10 +3,10 @@ package entities;
 import javax.lang.model.type.UnionType;
 
 public class Report {
-    private String User;
-    private int ReportType;
+    private String user;
+    private int reportType;
     //ReportType: 0 report on User, 1 report on Post, 2 report on Course.
-    private String Content;
+    private String content;
 
     public Report(){
 
@@ -14,44 +14,44 @@ public class Report {
 
     /**
      * @param username
-     * @param ReportType
-     * @param Content
+     * @param reportType
+     * @param content
      */
 
-    public Report(String username, int ReportType, String Content){
+    public Report(String username, int reportType, String content){
         /**
          * Constructor of the Report class. ReportType, 0 report on User, 1 report on Post, 2, report on Course.
          */
-        this.User = username;
-        this.ReportType = ReportType;
-        this.Content = Content;
+        this.user = username;
+        this.reportType = reportType;
+        this.content = content;
     }
 
     /**
      * @return
      */
     public String getUser() {
-        return this.User;
+        return this.user;
     }
 
     public int getReportType() {
-        return this.ReportType;
+        return this.reportType;
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
     public void setContent(String content) {
-        this.Content = content;
+        this.content = content;
     }
 
     public void setReportType(int reportType) {
-        this.ReportType = reportType;
+        this.reportType = reportType;
     }
 
     public void setUser(String user) {
-        this.User = user;
+        this.user = user;
     }
 }
 

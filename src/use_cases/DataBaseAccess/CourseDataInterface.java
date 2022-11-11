@@ -1,5 +1,5 @@
 package use_cases.DataBaseAccess;
-import src.entities.Course;
+import entities.Course;
 import java.util.ArrayList;
 
 

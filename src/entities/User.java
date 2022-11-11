@@ -2,11 +2,9 @@ package entities;
 
 public class User {
 
-    private String Username;
-    private int UserID;
-    private String Password;
-
-    private boolean IsAdministrator;
+    private String username;
+    private int userId;
+    private String password;
 
     public User(){
 
@@ -19,47 +17,28 @@ public class User {
      */
 
     public User(String username, int userid, String password){
-        this.Username = username;
-        this.UserID = userid;
-        this.Password = password;
-        this.IsAdministrator = false;
-    }
-
-    /**
-     * @param username
-     * @param userid
-     * @param password
-     * @param isAdministrator
-     */
-
-    public User(String username, int userid, String password, boolean isAdministrator){
-        this.Username = username;
-        this.UserID = userid;
-        this.Password = password;
-        this.IsAdministrator = isAdministrator;
+        this.username = username;
+        this.userId = userid;
+        this.password = password;
     }
 
     public String getUsername() {
-        return Username;
+        return this.username;
     }
 
     public int getUserID() {
-        return UserID;
+        return this.userId;
     }
 
     public String getPassword() {
-        return Password;
-    }
-
-    public boolean isAdministrator() {
-        return IsAdministrator;
+        return this.password;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 }

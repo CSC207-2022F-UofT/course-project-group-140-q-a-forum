@@ -3,9 +3,9 @@ package entities;
 import java.awt.*;
 
 public class Post {
-    private String Topic;
-    private String Texts;
-    private Image[] Images;
+    private String topic;
+    private String texts;
+    private Image[] images;
 
     public Post(){
 
@@ -17,9 +17,9 @@ public class Post {
      */
 
     public Post(String topic, String texts){
-        this.Topic = topic;
-        this.Texts = texts;
-        this.Images = null;
+        this.topic = topic;
+        this.texts = texts;
+        this.images = null;
     }
 
     /**
@@ -29,9 +29,9 @@ public class Post {
      */
 
     public Post(String topic, String texts, Image[] images){
-        this.Topic = topic;
-        this.Texts = texts;
-        this.Images = images;
+        this.topic = topic;
+        this.texts = texts;
+        this.images = images;
     }
 
 
