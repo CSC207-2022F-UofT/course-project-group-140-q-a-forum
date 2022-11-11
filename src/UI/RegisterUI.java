@@ -1,3 +1,5 @@
+package UI;
+
 public class RegisterUI {
     RegisterFrame f = new RegisterFrame();
 

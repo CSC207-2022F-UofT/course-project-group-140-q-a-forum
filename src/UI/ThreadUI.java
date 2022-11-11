@@ -1,3 +1,5 @@
+package UI;
+
 public class ThreadUI {
     ThreadFrame f = new ThreadFrame();
 
