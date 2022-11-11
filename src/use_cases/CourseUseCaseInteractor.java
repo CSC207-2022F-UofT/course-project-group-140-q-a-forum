@@ -1,4 +1,4 @@
-package src.use_cases;
+package use_cases;
 import src.entities.Course;
 import src.use_cases.DataBaseAccess.CourseDataInterface;
 
@@ -19,13 +19,14 @@ public class CourseUseCaseInteractor {
      */
     public boolean registerACourse(String courseCode){
         //TODO: complete this method
+        return true;
     }
 
     /**
      *
      * @param courseInformation
      */
-    public void removeACourse(String courseCode, String semester){
+    public void removeACourse(Object courseInformation){
 
     }
 }

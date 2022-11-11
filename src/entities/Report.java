@@ -1,4 +1,4 @@
-package src.entities;
+package entities;
 
 import javax.lang.model.type.UnionType;
 

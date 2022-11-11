@@ -1,4 +1,4 @@
-package src.use_cases.DataBaseAccess;
+package use_cases.DataBaseAccess;
 import src.entities.Course;
 import java.util.ArrayList;
 
