@@ -17,6 +17,10 @@ public class User {
      */
 
     public User(String username, int userid, String password){
+        /**
+         * Create a user account, with username, userid, and password.
+         * userid is assigned by an usercase, and is IMMUTABLE
+         */
         this.username = username;
         this.userId = userid;
         this.password = password;

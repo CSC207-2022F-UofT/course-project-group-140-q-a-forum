@@ -29,6 +29,11 @@ public class Course {
      */
 
     public Course(String name, String code, String description, Date[] semester,String instructor){
+        /**
+         * Create a course wih coursename, coursecode, description, semster teaching
+         * and instructor.
+         * all of the information are immutable, unless being fixed by a administrator.
+         */
         this.name = name;
         this.courseCode = code;
         this.description = description;
