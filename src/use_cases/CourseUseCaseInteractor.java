@@ -12,13 +12,21 @@ public class CourseUseCaseInteractor {
         this.courseDataInterface = courseDataInterface;
     }
 
-    void registerACourse(String courseCode, String semester){
-        ArrayList<Course> allCourses = courseDataInterface.getData();
-        boolean found = false;
+    /**
+     * register a course
+     * @param courseCode
+     * @return
+     */
+    public boolean registerACourse(String courseCode){
+        //TODO: complete this method
     }
 
-    void removeACourse(String courseCode, String semester){
-        courseDataInterface.deleteCourse(courseCode);
+    /**
+     *
+     * @param courseInformation
+     */
+    public void removeACourse(String courseCode, String semester){
+
     }
 }
 
