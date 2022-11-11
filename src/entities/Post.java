@@ -1,4 +1,4 @@
-package Entities;
+package src.entities;
 
 import java.awt.*;
 
