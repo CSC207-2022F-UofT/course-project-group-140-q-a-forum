@@ -6,6 +6,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CourseUseCaseInteractor {
+
+    // Try
     final CourseDataInterface courseDataInterface;
 
     public CourseUseCaseInteractor(CourseDataInterface courseDataInterface) {
