@@ -5,10 +5,10 @@ import use_cases.DataBaseAccess.PostDataInterface;
 
 public class PostUseCaseInteractor {
 
-    final PostDataInterface courseDataInterface;
+    final PostDataInterface postDataInterface;
 
-    public PostUseCaseInteractor(PostDataInterface courseDataInterface) {
-        this.courseDataInterface = courseDataInterface;
+    public PostUseCaseInteractor(PostDataInterface postDataInterface) {
+        this.postDataInterface = postDataInterface;
     }
 
     /**
