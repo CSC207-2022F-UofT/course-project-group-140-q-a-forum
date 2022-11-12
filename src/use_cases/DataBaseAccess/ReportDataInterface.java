@@ -1,17 +1,25 @@
 package use_cases.DataBaseAccess;
 
-import entities.Comment;
-import entities.Post;
-import entities.PostInfo;
 import entities.Report;
 
 import java.util.ArrayList;
 
 public interface ReportDataInterface extends DataInterface{
-    ArrayList<Post> getData();
+    ArrayList<Report> getData();
 
+
+    /**
+     * add a report in DataBase
+     * @param report/
+     */
     void addReport(Report report);
 
+
+
+    /**
+     * delete a report in DataBase
+     * @param report/
+     */
     void removeReport(Report report);
 
 }
