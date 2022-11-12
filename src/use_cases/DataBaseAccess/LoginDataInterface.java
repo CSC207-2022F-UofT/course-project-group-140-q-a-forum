@@ -4,6 +4,6 @@ import entities.Post;
 
 import java.util.ArrayList;
 
-public interface LoginInterface extends DataInterface{
+public interface LoginDataInterface extends DataInterface{
     ArrayList<Post> getData();
 }

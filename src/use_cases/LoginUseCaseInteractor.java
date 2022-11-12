@@ -1,12 +1,12 @@
 package use_cases;
 import entities.User;
-import use_cases.DataBaseAccess.LoginInterface;
+import use_cases.DataBaseAccess.LoginDataInterface;
 
 
 public class LoginUseCaseInteractor {
-    final LoginInterface loginInterface;
+    final LoginDataInterface loginInterface;
 
-    public LoginUseCaseInteractor(LoginInterface loginInterface) {
+    public LoginUseCaseInteractor(LoginDataInterface loginInterface) {
         this.loginInterface = loginInterface;
     }
     /**
