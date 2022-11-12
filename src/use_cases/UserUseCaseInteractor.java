@@ -31,7 +31,7 @@ public class UserUseCaseInteractor {
      * @param  password/
      * @return boo
      */
-    public boolean resetPassword(String password){
+    public boolean resetPassword(User user, String password){
         //TODO: complete this method
         return false;
     }
@@ -45,7 +45,7 @@ public class UserUseCaseInteractor {
      * @param  email/
      * @return boo
      */
-    public boolean resetEmail(String email){
+    public boolean resetEmail(User user, String email){
         //TODO: complete this method
         return false;
     }
