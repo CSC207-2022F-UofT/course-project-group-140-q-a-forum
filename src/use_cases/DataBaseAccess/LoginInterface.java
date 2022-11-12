@@ -1,4 +1,9 @@
 package use_cases.DataBaseAccess;
 
-public interface LoginInterface {
+import entities.Post;
+
+import java.util.ArrayList;
+
+public interface LoginInterface extends DataInterface{
+    ArrayList<Post> getData();
 }
