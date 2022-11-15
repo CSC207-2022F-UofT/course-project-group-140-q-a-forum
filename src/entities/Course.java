@@ -22,19 +22,17 @@ public class Course {
     }
 
     /**
-     * @param name
-     * @param code
-     * @param description
-     * @param semester
-     * @param instructors
+     * Create a course wih course name, course code, description, semester teaching
+     * and instructor.
+     * All the information are immutable, unless being fixed by a administrator.
+     * @param name the name of the course
+     * @param code the course code of the course
+     * @param description a description of the course
+     * @param semester the start and end date of the course
+     * @param instructors an array list of instructors
      */
 
     public Course(String name, String code, String description, Date[] semester, ArrayList<String> instructors){
-        /**
-         * Create a course wih coursename, coursecode, description, semster teaching
-         * and instructor.
-         * all of the information are immutable, unless being fixed by a administrator.
-         */
         this.name = name;
         this.courseCode = code;
         this.description = description;
@@ -70,14 +68,63 @@ public class Course {
      * Setter methods
      */
 
-    public void addStudent(User student){
-        this.students.add(student);
+    /**
+     * the method for adding a student to a course. If the student is already in the course, returns false;
+     * otherwise they are added to the course and returns true.
+     * @param student the student to be added
+     * @return boo
+     */
+    public boolean addStudent(User student){
+        if (this.students.contains(student)){
+            return false;
+        }else{
+            this.students.add(student);
+            return true;
+        }
     }
 
-    public void removeStudent(User student){
-        if(this.students.indexOf(student) != -1){
+    /**
+     * the method for removing a student to a course. If the student is not in the course, returns false;
+     * otherwise they are removed from this course and returns true.
+     * @param student the student to be removed
+     * @return boo
+     */
+    public boolean removeStudent(User student){
+        if (this.students.contains(student)){
             this.students.remove(student);
+            return true;
+        }else{
+            return false;
         }
-        // TODO: If the user is not in the course, generate an error message!
+    }
+
+    /**
+     * the method for adding an instructor to a course. If the instructor is already in the course, returns false;
+     * otherwise they are added to the course and returns true.
+     * @param instructor the instructor to be added
+     * @return boo
+     */
+    public boolean addInstructor(String instructor){
+        if (this.instructors.contains(instructor)){
+            return false;
+        }else{
+            this.instructors.add(instructor);
+            return true;
+        }
+    }
+
+    /**
+     * the method for removing an instructor to a course. If the instructor is not in the course, returns false;
+     * otherwise they are removed from this course and returns true.
+     * @param instructor the instructor to be removed
+     * @return boo
+     */
+    public boolean removeInstructor(String instructor){
+        if (this.instructors.contains(instructor)){
+            this.instructors.remove(instructor);
+            return true;
+        }else{
+            return false;
+        }
     }
 }

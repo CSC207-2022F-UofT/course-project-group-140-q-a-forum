@@ -1,5 +1,6 @@
 package use_cases;
 import entities.Course;
+import entities.User;
 import use_cases.DataBaseAccess.CourseDataInterface;
 import java.util.Date;
 
@@ -26,9 +27,7 @@ public class CourseUseCaseInteractor {
     public boolean registerACourse(Map<String, Object> courseInfo){
 
         // Check if the course exists in Database.
-        boolean found = courseDataInterface.courseExists(courseInfo);
-
-        if (found){return false;}
+        if (courseDataInterface.courseExists(courseInfo)){return false;}
 
         // Register a new course.
         Course course = new Course((String) courseInfo.get("Name"),
@@ -68,6 +67,46 @@ public class CourseUseCaseInteractor {
 
         courseDataInterface.modifyCourseContent(courseInfo, part, newPart);
         return true;
+    }
+
+    /**
+     * Add a student to a given course. Returns true if successfully added, returns false otherwise.
+     * @param course the course to be added the student to
+     * @param student the student to be added to the course
+     * @return boo
+     */
+    public boolean addStudent(Course course, User student){
+        return course.addStudent(student);
+    }
+
+    /**
+     * Remove a student from a given course. Returns true if successfully removed, returns false otherwise.
+     * @param course the course to be added the student to
+     * @param student the student to be added to the course
+     * @return boo
+     */
+    public boolean removeStudent(Course course, User student){
+        return course.removeStudent(student);
+    }
+
+    /**
+     * Add an instructor to a given course. Returns true if successfully added, returns false otherwise.
+     * @param course the course to be added the instructor to
+     * @param instructor the instructor to be added to the course
+     * @return boo
+     */
+    public boolean addInstructor(Course course, String instructor){
+        return course.addInstructor(instructor);
+    }
+
+    /**
+     * Remove a instructor from a given course. Returns true if successfully removed, returns false otherwise.
+     * @param course the course to be added the instructor to
+     * @param instructor the instructor to be added to the course
+     * @return boo
+     */
+    public boolean removeStudent(Course course, String instructor){
+        return course.removeInstructor(instructor);
     }
 }
 
