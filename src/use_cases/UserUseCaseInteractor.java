@@ -2,6 +2,9 @@ package use_cases;
 import entities.User;
 import use_cases.DataBaseAccess.UserDataInterface;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class UserUseCaseInteractor {
     final UserDataInterface userDataInterface;
 
@@ -11,13 +14,48 @@ public class UserUseCaseInteractor {
 
     /**
      * Create a user and setting UserName, PassWord, Email.
-     * If the Email be verified successfully, return True and
-       the User can be created into DataBase(need to call the userDataInterface).
-     * Otherwise, return False
-     * @param username, password, email
+     * Check whether the Username already exists.
+     * If the Username already exists, return "UsernameError"(String)
+     * Otherwise, Check whether the Password Valid or No.
+     * If password is not valid, return "PasswordValidError"
+     * Otherwise,Check whether the Re-enter password match with the password.
+     * If the two passwords do not match,  return "ReEnterError".
+     * If all four above pass, send the verification code to email and send "SendVerification"
+     * Then do the following:
+     * Check whether the verification code matches the verification. If no, return "VerificationError"
+     * Otherwise, send "RegisterSuccess".
+     * @param user
+     * @return type of the error UsernameError, PasswordValidError,ReEnterError,EmailError
+     */
+    public String createUser(Map<String,ArrayList<String>> user){
+        //TODO: complete this method
+
+        return "UsernameError";
+    }
+
+    /**
+     * Check the username entered
+     * If the username can be found in the database return False
+     * Otherwise, return True
+     * @param username
      * @return boo
      */
-    public boolean createUser(String username, String password, String email){
+    public boolean usernameCheck(String username){
+        //TODO: complete this method
+//        ArrayList<User> users=userDataInterface.getData();
+
+        return false;
+    }
+
+
+    /**
+     * Check the password and re-entered password
+     * If the two passwords entered is not the same, return False
+     * Otherwise, return True
+     * @param password, reenteredPassword
+     * @return boo
+     */
+    public boolean passwordCheck(String password, String reenteredPassword){
         //TODO: complete this method
         return false;
     }
@@ -51,7 +89,7 @@ public class UserUseCaseInteractor {
     }
 
     /**
-     * Take in the email, and send a random verify number to the eamil.
+     * Take in the email, and send a random verify number to the email.
      * If the verify number be verified successfully, return True
      * Otherwise, return False
      * @param  email/
@@ -59,6 +97,7 @@ public class UserUseCaseInteractor {
      */
     public boolean verifyEmail(String email){
         //TODO: complete this method
+
         return false;
     }
 }
