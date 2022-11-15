@@ -47,6 +47,18 @@ public class UserUseCaseInteractor {
         return false;
     }
 
+    /**
+     * Check the password.
+     * If the passwords entered meets the requirement, return True
+     * Otherwise, return False
+     * @param password
+     * @return boo
+     */
+    public boolean passwordCheck(String password){
+        //TODO: complete this method
+        return false;
+    }
+
 
     /**
      * Check the password and re-entered password
@@ -55,7 +67,7 @@ public class UserUseCaseInteractor {
      * @param password, reenteredPassword
      * @return boo
      */
-    public boolean passwordCheck(String password, String reenteredPassword){
+    public boolean duoPasswordCheck(String password, String reenteredPassword){
         //TODO: complete this method
         return false;
     }
