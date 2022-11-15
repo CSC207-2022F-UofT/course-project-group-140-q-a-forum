@@ -2,6 +2,8 @@ package use_cases;
 import entities.User;
 import use_cases.DataBaseAccess.LoginDataInterface;
 
+import java.util.ArrayList;
+
 
 public class LoginUseCaseInteractor {
     final LoginDataInterface loginInterface;
@@ -16,7 +18,7 @@ public class LoginUseCaseInteractor {
      * @return boo
      */
     public boolean checkLogin(User user, String password){
-        //TODO: complete this method
-        return true;
+        ArrayList<User> users = loginInterface.getData();
+        return (users.contains(user)) && (user.getPassword().equals(password));
     }
 }
