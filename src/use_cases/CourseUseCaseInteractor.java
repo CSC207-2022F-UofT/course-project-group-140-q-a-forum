@@ -100,12 +100,12 @@ public class CourseUseCaseInteractor {
     }
 
     /**
-     * Remove a instructor from a given course. Returns true if successfully removed, returns false otherwise.
+     * Remove an instructor from a given course. Returns true if successfully removed, returns false otherwise.
      * @param course the course to be added the instructor to
      * @param instructor the instructor to be added to the course
      * @return boo
      */
-    public boolean removeStudent(Course course, String instructor){
+    public boolean removeInstructor(Course course, String instructor){
         return course.removeInstructor(instructor);
     }
 }
