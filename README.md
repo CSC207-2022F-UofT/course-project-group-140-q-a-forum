@@ -57,7 +57,7 @@ The posts has the following attributes.
 
 All of the information of the Report object, once created, are immutable.
 ## 2. Use cases
-## 2.1 Course use case
+### 2.1 Course use case
 The course use case provides interface to create, modify, and delete course information. It has following functions:
 * addCourse()
 Function **addCourse()** takes in the course information and attempt to create the course and 
@@ -73,7 +73,10 @@ Function **modifyCourse()** takes in the course information and attempt to modif
 Function **deleteCourse()** takes some in the course information and attempt to create the course and
   return *true*. If the course information does not match, do nothing and return *false*.
 
-## 2.2
+### 2.2 Login use case
+### 2.3 User use case
+### 2.4 Post use case
+### 2.5 report use case
 
 ## 3. Controllers
 ## 4. Graphical User Interface
