@@ -23,7 +23,7 @@ The course object  has the following attributes:
 * course code
 * course description
 * semester offering
-* course instructor
+* course instructor(s)
 * students
 
 Most attributes for the course objects, once created, are immutable. The object only provides two
@@ -57,6 +57,23 @@ The posts has the following attributes.
 
 All of the information of the Report object, once created, are immutable.
 ## 2. Use cases
+## 2.1 Course use case
+The course use case provides interface to create, modify, and delete course information. It has following functions:
+* addCourse()
+Function **addCourse()** takes in the course information and attempt to create the course and 
+return *true*. If the course already exist, do nothing and return *false*. 
+
+
+* modifyCourse()
+Function **modifyCourse()** takes in the course information and attempt to modify the course and
+  return *true*. If the course does not exist, do nothing and return *false*.
+
+
+* deleteCourse()
+Function **deleteCourse()** takes some in the course information and attempt to create the course and
+  return *true*. If the course information does not match, do nothing and return *false*.
+
+## 2.2
 
 ## 3. Controllers
 ## 4. Graphical User Interface
