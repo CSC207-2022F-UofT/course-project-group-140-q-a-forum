@@ -1,5 +1,6 @@
 package use_cases.DataBaseAccess;
 
+import entities.Report;
 import entities.User;
 
 import java.util.ArrayList;
