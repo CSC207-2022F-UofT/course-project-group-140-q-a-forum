@@ -8,7 +8,8 @@ public class Course {
     private String name;
     private String courseCode;
     private String description;
-    private String instructor;
+
+    private ArrayList<String> instructors;
     private Date[] semester;
     private ArrayList<User> students;
 
@@ -25,10 +26,10 @@ public class Course {
      * @param code
      * @param description
      * @param semester
-     * @param instructor
+     * @param instructors
      */
 
-    public Course(String name, String code, String description, Date[] semester,String instructor){
+    public Course(String name, String code, String description, Date[] semester, ArrayList<String> instructors){
         /**
          * Create a course wih coursename, coursecode, description, semster teaching
          * and instructor.
@@ -38,7 +39,7 @@ public class Course {
         this.courseCode = code;
         this.description = description;
         this.semester = semester;
-        this.instructor = instructor;
+        this.instructors = instructors;
         this.students = new ArrayList<>();
     }
 
@@ -61,8 +62,8 @@ public class Course {
         return this.semester;
     }
 
-    public String getInstructor() {
-        return this.instructor;
+    public ArrayList<String> getInstructor() {
+        return this.instructors;
     }
 
     /**
