@@ -1,9 +1,9 @@
 package use_cases;
+
 import entities.User;
 import use_cases.DataBaseAccess.UserDataInterface;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Map;
 
 public class UserUseCaseInteractor {
     final UserDataInterface userDataInterface;
