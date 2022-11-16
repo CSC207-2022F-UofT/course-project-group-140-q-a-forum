@@ -1,39 +1,82 @@
-# Project Template
+# Group 140 CSC207 project: Q/A forum
+## Group members (alphabetical order by last name):
+Chihan Cui, Qianjun Huang, Liwei Yang, Jiawei Yu,  Gangquan Zhang, Xinlin Zhao, Yuyang Zhao, Jiajie Zhu
+### Task assignment
+# Project introduction
+## 1. Entities
+### 1.1 User.java
+User.java is a class that is used to store the data of each individual user/administrator of the forum. \
+\
+The user object has the following attributes:
+* username
+* userid
+* password
+* email
 
-This is a template repository for CSC 207 projects. 
-This repository contains starter code for a gradle project.
-It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
+The entity provides interfaces for other functions to modify the username, password, and email. The userid, however,
+is immutable once registration.
+### 1.2 Course.java
+Course.java is a class that is used to store the data of each specific course registrated on the forum.
+\
+The course object  has the following attributes:
+* course name
+* course code
+* course description
+* semester offering
+* course instructor(s)
+* students
 
-## Checklist For Your Project
-- [ ] Verify the correct settings for your project repository
-- [ ] Set up Github Projects
-- [ ] Create the implementation plan using issues and Github Projects
-- [ ] Create deveopment branches for your features
-- [ ] Use pull requests to merge finished features into main branch
-- [ ] Conduct code reviews
+Most attributes for the course objects, once created, are immutable. The object only provides two
+functions to add/remove students.
+### 1.3 Post.java
+Post.java is a class that is used to store the data of the posts in the forum. \
+The posts has the following attributes:
+* topic
+* texts
+* images
+* comments
+* posted by which user
 
-**If your team has trouble with any of these steps, please ask on Piazza. For example, with how GitHub Classroom works, your team *may* not have permissions to do some of the first few steps, in which case we'll post alternative instructions as needed.**
+The post object, once created, are modifiable, and can be commented by other user objects. \
+Some attributes, however, like the user who posted this thread, is immutable and viewable to everyone.
+### 1.4 Comment.java
+Comment.java is a class that used to store the data of each comment to a post.\
+The posts has the following attributes.
+* texts
+* images
+* comments
+* posted by which user
 
-## Workflow Documents
+The comment object is very similar to a post. However, it must be attached to a post or another comment.
+### 1.5 Report.java
+Comment.java is a class that used to store the data of a report of a problem in a forum to be viewed and resolved by the administrator.\
+The posts has the following attributes.
+* report type
+* content
+* posted by which user
 
-* Github Workflow: Please refer to the workflow that was introduced in the first lab. You should follow this when working on your code. The following document provides additional details too.
+All of the information of the Report object, once created, are immutable.
+## 2. Use cases
+### 2.1 Course use case
+The course use case provides interface to create, modify, and delete course information. It has following functions:
+* addCourse()
+Function **addCourse()** takes in the course information and attempt to create the course and 
+return *true*. If the course already exist, do nothing and return *false*. 
 
-* [Project Planning and Development Guide](project_plan_dev.md): This document helps you to understand how to create and maintain a project plan for your class project. **This document helps you to complete the Implementation Plan Milestone.**
 
-## Gradle Project
-Import this project into your Intellij editor. It should automatically recognise this as a gradle repository.
-The starter code was built using SDK version 11.0.1. Ensure that you are using this version for this project. (You can, of course, change the SDK version as per your requirement if your team has all agreed to use a different version)
+* modifyCourse()
+Function **modifyCourse()** takes in the course information and attempt to modify the course and
+  return *true*. If the course does not exist, do nothing and return *false*.
 
-You have been provided with two starter files for demonstration: HelloWorld and HelloWorldTest.
 
-You will find HelloWorld in `src/main/java/tutorial` directory. Right click on the HelloWorld file and click on `Run HelloWorld.main()`.
-This should run the program and print on your console.
+* deleteCourse()
+Function **deleteCourse()** takes some in the course information and attempt to create the course and
+  return *true*. If the course information does not match, do nothing and return *false*.
 
-You will find HelloWorldTest in `src/test/java/tutorial` directory. Right click on the HelloWorldTest file and click on `Run HelloWorldTest`.
-All tests should pass. Your team can remove this sample of how testing works once you start adding your project code to the repo.
+### 2.2 Login use case
+### 2.3 User use case
+### 2.4 Post use case
+### 2.5 report use case
 
-Moving forward, we expect you to maintain this project structure. You *should* use Gradle as the build environment, but it is fine if your team prefers to use something else -- just remove the gradle files and push your preferred project setup. Assuming you stick with Gradle, your source code should go into `src/main/java` (you can keep creating more subdirectories as per your project requirement). Every source class can auto-generate a test file for you. For example, open HelloWorld.java file and click on the `HelloWorld` variable as shown in the image below. You should see an option `Generate` and on clicking this your should see an option `Test`. Clicking on this will generate a JUnit test file for `HelloWorld` class. This was used to generate the `HelloWorldTest`.
-
-![image](https://user-images.githubusercontent.com/5333020/196066655-d3c97bf4-fdbd-46b0-b6ae-aeb8dbcf351d.png)
-
-You can create another simple class and try generating a test for this class.
+## 3. Controllers
+## 4. Graphical User Interface
