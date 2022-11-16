@@ -24,7 +24,7 @@ public class Course {
     /**
      * Create a course wih course name, course code, description, semester teaching
      * and instructor.
-     * All the information are immutable, unless being fixed by a administrator.
+     * All the information are immutable, unless being fixed by an administrator.
      * @param name the name of the course
      * @param code the course code of the course
      * @param description a description of the course
@@ -64,15 +64,12 @@ public class Course {
         return this.instructors;
     }
 
-    /**
-     * Setter methods
-     */
 
     /**
      * the method for adding a student to a course. If the student is already in the course, returns false;
      * otherwise they are added to the course and returns true.
      * @param student the student to be added
-     * @return boo
+     * @return if successfully added this student to this course
      */
     public boolean addStudent(User student){
         if (this.students.contains(student)){
@@ -87,7 +84,7 @@ public class Course {
      * the method for removing a student to a course. If the student is not in the course, returns false;
      * otherwise they are removed from this course and returns true.
      * @param student the student to be removed
-     * @return boo
+     * @return if successfully removed this student from this course
      */
     public boolean removeStudent(User student){
         if (this.students.contains(student)){
@@ -102,7 +99,7 @@ public class Course {
      * the method for adding an instructor to a course. If the instructor is already in the course, returns false;
      * otherwise they are added to the course and returns true.
      * @param instructor the instructor to be added
-     * @return boo
+     * @return if successfully added this instructor into this course
      */
     public boolean addInstructor(String instructor){
         if (this.instructors.contains(instructor)){
@@ -117,7 +114,7 @@ public class Course {
      * the method for removing an instructor to a course. If the instructor is not in the course, returns false;
      * otherwise they are removed from this course and returns true.
      * @param instructor the instructor to be removed
-     * @return boo
+     * @return if successfully removed this instructor from this course
      */
     public boolean removeInstructor(String instructor){
         if (this.instructors.contains(instructor)){

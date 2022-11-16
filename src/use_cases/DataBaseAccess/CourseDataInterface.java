@@ -24,7 +24,7 @@ public interface CourseDataInterface extends DataInterface {
     /**
      * checks if a course exists in the current database.
      * @param courseInfo relevant information of the course to check existence.
-     * @return boo
+     * @return if this course exists in the current database
      */
     boolean courseExists(Map<String, Object> courseInfo);
 
