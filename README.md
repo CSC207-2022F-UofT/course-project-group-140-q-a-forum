@@ -1,6 +1,6 @@
 # Group 140 CSC207 project: Q/A forum
 ## Group members (alphabetical order by last name):
-Chihan Cui, Qianjun Huang, Liwei Yang, Jiawei Yu,  Gangquan Zhang, Xiling Zhao, Yuyang Zhao, Jiajie Zhu
+Chihan Cui(HermesCui), Qianjun Huang(cang-xue), Liwei Yang(Blair Yang), Jiawei Yu(JY3150),  Gangquan Zhang(jasongangquanzhang), Xiling Zhao(Teinble), Yuyang Zhao(NerverSoGoodStart), Jiajie Zhu(Christinjiajie)
 ### Task assignment
 # Project introduction
 ## 1. Entities
