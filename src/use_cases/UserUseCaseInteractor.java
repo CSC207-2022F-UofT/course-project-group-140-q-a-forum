@@ -9,109 +9,192 @@ import java.util.*;
 public class UserUseCaseInteractor {
     final UserDataInterface userDataInterface;
 
-    public UserUseCaseInteractor(UserDataInterface userDataInterface){
+    public UserUseCaseInteractor(UserDataInterface userDataInterface) {
         this.userDataInterface = userDataInterface;
     }
 
     /**
-     * Check the information a user entered. Create a user and setting UserName, PassWord, Email.
-     * @param user/
-     * @return type of the error UsernameError, PasswordValidError,ReEnterError,EmailError
+     * Register a user if this is not present in the current database.
+     * Returns the situation of registration.
+     *
+     * @param user This is a Map that contains necessary information
+     *             needed to register a user. The keys must be
+     *             "Username", "Password", "Re-entered Password", and "Email".
+     * @return if successfully registered this student
      */
-    public String createUser(Map<String,ArrayList<String>> user){
+    public String createUser(Map<String, String> user) {
 
-        //TODO:Check whether the Username already exists.
-        //     If the Username already exists, return "UsernameError"(String)
-        //     Otherwise, Check whether the Password Valid or No.
-        //     If password is not valid, return "PasswordValidError"
-        //     Otherwise,Check whether the Re-enter password match with the password.
-        //     If the two passwords do not match,  return "ReEnterError".
-        //     If all four above pass, send the verification code to email and send "SendVerification"
-        //     Then do the following:
-        //     Check whether the verification code matches the verification. If no, return "VerificationError"
-        //     Otherwise, send "RegisterSuccess".
+        // Check if the user exists in Database.
+        if (userDataInterface.userExists(user)) {
+            return "UsernameError";
+        }
 
-        return "UsernameError";
+        // Check if the password is valid.
+        if (!passwordCheck(user.get("password"))) {
+            return "PasswordValidError";
+        }
+
+        // Check if the reentered password is the same.
+        if (!duoPasswordCheck(user.get("Password"), user.get("Re-entered Password"))) {
+            return "ReEnterError";
+        }
+
+        // Check if the email is valid.
+        if (!emailCheck(user.get("Email"))) {
+            return "EmailError";
+        }
+
+        // Check the email verification.
+        if (!verifyEmail(user.get("email"))) {
+            return "VerificationError";
+        }
+
+        // Register a new user.
+        User newuser = new User(user.get("Username"), user.get("Password"),
+                user.get("Email"));
+
+        userDataInterface.addUser(newuser);
+
+        return "RegisterSuccess";
     }
 
-    /**
-     * Check the username entered
-     * @param username/
-     * @return boo
-     */
-    public boolean usernameCheck(String username){
-        //TODO: If the username can be found in the database return False
-        //      Otherwise, return True
-//        ArrayList<User> users=userDataInterface.getData();
-
-        return false;
-    }
 
     /**
-     * Check the password.
-     * @param password/
-     * @return boo
+     * This method check the password user entered.
+     * If the password meets the requirement, return true.
+     * Otherwise, returns false.
+     *
+     * @param password information user provided.
+     * @return if the password includes numbers, letters, and at least one upper letter.
      */
-    public boolean passwordCheck(String password){
+    public boolean passwordCheck(String password) {
         //TODO: complete this method
         //      If the passwords entered meets the requirement, return True
-        //      Otherwise, return False
+        //      Otherwise, return False.
 
-        return false;
+        // Check if the length of password is greater than 8.
+        return password.length() > 8;
     }
 
 
     /**
      * Check the password and re-entered password
-     * @param password/, reenteredPassword/
+     *
+     * @param password          password user provided.
+     * @param reenteredpassword password user provided for the second time.
      * @return boo
      */
-    public boolean duoPasswordCheck(String password, String reenteredPassword){
+    public boolean duoPasswordCheck(String password, String reenteredpassword) {
         //TODO: complete this method
         //      If the two passwords entered is not the same, return False
         //      Otherwise, return True
-        return false;
-    }
+        return password.equals(reenteredpassword);
 
-
-    /**
-     * Reset password, take in the CORRECT password.
-     * @param  user/
-     * @return boo
-     */
-    public boolean resetPassword(Map<String,ArrayList<String>> user){
-        //TODO: complete this method
-        //      If the password be verified successfully, return True and
-        //      reset a new password. the User's password is changed into DataBase(need to call the userDataInterface).
-        //      Otherwise, return False
-
-        return false;
     }
 
     /**
-     * Reset email, take in the CORRECT email and get the Verification.
-     * @param  user/
-     * @return boo
+     * This checks the email the user entered.Returns true if the email is from University of Toronto.
+     * Otherwise, it returns false
+     *
+     * @param email email user provided.
+     * @return if the email entered is valid.
      */
-    public boolean resetEmail(Map<String,ArrayList<String>> user){
-        //TODO: complete this method
-        //      If the email be verified successfully, return True and reset a new email and verify the new email.
-        //       the User's email is changed into DataBase(need to call the userDataInterface).
-        //      Otherwise, return False
-        return false;
+
+    private boolean emailCheck(String email) {
+        StringBuilder email2 = new StringBuilder(email);
+
+        // Reverse the email.
+        email2.reverse();
+
+        return email2.substring(0, 17).equals("ac.otnorotu.liam@");
     }
 
     /**
      * Take in the email, and send a random verify number to the email.
-
-     * @param  email/
-     * @return boo
+     *
+     * @param email email user provided.
+     * @return if the email passes the verification.
      */
-    public boolean verifyEmail(String email){
+    public boolean verifyEmail(String email) {
         //TODO: complete this method
         //      If the verify number be verified successfully, return True
         //      Otherwise, return False
 
         return false;
+    }
+
+
+    /**
+     * This method reset the password of user.
+     * If the new password meets the requirement, it resets password and returns true.
+     * Otherwise, it returns false.
+     *
+     * @param user        information user provided.
+     * @param newPassword the new password user wants to change.
+     * @return if successfully change the password.
+     */
+    public boolean resetPassword(Map<String, String> user, String newPassword) {
+        //TODO: complete this method
+        //      If the password be verified successfully, return True and
+        //      reset a new password. the User's password is changed into DataBase(need to call the userDataInterface).
+        //      Otherwise, return False
+
+        // If the given new password does not meet the requirement, return false.
+        if (!passwordCheck(newPassword)) {
+            return false;
+        }
+
+        // Reset the password.
+        userDataInterface.resetPassword(user, newPassword);
+        return true;
+    }
+
+    /**
+     * This method reset the email of user.
+     * If the new email is correct and passes the verification reset email and return true
+     * Otherwise, it returns false.
+     *
+     * @param user     information user provided.
+     * @param newEmail the new email user wants to change.
+     * @return if successfully change the email.
+     */
+    public boolean resetEmail(Map<String, String> user, String newEmail) {
+        //TODO: complete this method
+        //      If the email be verified successfully, return True and reset a new email and verify the new email.
+        //       the User's email is changed into DataBase(need to call the userDataInterface).
+        //      Otherwise, return False
+
+        // If the given new email does not meet the requirement, return false.
+        if (!emailCheck(newEmail)) {
+            return false;
+        }
+
+        // If the given new email does not pass the verification, return false.
+        if (!verifyEmail(newEmail)) {
+            return false;
+        }
+
+        userDataInterface.resetEmail(user, newEmail);
+        return true;
+    }
+
+
+    /**
+     * This removes a user from the current Database.
+     * It first checks if the user exists, and removes it if so;
+     * otherwise, it returns false.
+     *
+     * @param user Relevant information of this user.
+     * @return if successfully removed this user.
+     */
+    public boolean removeAUser(Map<String, String> user) {
+
+        // If the given user does not exist in the database, return false.
+        if (!userDataInterface.userExists(user)) {
+            return false;
+        }
+
+        userDataInterface.deleteUser(user.get("Username"));
+        return true;
     }
 }

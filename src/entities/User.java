@@ -6,24 +6,28 @@ public class User {
     private int userId;
     private String password;
 
+    private String email;
+
     public User(){
 
     }
 
     /**
      * @param username
-     * @param userid
      * @param password
+     * @param email
      */
 
-    public User(String username, int userid, String password){
+    public User(String username, String password, String email){
         /**
          * Create a user account, with username, userid, and password.
          * userid is assigned by an usercase, and is IMMUTABLE
          */
         this.username = username;
-        this.userId = userid;
+//        this.userId = userid;
         this.password = password;
+        this.email = email;
+
     }
 
     public String getUsername() {
