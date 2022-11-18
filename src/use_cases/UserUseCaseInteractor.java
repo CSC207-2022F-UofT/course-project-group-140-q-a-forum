@@ -72,7 +72,7 @@ public class UserUseCaseInteractor {
         //      If the passwords entered meets the requirement, return True
         //      Otherwise, return False.
 
-        // Check if the length of password is greater than 8.
+        // Check if the length of the password is greater than 8.
         return password.length() > 8;
     }
 
