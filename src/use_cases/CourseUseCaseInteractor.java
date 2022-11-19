@@ -19,6 +19,7 @@ public class CourseUseCaseInteractor {
      */
     public boolean registerACourse(String courseCode){
         //TODO: complete this method
+
         return true;
     }
 
