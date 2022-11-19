@@ -133,6 +133,36 @@ public class UserUseCaseInteractor {
 
 
     /**
+     * This method reset the username of user.
+     * If the new username is not in database, it resets username and returns true.
+     * Otherwise, it returns false.
+     *
+     * @param user        information user provided.
+     * @param newUsername the new username user wants to change.
+     * @return if successfully change the password.
+     */
+    public boolean resetUsername(Map<String, String> user, String newUsername) {
+        //TODO: complete this method
+        //      If the password be verified successfully, return True and
+        //      reset a new password. the User's password is changed into DataBase(need to call the userDataInterface).
+        //      Otherwise, return False
+
+        ArrayList<User> users = userDataInterface.getData();
+
+        // If the given new username exists in database, return false.
+        for (User people : users){
+            if (people.getUsername().equals(newUsername)) {
+                return false;
+            }
+        }
+
+        // Reset the password.
+        userDataInterface.resetUsername(user, newUsername);
+        return true;
+    }
+
+
+    /**
      * This method reset the password of user.
      * If the new password meets the requirement, it resets password and returns true.
      * Otherwise, it returns false.
