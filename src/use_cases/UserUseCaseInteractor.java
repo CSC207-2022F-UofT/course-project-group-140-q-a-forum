@@ -19,7 +19,7 @@ public class UserUseCaseInteractor {
      *
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
-     *             "Username", "Password", "Re-entered Password", and "Email".
+     *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
      * @return if successfully registered this student
      */
     public String createUser(Map<String, String> user) {
