@@ -20,7 +20,7 @@ public class PostUseCaseInteractor {
      */
 
     public boolean createPost(PostInfo information){
-
+        //TODO
         boolean boo = false;
         return boo;
     }
@@ -34,6 +34,7 @@ public class PostUseCaseInteractor {
      */
 
     public boolean editPost(Post post, PostInfo info){
+        //TODO
         boolean boo = false;
         return boo;
     }

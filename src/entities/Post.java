@@ -11,6 +11,8 @@ public class Post {
 
     private User postedBy;
 
+    private Course course;
+
     public Post(){
 
     }
@@ -20,7 +22,7 @@ public class Post {
      * @param texts
      */
 
-    public Post(String topic, String texts, User postedBy){
+    public Post(String topic, String texts, User postedBy, Course course){
         /**
          * Create a comment, with text, topic, and without images.
          * The comment can be commented (nest) as well
@@ -30,6 +32,7 @@ public class Post {
         this.topic = topic;
         this.texts = texts;
         this.postedBy = postedBy;
+        this.course = course;
         this.images = null;
     }
 
@@ -39,7 +42,7 @@ public class Post {
      * @param images
      */
 
-    public Post(String topic, String texts, ArrayList<Image> images, User postedBy){
+    public Post(String topic, String texts, ArrayList<Image> images, User postedBy, Course course){
         /**
          * Create a comment, with text, topic, and images.
          * The comment can be commented (nest) as well
@@ -50,6 +53,7 @@ public class Post {
         this.texts = texts;
         this.images = images;
         this.postedBy = postedBy;
+        this.course = course;
     }
 
     public ArrayList<Comment> getComments() {
@@ -67,6 +71,8 @@ public class Post {
     public String getTopic() {
         return topic;
     }
+
+    public Course getCourse() {return course;}
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
