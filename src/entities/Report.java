@@ -6,7 +6,7 @@ public class Report {
     private String user;
     private int reportType;
     //ReportType: 0 report on User, 1 report on Post, 2 report on Course.
-    private String content;
+    private Object content;
 
     public Report(){
 
@@ -18,9 +18,10 @@ public class Report {
      * @param content
      */
 
-    public Report(String username, int reportType, String content){
+    public Report(String username, int reportType, Object content){
         /**
-         * Constructor of the Report class. ReportType, 0 report on User, 1 report on Post, 2, report on Course.
+         * Create a report to a post. ReportType, 0 report on User,
+         * 1 report on Post, 2, report on Course.
          */
         this.user = username;
         this.reportType = reportType;
@@ -38,20 +39,10 @@ public class Report {
         return this.reportType;
     }
 
-    public String getContent() {
+    public Object getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
 
-    public void setReportType(int reportType) {
-        this.reportType = reportType;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
 }
 
