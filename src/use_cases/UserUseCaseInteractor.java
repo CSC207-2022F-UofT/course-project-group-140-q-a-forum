@@ -14,7 +14,7 @@ public class UserUseCaseInteractor {
     }
 
     /**
-     * Register a user if this is not present in the current database.
+     * Register a user if it is not present in the current database.
      * Returns the situation of registration.
      *
      * @param user This is a Map that contains necessary information
