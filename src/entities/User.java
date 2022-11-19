@@ -35,7 +35,7 @@ public class User {
     public User(String username, String password, String email, String isAdmin) {
         /**
          * Create a user account, with username, userid, and password.
-         * userid is assigned by an usercase, and is IMMUTABLE.
+         * userid is assigned by an usercase, and is IMMUTABLE
          */
         this.username = username;
 

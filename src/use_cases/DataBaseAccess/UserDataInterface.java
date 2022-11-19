@@ -18,7 +18,7 @@ public interface UserDataInterface extends DataInterface{
     /**
      * checks if a user exists in the current database.
      * @param user relevant information of the user to check existence.
-     * @return if this user exists in the current database
+     * @return if this user exists in the current database.
      */
     boolean userExists(Map<String, String> user);
 
