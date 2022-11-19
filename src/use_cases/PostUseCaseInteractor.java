@@ -20,7 +20,7 @@ public class PostUseCaseInteractor {
      * @return boo
      */
 
-    public boolean createPost(String topic, String texts, User postedBy){
+    public static boolean createPost(String topic, String texts, User postedBy){
 
         boolean boo = false;
         return boo;

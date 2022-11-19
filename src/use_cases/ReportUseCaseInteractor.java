@@ -32,7 +32,7 @@ public class ReportUseCaseInteractor {
      * @return boo
      */
 
-    public boolean removeReport(Report report){
+    public boolean removeReport(Report report) {
         //TODO: complete this method
         return false;
     }
