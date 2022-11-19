@@ -3,35 +3,55 @@ package entities;
 public class User {
 
     private String username;
-    private int userId;
     private String password;
+    private boolean isAdmin;
 
-    public User(){
+    private String email;
+
+    public User() {
 
     }
 
     /**
      * @param username
-     * @param userid
      * @param password
+     * @param email
      */
 
-    public User(String username, int userid, String password){
+    public User(String username, String password, String email) {
         /**
          * Create a user account, with username, userid, and password.
          * userid is assigned by an usercase, and is IMMUTABLE
          */
         this.username = username;
-        this.userId = userid;
+
         this.password = password;
+        this.email = email;
+        this.isAdmin = false;
+
     }
+
+
+    public User(String username, String password, String email, String isAdmin) {
+        /**
+         * Create a user account, with username, userid, and password.
+         * userid is assigned by an usercase, and is IMMUTABLE
+         */
+        this.username = username;
+
+        this.password = password;
+        this.email = email;
+        this.isAdmin = true;
+
+    }
+
 
     public String getUsername() {
         return this.username;
     }
 
-    public int getUserID() {
-        return this.userId;
+    public String getEmail() {
+        return this.email;
     }
 
     public String getPassword() {
@@ -44,5 +64,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 }
