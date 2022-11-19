@@ -10,8 +10,7 @@ public class Course {
     private String description;
 
     private ArrayList<String> instructors;
-    private Date[] semester;
-    private ArrayList<User> students;
+    private String semester;
 
     /**
      *
@@ -32,13 +31,12 @@ public class Course {
      * @param instructors an array list of instructors
      */
 
-    public Course(String name, String code, String description, Date[] semester, ArrayList<String> instructors){
+    public Course(String name, String code, String description, String semester, ArrayList<String> instructors){
         this.name = name;
         this.courseCode = code;
         this.description = description;
         this.semester = semester;
         this.instructors = instructors;
-        this.students = new ArrayList<>();
     }
 
     /**
@@ -56,7 +54,7 @@ public class Course {
         return this.description;
     }
 
-    public Date[] getSemester() {
+    public String getSemester() {
         return this.semester;
     }
 
@@ -65,35 +63,6 @@ public class Course {
     }
 
 
-    /**
-     * the method for adding a student to a course. If the student is already in the course, returns false;
-     * otherwise they are added to the course and returns true.
-     * @param student the student to be added
-     * @return if successfully added this student to this course
-     */
-    public boolean addStudent(User student){
-        if (this.students.contains(student)){
-            return false;
-        }else{
-            this.students.add(student);
-            return true;
-        }
-    }
-
-    /**
-     * the method for removing a student to a course. If the student is not in the course, returns false;
-     * otherwise they are removed from this course and returns true.
-     * @param student the student to be removed
-     * @return if successfully removed this student from this course
-     */
-    public boolean removeStudent(User student){
-        if (this.students.contains(student)){
-            this.students.remove(student);
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     /**
      * the method for adding an instructor to a course. If the instructor is already in the course, returns false;
