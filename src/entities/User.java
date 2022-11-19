@@ -8,7 +8,7 @@ public class User {
 
     private String email;
 
-    public User(){
+    public User() {
 
     }
 
@@ -18,7 +18,7 @@ public class User {
      * @param email
      */
 
-    public User(String username, String password, String email){
+    public User(String username, String password, String email) {
         /**
          * Create a user account, with username, userid, and password.
          * userid is assigned by an usercase, and is IMMUTABLE
@@ -32,7 +32,7 @@ public class User {
     }
 
 
-    public User(String username, String password, String email, String isAdmin){
+    public User(String username, String password, String email, String isAdmin) {
         /**
          * Create a user account, with username, userid, and password.
          * userid is assigned by an usercase, and is IMMUTABLE
@@ -44,7 +44,6 @@ public class User {
         this.isAdmin = true;
 
     }
-
 
 
     public String getUsername() {

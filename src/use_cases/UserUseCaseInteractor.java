@@ -50,13 +50,11 @@ public class UserUseCaseInteractor {
         }
 
         // Register a new user.
-        if (user.get("isAdmin")!=null){
+        if (user.get("isAdmin") != null) {
             User newUser = new User(user.get("Username"), user.get("Password"),
                     user.get("Email"), "");
             userDataInterface.addUser(newUser);
-        }
-
-        else{
+        } else {
             // Register a new user.
             User newUser = new User(user.get("Username"), user.get("Password"),
                     user.get("Email"));
