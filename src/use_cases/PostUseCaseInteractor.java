@@ -49,12 +49,25 @@ public class PostUseCaseInteractor {
      */
 
     public void editPost(HashMap<String, Object> post_info){
-        //TODO
-        return;
+        String title = post_info.get("title").toString();
+        String text = post_info.get("text").toString();
+        ArrayList<Image> images = (ArrayList<Image>) post_info.get("images");
+        User postedBy = (User) post_info.get("user");
+        Course course = (Course) post_info.get("course");
+        Boolean valid = checkPostValidity(title, text);
+        if (valid){
+
+            Post new_post = new Post(title, text, images, postedBy, course);
+            postDataInterface.editPost(new_post, post_info);
+        }
+        else {
+            throw new EmptyEntryException("title");
+        }
     }
 
     public boolean checkPostValidity(String title, String text){
         return title != "" & text != "" ;
     }
+
 
 }
