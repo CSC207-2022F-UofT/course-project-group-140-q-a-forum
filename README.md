@@ -80,3 +80,151 @@ Function **deleteCourse()** takes some in the course information and attempt to 
 
 ## 3. Controllers
 ## 4. Graphical User Interface
+### Figure 1.1 Login InterFace
+![](../../ScreenShot/LoginForm.png)
+This is the First interface showed when opening the project 
+The User should enter Their **UserName**, their **Password** and press
+.Then they need to press **Login** to Enter to the CoursesPage
+
+If they don't have any account yet, then press **Register** to enter the RegisterPage.
+
+### Figure 1.2 Register InterFace
+![](../../ScreenShot/RegisterForm/RegisterAUser.png)
+After click **Register** and enter the RegisterPage. Then user should fill 
+the first four information into the TextField, including enter Username, Password and Re-EnterPassword
+
+After Enter the Email, then click **Send Verification**, Then, it will check 
+whether the entered email is valid or no. If valid, the label under the **Send Verification**
+would have text and tell user an email contain verification code have already send email to the given email.
+If the verification code match with the sending code, then the user account would be created and go back to the 
+LoginPage. Otherwise, an error message would raise.
+
+### Figure 2.1 Courses Page
+
+![](../../ScreenShot/MainForm(showingContent)/CoursesForm.png)
+After Login successfully from Login Page, then entered to the courses page. 
+In the left panel of the page, it shows all the courses with their titles stored in the system.
+Click one of the courses, the description of the course would appear on the right. 
+
+To see all posts in the chosen course, click **Show all Posts** to enter the Postpage. 
+
+If there are any problem of the courses, click **Report this Course** to enter the ReportPage.
+
+
+In this page, User could click the top left button, **Register A new Course** and go to the MakeACourse Page.
+
+
+
+
+### Figure 2.2 Post Page
+
+![](../../ScreenShot/MainForm(showingContent)/PostForm.png)
+In this page, 
+In the top left of the page, it shows this is the posts page of the chosen course.
+
+In the left panel of the page, it shows all the posts in the course. 
+
+Click one of the post, the information of that post would appear on the right.
+
+To see all comments in the chosen course, click **Show all Posts** to enter the Postpage.
+
+If user want to do more discussion, they could click **Comment this Post** button to go to **CommentPage**
+
+If there are any problem of the posts, click **Report this post** to enter the ReportPage.
+
+
+In this page, User could click the top button, **Post a Post** and go to the MakeAPost Page.
+
+### sFigure 2.3 Comments Page
+
+![](../../ScreenShot/MainForm(showingContent)/CommentsForm.png)
+
+In this page,
+In the top left of the page, it shows this is the comments page of the chosen post or comment.
+
+In the left panel of the page, it shows all the comments with their title in post/comment.
+
+Click one of the comment, the information of that comment would appear on the right.
+
+If user want to do more discussion, they could click **Comment this Post** button to go to **CommentPage**
+
+If there are any problem of the comment, click **Report this Comment** to enter the ReportPage.
+
+
+In this page, User could click the top button, **Back to upper-level** and go to the MakeAPost Page.
+
+
+### Figure 3.1 Register A Course
+![](../../MakeACourse.png)
+User enter all needed information and select the "Fall", "Winter", "Summer"
+from the Semester ComboBox. 
+
+After filled all information, usr could click the **Register the Course** to register the Course
+and go back to CoursePage.
+
+If user want to skip register the course, they also could go back to CoursePage by click **Back to the Course Page** 
+
+
+### Figure 3.2 Make A Post
+![](../../MakeAPost.png)
+User enter all needed information for a post. In the top label, it shows it is under which course in the top label
+
+After filled all information, usr could click the **Post the post** to register the Course
+and go back to CoursePage.
+
+User also could choose post as the username or anonymous by selecting the comboButtons.
+
+If user want to skip Make the Post, they also could go back to PostPage by click **Back to the Course Page** 
+
+
+### Figure 3.3 Make A Comment
+![](../../ScreenShot/RegisterForm/MakeAComment.png)
+User enter all needed information for a comment. In the top label, it shows it is under which post/comment the top label
+
+After filled all information, usr could click the **Make the comment** to make a commment
+and go back to PostPage/CommentPage.
+
+User also could choose post as the username or anonymous by selecting the comboButtons.
+
+
+If user want to skip make the comment, they also could go back to PostPage by click **Back to the Course Page** 
+
+
+
+### Figure 3.3 Make A Report
+![](../../ScreenShot/RegisterForm/MakeAReportUI.png)
+
+User enter all needed information for a report. In the top label, it shows it is under which course/post/comment the top label
+
+After filled all information, usr could click the **Report** to send the report
+and go back to CoursePage.
+
+User also could choose post as the username or anonymous by selecting the comboButtons.
+
+
+If user want to skip register the course, they also could go back to CoursePage by click **Back to the Course Page** 
+
+
+### 4.1 Profile Page
+![](../../ScreenShot/ProfilePage.png)
+This page shows all profile information related to the user.
+
+Moreover, it support edit the username by clicking
+**Edit**.
+
+Also, it could change the password by clicking **Change Password**.
+
+User can go back to the main page **Back to Main Page** by clicking button. 
+
+
+
+
+
+### Figure 4.2 Change Password
+![](../../ScreenShot/ChangePassWordForm.png)
+If user doesn't feel good about their password, they just typing the OldPassword
+and enter twice of their NewPassword. After click **Change Password**, if all
+password are valid. Then the Password would be reset and return to the profile page.
+
+If user doesn't want to change, they also can go back by clicking the **Back to Profile Page**
+
