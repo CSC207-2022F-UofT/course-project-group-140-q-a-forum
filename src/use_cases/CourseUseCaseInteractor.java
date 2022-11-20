@@ -24,19 +24,40 @@ public class CourseUseCaseInteractor {
      *                   and "Instructors".
      * @return if successfully registered this student
      */
-    public boolean registerACourse(Map<String, Object> courseInfo){
+    public boolean registerACourse(Map<String, String> courseInfo){
 
         // Check if the course exists in Database.
-        if (courseDataInterface.courseExists(courseInfo)){return false;}
+        if (courseDataInterface.courseExists((String)
+                courseInfo.get("Course Code"))){
+            return false;
+        }
+        ArrayList instructors = extractInstructor(courseInfo.get("Instructors"));
 
         // Register a new course.
-        Course course = new Course((String) courseInfo.get("Name"),
-                (String) courseInfo.get("Course Code"),
-                (String) courseInfo.get("Description"),
-                (Date[] )courseInfo.get("Semester"),
-                (ArrayList<String>) courseInfo.get("Instructors"));
+        Course course = new Course(courseInfo.get("Name"),
+                courseInfo.get("Course Code"),
+                courseInfo.get("Description"),
+                courseInfo.get("Semester"),
+                instructors);
         courseDataInterface.addCourse(course);
         return true;
+    }
+
+    /**
+     * Extract the name of the instructors in a given string.
+     * @param original A string containing the name of the instructors,
+     *                 separated by commas.
+     * @return An array list of strings, each element is a string represented
+     * the name of an instructor.
+     */
+    private ArrayList<String> extractInstructor(String original){
+        ArrayList<String> instructors = new ArrayList<String>();
+
+        for(String instructor: original.split(",")){
+            instructors.add(instructor.strip());
+        }
+
+        return instructors;
     }
 
     /**
@@ -46,11 +67,11 @@ public class CourseUseCaseInteractor {
      * @param courseInfo Relevant information of this course.
      * @return if successfully removed this course
      */
-    public boolean removeACourse(Map<String, Object> courseInfo){
+    public boolean removeACourse(Map<String, String> courseInfo){
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseInfo)){return false;}
+        if (!courseDataInterface.courseExists(courseInfo.get("Course Code"))){return false;}
 
-        courseDataInterface.deleteCourse((String) courseInfo.get("Course Code"));
+        courseDataInterface.deleteCourse(courseInfo.get("Course Code"));
         return true;
     }
 
@@ -61,32 +82,12 @@ public class CourseUseCaseInteractor {
      * @param newPart What it needs to be changed to.
      * @return if successfully modified this course
      */
-    public boolean modifyCourseContent(Map<String, Object> courseInfo, String part, String newPart){
+    public boolean modifyCourseContent(Map<String, String> courseInfo, String part, String newPart){
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseInfo)){return false;}
+        if (!courseDataInterface.courseExists(courseInfo.get("Course Code"))){return false;}
 
-        courseDataInterface.modifyCourseContent(courseInfo, part, newPart);
+        courseDataInterface.modifyCourseContent(courseInfo.get("Course Code"), part, newPart);
         return true;
-    }
-
-    /**
-     * Add a student to a given course. Returns true if successfully added, returns false otherwise.
-     * @param course the course to be added the student to
-     * @param student the student to be added to the course
-     * @return if successfully added this student into this course
-     */
-    public boolean addStudent(Course course, User student){
-        return course.addStudent(student);
-    }
-
-    /**
-     * Remove a student from a given course. Returns true if successfully removed, returns false otherwise.
-     * @param course the course to be added the student to
-     * @param student the student to be added to the course
-     * @return if successfully removed this student from this course
-     */
-    public boolean removeStudent(Course course, User student){
-        return course.removeStudent(student);
     }
 
     /**

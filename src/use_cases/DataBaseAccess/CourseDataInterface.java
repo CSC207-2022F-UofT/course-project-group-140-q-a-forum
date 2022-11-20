@@ -23,16 +23,16 @@ public interface CourseDataInterface extends DataInterface {
 
     /**
      * checks if a course exists in the current database.
-     * @param courseInfo relevant information of the course to check existence.
+     * @param courseCode relevant information of the course to check existence.
      * @return if this course exists in the current database
      */
-    boolean courseExists(Map<String, Object> courseInfo);
+    boolean courseExists(String courseCode);
 
     /**
      * modifies content of an existing course.
-     * @param courseInfo relevant information needed to check for course content.
+     * @param courseCode Course Code of a course.
      * @param part the part of the course needed to be modified.
      * @param newPart the content of the part that needs to be modified to.
      */
-    void modifyCourseContent(Map<String, Object> courseInfo, String part, String newPart);
+    void modifyCourseContent(String courseCode, String part, String newPart);
 }

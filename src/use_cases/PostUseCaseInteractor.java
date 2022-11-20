@@ -33,6 +33,7 @@ public class PostUseCaseInteractor {
         Boolean valid = checkPostValidity(title, text);
         if (valid){
             Post new_post = new Post(title, text, images, postedBy, course);
+            course.
             return true;
         }
         else {
