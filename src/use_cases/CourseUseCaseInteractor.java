@@ -2,6 +2,7 @@ package use_cases;
 import entities.Course;
 import entities.User;
 import use_cases.DataBaseAccess.CourseDataInterface;
+import exceptions.*;
 import java.util.Date;
 
 
@@ -24,12 +25,12 @@ public class CourseUseCaseInteractor {
      *                   and "Instructors".
      * @return if successfully registered this student
      */
-    public boolean registerACourse(Map<String, String> courseInfo){
+    public void registerACourse(Map<String, String> courseInfo){
 
         // Check if the course exists in Database.
         if (courseDataInterface.courseExists((String)
                 courseInfo.get("Course Code"))){
-            return false;
+            throw new CourseNotFoundException(courseInfo.get("Course Code"));
         }
         ArrayList instructors = extractInstructor(courseInfo.get("Instructors"));
 
@@ -40,7 +41,6 @@ public class CourseUseCaseInteractor {
                 courseInfo.get("Semester"),
                 instructors);
         courseDataInterface.addCourse(course);
-        return true;
     }
 
     /**
@@ -67,12 +67,13 @@ public class CourseUseCaseInteractor {
      * @param courseInfo Relevant information of this course.
      * @return if successfully removed this course
      */
-    public boolean removeACourse(Map<String, String> courseInfo){
+    public void removeACourse(Map<String, String> courseInfo){
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseInfo.get("Course Code"))){return false;}
+        if (!courseDataInterface.courseExists(courseInfo.get("Course Code"))){
+            throw new CourseNotFoundException(courseInfo.get("Course Code"));
+        }
 
         courseDataInterface.deleteCourse(courseInfo.get("Course Code"));
-        return true;
     }
 
     /**
@@ -82,12 +83,13 @@ public class CourseUseCaseInteractor {
      * @param newPart What it needs to be changed to.
      * @return if successfully modified this course
      */
-    public boolean modifyCourseContent(Map<String, String> courseInfo, String part, String newPart){
+    public void modifyCourseContent(Map<String, String> courseInfo, String part, String newPart){
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseInfo.get("Course Code"))){return false;}
+        if (!courseDataInterface.courseExists(courseInfo.get("Course Code"))){
+            throw new CourseNotFoundException(courseInfo.get("Course Code"));
+        }
 
         courseDataInterface.modifyCourseContent(courseInfo.get("Course Code"), part, newPart);
-        return true;
     }
 
     /**
@@ -96,8 +98,13 @@ public class CourseUseCaseInteractor {
      * @param instructor the instructor to be added to the course
      * @return if successfully added this instructor into this course
      */
-    public boolean addInstructor(Course course, String instructor){
-        return course.addInstructor(instructor);
+    public void addInstructor(Course course, String instructor){
+        if (course.addInstructor(instructor)){
+
+        }
+        else{
+            throw new CourseInfoNotFoundException("instructor", course.getCode());
+        }
     }
 
     /**
@@ -106,8 +113,13 @@ public class CourseUseCaseInteractor {
      * @param instructor the instructor to be added to the course
      * @return if successfully removed this instructor from this course
      */
-    public boolean removeInstructor(Course course, String instructor){
-        return course.removeInstructor(instructor);
+    public void removeInstructor(Course course, String instructor){
+        if (course.removeInstructor(instructor)){
+
+        }
+        else{
+            throw new CourseInfoNotFoundException("instructor", course.getCode());
+        }
     }
 }
 

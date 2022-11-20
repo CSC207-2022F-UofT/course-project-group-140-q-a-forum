@@ -18,9 +18,8 @@ public class ReportUseCaseInteractor {
      * @param username, type, content
      * @return boo
      */
-    public boolean createReport(String username, int type, Object content){
+    public void createReport(String username, int type, Object content){
         //TODO: complete this method
-        return false;
     }
 
 
@@ -32,9 +31,8 @@ public class ReportUseCaseInteractor {
      * @return boo
      */
 
-    public boolean removeReport(Report report) {
+    public void removeReport(Report report) {
         //TODO: complete this method
-        return false;
     }
 
 }

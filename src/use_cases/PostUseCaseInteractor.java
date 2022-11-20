@@ -1,4 +1,5 @@
 package use_cases;
+import exceptions.*;
 import entities.Course;
 import entities.Post;
 import entities.User;
@@ -21,10 +22,10 @@ public class PostUseCaseInteractor {
      * If the post can be succesfully posted, create such entity and return Ture
      * If the process cannot be completed, return False
      * @param post_info
-     * @return boo
+     * @return 0 if successfully created, 1 if not
      */
 
-    public boolean createPost(HashMap<String, Object> post_info){
+    public void createPost(HashMap<String, Object> post_info){
         String title = post_info.get("title").toString();
         String text = post_info.get("text").toString();
         ArrayList<Image> images = (ArrayList<Image>) post_info.get("images");
@@ -33,11 +34,10 @@ public class PostUseCaseInteractor {
         Boolean valid = checkPostValidity(title, text);
         if (valid){
             Post new_post = new Post(title, text, images, postedBy, course);
-            course.
-            return true;
+            postDataInterface.addPost(new_post);
         }
         else {
-            return false;
+            throw new EmptyEntryException("title");
         }
     }
 
@@ -48,10 +48,9 @@ public class PostUseCaseInteractor {
      * @return boo
      */
 
-    public boolean editPost(HashMap<String, Object> post_info){
+    public void editPost(HashMap<String, Object> post_info){
         //TODO
-        boolean boo = false;
-        return boo;
+        return;
     }
 
     public boolean checkPostValidity(String title, String text){

@@ -21,12 +21,18 @@ public class ReportController {
      */
 
     public boolean createAReport(Map<String,Object> reportInformation){
+        // TODO: implement this method
+        try{
+            reportUseCaseInteractor.createReport(
+                    (String)reportInformation.get("Username"),
+                    (Integer)reportInformation.get("Username"),
+                    reportInformation.get("Username"));
+        }catch (RuntimeException e){
 
-
-        return reportUseCaseInteractor.createReport(
-                (String)reportInformation.get("Username"),
-                (Integer)reportInformation.get("Username"),
-                reportInformation.get("Username"));}
+        }finally {
+            return true;
+        }
+    }
 
 
 

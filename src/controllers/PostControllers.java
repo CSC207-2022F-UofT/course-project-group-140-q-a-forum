@@ -6,9 +6,11 @@ import java.util.HashMap;
 
 public class PostControllers {
     final LoginUseCaseInteractor loginUseCaseInteractor;
+    final PostUseCaseInteractor postUseCaseInteractor;
 
-    public PostControllers(LoginUseCaseInteractor loginUseCaseInteractor){
+    public PostControllers(LoginUseCaseInteractor loginUseCaseInteractor, PostUseCaseInteractor postUseCaseInteractor){
         this.loginUseCaseInteractor = loginUseCaseInteractor;
+        this.postUseCaseInteractor = postUseCaseInteractor;
     }
 
     /**
@@ -19,13 +21,13 @@ public class PostControllers {
      * @return  String for each state.
      */
     public String passDataCreatePost(HashMap<String,Object> post){
-        boolean state = PostUseCaseInteractor.createPost(post);
-        if (state){
-            return "successfully post";
+        try{
+            postUseCaseInteractor.createPost(post);
         }
-        else {
-            return "meaningless post";
+        catch (RuntimeException e){
+
         }
+        return "Ok.";
     }
 
     /**
@@ -35,13 +37,13 @@ public class PostControllers {
      * @param post information will be stored at the HashMap
      * @return  String for each state.
      */
-    public String passDataEditPost (HashMap<String, String> post) {
-        int state = PostUseCaseInteractor.editPost(post);
-        if (state == 0) {
-            return "post already existed";
-        } else if (state == 1) {
-            return "meaningless post";
+    public String passDataEditPost(HashMap<String, Object> post) {
+        try{
+            postUseCaseInteractor.editPost(post);
         }
-    return "successfully post";
+        catch(RuntimeException e){
+            //TODO: Do sth.
+        }
+        return "Ok.";
     }
 }

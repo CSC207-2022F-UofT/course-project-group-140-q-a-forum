@@ -23,7 +23,13 @@ public class UserController {
      * @return if successfully registered this student, if not return the error type
      */
     public String registerUser(Map<String, String> user){
-        return userUseCaseInteractor.createUser(user);
+        try{
+            userUseCaseInteractor.createUser(user);
+        }catch (RuntimeException e){
+
+        }finally {
+            return "GOOD!";
+        }
     }
 
 
