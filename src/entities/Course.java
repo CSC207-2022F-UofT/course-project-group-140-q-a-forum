@@ -70,6 +70,31 @@ public class Course {
     }
 
     /**
+     * Modify the content of a course.
+     * @param part Which attribute of the course to be modified to.
+     * @param changTo The content to be changed to.
+     * @return If the modification is successful.
+     */
+    public boolean modifyCourseContent(String part, String changTo){
+        switch(part){
+            case "name":
+                this.name = changTo;
+                return true;
+            case "courseCode":
+                this.courseCode = changTo;
+                return true;
+            case "description":
+                this.description = changTo;
+                return true;
+            case "semester":
+                this.semester = changTo;
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
      * the method for adding an instructor to a course. If the instructor is already in the course, returns false;
      * otherwise they are added to the course and returns true.
      * @param instructor the instructor to be added
@@ -100,10 +125,9 @@ public class Course {
     }
 
     /**
-     * the method for adding an instructor to a course. If the instructor is already in the course, returns false;
-     * otherwise they are added to the course and returns true.
-     * @param instructor the instructor to be added
-     * @return if successfully added this instructor into this course
+     * Add a post to the post list of this course.
+     * @param post The post to be added in.
+     * @return If the post is successfully added.
      */
     public boolean addPost(Post post){
         if (this.posts.contains(post)){
@@ -114,12 +138,17 @@ public class Course {
         }
     }
 
-    public boolean editPost(Post post){
+    /**
+     * Remove a post from the post list of this course.
+     * @param post The post to be removed.
+     * @return If the post is successfully removed.
+     */
+    public boolean removePost(Post post){
         if (this.posts.contains(post)){
-            return false;
-        }else{
-            this.posts.add(post);
+            this.posts.remove(post);
             return true;
+        }else{
+            return false;
         }
     }
 }

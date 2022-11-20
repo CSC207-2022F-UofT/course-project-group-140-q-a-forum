@@ -1,12 +1,13 @@
 package use_cases;
 import entities.Course;
+import entities.Post;
 import entities.User;
 import use_cases.DataBaseAccess.CourseDataInterface;
 import exceptions.*;
-import java.util.Date;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class CourseUseCaseInteractor {
@@ -28,11 +29,10 @@ public class CourseUseCaseInteractor {
     public void registerACourse(Map<String, String> courseInfo){
 
         // Check if the course exists in Database.
-        if (courseDataInterface.courseExists((String)
-                courseInfo.get("Course Code"))){
-            throw new CourseNotFoundException(courseInfo.get("Course Code"));
+        if (courseDataInterface.courseExists(courseInfo.get("Course Code"))){
+            throw new DuplicationException("Course");
         }
-        ArrayList instructors = extractInstructor(courseInfo.get("Instructors"));
+        ArrayList<String> instructors = extractInstructor(courseInfo.get("Instructors"));
 
         // Register a new course.
         Course course = new Course(courseInfo.get("Name"),
@@ -51,7 +51,7 @@ public class CourseUseCaseInteractor {
      * the name of an instructor.
      */
     private ArrayList<String> extractInstructor(String original){
-        ArrayList<String> instructors = new ArrayList<String>();
+        ArrayList<String> instructors = new ArrayList<>();
 
         for(String instructor: original.split(",")){
             instructors.add(instructor.strip());
@@ -64,62 +64,99 @@ public class CourseUseCaseInteractor {
      * This removes a course from the current Database.
      * It first checks if the course exists, and removes it if so;
      * otherwise, it returns false.
-     * @param courseInfo Relevant information of this course.
+     * @param courseCode Course code of the course to be removed.
      * @return if successfully removed this course
      */
-    public void removeACourse(Map<String, String> courseInfo){
+    public void removeACourse(String courseCode){
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseInfo.get("Course Code"))){
-            throw new CourseNotFoundException(courseInfo.get("Course Code"));
+        if (!courseDataInterface.courseExists(courseCode)){
+            throw new CourseNotFoundException(courseCode);
         }
 
-        courseDataInterface.deleteCourse(courseInfo.get("Course Code"));
+        courseDataInterface.deleteCourse(courseCode);
     }
 
     /**
      * This method modifies an existing course in the database.
-     * @param courseInfo Relevant information of this course.
+     * @param courseCode Course Code of the course to be modified.
      * @param part Which attribute of this course needs to be changed.
      * @param newPart What it needs to be changed to.
-     * @return if successfully modified this course
      */
-    public void modifyCourseContent(Map<String, String> courseInfo, String part, String newPart){
+    public void modifyCourseContent(String courseCode, String part, String newPart){
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseInfo.get("Course Code"))){
-            throw new CourseNotFoundException(courseInfo.get("Course Code"));
+        if (!courseDataInterface.courseExists(courseCode)){
+            throw new CourseNotFoundException(courseCode);
         }
 
-        courseDataInterface.modifyCourseContent(courseInfo.get("Course Code"), part, newPart);
+        Course course = courseDataInterface.getCourse(courseCode);
+        String[] attributes = {"name", "courseCode", "description", "semester"};
+
+        boolean found = false;
+        for (String attribute: attributes){
+            if (attribute.equals(part)) {
+                found = true;
+                break;
+            }
+        }
+
+        if (found){
+            boolean success = course.modifyCourseContent(part, newPart);
+            if (!success){
+                throw new CourseAttributeNotFoundException(part);
+            }
+        }
     }
 
     /**
      * Add an instructor to a given course. Returns true if successfully added, returns false otherwise.
-     * @param course the course to be added the instructor to
+     * @param courseCode The course code of theh course to be added to.
      * @param instructor the instructor to be added to the course
-     * @return if successfully added this instructor into this course
      */
-    public void addInstructor(Course course, String instructor){
-        if (course.addInstructor(instructor)){
-
-        }
-        else{
-            throw new CourseInfoNotFoundException("instructor", course.getCode());
+    public void addInstructor(String courseCode, String instructor){
+        Course course = courseDataInterface.getCourse(courseCode);
+        if (!course.addInstructor(instructor)){
+            throw new DuplicationException("instructor");
         }
     }
 
     /**
      * Remove an instructor from a given course. Returns true if successfully removed, returns false otherwise.
-     * @param course the course to be added the instructor to
+     * @param courseCode The course code of theh course to be added to.
      * @param instructor the instructor to be added to the course
-     * @return if successfully removed this instructor from this course
      */
-    public void removeInstructor(Course course, String instructor){
+    public void removeInstructor(String courseCode, String instructor){
+        Course course = courseDataInterface.getCourse(courseCode);
         if (course.removeInstructor(instructor)){
-
-        }
-        else{
             throw new CourseInfoNotFoundException("instructor", course.getCode());
         }
     }
+
+    /**
+     * Add the given post to the course with the given course code.
+     * @param courseCode The course to be added in.
+     * @param post The post to be added.
+     */
+    public void addPost(String courseCode, Post post){
+        Course course = courseDataInterface.getCourse(courseCode);
+
+        if (!course.addPost(post)){
+            throw new DuplicationException("Post");
+        }
+    }
+
+    /**
+     * Remove the given post from the course with the given course code.
+     * @param courseCode The course to be removed from.
+     * @param post The post to be removed.
+     */
+    public void removePost(String courseCode, Post post){
+        Course course = courseDataInterface.getCourse(courseCode);
+
+        if (!course.addPost(post)){
+            throw new CourseInfoNotFoundException("Post", course.getCode());
+        }
+    }
+
+
 }
 
