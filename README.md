@@ -231,5 +231,5 @@ If user doesn't feel good about their password, they just typing the OldPassword
 and enter twice of their NewPassword. After click **Change Password**, if all
 password are valid. Then the Password would be reset and return to the profile page.
 
-If user doesn't want to change, they also can go back by clicking the **Back to Profile Page**
+If user doesn't want to change,  they also can go back by clicking the **Back to Profile Page**
 
