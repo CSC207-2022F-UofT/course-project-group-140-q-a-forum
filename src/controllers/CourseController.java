@@ -1,11 +1,14 @@
 package controllers;
 
+import entities.Course;
 import entities.Post;
 import exceptions.CourseAttributeNotFoundException;
 import exceptions.CourseInfoNotFoundException;
 import exceptions.CourseNotFoundException;
 import exceptions.DuplicationException;
 import use_cases.CourseUseCaseInteractor;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CourseController {
@@ -142,5 +145,27 @@ public class CourseController {
             return -1;
         }
         return 1;
+    }
+
+    /**
+     * Return all the courses.
+     * @return An arraylist consists of all the courses.
+     */
+    public ArrayList<Course> getAllCourses(){
+        return courseInteractor.getAllCourses();
+    }
+
+    /**
+     * Get all posts of the course with given course code
+     * @param courseCode The course code of the given course
+     * @return If the course is not found, then return an empty ArrayList, otherwise, return an array list
+     * of the posts of the given course.
+     */
+    public ArrayList<Post> getAllPosts(String courseCode){
+        try{return courseInteractor.getAllPosts(courseCode);}
+        catch(CourseNotFoundException e){
+            //call presenter
+            return new ArrayList<>();
+        }
     }
 }

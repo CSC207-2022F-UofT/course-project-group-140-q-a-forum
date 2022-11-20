@@ -6,6 +6,7 @@ import use_cases.DataBaseAccess.CourseDataInterface;
 import exceptions.*;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -157,6 +158,22 @@ public class CourseUseCaseInteractor {
         }
     }
 
+    /**
+     * A method that returns all the courses in the current database.
+     * @return An arraylist consists of all the courses in the database.
+     */
+    public ArrayList<Course> getAllCourses(){
+        return courseDataInterface.getData();
+    }
 
+
+    public ArrayList<Post> getAllPosts(String courseCode){
+        if (!courseDataInterface.courseExists(courseCode)){
+            throw new CourseNotFoundException(courseCode);
+        }
+
+        Course course = courseDataInterface.getCourse(courseCode);
+        return course.getPosts();
+    }
 }
 
