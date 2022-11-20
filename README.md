@@ -81,7 +81,8 @@ Function **deleteCourse()** takes some in the course information and attempt to 
 ## 3. Controllers
 ## 4. Graphical User Interface
 ### Figure 1.1 Login InterFace
-![](../../ScreenShot/LoginForm.png)
+![](ScreenShot1/LoginForm.png)
+
 This is the First interface showed when opening the project 
 The User should enter Their **UserName**, their **Password** and press
 .Then they need to press **Login** to Enter to the CoursesPage
@@ -89,7 +90,8 @@ The User should enter Their **UserName**, their **Password** and press
 If they don't have any account yet, then press **Register** to enter the RegisterPage.
 
 ### Figure 1.2 Register InterFace
-![](../../ScreenShot/RegisterForm/RegisterAUser.png)
+![](ScreenShot1/RegisterForm/RegisterAUser.png)
+
 After click **Register** and enter the RegisterPage. Then user should fill 
 the first four information into the TextField, including enter Username, Password and Re-EnterPassword
 
@@ -100,8 +102,7 @@ If the verification code match with the sending code, then the user account woul
 LoginPage. Otherwise, an error message would raise.
 
 ### Figure 2.1 Courses Page
-
-![](../../ScreenShot/MainForm(showingContent)/CoursesForm.png)
+![](ScreenShot1/MainForm(showingContent)/CoursesForm.png)
 After Login successfully from Login Page, then entered to the courses page. 
 In the left panel of the page, it shows all the courses with their titles stored in the system.
 Click one of the courses, the description of the course would appear on the right. 
@@ -117,8 +118,8 @@ In this page, User could click the top left button, **Register A new Course** an
 
 
 ### Figure 2.2 Post Page
+![](ScreenShot1/MainForm(showingContent)/PostForm.png)
 
-![](../../ScreenShot/MainForm(showingContent)/PostForm.png)
 In this page, 
 In the top left of the page, it shows this is the posts page of the chosen course.
 
@@ -135,9 +136,8 @@ If there are any problem of the posts, click **Report this post** to enter the R
 
 In this page, User could click the top button, **Post a Post** and go to the MakeAPost Page.
 
-### sFigure 2.3 Comments Page
-
-![](../../ScreenShot/MainForm(showingContent)/CommentsForm.png)
+### Figure 2.3 Comments Page
+![](ScreenShot1/MainForm(showingContent)/CommentsForm.png)
 
 In this page,
 In the top left of the page, it shows this is the comments page of the chosen post or comment.
@@ -155,7 +155,8 @@ In this page, User could click the top button, **Back to upper-level** and go to
 
 
 ### Figure 3.1 Register A Course
-![](../../MakeACourse.png)
+![](ScreenShot1/RegisterForm/MakeACourse.png)
+
 User enter all needed information and select the "Fall", "Winter", "Summer"
 from the Semester ComboBox. 
 
@@ -166,7 +167,8 @@ If user want to skip register the course, they also could go back to CoursePage 
 
 
 ### Figure 3.2 Make A Post
-![](../../MakeAPost.png)
+![](ScreenShot1/RegisterForm/MakeAPost.png)
+
 User enter all needed information for a post. In the top label, it shows it is under which course in the top label
 
 After filled all information, usr could click the **Post the post** to register the Course
@@ -178,7 +180,8 @@ If user want to skip Make the Post, they also could go back to PostPage by click
 
 
 ### Figure 3.3 Make A Comment
-![](../../ScreenShot/RegisterForm/MakeAComment.png)
+![](ScreenShot1/RegisterForm/MakeAComment.png)
+
 User enter all needed information for a comment. In the top label, it shows it is under which post/comment the top label
 
 After filled all information, usr could click the **Make the comment** to make a commment
@@ -191,8 +194,8 @@ If user want to skip make the comment, they also could go back to PostPage by cl
 
 
 
-### Figure 3.3 Make A Report
-![](../../ScreenShot/RegisterForm/MakeAReportUI.png)
+### Figure 3.4 Make A Report
+![](ScreenShot1/RegisterForm/MakeAReportUI.png)
 
 User enter all needed information for a report. In the top label, it shows it is under which course/post/comment the top label
 
@@ -206,7 +209,8 @@ If user want to skip register the course, they also could go back to CoursePage 
 
 
 ### 4.1 Profile Page
-![](../../ScreenShot/ProfilePage.png)
+![](ScreenShot1/ProfilePage.png)
+
 This page shows all profile information related to the user.
 
 Moreover, it support edit the username by clicking
@@ -221,7 +225,8 @@ User can go back to the main page **Back to Main Page** by clicking button.
 
 
 ### Figure 4.2 Change Password
-![](../../ScreenShot/ChangePassWordForm.png)
+![](ScreenShot1/ChangePassWordForm.png)
+
 If user doesn't feel good about their password, they just typing the OldPassword
 and enter twice of their NewPassword. After click **Change Password**, if all
 password are valid. Then the Password would be reset and return to the profile page.
