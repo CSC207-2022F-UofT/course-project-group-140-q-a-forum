@@ -26,12 +26,12 @@ public class UserUseCaseInteractor {
     public void createUser(Map<String, String> user) {
 
         // Check if the user exists in Database.
-        if (userDataInterface.userExists(user.get("Username"))) {
+        if (!userDataInterface.userExists(user.get("Username"))) {
             throw new DuplicationException("user");
         }
 
         // Check if the password is valid.
-        if (!passwordCheck(user.get("password"))) {
+        if (!passwordCheck(user.get("Password"))) {
             throw new PasswordTooWeakException();
         }
 
@@ -41,12 +41,12 @@ public class UserUseCaseInteractor {
         }
 
         // Check if the email is valid.
-        if (!emailCheck(user.get("email"))) {
+        if (!emailCheck(user.get("Email"))) {
             throw new InvalidFormatException("email");
         }
 
         // Check the email verification.
-        if (!verifyEmail(user.get("verfication"))) {
+        if (!verifyEmail(user.get("Verfication"))) {
             throw new WrongPasswordException("verfication number");
         }
 
@@ -119,7 +119,7 @@ public class UserUseCaseInteractor {
         //      If the verify number be verified successfully, return True
         //      Otherwise, return False
 
-        return false;
+        return true;
     }
 
 

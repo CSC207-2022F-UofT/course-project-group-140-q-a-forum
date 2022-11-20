@@ -1,5 +1,6 @@
 package controllers;
 
+import Presenter.RegisterPresenter;
 import entities.User;
 import use_cases.LoginUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
@@ -33,6 +34,8 @@ public class UserController {
 
         }catch (RuntimeException e){
             //A bunch of possible exceptions here, later I will add details.
+            RegisterPresenter.showNonValidEmailError();
+            System.out.println(e.getMessage());
         }
         return "GOOD";
     }
