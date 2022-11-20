@@ -163,7 +163,7 @@ public class CourseUseCaseInteractor {
      * @return An arraylist consists of all the courses in the database.
      */
     public ArrayList<Course> getAllCourses(){
-        return courseDataInterface.getData();
+        return courseDataInterface.getAllCourses();
     }
 
 
