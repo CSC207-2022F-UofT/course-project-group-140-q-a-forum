@@ -8,6 +8,11 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.Properties;
 
+
+//I wrote the SendEmail which contains two main functions: getting a 6-bits random int value and sending an email.
+//I think my code is correct because my friend could use it to send an email with I some library source deleting.
+//I am not able to run it, but I will ask him and check every course after he wakes up.
+//You can use it and I will tell you which library source to change later.
 public class SendEmail {
 
     public static String myEmailAccount = "3232085039@qq.com";
