@@ -2,7 +2,8 @@ package controllers;
 
 import entities.Course;
 import entities.Post;
-import exceptions.CourseAttributeNotFoundException;
+import exceptions.CourseAttributeNotModifiableException;
+
 import exceptions.CourseInfoNotFoundException;
 import exceptions.CourseNotFoundException;
 import exceptions.DuplicationException;
@@ -80,7 +81,7 @@ public class CourseController {
         catch(CourseNotFoundException e){
             //Call presenter
             return -1;
-        }catch(CourseAttributeNotFoundException e){
+        }catch(CourseAttributeNotModifiableException e){
             //Call presenter
             return -2;
         }
@@ -112,9 +113,14 @@ public class CourseController {
      * @param instructor The name of the instructor.
      * @return An integer representing the result of the method.
      * 1: Successfully removed;
+     * 0: The user is not an admin so cannot remove this post;
      * -1: The instructor is not found in this course.
      */
     public int removeInstructor(boolean isAdmin, String courseCode, String instructor){
+        if (!isAdmin){
+            //Call presenter
+            return 0;
+        }
         try{courseInteractor.removeInstructor(courseCode, instructor);}
         catch(CourseInfoNotFoundException e){
             //Call presenter
