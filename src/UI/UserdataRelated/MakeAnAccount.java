@@ -4,12 +4,18 @@
  */
 package UI.UserdataRelated;
 
+import base.main;
+import controllers.UserController;
+
+import javax.swing.*;
+import java.util.HashMap;
+
 /**
  *
  * @author zhaoxiling
  */
 public class MakeAnAccount extends javax.swing.JFrame {
-
+    private UserController userController = main.userController;
     /**
      * Creates new form RegisterForm
      */
@@ -224,6 +230,25 @@ public class MakeAnAccount extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        HashMap<String, String> RegInfo = new HashMap<>();
+        String userName = userNameText.getText();
+        RegInfo.put("Username", userName);
+        String passWord = passWordText.getText();
+        RegInfo.put("Password", passWord);
+        String repass = rePassText.getText();
+        RegInfo.put("Re-entered Password", repass);
+        String email = emailText.getText();
+        RegInfo.put("Email", email);
+        String isAdmin = "false";
+        RegInfo.put("isAdmin", isAdmin);
+        String result  = userController.registerUser(RegInfo);
+        if(result.equals("GOOD!")){
+
+            JOptionPane.showMessageDialog(null, "Register successfully", "reg success", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+            LoginForm loginPage = new LoginForm();
+            loginPage.setVisible(true);
+        }
     }
 
     /**

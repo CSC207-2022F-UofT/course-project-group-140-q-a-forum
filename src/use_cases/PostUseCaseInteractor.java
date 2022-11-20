@@ -3,6 +3,7 @@ import exceptions.*;
 import entities.Course;
 import entities.Post;
 import entities.User;
+import use_cases.DataBaseAccess.CourseDataInterface;
 import use_cases.DataBaseAccess.PostDataInterface;
 
 import java.awt.*;
@@ -11,10 +12,10 @@ import java.util.HashMap;
 
 public class PostUseCaseInteractor {
 
-    final PostDataInterface postDataInterface;
+    final CourseDataInterface courseDataInterface;
 
-    public PostUseCaseInteractor(PostDataInterface postDataInterface) {
-        this.postDataInterface = postDataInterface;
+    public PostUseCaseInteractor(CourseDataInterface courseDataInterface) {
+        this.courseDataInterface = courseDataInterface;
     }
 
     /**
@@ -31,10 +32,10 @@ public class PostUseCaseInteractor {
         ArrayList<Image> images = (ArrayList<Image>) post_info.get("images");
         User postedBy = (User) post_info.get("user");
         Course course = (Course) post_info.get("course");
-        Boolean valid = checkPostValidity(title, text);
+        boolean valid = checkPostValidity(title, text);
         if (valid){
             Post new_post = new Post(title, text, images, postedBy, course);
-            postDataInterface.addPost(new_post);
+            course.addPost(new_post);
         }
         else {
             throw new EmptyEntryException("title");

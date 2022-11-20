@@ -7,12 +7,17 @@ import java.util.*;
 
 public class UserController {
     private final UserUseCaseInteractor userUseCaseInteractor;
-    private final LoginUseCaseInteractor loginUseCaseInteractor;
+//    private final LoginUseCaseInteractor loginUseCaseInteractor;
 
 
-    public UserController(UserUseCaseInteractor userUseCaseInteractor, LoginUseCaseInteractor loginUseCaseInteractor) {
+//    public UserController(UserUseCaseInteractor userUseCaseInteractor, LoginUseCaseInteractor loginUseCaseInteractor) {
+//        this.userUseCaseInteractor = userUseCaseInteractor;
+//        this.loginUseCaseInteractor = loginUseCaseInteractor;
+//    }
+
+    public UserController(UserUseCaseInteractor userUseCaseInteractor) {
         this.userUseCaseInteractor = userUseCaseInteractor;
-        this.loginUseCaseInteractor = loginUseCaseInteractor;
+//        this.loginUseCaseInteractor = loginUseCaseInteractor;
     }
 
     /**
@@ -25,11 +30,11 @@ public class UserController {
     public String registerUser(Map<String, String> user){
         try{
             userUseCaseInteractor.createUser(user);
-        }catch (RuntimeException e){
 
-        }finally {
-            return "GOOD!";
+        }catch (RuntimeException e){
+            //A bunch of possible exceptions here, later I will add details.
         }
+        return "GOOD";
     }
 
 
@@ -38,11 +43,13 @@ public class UserController {
      * @param user  This is a Map that contains necessary information
      *      *             needed to register a user. The keys must be
      *      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @param passwork  This is the password we input
+     * @param password  This is the password we input
      * @return  the string "Correct Password" or "Wrong Password"
      */
-    public String loginUser(User user, String passwork){
-        if (loginUseCaseInteractor.checkLogin(user, passwork)){
+
+    public String loginUser(String userName, String password){
+
+        if (userUseCaseInteractor.checkLogin(userName, password)){
             return "Correct Password";
         }
         else{

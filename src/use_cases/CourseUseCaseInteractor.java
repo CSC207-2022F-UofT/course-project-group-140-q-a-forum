@@ -25,13 +25,18 @@ public class CourseUseCaseInteractor {
      *                   needed to register a course. The keys must be
      *                   "Name", "Course Code", "Description", "Semester",
      *                   and "Instructors".
-     * @return if successfully registered this student
      */
     public void registerACourse(Map<String, String> courseInfo){
 
         // Check if the course exists in Database.
         if (courseDataInterface.courseExists(courseInfo.get("Course Code"))){
             throw new DuplicationException("Course");
+        }
+
+        for (String part: courseInfo.keySet()){
+            if (courseInfo.get(part).equals("")){
+                throw new EmptyEntryException(courseInfo.get(part));
+            }
         }
         ArrayList<String> instructors = extractInstructor(courseInfo.get("Instructors"));
 
@@ -66,7 +71,6 @@ public class CourseUseCaseInteractor {
      * It first checks if the course exists, and removes it if so;
      * otherwise, it returns false.
      * @param courseCode Course code of the course to be removed.
-     * @return if successfully removed this course
      */
     public void removeACourse(String courseCode){
         // if the given course does not exist in the database, return false.
@@ -153,7 +157,7 @@ public class CourseUseCaseInteractor {
     public void removePost(String courseCode, Post post){
         Course course = courseDataInterface.getCourse(courseCode);
 
-        if (!course.addPost(post)){
+        if (!course.removePost(post)){
             throw new CourseInfoNotFoundException("Post", course.getCode());
         }
     }

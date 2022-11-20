@@ -38,11 +38,8 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     }
 
     @Override
-    public boolean userExists(Map<String, String> user) {
-        String username = user.get("username");
-        String email = user.get("email");
-        return dataHandler.lookupUserfromName(username) == null
-                & dataHandler.lookupUserfromEmail(email) == null;
+    public boolean userExists(String userName) {
+        return dataHandler.lookupUserfromName(userName) == null;
     }
 
     @Override
@@ -55,26 +52,29 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     }
 
     @Override
-    public void resetUsername(Map<String, String> user, String newUsername) {
-        User user_entity = dataHandler.lookupUserfromName(user.get("email"));
+    public void resetUsername(User user, String newUsername) {
+        User user_entity = dataHandler.lookupUserfromName(user.getEmail());
         user_entity.setUsername(newUsername);
     }
 
     @Override
-    public void resetPassword(Map<String, String> user, String newPassword) {
-        User user_entity = dataHandler.lookupUserfromName(user.get("email"));
+    public void resetPassword(String userName, String newPassword) {
+        User user_entity = dataHandler.lookupUserfromName(userName);
         user_entity.setPassword(newPassword);
     }
 
-    @Override
-    public void resetEmail(Map<String, String> user, String newEmail) {
-        // WE CANNOT RESET EMAIL
-    }
+//    @Override
+//    public void resetEmail(Map<String, String> user, String newEmail) {
+//        // WE CANNOT RESET EMAIL
+//    }
 
     @Override
     public Course getCourse(String courseCode) {
         return dataHandler.lookupCourse(courseCode);
     }
+
+    @Override
+    public User getUser(String userName) {return dataHandler.lookupUserfromName(userName);}
 
     @Override
     public void addCourse(Course course) {
