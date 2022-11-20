@@ -93,7 +93,7 @@ public class Post {
     public void setTopic(String topic) {
         this.topic = topic;
     }
-I
+
     public void setCourse(Course course){
         this.course = course;
     }

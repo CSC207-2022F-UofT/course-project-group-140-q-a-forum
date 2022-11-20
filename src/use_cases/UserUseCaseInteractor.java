@@ -1,6 +1,7 @@
 package use_cases;
 
 import entities.User;
+import exceptions.*;
 import use_cases.DataBaseAccess.UserDataInterface;
 
 import java.util.*;
@@ -22,31 +23,31 @@ public class UserUseCaseInteractor {
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
      * @return if successfully registered this student
      */
-    public String createUser(Map<String, String> user) {
+    public void createUser(Map<String, String> user) {
 
         // Check if the user exists in Database.
         if (userDataInterface.userExists(user)) {
-            return "UsernameError";
+            throw new DuplicationException("user");
         }
 
         // Check if the password is valid.
         if (!passwordCheck(user.get("password"))) {
-            return "PasswordValidError";
+            throw new WrongPasswordException("password");
         }
 
         // Check if the reentered password is the same.
         if (!duoPasswordCheck(user.get("Password"), user.get("Re-entered Password"))) {
-            return "ReEnterError";
+            throw new WrongPasswordException("password");
         }
 
         // Check if the email is valid.
-        if (!emailCheck(user.get("Email"))) {
-            return "EmailError";
+        if (!emailCheck(user.get("email"))) {
+            throw new InvalidFormatException("email");
         }
 
         // Check the email verification.
-        if (!verifyEmail(user.get("email"))) {
-            return "VerificationError";
+        if (!verifyEmail(user.get("verfication"))) {
+            throw new WrongPasswordException("verfication number");
         }
 
         // Register a new user.
@@ -61,9 +62,6 @@ public class UserUseCaseInteractor {
             userDataInterface.addUser(newUser);
 
         }
-
-
-        return "RegisterSuccess";
     }
 
 

@@ -23,4 +23,6 @@ public class LoginUseCaseInteractor {
         ArrayList<User> users = loginInterface.getData();
         return (users.contains(user)) && (user.getPassword().equals(password));
     }
+
+
 }

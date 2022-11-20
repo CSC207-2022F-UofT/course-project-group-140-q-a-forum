@@ -12,6 +12,8 @@ public class Course {
     private ArrayList<String> instructors;
     private String semester;
 
+    private ArrayList<Post> posts;
+
     /**
      *
      */
@@ -37,6 +39,7 @@ public class Course {
         this.description = description;
         this.semester = semester;
         this.instructors = instructors;
+        this.posts = new ArrayList<>();
     }
 
     /**
@@ -62,7 +65,9 @@ public class Course {
         return this.instructors;
     }
 
-
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
 
     /**
      * the method for adding an instructor to a course. If the instructor is already in the course, returns false;
@@ -91,6 +96,30 @@ public class Course {
             return true;
         }else{
             return false;
+        }
+    }
+
+    /**
+     * the method for adding an instructor to a course. If the instructor is already in the course, returns false;
+     * otherwise they are added to the course and returns true.
+     * @param instructor the instructor to be added
+     * @return if successfully added this instructor into this course
+     */
+    public boolean addPost(Post post){
+        if (this.posts.contains(post)){
+            return false;
+        }else{
+            this.posts.add(post);
+            return true;
+        }
+    }
+
+    public boolean editPost(Post post){
+        if (this.posts.contains(post)){
+            return false;
+        }else{
+            this.posts.add(post);
+            return true;
         }
     }
 }
