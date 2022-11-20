@@ -83,6 +83,8 @@ public class UserUseCaseInteractor {
     }
 
 
+
+
     /**
      * Check the password and re-entered password
      *
@@ -233,4 +235,6 @@ public class UserUseCaseInteractor {
         userDataInterface.deleteUser(user.get("Username"));
         return true;
     }
+
+
 }

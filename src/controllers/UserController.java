@@ -1,11 +1,14 @@
 package controllers;
 
 import entities.User;
+import exceptions.UserNotFoundException;
+import exceptions.WrongPasswordException;
 import use_cases.LoginUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 import java.util.*;
 
 public class UserController {
+
     private final UserUseCaseInteractor userUseCaseInteractor;
     private final LoginUseCaseInteractor loginUseCaseInteractor;
 
@@ -20,34 +23,45 @@ public class UserController {
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @return if successfully registered this student, if not return the error type
+     * @return if successfully registered this student, then return "Good", if not return the message of the error
      */
     public String registerUser(Map<String, String> user){
         try{
             userUseCaseInteractor.createUser(user);
         }catch (RuntimeException e){
-
-        }finally {
-            return "GOOD!";
+            return e.getMessage();
         }
+//        finally {
+//            return "GOOD!";
+//        }
+        return "Good";
     }
 
 
     /**
      * Login the user
-     * @param user  This is a Map that contains necessary information
+     * @param username  This is a Map that contains necessary information
      *      *             needed to register a user. The keys must be
      *      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @param passwork  This is the password we input
-     * @return  the string "Correct Password" or "Wrong Password"
+     * @param password  This is the password we input
+     * @return int  1 represent get the user and the user password match the userName
+     *      *      -1 represent didn't find the user in the database
+*      *           -2 represent the user's password do not match the user's userName
      */
-    public String loginUser(User user, String passwork){
-        if (loginUseCaseInteractor.checkLogin(user, passwork)){
-            return "Correct Password";
+      public int loginUser(String username, String password){
+        try{loginUseCaseInteractor.checkLogin(username,password);}
+        catch(WrongPasswordException e){
+            return -2;
         }
-        else{
-            return "Wrong Password";
+        catch (UserNotFoundException e){
+            return -1;
         }
-
+        return 1;
     }
+
+
+
+//    public User searchUser(String username){
+//
+//    }
 }

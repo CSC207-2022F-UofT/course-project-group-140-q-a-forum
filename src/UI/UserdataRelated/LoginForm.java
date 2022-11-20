@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI.UserdataRelated;
+import base.ControllerInteractor;
+import UI.MainOfShowingContents.PostForm;
+import controllers.UserController;
+import entities.User;
+
+import javax.swing.*;
 
 /**
  *
@@ -10,10 +16,14 @@ package UI.UserdataRelated;
  */
 public class LoginForm extends javax.swing.JFrame {
 
+
+
+
     /**
      * Creates new form LoginForm
      */
     public LoginForm() {
+
         initComponents();
     }
 
@@ -25,6 +35,7 @@ public class LoginForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+
 
         jPanel1 = new javax.swing.JPanel();
         passText = new javax.swing.JPasswordField();
@@ -117,10 +128,16 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        String userName = usernameText.getText();
+        String passWord = new String(passText.getPassword());
+
     }
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        this.setVisible(false);
+        MakeAnAccount RegPage = new MakeAnAccount();
+        RegPage.setVisible(true);
     }
 
     /**
@@ -132,6 +149,7 @@ public class LoginForm extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -153,7 +171,9 @@ public class LoginForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new LoginForm().setVisible(true);
+
             }
         });
     }

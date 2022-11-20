@@ -4,6 +4,11 @@
  */
 package UI.MainOfShowingContents;
 
+import entities.Comment;
+import entities.User;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author zhaoxiling
@@ -13,6 +18,7 @@ public class CommentsForm extends javax.swing.JFrame {
     /**
      * Creates new form CommentsForm
      */
+
     public CommentsForm() {
         initComponents();
     }
