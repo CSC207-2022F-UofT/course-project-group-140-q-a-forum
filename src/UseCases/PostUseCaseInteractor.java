@@ -1,9 +1,9 @@
-package use_cases;
+package UseCases;
 import exceptions.*;
 import entities.Course;
 import entities.Post;
 import entities.User;
-import use_cases.DataBaseAccess.PostDataInterface;
+import UseCases.DataBaseAccess.PostDataInterface;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package use_cases.DataBaseAccess;
+package UseCases.DataBaseAccess;
 import java.util.ArrayList;
 
 public interface DataInterface<T> {

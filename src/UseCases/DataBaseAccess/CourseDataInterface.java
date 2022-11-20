@@ -1,7 +1,6 @@
-package use_cases.DataBaseAccess;
+package UseCases.DataBaseAccess;
 import entities.Course;
 import java.util.ArrayList;
-import java.util.Map;
 
 
 public interface CourseDataInterface extends DataInterface {
