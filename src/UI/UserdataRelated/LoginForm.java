@@ -6,6 +6,8 @@ package UI.UserdataRelated;
 import base.main;
 import controllers.UserController;
 
+import Presenter.LoginPresenter;
+
 /**
  *
  * @author zhaoxiling
@@ -37,6 +39,7 @@ public class LoginForm extends javax.swing.JFrame {
         usernameText = new javax.swing.JTextField();
         LoginButton = new javax.swing.JButton();
         RegisterButton = new javax.swing.JButton();
+        forgetButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +63,13 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
+        forgetButton.setText("Forget Password?");
+        forgetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forgetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -75,11 +85,13 @@ public class LoginForm extends javax.swing.JFrame {
                                         .addComponent(passText, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
+                                .addGap(21, 21, 21)
                                 .addComponent(LoginButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(37, 37, 37)
                                 .addComponent(RegisterButton)
-                                .addGap(67, 67, 67))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                .addComponent(forgetButton)
+                                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +107,8 @@ public class LoginForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(LoginButton)
-                                        .addComponent(RegisterButton))
+                                        .addComponent(RegisterButton)
+                                        .addComponent(forgetButton))
                                 .addGap(39, 39, 39))
         );
 
@@ -106,7 +119,7 @@ public class LoginForm extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(117, 117, 117)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(263, Short.MAX_VALUE))
+                                .addContainerGap(214, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,6 +142,10 @@ public class LoginForm extends javax.swing.JFrame {
         MakeAnAccount RegPage = new MakeAnAccount();
         RegPage.setVisible(true);
         this.setVisible(false);
+    }
+
+    private void forgetButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
     /**
@@ -169,6 +186,7 @@ public class LoginForm extends javax.swing.JFrame {
     // Variables declaration - do not modify
     private javax.swing.JButton LoginButton;
     private javax.swing.JButton RegisterButton;
+    private javax.swing.JButton forgetButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
