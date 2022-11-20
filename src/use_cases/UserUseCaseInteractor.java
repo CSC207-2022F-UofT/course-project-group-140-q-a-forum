@@ -23,7 +23,7 @@ public class UserUseCaseInteractor {
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
      * @return if successfully registered this student
      */
-    public void createUser(Map<String, String> user) {
+    public void createUser(Map<String, String> user) throws DifferentPasswordException {
 
         // Check if the user exists in Database.
         if (userDataInterface.userExists(user)) {
@@ -37,7 +37,7 @@ public class UserUseCaseInteractor {
 
         // Check if the reentered password is the same.
         if (!duoPasswordCheck(user.get("Password"), user.get("Re-entered Password"))) {
-            throw new WrongPasswordException("password");
+            throw new DifferentPasswordException("Password");
         }
 
         // Check if the email is valid.
@@ -47,7 +47,7 @@ public class UserUseCaseInteractor {
 
         // Check the email verification.
         if (!verifyEmail(user.get("verfication"))) {
-            throw new WrongPasswordException("verfication number");
+            throw new EmailVerifyException("verfication number");
         }
 
         // Register a new user.

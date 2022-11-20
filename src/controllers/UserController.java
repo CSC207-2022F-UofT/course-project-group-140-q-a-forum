@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.User;
+import exceptions.*;
 import use_cases.LoginUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 import java.util.*;
@@ -20,16 +21,23 @@ public class UserController {
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @return if successfully registered this student, if not return the error type
+     * @return if successfully registered this student return 0,
+     *  if EmptyEntryException return -1,
+     *  if InvalidFormatException return -2,
+     *  if WrongPasswordException return -3.
      */
-    public String registerUser(Map<String, String> user){
+    public int registerUser(Map<String, String> user){
         try{
             userUseCaseInteractor.createUser(user);
-        }catch (RuntimeException e){
-
-        }finally {
-            return "GOOD!";
+        }catch (EmptyEntryException e){
+            return -1;
+        }catch (InvalidFormatException e) {
+            return -2;
+        }catch (DifferentPasswordException e){
+            return -3;
         }
+        return 0;
+
     }
 
 
@@ -37,20 +45,26 @@ public class UserController {
 
 
     /**
-     * Login the user
-     * @param user  This is a Map that contains necessary information
-     *      *             needed to register a user. The keys must be
-     *      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @param passwork  This is the password we input
-     * @return  the string "Correct Password" or "Wrong Password"
+     * this function registers the User
+     * @param user This is a Map that contains necessary information
+     *             needed to register a user. The keys must be
+     *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
+     * @return if successfully registered this student return 0,
+     *  if EmptyEntryException return -1,
+     *  if EmailVerifyException return -2,
+     *  if WrongPasswordException return -3.
      */
-    public String loginUser(User user, String passwork){
-        if (loginUseCaseInteractor.checkLogin(user, passwork)){
-            return "Correct Password";
+    public int loginUser(User user, String password){
+        try {
+            loginUseCaseInteractor.checkLogin(user, password);
+        }catch (WrongPasswordException e){
+            return  -3;
+            //Email verification exception
+        }catch (EmailVerifyException e){
+            return -2;
+        }catch (EmptyEntryException e){
+            return -1;
         }
-        else{
-            return "Wrong Password";
-        }
-
+        return  0;
     }
 }

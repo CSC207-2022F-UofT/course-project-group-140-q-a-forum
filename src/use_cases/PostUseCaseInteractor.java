@@ -65,6 +65,8 @@ public class PostUseCaseInteractor {
         }
     }
 
+
+
     public boolean checkPostValidity(String title, String text){
         return title != "" & text != "" ;
     }
