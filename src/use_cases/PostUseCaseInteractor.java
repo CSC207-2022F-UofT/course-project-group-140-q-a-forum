@@ -65,11 +65,31 @@ public class PostUseCaseInteractor {
         }
     }
 
+    public void removePost(HashMap<String, Object> post_info){
+        String title = post_info.get("title").toString();
+        String text = post_info.get("text").toString();
+        ArrayList<Image> images = (ArrayList<Image>) post_info.get("images");
+        User postedBy = (User) post_info.get("user");
+        Course course = (Course) post_info.get("course");
+        Post new_post = new Post(title, text, images, postedBy, course);
+        Boolean valid = checkPostExist(new_post);
+
+        if (valid){
+            postDataInterface.removePost(new_post);
+        }
+        else {
+            throw new EmptyEntryException("title");
+        }
+    }
+
+
+
 
 
     public boolean checkPostValidity(String title, String text){
         return title != "" & text != "" ;
     }
+    public boolean checkPostExist(Post post){return postDataInterface.getData().contains(post);}
 
 
 }
