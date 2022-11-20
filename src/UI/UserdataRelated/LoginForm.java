@@ -3,12 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI.UserdataRelated;
-import base.ControllerInteractor;
-import UI.MainOfShowingContents.PostForm;
-import controllers.UserController;
-import entities.User;
-
-import javax.swing.*;
 
 /**
  *
