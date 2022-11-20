@@ -81,7 +81,7 @@ Function **deleteCourse()** takes some in the course information and attempt to 
 ## 3. Controllers
 ## 4. Graphical User Interface
 ### Figure 1.1 Login InterFace
-![](ScreenShot1/LoginForm.png)
+![](ScreenShot/LoginForm.png)
 
 This is the First interface showed when opening the project 
 The User should enter Their **UserName**, their **Password** and press
@@ -90,7 +90,7 @@ The User should enter Their **UserName**, their **Password** and press
 If they don't have any account yet, then press **Register** to enter the RegisterPage.
 
 ### Figure 1.2 Register InterFace
-![](ScreenShot1/RegisterForm/RegisterAUser.png)
+![](ScreenShot/RegisterForm/RegisterAUser.png)
 
 After click **Register** and enter the RegisterPage. Then user should fill 
 the first four information into the TextField, including enter Username, Password and Re-EnterPassword
@@ -102,7 +102,7 @@ If the verification code match with the sending code, then the user account woul
 LoginPage. Otherwise, an error message would raise.
 
 ### Figure 2.1 Courses Page
-![](ScreenShot1/MainForm(showingContent)/CoursesForm.png)
+![](ScreenShot/MainForm(showingContent)/CoursesForm.png)
 After Login successfully from Login Page, then entered to the courses page. 
 In the left panel of the page, it shows all the courses with their titles stored in the system.
 Click one of the courses, the description of the course would appear on the right. 
@@ -118,7 +118,7 @@ In this page, User could click the top left button, **Register A new Course** an
 
 
 ### Figure 2.2 Post Page
-![](ScreenShot1/MainForm(showingContent)/PostForm.png)
+![](ScreenShot/MainForm(showingContent)/PostForm.png)
 
 In this page, 
 In the top left of the page, it shows this is the posts page of the chosen course.
@@ -137,7 +137,7 @@ If there are any problem of the posts, click **Report this post** to enter the R
 In this page, User could click the top button, **Post a Post** and go to the MakeAPost Page.
 
 ### Figure 2.3 Comments Page
-![](ScreenShot1/MainForm(showingContent)/CommentsForm.png)
+![](ScreenShot/MainForm(showingContent)/CommentsForm.png)
 
 In this page,
 In the top left of the page, it shows this is the comments page of the chosen post or comment.
@@ -155,7 +155,7 @@ In this page, User could click the top button, **Back to upper-level** and go to
 
 
 ### Figure 3.1 Register A Course
-![](ScreenShot1/RegisterForm/MakeACourse.png)
+![](ScreenShot/RegisterForm/MakeACourse.png)
 
 User enter all needed information and select the "Fall", "Winter", "Summer"
 from the Semester ComboBox. 
@@ -167,7 +167,7 @@ If user want to skip register the course, they also could go back to CoursePage 
 
 
 ### Figure 3.2 Make A Post
-![](ScreenShot1/RegisterForm/MakeAPost.png)
+![](ScreenShot/RegisterForm/MakeAPost.png)
 
 User enter all needed information for a post. In the top label, it shows it is under which course in the top label
 
@@ -180,7 +180,7 @@ If user want to skip Make the Post, they also could go back to PostPage by click
 
 
 ### Figure 3.3 Make A Comment
-![](ScreenShot1/RegisterForm/MakeAComment.png)
+![](ScreenShot/RegisterForm/MakeAComment.png)
 
 User enter all needed information for a comment. In the top label, it shows it is under which post/comment the top label
 
@@ -195,7 +195,7 @@ If user want to skip make the comment, they also could go back to PostPage by cl
 
 
 ### Figure 3.4 Make A Report
-![](ScreenShot1/RegisterForm/MakeAReportUI.png)
+![](ScreenShot/RegisterForm/MakeAReportUI.png)
 
 User enter all needed information for a report. In the top label, it shows it is under which course/post/comment the top label
 
@@ -209,7 +209,7 @@ If user want to skip register the course, they also could go back to CoursePage 
 
 
 ### 4.1 Profile Page
-![](ScreenShot1/ProfilePage.png)
+![](ScreenShot/ProfilePage.png)
 
 This page shows all profile information related to the user.
 
@@ -221,11 +221,8 @@ Also, it could change the password by clicking **Change Password**.
 User can go back to the main page **Back to Main Page** by clicking button. 
 
 
-
-
-
 ### Figure 4.2 Change Password
-![](ScreenShot1/ChangePassWordForm.png)
+![](ScreenShot/ChangePassWordForm.png)
 
 If user doesn't feel good about their password, they just typing the OldPassword
 and enter twice of their NewPassword. After click **Change Password**, if all
