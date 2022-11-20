@@ -33,6 +33,7 @@ fabric.properties
 
 ## Gradle-related
 .gradle/
+gradle/wrapper/
 **/build/
 !src/**/build/
 output/
