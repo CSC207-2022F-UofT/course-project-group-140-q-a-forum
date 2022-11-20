@@ -4,6 +4,10 @@
  */
 package UI.UserdataRelated;
 
+import Presenter.RegisterPresenter;
+import base.main;
+import controllers.UserController;
+
 import java.util.HashMap;
 
 /**
@@ -15,6 +19,7 @@ public class MakeAnAccount extends javax.swing.JFrame {
     /**
      * Creates new form RegisterForm
      */
+    private UserController userController = main.userController;
     public MakeAnAccount() {
         initComponents();
     }
@@ -239,14 +244,13 @@ public class MakeAnAccount extends javax.swing.JFrame {
         RegInfo.put("isAdmin", isAdmin);
         String result  = userController.registerUser(RegInfo);
         if(result.equals("GOOD!")){
-
-            JOptionPane.showMessageDialog(null, "Register successfully", "reg success", JOptionPane.INFORMATION_MESSAGE);
+            RegisterPresenter.showRegisterSuccess();
             this.setVisible(false);
             LoginForm loginPage = new LoginForm();
             loginPage.setVisible(true);
         }
     }
-    }
+
 
     /**
      * @param args the command line arguments
