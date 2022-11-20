@@ -103,7 +103,7 @@ public class CourseUseCaseInteractor {
         if (found){
             boolean success = course.modifyCourseContent(part, newPart);
             if (!success){
-                throw new CourseAttributeNotFoundException(part);
+                throw new CourseAttributeNotModifiableException(part);
             }
         }
     }
