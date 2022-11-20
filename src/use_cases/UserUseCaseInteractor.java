@@ -79,7 +79,33 @@ public class UserUseCaseInteractor {
         //      Otherwise, return False.
 
         // Check if the length of the password is greater than 8.
-        return password.length() > 8;
+        if (password.length() < 8) {
+            return false;
+        } else {
+            char c;
+            int count = 1;
+            for (int i = 0; i < password.length() - 1; i++) {
+                c = password.charAt(i);
+
+                // Check if password has ','
+                if (c == ',') {
+                    return false;
+
+                } else if (Character.isDigit(c)) {
+                    count++; //Get the number of numbers in password
+
+                    //Check if the password has at least 2 numbers
+                    if (count < 2) {
+                        return false;
+
+                        // Check if the password are all numbers.
+                    } else if (count == password.length()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
 
@@ -147,7 +173,7 @@ public class UserUseCaseInteractor {
         ArrayList<User> users = userDataInterface.getData();
 
         // If the given new username exists in database, return false.
-        for (User people : users){
+        for (User people : users) {
             if (people.getUsername().equals(newUsername)) {
                 throw new DuplicationException("user");
             }
