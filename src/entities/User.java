@@ -24,7 +24,6 @@ public class User {
          * userid is assigned by an usercase, and is IMMUTABLE
          */
         this.username = username;
-
         this.password = password;
         this.email = email;
         this.isAdmin = false;
@@ -38,7 +37,6 @@ public class User {
          * userid is assigned by an usercase, and is IMMUTABLE
          */
         this.username = username;
-
         this.password = password;
         this.email = email;
         this.isAdmin = true;

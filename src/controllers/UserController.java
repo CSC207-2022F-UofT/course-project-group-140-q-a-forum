@@ -27,6 +27,7 @@ public class UserController {
             userUseCaseInteractor.createUser(user);
         }catch (RuntimeException e){
 
+
         }finally {
             return "GOOD!";
         }

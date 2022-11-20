@@ -2,7 +2,9 @@ package use_cases.DataBaseAccess;
 
 import entities.Report;
 
-import java.util.ArrayList;
+import java.util.*;
+
+
 
 public interface ReportDataInterface extends DataInterface{
     ArrayList<Report> getData();
@@ -13,7 +15,6 @@ public interface ReportDataInterface extends DataInterface{
      * @param report/
      */
     void addReport(Report report);
-
 
 
     /**
