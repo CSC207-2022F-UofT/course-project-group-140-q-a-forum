@@ -4,7 +4,14 @@
  */
 package UI.MainOfShowingContents;
 
+import UI.PostingStuff.MakeACourse;
+import base.main;
+import controllers.CourseController;
+import entities.Course;
 import entities.User;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -12,11 +19,14 @@ import entities.User;
  */
 public class CoursesForm extends javax.swing.JFrame {
     private final User user;
+    private final Course[] courses ;
+    private final CourseController courseController = main.courseController;
     /**
      * Creates new form CoursesForm
      */
-    public CoursesForm(User user) {
+    public CoursesForm(User user, Course[] courses) {
         this.user = user;
+        this.courses = courses;
         initComponents();
     }
 
@@ -37,7 +47,7 @@ public class CoursesForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
-        commentButton = new javax.swing.JButton();
+        showPostsButton = new javax.swing.JButton();
         reportButton = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         codeLabel = new javax.swing.JLabel();
@@ -68,7 +78,9 @@ public class CoursesForm extends javax.swing.JFrame {
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Course"));
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = courseController.getAllCoursesName().toArray(new String[0]);
+
+
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -91,14 +103,14 @@ public class CoursesForm extends javax.swing.JFrame {
 
         descriptionLabel.setText("jLabel4");
 
-        commentButton.setText("Comment on this comment");
-        commentButton.addActionListener(new java.awt.event.ActionListener() {
+        showPostsButton.setText("Comment on this comment");
+        showPostsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 commentButtonActionPerformed(evt);
             }
         });
 
-        reportButton.setText("Report this comment");
+        reportButton.setText("Report this course");
         reportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reportButtonActionPerformed(evt);
@@ -131,7 +143,7 @@ public class CoursesForm extends javax.swing.JFrame {
                                 .addGap(15, 15, 15)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel7Layout.createSequentialGroup()
-                                                .addComponent(commentButton)
+                                                .addComponent(showPostsButton)
                                                 .addGap(55, 55, 55)
                                                 .addComponent(reportButton))
                                         .addGroup(jPanel7Layout.createSequentialGroup()
@@ -184,12 +196,12 @@ public class CoursesForm extends javax.swing.JFrame {
                                         .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(commentButton)
+                                        .addComponent(showPostsButton)
                                         .addComponent(reportButton))
                                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        userLabel.setText("username");
+        userLabel.setText(user.getUsername());
 
         profileButton.setText("Profile Page");
         profileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -259,6 +271,10 @@ public class CoursesForm extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        MakeACourse makeACourse = new MakeACourse(this.user);
+        makeACourse.setVisible(true);
+        this.setVisible(false);
+
     }
 
     private void jList2KeyPressed(java.awt.event.KeyEvent evt) {
@@ -268,6 +284,9 @@ public class CoursesForm extends javax.swing.JFrame {
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
+        int chosenCourseIndex = jList2.getSelectedIndex();
+        Course selectCourse = courses[chosenCourseIndex];
+        changePanel(selectCourse);
 
     }
 
@@ -275,44 +294,63 @@ public class CoursesForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new CoursesForm(user).setVisible(true);
-//            }
-//        });
-//    }
+    private void changePanel(Course course){
+        nameLabel.setText(course.getName());
+        codeLabel.setText(course.getCode());
+        semesterLabel.setText(course.getSemester());
+        instructorLabel.setText(String.valueOf(course.getInstructor()));
+        postsLabel.setText(String.valueOf(course.getPosts().size()));
+        descriptionLabel.setText(course.getDescription());
+
+
+
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                User user = new User("zxl", "","", "");
+                ArrayList<Course> courses1 = new ArrayList<Course>();
+                ArrayList<String> testInstructors = new ArrayList<String>();
+                testInstructors.add("bob");
+                testInstructors.add("Alice");
+                Course testCourse = new Course("this is test course", "1", "2", "3",  testInstructors);
+                Course[] courses2 = courses1.toArray(new Course[0]);
+                new CoursesForm(user, courses2).setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify
     private javax.swing.JLabel codeLabel;
-    private javax.swing.JButton commentButton;
+    private javax.swing.JButton showPostsButton;
     private javax.swing.JLabel coursenameLabel;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel instructorLabel;

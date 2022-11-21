@@ -133,7 +133,7 @@ public class UserUseCaseInteractor {
      *          return the user. Otherwise, throw EntryNotFoundException.
      */
     public User getUser(String userName){
-        if(userDataInterface.userExists(userName)){
+        if(!userDataInterface.userExists(userName)){
             return userDataInterface.getUser(userName);
         }
        return null;

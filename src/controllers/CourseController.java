@@ -175,4 +175,10 @@ public class CourseController {
             return new ArrayList<>();
         }
     }
+
+
+
+    public ArrayList<String> getAllCoursesName(){
+       return courseInteractor.getAllCoursesName();
+    }
 }

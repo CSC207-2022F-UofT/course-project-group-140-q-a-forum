@@ -18,4 +18,14 @@ public class GeneralPresenter extends JOptionPane {
                 notFoundType + " not find",ERROR_MESSAGE);
     }
 
+    public static void showEmptyEntryError(){
+        JOptionPane.showMessageDialog(null, "Some Message is Unfilled, please fill them",
+                "Empty Entry",ERROR_MESSAGE);
+    }
+
+    public static void showSuccessMessage(String successType){
+        JOptionPane.showMessageDialog(null, "This "  + successType + " is made successfully!",
+                "Register Success",INFORMATION_MESSAGE);
+    }
+
 }

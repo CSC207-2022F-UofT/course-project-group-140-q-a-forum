@@ -5,10 +5,14 @@
 package UI.UserdataRelated;
 import UI.MainOfShowingContents.CoursesForm;
 import base.main;
+import controllers.CourseController;
 import controllers.UserController;
 
 import Presenter.LoginPresenter;
+import entities.Course;
 import entities.User;
+import use_cases.DataBaseAccess.LoginDataInterface;
+import use_cases.DataBaseAccess.UserDataInterface;
 
 /**
  *
@@ -21,6 +25,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
 
     private UserController userController =  main.userController;
+    private CourseController courseController = main.courseController;
     public LoginForm() {
         initComponents();
     }
@@ -142,7 +147,8 @@ public class LoginForm extends javax.swing.JFrame {
         if(result == 1){
             this.setVisible(true);
             User user = userController.getUser(username);
-            CoursesForm coursesForm = new CoursesForm(user);
+            Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
+            CoursesForm coursesForm = new CoursesForm(user, courses);
             coursesForm.setVisible(true);
         }
         else if(result == -2){

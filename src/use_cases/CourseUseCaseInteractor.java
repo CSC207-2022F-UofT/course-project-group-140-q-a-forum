@@ -170,6 +170,16 @@ public class CourseUseCaseInteractor {
         return courseDataInterface.getAllCourses();
     }
 
+    public ArrayList<String> getAllCoursesName(){
+        ArrayList<Course> courses = courseDataInterface.getAllCourses();
+        ArrayList<String> coursesName = new ArrayList<String>();
+        for (Course cours : courses) {
+            coursesName.add(cours.getName());
+        }
+
+        return coursesName;
+    }
+
 
     public ArrayList<Post> getAllPosts(String courseCode){
         if (!courseDataInterface.courseExists(courseCode)){
