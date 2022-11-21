@@ -5,10 +5,15 @@ import exceptions.*;
 import use_cases.DataBaseAccess.UserDataInterface;
 
 import java.util.*;
+import java.util.regex.Pattern;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
 
 
 public class UserUseCaseInteractor {
     final UserDataInterface userDataInterface;
+    private String verificationnum;
 
     public UserUseCaseInteractor(UserDataInterface userDataInterface) {
         this.userDataInterface = userDataInterface;
@@ -20,7 +25,7 @@ public class UserUseCaseInteractor {
      *
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
-     *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
+     *             "Username", "Password", "Re-entered Password", "Email", "Verification code", and "isAdmin".
      * @return if successfully registered this student
      */
     public void createUser(Map<String, String> user) {
@@ -30,8 +35,16 @@ public class UserUseCaseInteractor {
             throw new DuplicationException("user");
         }
 
+        // Check if the username is empty or an email format.
+        if (usernameCheck(user.get("Username")) == 0) {
+            throw new EmptyEntryException("Username");
+        } else if (usernameCheck(user.get("Username")) == 1) {
+            throw new EmailFormatException("Username");
+        }
+
+
         // Check if the password is valid.
-        if (!passwordCheck(user.get("password"))) {
+        if (!passwordCheck(user.get("Password"))) {
             throw new WrongPasswordException("password");
         }
 
@@ -41,12 +54,15 @@ public class UserUseCaseInteractor {
         }
 
         // Check if the email is valid.
-        if (!emailCheck(user.get("email"))) {
+        if (user.get("Email") == null) {
+            throw new EmptyEntryException("email");
+        } else if (!emailCheck(user.get("Email"))) {
             throw new InvalidFormatException("email");
         }
 
         // Check the email verification.
-        if (!verifyEmail(user.get("verfication"))) {
+
+        if (!verifyEmail(user.get("Verification"))) {
             throw new WrongPasswordException("verfication number");
         }
 
@@ -108,6 +124,28 @@ public class UserUseCaseInteractor {
         return true;
     }
 
+    /**
+     * Check the username the user entered.
+     *
+     * @param username username user provided.
+     * @return the username is an email address.
+     */
+    public int usernameCheck(String username) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        // Check if the username is null.
+        if (username == null) {
+            return 0;
+        } else if (pat.matcher(username).matches()) {
+            return 1;
+        }
+        return -1;
+    }
+
 
     /**
      * Check the password and re-entered password
@@ -133,26 +171,84 @@ public class UserUseCaseInteractor {
      */
 
     private boolean emailCheck(String email) {
-        StringBuilder email2 = new StringBuilder(email);
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
 
-        // Reverse the email.
-        email2.reverse();
+        Pattern pat = Pattern.compile(emailRegex);
 
-        return email2.substring(0, 17).equals("ac.otnorotu.liam@");
+        return pat.matcher(email).matches();
     }
 
     /**
      * Take in the email, and send a random verify number to the email.
      *
      * @param email email user provided.
-     * @return if the email passes the verification.
      */
-    public boolean verifyEmail(String email) {
+    public void sendVerificationEmail(String email) {
         //TODO: complete this method
         //      If the verify number be verified successfully, return True
         //      Otherwise, return False
 
-        return false;
+        // Send verification email.
+        // Recipient's email ID needs to be mentioned.
+        String to = email;
+
+        // Sender's email ID needs to be mentioned
+        String from = "web@gmail.com";
+
+        // Assuming you are sending email from localhost
+        String host = "localhost";
+
+        // Get system properties
+        Properties properties = System.getProperties();
+
+        // Setup mail server
+        properties.setProperty("mail.smtp.host", host);
+
+        // Get the default Session object.
+        Session session = Session.getDefaultInstance(properties);
+
+        try {
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(session);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+            // Set Subject: header field
+            message.setSubject("Your verification number is");
+
+            // Generate a verification code.
+            int num = (int) (Math.random() * 90000) + 100000;
+            String messagetosend = Integer.toString(num);
+            this.verificationnum = messagetosend;
+
+            // Now set the actual message
+            message.setText(messagetosend);
+
+            // Send message
+            Transport.send(message);
+            System.out.println("Sent message successfully....");
+
+
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Take in the email, and send a random verify number to the email.
+     *
+     * @param verification email user provided.
+     */
+    public boolean verifyEmail(String verification) {
+        return verification == verificationnum;
     }
 
 
@@ -243,14 +339,11 @@ public class UserUseCaseInteractor {
      *
      * @param user Relevant information of this user.
      */
-    public void removeAUser(Map<String, String> user) {
+    public void removeAUser(User user) {
 
-        // If the given user does not exist in the database, return false.
-        if (!userDataInterface.userExists(user)) {
-            throw new UserNotExistException(user.get("Username"));
-        }
-
-        userDataInterface.deleteUser(user.get("Username"));
+        userDataInterface.deleteUser(user);
 
     }
+
+
 }
