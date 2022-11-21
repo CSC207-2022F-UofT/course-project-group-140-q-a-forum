@@ -1,6 +1,6 @@
 package controllers;
-import use_cases.LoginUseCaseInteractor;
-import use_cases.PostUseCaseInteractor;
+import UseCases.LoginUseCaseInteractor;
+import UseCases.PostUseCaseInteractor;
 
 import java.util.HashMap;
 

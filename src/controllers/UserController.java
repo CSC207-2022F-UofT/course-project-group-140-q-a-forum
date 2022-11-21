@@ -1,8 +1,8 @@
 package controllers;
 
 import entities.User;
-import use_cases.LoginUseCaseInteractor;
-import use_cases.UserUseCaseInteractor;
+import UseCases.LoginUseCaseInteractor;
+import UseCases.UserUseCaseInteractor;
 import java.util.*;
 
 public class UserController {

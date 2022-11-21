@@ -1,6 +1,6 @@
-package use_cases;
+package UseCases;
 import entities.User;
-import use_cases.DataBaseAccess.LoginDataInterface;
+import UseCases.DataBaseAccess.LoginDataInterface;
 
 import java.util.ArrayList;
 

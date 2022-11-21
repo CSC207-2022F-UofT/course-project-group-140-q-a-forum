@@ -1,6 +1,6 @@
 package controllers;
 import java.util.*;
-import use_cases.ReportUseCaseInteractor;
+import UseCases.ReportUseCaseInteractor;
 
 public class ReportController {
     private final ReportUseCaseInteractor reportUseCaseInteractor;

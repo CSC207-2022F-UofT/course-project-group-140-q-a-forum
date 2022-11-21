@@ -7,7 +7,7 @@ import exceptions.CourseAttributeNotModifiableException;
 import exceptions.CourseInfoNotFoundException;
 import exceptions.CourseNotFoundException;
 import exceptions.DuplicationException;
-import use_cases.CourseUseCaseInteractor;
+import UseCases.CourseUseCaseInteractor;
 
 import java.util.ArrayList;
 import java.util.HashMap;

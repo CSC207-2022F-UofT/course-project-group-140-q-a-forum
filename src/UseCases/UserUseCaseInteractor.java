@@ -1,8 +1,8 @@
-package use_cases;
+package UseCases;
 
 import entities.User;
 import exceptions.*;
-import use_cases.DataBaseAccess.UserDataInterface;
+import UseCases.DataBaseAccess.UserDataInterface;
 
 import java.util.*;
 

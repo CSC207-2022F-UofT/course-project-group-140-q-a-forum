@@ -1,4 +1,4 @@
-package use_cases.DataBaseAccess;
+package UseCases.DataBaseAccess;
 
 import entities.Report;
 

@@ -1,14 +1,11 @@
-package use_cases;
+package UseCases;
 import entities.Course;
 import entities.Post;
-import entities.User;
-import use_cases.DataBaseAccess.CourseDataInterface;
+import UseCases.DataBaseAccess.CourseDataInterface;
 import exceptions.*;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 public class CourseUseCaseInteractor {
