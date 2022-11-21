@@ -60,14 +60,10 @@ public class UserController {
         try{userUseCaseInteractor.checkLogin(userName, password);}
         catch(EntryNotFoundException e){
             return -1;}
-
+        catch (WrongPasswordException e){
+            return -2;
+        }
         return 1;
-//        if (userUseCaseInteractor.checkLogin(userName, password)){
-//            return "1";
-//        }
-//        else{
-//            return "0";
-//        }
 
     }
 }
