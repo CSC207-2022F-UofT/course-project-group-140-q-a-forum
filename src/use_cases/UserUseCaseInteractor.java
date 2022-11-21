@@ -50,7 +50,7 @@ public class UserUseCaseInteractor {
 
         // Check if the reentered password is the same.
         if (!duoPasswordCheck(user.get("Password"), user.get("Re-entered Password"))) {
-            throw new WrongPasswordException("password");
+            throw new DifferentPasswordException("Password");
         }
 
         // Check if the email is valid.
@@ -63,7 +63,7 @@ public class UserUseCaseInteractor {
         // Check the email verification.
 
         if (!verifyEmail(user.get("Verification"))) {
-            throw new WrongPasswordException("verfication number");
+            throw new EmailVerifyException("verfication number");
         }
 
         // Register a new user.
