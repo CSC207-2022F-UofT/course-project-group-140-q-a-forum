@@ -145,8 +145,11 @@ public class LoginForm extends javax.swing.JFrame {
             CoursesForm coursesForm = new CoursesForm();
             coursesForm.setVisible(true);
         }
-        else{
+        else if(result == -2){
            LoginPresenter.showPasswordNotMatch();
+        }
+        else{
+            LoginPresenter.showUserNotExists();
         }
     }
 
@@ -158,6 +161,9 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void forgetButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        ForgetPassword forgetPassword = new ForgetPassword();
+        forgetPassword.setVisible(true);
+        this.setVisible(false);
     }
 
     /**
