@@ -2,24 +2,16 @@ package controllers;
 
 import Presenter.RegisterPresenter;
 import entities.User;
-import exceptions.EntryNotFoundException;
+import exceptions.*;
 import use_cases.LoginUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 import java.util.*;
 
 public class UserController {
     private final UserUseCaseInteractor userUseCaseInteractor;
-//    private final LoginUseCaseInteractor loginUseCaseInteractor;
-
-
-//    public UserController(UserUseCaseInteractor userUseCaseInteractor, LoginUseCaseInteractor loginUseCaseInteractor) {
-//        this.userUseCaseInteractor = userUseCaseInteractor;
-//        this.loginUseCaseInteractor = loginUseCaseInteractor;
-//    }
 
     public UserController(UserUseCaseInteractor userUseCaseInteractor) {
         this.userUseCaseInteractor = userUseCaseInteractor;
-//        this.loginUseCaseInteractor = loginUseCaseInteractor;
     }
 
     /**
@@ -29,26 +21,37 @@ public class UserController {
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
      * @return if successfully registered this student, if not return the error type
      */
-    public String registerUser(Map<String, String> user){
+    public int registerUser(Map<String, String> user){
         try{
             userUseCaseInteractor.createUser(user);
 
-        }catch (RuntimeException e){
+        }catch (DuplicationException e){
             //A bunch of possible exceptions here, later I will add details.
-            RegisterPresenter.showNonValidEmailError();
-            System.out.println(e.getMessage());
-            return "BAD";
+
+            return -1;
+        }catch (PasswordTooWeakException e){
+
+            return -2;
+        }catch (PasswordDoesNotMatchException e){
+
+            return -3;
+        }catch (InvalidFormatException e){
+
+            return -4;
+        }catch (WrongPasswordException e){
+
+            return -5;
         }
 
-        return "GOOD";
+
+        return 1;
     }
 
 
     /**
      * Login the user
-     * @param user  This is a Map that contains necessary information
-     *      *             needed to register a user. The keys must be
-     *      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
+     * @param userName  it is a string that stores the username
+     *        password  used to check whether the password match with username in the database
      * @param password  This is the password we input
      * @return  the string "Correct Password" or "Wrong Password"
      */
@@ -56,7 +59,6 @@ public class UserController {
     public int loginUser(String userName, String password){
         try{userUseCaseInteractor.checkLogin(userName, password);}
         catch(EntryNotFoundException e){
-            System.out.println(e.getMessage());
             return -1;}
 
         return 1;

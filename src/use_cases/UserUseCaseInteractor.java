@@ -3,8 +3,8 @@ package use_cases;
 import entities.User;
 import exceptions.*;
 import use_cases.DataBaseAccess.UserDataInterface;
-
 import java.util.*;
+import java.util.regex.Pattern;
 
 
 public class UserUseCaseInteractor {
@@ -99,12 +99,16 @@ public class UserUseCaseInteractor {
      */
 
     private boolean emailCheck(String email) {
-        StringBuilder email2 = new StringBuilder(email);
-
         // Reverse the email.
-        email2.reverse();
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
 
-        return email2.substring(0, 17).equals("ac.otnorotu.liam@");
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
     }
 
     /**
@@ -152,7 +156,7 @@ public class UserUseCaseInteractor {
         // If the given new password does not meet the requirement, return false.
         if (!passwordCheck(newPassword)) {
             return false;
-        }else if(!user.getPassword().equals(oldPassword)){
+        } else if (!user.getPassword().equals(oldPassword)) {
             return false;
         }
 
@@ -196,7 +200,7 @@ public class UserUseCaseInteractor {
      * It first checks if the user exists, and removes it if so;
      * otherwise, it returns false.
      *
-     * @param user Relevant information of this user.
+     * @param userName Relevant information of this user.
      * @return if successfully removed this user.
      */
     public boolean removeAUser(String userName) {
@@ -211,23 +215,27 @@ public class UserUseCaseInteractor {
 
     }
 
-    public boolean checkLogin(String userName, String password){
+    public boolean checkLogin(String userName, String password) {
         ArrayList<User> allUsers = userDataInterface.getAllUsers();
         User user = userDataInterface.getUser(userName);
         //for debug
         ArrayList<String> names = new ArrayList<>();
 
-        for (User user_temp: allUsers){
+        for (User user_temp : allUsers) {
             names.add(user_temp.getUsername());
             names.add(user_temp.getPassword());
         }
 
         System.out.println(names);
 
-        if (user == null){
+        if (user == null) {
             throw new EntryNotFoundException("user");
         }
 
-        return user.getPassword().equals(password);
+        if (user.getPassword().equals(password)) {
+            throw new WrongPasswordException("password");
+        }
+    return true;
+
     }
 }
