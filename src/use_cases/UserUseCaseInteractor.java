@@ -145,7 +145,7 @@ public class UserUseCaseInteractor {
         //      reset a new password. the User's password is changed into DataBase(need to call the userDataInterface).
         //      Otherwise, return False
 
-        ArrayList<User> users = userDataInterface.getData();
+        ArrayList<User> users = userDataInterface.getAllUsers();
 
         // If the given new username exists in database, return false.
         for (User people : users){
