@@ -1,4 +1,5 @@
 package controllers;
+import exceptions.EmptyEntryException;
 import use_cases.LoginUseCaseInteractor;
 import use_cases.PostUseCaseInteractor;
 
@@ -23,14 +24,14 @@ public class PostControllers {
      * @param post information will be stored at the HashMap
      * @return  String for each state.
      */
-    public String passDataCreatePost(HashMap<String,Object> post){
+    public int passDataCreatePost(HashMap<String,Object> post){
         try{
             postUseCaseInteractor.createPost(post);
         }
-        catch (RuntimeException e){
-
+        catch (EmptyEntryException e){
+            return -1;
         }
-        return "Ok.";
+        return 0;
     }
 
     /**
@@ -40,13 +41,23 @@ public class PostControllers {
      * @param post information will be stored at the HashMap
      * @return  String for each state.
      */
-    public String passDataEditPost(HashMap<String, Object> post) {
+    public int passDataEditPost(HashMap<String, Object> post) {
         try{
             postUseCaseInteractor.editPost(post);
         }
-        catch(RuntimeException e){
-            //TODO: Do sth.
+        catch(EmptyEntryException e){
+            return -1;
         }
-        return "Ok.";
+        return 0;
+    }
+
+    public int passDataRemovePost(HashMap<String, Object> post){
+        try{
+            postUseCaseInteractor.removePost(post);
+        }
+        catch(EmptyEntryException e){
+            return -1;
+        }
+        return 0;
     }
 }
