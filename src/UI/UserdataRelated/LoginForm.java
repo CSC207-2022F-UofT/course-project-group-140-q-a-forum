@@ -141,7 +141,6 @@ public class LoginForm extends javax.swing.JFrame {
         String username = usernameText.getText();
         String password = new String(passText.getPassword());
         int result = userController.loginUser(username, password);
-        System.out.println(username + "     ? ? " +  password);
         if(result == 1){
             this.setVisible(true);
             CoursesForm coursesForm = new CoursesForm();
