@@ -238,7 +238,7 @@ public class UserUseCaseInteractor {
             throw new EntryNotFoundException("user");
         }
 
-        if (user.getPassword().equals(password)) {
+        if (!user.getPassword().equals(password)) {
             throw new WrongPasswordException("password");
         }
     return true;

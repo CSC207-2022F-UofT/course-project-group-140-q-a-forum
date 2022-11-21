@@ -49,6 +49,9 @@ public class CoursesForm extends javax.swing.JFrame {
         postsLabel = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
+        profileButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +71,16 @@ public class CoursesForm extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList2MouseClicked(evt);
+            }
+        });
+        jList2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList2KeyPressed(evt);
+            }
         });
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Course Description"));
@@ -176,6 +189,17 @@ public class CoursesForm extends javax.swing.JFrame {
                                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
+        userLabel.setText("username");
+
+        profileButton.setText("Profile Page");
+        profileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("User");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,14 +211,21 @@ public class CoursesForm extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(coursenameLabel)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel1))
-                                        .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jList2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(78, Short.MAX_VALUE))
+                                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 72, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(coursenameLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(userLabel)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(profileButton)))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,14 +233,17 @@ public class CoursesForm extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel1)
-                                        .addComponent(coursenameLabel))
+                                        .addComponent(coursenameLabel)
+                                        .addComponent(userLabel)
+                                        .addComponent(profileButton)
+                                        .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(registerButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jList2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(71, Short.MAX_VALUE))
+                                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -224,6 +258,20 @@ public class CoursesForm extends javax.swing.JFrame {
     }
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void jList2KeyPressed(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+
+    }
+
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+
+    }
+
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -268,12 +316,14 @@ public class CoursesForm extends javax.swing.JFrame {
     private javax.swing.JLabel coursenameLabel;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel instructorLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList2;
@@ -282,6 +332,8 @@ public class CoursesForm extends javax.swing.JFrame {
     private javax.swing.JLabel postsLabel;
     private javax.swing.JButton registerButton;
     private javax.swing.JButton reportButton;
+    private javax.swing.JButton profileButton;
     private javax.swing.JLabel semesterLabel;
+    private javax.swing.JLabel userLabel;
     // End of variables declaration
 }
