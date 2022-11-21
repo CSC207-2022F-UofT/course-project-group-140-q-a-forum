@@ -1,5 +1,6 @@
 package base;
 
+import UI.UserdataRelated.LoginForm;
 import controllers.CourseController;
 import controllers.PostControllers;
 import controllers.UserController;
@@ -22,7 +23,8 @@ public class main {
     PostControllers postControllers = new PostControllers(postInteractor);
     public static UserController userController = new UserController(userInteractor);
     public static void main(String[] args) {
-        System.out.println(userController.passEmail("yujiawei364557@gmail.com"));
+        LoginForm loginForm = new LoginForm();
+        loginForm.setVisible(true);
 
     }
 }

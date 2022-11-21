@@ -170,36 +170,6 @@ public class UserUseCaseInteractor {
         userDataInterface.resetPassword(user.getUsername(), newPassword);
         return true;
     }
-// I don't think we support this.
-//    /**
-//     * This method reset the email of user.
-//     * If the new email is correct and passes the verification reset email and return true
-//     * Otherwise, it returns false.
-//     *
-//     * @param user     information user provided.
-//     * @param newEmail the new email user wants to change.
-//     * @return if successfully change the email.
-//     */
-//    public boolean resetEmail(User user, String newEmail) {
-//        //TODO: complete this method
-//        //      If the email be verified successfully, return True and reset a new email and verify the new email.
-//        //       the User's email is changed into DataBase(need to call the userDataInterface).
-//        //      Otherwise, return False
-//
-//        // If the given new email does not meet the requirement, return false.
-//        if (!emailCheck(newEmail)) {
-//            return false;
-//        }
-//
-//        // If the given new email does not pass the verification, return false.
-//        if (!verifyEmail(newEmail)) {
-//            return false;
-//        }
-//
-//        userDataInterface.resetEmail(user, newEmail);
-//        return true;
-//    }
-
 
     /**
      * This removes a user from the current Database.
@@ -224,15 +194,6 @@ public class UserUseCaseInteractor {
     public boolean checkLogin(String userName, String password) {
         ArrayList<User> allUsers = userDataInterface.getAllUsers();
         User user = userDataInterface.getUser(userName);
-        //for debug
-        ArrayList<String> names = new ArrayList<>();
-
-        for (User user_temp : allUsers) {
-            names.add(user_temp.getUsername());
-            names.add(user_temp.getPassword());
-        }
-
-        System.out.println(names);
 
         if (user == null) {
             throw new EntryNotFoundException("user");
