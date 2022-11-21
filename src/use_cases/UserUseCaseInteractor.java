@@ -60,7 +60,6 @@ public class UserUseCaseInteractor {
             User newUser = new User(user.get("Username"), user.get("Password"),
                     user.get("Email"));
             userDataInterface.addUser(newUser);
-
         }
     }
 
@@ -215,6 +214,19 @@ public class UserUseCaseInteractor {
     public boolean checkLogin(String userName, String password){
         ArrayList<User> allUsers = userDataInterface.getAllUsers();
         User user = userDataInterface.getUser(userName);
+        //for debug
+        ArrayList<String> names = new ArrayList<>();
+
+        for (User user_temp: allUsers){
+            names.add(user_temp.getUsername());
+            names.add(user_temp.getPassword());
+        }
+
+        System.out.println(names);
+
+        if (user == null){
+            throw new EntryNotFoundException("user");
+        }
 
         return user.getPassword().equals(password);
     }

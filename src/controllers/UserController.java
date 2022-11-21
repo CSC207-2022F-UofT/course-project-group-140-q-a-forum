@@ -2,6 +2,7 @@ package controllers;
 
 import Presenter.RegisterPresenter;
 import entities.User;
+import exceptions.EntryNotFoundException;
 import use_cases.LoginUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 import java.util.*;
@@ -36,7 +37,9 @@ public class UserController {
             //A bunch of possible exceptions here, later I will add details.
             RegisterPresenter.showNonValidEmailError();
             System.out.println(e.getMessage());
+            return "BAD";
         }
+
         return "GOOD";
     }
 
@@ -50,14 +53,19 @@ public class UserController {
      * @return  the string "Correct Password" or "Wrong Password"
      */
 
-    public String loginUser(String userName, String password){
+    public int loginUser(String userName, String password){
+        try{userUseCaseInteractor.checkLogin(userName, password);}
+        catch(EntryNotFoundException e){
+            System.out.println(e.getMessage());
+            return -1;}
 
-        if (userUseCaseInteractor.checkLogin(userName, password)){
-            return "Correct Password";
-        }
-        else{
-            return "Wrong Password";
-        }
+        return 1;
+//        if (userUseCaseInteractor.checkLogin(userName, password)){
+//            return "1";
+//        }
+//        else{
+//            return "0";
+//        }
 
     }
 }

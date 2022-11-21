@@ -3,10 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI.UserdataRelated;
+import UI.MainOfShowingContents.CoursesForm;
 import base.main;
 import controllers.UserController;
 
 import Presenter.LoginPresenter;
+import entities.User;
+
+import javax.swing.*;
 
 /**
  *
@@ -134,7 +138,18 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-
+        String username = usernameText.getText();
+        String password = new String(passText.getPassword());
+        int result = userController.loginUser(username, password);
+        System.out.println(username + "     ? ? " +  password);
+        if(result == 1){
+            this.setVisible(true);
+            CoursesForm coursesForm = new CoursesForm();
+            coursesForm.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "something wrong", "something wrong", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {

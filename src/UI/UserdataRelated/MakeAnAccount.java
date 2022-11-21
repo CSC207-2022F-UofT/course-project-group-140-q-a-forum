@@ -239,10 +239,10 @@ public class MakeAnAccount extends javax.swing.JFrame {
         RegInfo.put("Re-entered Password", repass);
         String email = emailText.getText();
         RegInfo.put("Email", email);
-        String isAdmin = "false";
+        String isAdmin = null;
         RegInfo.put("isAdmin", isAdmin);
         String result  = userController.registerUser(RegInfo);
-        if(result.equals("GOOD!")){
+        if(result.equals("GOOD")){
             JOptionPane.showMessageDialog(null, "Register successfully", "reg success", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
             LoginForm loginPage = new LoginForm();
