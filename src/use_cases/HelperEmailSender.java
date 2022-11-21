@@ -6,8 +6,10 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 class Mailer{
+    //This class is directly used from this website:
     public void send(String from, String password, String to, String sub, String msg){
         //Get properties object
+
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -15,6 +17,7 @@ class Mailer{
                 "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
+
         //get Session
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {

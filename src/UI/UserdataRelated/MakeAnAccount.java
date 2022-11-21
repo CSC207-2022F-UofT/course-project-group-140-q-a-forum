@@ -8,6 +8,7 @@ import Presenter.LoginPresenter;
 import Presenter.RegisterPresenter;
 import base.main;
 import controllers.UserController;
+import use_cases.UserUseCaseInteractor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +20,7 @@ import java.util.HashMap;
  */
 public class MakeAnAccount extends javax.swing.JFrame {
     private final UserController userController = main.userController;
+    private String verificationCode = null;
     /**
      * Creates new form RegisterForm
      */
@@ -247,7 +249,9 @@ public class MakeAnAccount extends javax.swing.JFrame {
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        String email = emailText.getText();
         showingSeding.setText("Verification Send");
+        verificationCode = userController.passEmail(email);
 
     }
 
@@ -264,7 +268,7 @@ public class MakeAnAccount extends javax.swing.JFrame {
         RegInfo.put("Email", email);
         String isAdmin = null;
         RegInfo.put("isAdmin", isAdmin);
-        int result = userController.registerUser(RegInfo);
+        int result = userController.registerUser(RegInfo, verificationCode);
         switch (result) {
             case 1 -> {
                 RegisterPresenter.showRegisterSuccess();

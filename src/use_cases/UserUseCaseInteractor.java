@@ -20,10 +20,11 @@ public class UserUseCaseInteractor {
      *
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
-     *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
+     *             "Username", "Password", "Re-entered Password", "Email",
+     *             "Verification" and "isAdmin".
      * @return if successfully registered this student
      */
-    public void createUser(Map<String, String> user) {
+    public void createUser(Map<String, String> user, String code) {
 
         // Check if the user exists in Database.
         if (!userDataInterface.userExists(user.get("Username"))) {
@@ -46,7 +47,8 @@ public class UserUseCaseInteractor {
         }
 
         // Check the email verification.
-        if (!verifyEmail(user.get("Verfication"))) {
+//        if (!code.equals(user.get("Verification"))) {
+        if(false){
             throw new WrongPasswordException("verfication number");
         }
 
@@ -117,15 +119,19 @@ public class UserUseCaseInteractor {
      * @param email email user provided.
      * @return if the email passes the verification.
      */
-    public boolean verifyEmail(String email) {
-        //TODO: complete this method
-        //      If the verify number be verified successfully, return True
-        //      Otherwise, return False
-
-        return true;
+    public String verifyEmail(String email) {
+//        Mailer mailer = new Mailer();
+//        String code = randomStringGenerator();
+//        mailer.send("QNAForumGroup140@gmail.com", "TheForum140", email, "Verification Code", code);
+//
+//        return code;
+        return "123";
     }
 
-
+    private String randomStringGenerator(){
+        Random random = new Random();
+        return Integer.toString(random.nextInt(1000000));
+    }
     /**
      * This method reset the username of user.
      * If the new username is not in database, it resets username and returns true.
@@ -232,7 +238,7 @@ public class UserUseCaseInteractor {
             throw new EntryNotFoundException("user");
         }
 
-        if (user.getPassword().equals(password)) {
+        if (!user.getPassword().equals(password)) {
             throw new WrongPasswordException("password");
         }
     return true;

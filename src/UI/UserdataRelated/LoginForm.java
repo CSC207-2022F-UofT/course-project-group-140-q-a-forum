@@ -137,7 +137,6 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         String username = usernameText.getText();
         String password = new String(passText.getPassword());
         int result = userController.loginUser(username, password);
@@ -152,7 +151,6 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         MakeAnAccount RegPage = new MakeAnAccount();
         RegPage.setVisible(true);
         this.setVisible(false);

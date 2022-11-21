@@ -22,9 +22,7 @@ public class main {
     PostControllers postControllers = new PostControllers(postInteractor);
     public static UserController userController = new UserController(userInteractor);
     public static void main(String[] args) {
-
-
-
+        System.out.println(userController.passEmail("yujiawei364557@gmail.com"));
 
     }
 }

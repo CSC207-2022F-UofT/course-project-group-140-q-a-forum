@@ -18,16 +18,16 @@ public class UserController {
      * this function registers the User
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
-     *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
+     *             "Username", "Password", "Re-entered Password", "Email", and  "isAdmin".
      * @return if successfully registered this student, if not return the error type
      */
-    public int registerUser(Map<String, String> user){
-        try{
-            userUseCaseInteractor.createUser(user);
+    public int registerUser(Map<String, String> user, String code){
 
+
+        try{
+            userUseCaseInteractor.createUser(user, code);
         }catch (DuplicationException e){
             //A bunch of possible exceptions here, later I will add details.
-
             return -1;
         }catch (PasswordTooWeakException e){
 
@@ -47,6 +47,9 @@ public class UserController {
         return 1;
     }
 
+    public String passEmail(String email){
+        return userUseCaseInteractor.verifyEmail(email);
+    }
 
     /**
      * Login the user
@@ -62,12 +65,7 @@ public class UserController {
             return -1;}
 
         return 1;
-//        if (userUseCaseInteractor.checkLogin(userName, password)){
-//            return "1";
-//        }
-//        else{
-//            return "0";
-//        }
-
     }
+
+
 }
