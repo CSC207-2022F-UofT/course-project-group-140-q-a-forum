@@ -163,6 +163,9 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void forgetButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        ForgetPassword forgetPassword = new ForgetPassword();
+        forgetPassword.setVisible(true);
+        this.setVisible(false);
     }
 
     /**

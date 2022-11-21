@@ -206,6 +206,9 @@ public class ForgetPassword extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        LoginForm loginForm = new LoginForm();
+        loginForm.setVisible(true);
+        this.setVisible(false);
     }
 
     /**
