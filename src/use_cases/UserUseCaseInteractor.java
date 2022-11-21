@@ -127,6 +127,20 @@ public class UserUseCaseInteractor {
 
 
     /**
+     * Find the user with UserName
+     * @param userName  it is a string that stores the username
+     * @return  if there is an user with the input username in the database, then
+     *          return the user. Otherwise, throw EntryNotFoundException.
+     */
+    public User getUser(String userName){
+        if(userDataInterface.userExists(userName)){
+            return userDataInterface.getUser(userName);
+        }
+       return null;
+    }
+
+
+    /**
      * This method reset the username of user.
      * If the new username is not in database, it resets username and returns true.
      * Otherwise, it returns false.
@@ -135,6 +149,9 @@ public class UserUseCaseInteractor {
      * @param newUsername the new username user wants to change.
      * @return if successfully change the password.
      */
+
+
+
     public boolean resetUsername(User user, String newUsername) {
         // If the given new username exists in database, return false.
         // Reset the password.
@@ -216,18 +233,7 @@ public class UserUseCaseInteractor {
     }
 
     public boolean checkLogin(String userName, String password) {
-        ArrayList<User> allUsers = userDataInterface.getAllUsers();
         User user = userDataInterface.getUser(userName);
-        //for debug
-        ArrayList<String> names = new ArrayList<>();
-
-        for (User user_temp : allUsers) {
-            names.add(user_temp.getUsername());
-            names.add(user_temp.getPassword());
-        }
-
-        System.out.println(names);
-
         if (user == null) {
             throw new EntryNotFoundException("user");
         }
@@ -238,4 +244,6 @@ public class UserUseCaseInteractor {
     return true;
 
     }
+
+
 }

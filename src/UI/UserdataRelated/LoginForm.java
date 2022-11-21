@@ -10,8 +10,6 @@ import controllers.UserController;
 import Presenter.LoginPresenter;
 import entities.User;
 
-import javax.swing.*;
-
 /**
  *
  * @author zhaoxiling
@@ -143,7 +141,8 @@ public class LoginForm extends javax.swing.JFrame {
         int result = userController.loginUser(username, password);
         if(result == 1){
             this.setVisible(true);
-            CoursesForm coursesForm = new CoursesForm();
+            User user = userController.getUser(username);
+            CoursesForm coursesForm = new CoursesForm(user);
             coursesForm.setVisible(true);
         }
         else if(result == -2){

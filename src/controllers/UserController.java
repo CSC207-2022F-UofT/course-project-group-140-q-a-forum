@@ -4,6 +4,7 @@ import Presenter.RegisterPresenter;
 import entities.User;
 import exceptions.*;
 import use_cases.LoginUseCaseInteractor;
+import use_cases.UserUseCase;
 import use_cases.UserUseCaseInteractor;
 import java.util.*;
 
@@ -66,4 +67,18 @@ public class UserController {
         return 1;
 
     }
+
+    /**
+     * Find the user with UserName
+     * @param userName  it is a string that stores the username
+     * @return  if there is an user with the input username in the database, then
+     *          return the user. Otherwise, return null.
+     */
+    public User getUser(String userName){
+     return userUseCaseInteractor.getUser(userName);
+    }
+
+
+
+
 }
