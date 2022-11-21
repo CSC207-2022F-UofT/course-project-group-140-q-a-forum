@@ -5,7 +5,9 @@ import entities.Report;
 import java.util.ArrayList;
 
 public interface ReportDataInterface extends DataInterface{
-    ArrayList<Report> getData();
+    ArrayList<Report> getAllReport();
+
+    ArrayList<Report> getAllReportFromType(int type);
 
 
     /**

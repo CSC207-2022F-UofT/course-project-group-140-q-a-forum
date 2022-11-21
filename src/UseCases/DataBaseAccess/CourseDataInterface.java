@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public interface CourseDataInterface extends DataInterface {
-    ArrayList<Course> getData();
+    ArrayList<Course> getAllCourses();
 
     Course getCourse(String courseCode);
 

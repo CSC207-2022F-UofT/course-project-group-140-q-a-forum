@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface UserDataInterface extends DataInterface{
 
-    ArrayList<User> getData();
+    ArrayList<User> getAllUsers();
 
     /**
      * add a user in DataBase
