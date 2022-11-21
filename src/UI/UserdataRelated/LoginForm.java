@@ -148,7 +148,7 @@ public class LoginForm extends javax.swing.JFrame {
             coursesForm.setVisible(true);
         }
         else{
-            JOptionPane.showMessageDialog(null, "something wrong", "something wrong", JOptionPane.ERROR_MESSAGE);
+           LoginPresenter.showPasswordNotMatch();
         }
     }
 
