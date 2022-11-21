@@ -5,8 +5,9 @@ import java.util.Map;
 
 
 public interface CourseDataInterface extends DataInterface {
-    ArrayList<Course> getData();
+    ArrayList<Course> getAllCourses();
 
+    Course getCourse(String courseCode);
 
     /**
      * add a course in DataBase
@@ -28,11 +29,4 @@ public interface CourseDataInterface extends DataInterface {
      */
     boolean courseExists(String courseCode);
 
-    /**
-     * modifies content of an existing course.
-     * @param courseCode Course Code of a course.
-     * @param part the part of the course needed to be modified.
-     * @param newPart the content of the part that needs to be modified to.
-     */
-    void modifyCourseContent(String courseCode, String part, String newPart);
 }

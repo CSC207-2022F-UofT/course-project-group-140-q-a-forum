@@ -11,7 +11,8 @@ public class RegisterPresenter extends JOptionPane {
 
     public static void showWrongPasswordError(){
         JOptionPane.showMessageDialog(null,
-                "The password is not Valid","Password Not Valid", ERROR_MESSAGE );
+                "The password is not Valid\n Password has to have more than 8 digits ",
+                "Password Not Valid", ERROR_MESSAGE );
     }
 
     public static void showWrongRePassError(){

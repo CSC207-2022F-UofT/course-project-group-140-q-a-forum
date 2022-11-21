@@ -12,6 +12,8 @@ public class Course {
     private ArrayList<String> instructors;
     private String semester;
 
+    private ArrayList<Post> posts;
+
     /**
      *
      */
@@ -37,6 +39,7 @@ public class Course {
         this.description = description;
         this.semester = semester;
         this.instructors = instructors;
+        this.posts = new ArrayList<>();
     }
 
     /**
@@ -62,7 +65,34 @@ public class Course {
         return this.instructors;
     }
 
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
 
+    /**
+     * Modify the content of a course.
+     * @param part Which attribute of the course to be modified to.
+     * @param changTo The content to be changed to.
+     * @return If the modification is successful.
+     */
+    public boolean modifyCourseContent(String part, String changTo){
+        switch(part){
+            case "name":
+                this.name = changTo;
+                return true;
+            case "courseCode":
+                this.courseCode = changTo;
+                return true;
+            case "description":
+                this.description = changTo;
+                return true;
+            case "semester":
+                this.semester = changTo;
+                return true;
+            default:
+                return false;
+        }
+    }
 
     /**
      * the method for adding an instructor to a course. If the instructor is already in the course, returns false;
@@ -88,6 +118,34 @@ public class Course {
     public boolean removeInstructor(String instructor){
         if (this.instructors.contains(instructor)){
             this.instructors.remove(instructor);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Add a post to the post list of this course.
+     * @param post The post to be added in.
+     * @return If the post is successfully added.
+     */
+    public boolean addPost(Post post){
+        if (this.posts.contains(post)){
+            return false;
+        }else{
+            this.posts.add(post);
+            return true;
+        }
+    }
+
+    /**
+     * Remove a post from the post list of this course.
+     * @param post The post to be removed.
+     * @return If the post is successfully removed.
+     */
+    public boolean removePost(Post post){
+        if (this.posts.contains(post)){
+            this.posts.remove(post);
             return true;
         }else{
             return false;

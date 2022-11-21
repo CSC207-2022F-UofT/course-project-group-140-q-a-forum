@@ -7,8 +7,9 @@ import java.util.Map;
 
 public interface UserDataInterface extends DataInterface{
 
-    ArrayList<User> getData();
+    ArrayList<User> getAllUsers();
 
+    User getUser(String userName);
     /**
      * add a user in DataBase
      * @param user/
@@ -20,7 +21,7 @@ public interface UserDataInterface extends DataInterface{
      * @param user relevant information of the user to check existence.
      * @return if this user exists in the current database.
      */
-    boolean userExists(Map<String, String> user);
+    boolean userExists(String userName);
 
 
     /**
@@ -34,20 +35,20 @@ public interface UserDataInterface extends DataInterface{
      * @param user     information user provided.
      * @param newUsername the new username user wants to change.
      */
-    void resetUsername(Map<String, String> user, String newUsername);
+    void resetUsername(User user, String newUsername);
 
     /**
      * Change password of a user in DataBase
      * @param user the password of which to be changed.
      * @param newPassword the new password to be changed.
      */
-    void resetPassword(Map<String, String> user, String newPassword);
+    void resetPassword(String userName, String newPassword);
 
-    /**
-     * Change email of a user in DataBase
-     * @param user     information user provided.
-     * @param newEmail the new email user wants to change.
-     */
-    void resetEmail(Map<String, String> user, String newEmail);
+//    /**
+//     * Change email of a user in DataBase
+//     * @param user     information user provided.
+//     * @param newEmail the new email user wants to change.
+//     */
+//    void resetEmail(String userName, String newEmail);
 
 }

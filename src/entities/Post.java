@@ -94,4 +94,8 @@ public class Post {
         this.topic = topic;
     }
 
+    public void setCourse(Course course){
+        this.course = course;
+    }
+
 }
