@@ -22,13 +22,13 @@ public class Comment {
         this.comments = new ArrayList<>();
     }
 
+    /**
+     * Create a comment to a Post, with  text and images.
+     * The comment can be commented (nest) as well
+     * The comment will only contain the content and the
+     * information of the use who posted it
+     */
     public Comment(String texts, ArrayList<Image> images, User postedBy){
-        /**
-         * Create a comment to a Post, with  text and images.
-         * The comment can be commented (nest) as well
-         * The comment will only contain the content and the
-         * information of the use who posted it
-         */
         this.postedBy = postedBy;
         this.texts = texts;
         this.images = images;
