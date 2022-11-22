@@ -4,12 +4,13 @@ import use_cases.LoginUseCaseInteractor;
 import use_cases.PostUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PostControllers {
+public class PostController {
 
     private final PostUseCaseInteractor postUseCaseInteractor;
-    public PostControllers(PostUseCaseInteractor postUseCaseInteractor){
+    public PostController(PostUseCaseInteractor postUseCaseInteractor){
         this.postUseCaseInteractor = postUseCaseInteractor;
     }
 
@@ -47,7 +48,7 @@ public class PostControllers {
         return 0;
     }
 
-    public int removePost(HashMap<String, Object> post){
+    public int removePost(HashMap<String, Object> post, String courseCode){
         try{
             postUseCaseInteractor.removePost(post);
         }
@@ -56,4 +57,11 @@ public class PostControllers {
         }
         return 0;
     }
+
+    public ArrayList<String> getAllPosts(HashMap<String, Object> info){
+        String code = (String) info.get("code");
+        return null;
+    }
+
+
 }

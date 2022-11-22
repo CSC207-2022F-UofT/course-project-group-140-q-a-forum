@@ -74,6 +74,10 @@ public class Post {
 
     public Course getCourse() {return course;}
 
+    public User getPostedBy() {
+        return postedBy;
+    }
+
     public void addComment(Comment comment) {
         this.comments.add(comment);
     }
@@ -105,6 +109,7 @@ public class Post {
         this.images = images;
         this.postedBy = postedBy;
     }
+
 
 
 }

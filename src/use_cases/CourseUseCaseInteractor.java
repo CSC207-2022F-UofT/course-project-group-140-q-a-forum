@@ -141,7 +141,7 @@ public class CourseUseCaseInteractor {
      * @param courseCode The course to be added in.
      * @param post The post to be added.
      */
-    public void addPost(String courseCode, Post post){
+    public void createPost(String courseCode, Post post){
         Course course = courseDataInterface.getCourse(courseCode);
 
         if (!course.addPost(post)){
@@ -188,6 +188,15 @@ public class CourseUseCaseInteractor {
 
         Course course = courseDataInterface.getCourse(courseCode);
         return course.getPosts();
+    }
+
+    public ArrayList<String> getAllPostTitles(String courseCode){
+        if (!courseDataInterface.courseExists(courseCode)){
+            throw new CourseNotFoundException(courseCode);
+        }
+
+        Course course = courseDataInterface.getCourse(courseCode);
+        return course.getPostTitles();
     }
 }
 
