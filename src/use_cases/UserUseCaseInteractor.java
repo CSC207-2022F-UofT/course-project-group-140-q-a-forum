@@ -23,7 +23,7 @@ public class UserUseCaseInteractor {
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
      * @return if successfully registered this student
      */
-    public void createUser(Map<String, String> user) {
+    public void createUser(Map<String, String> user){
 
         // Check if the user exists in Database.
         if (!userDataInterface.userExists(user.get("Username"))) {

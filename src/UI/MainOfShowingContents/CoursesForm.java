@@ -16,6 +16,8 @@ public class CoursesForm extends javax.swing.JFrame {
     private final User user;
     private final Course[] courses ;
     private final CourseController courseController = main.courseController;
+
+    private Course viewCourse;
     /**
      * Creates new form CoursesForm
      */
@@ -33,8 +35,6 @@ public class CoursesForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        JLabel jLabel1 = new JLabel();
-        coursenameLabel = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
         jList2 = new javax.swing.JList();
         JPanel jPanel7 = new JPanel();
@@ -59,9 +59,7 @@ public class CoursesForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Courses Page");
 
-        coursenameLabel.setText("courses name");
 
         registerButton.setText("Register A new Course");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +95,7 @@ public class CoursesForm extends javax.swing.JFrame {
 
         descriptionLabel.setText("jLabel4");
 
-        showPostsButton.setText("Comment on this comment");
+        showPostsButton.setText("Show All Passwords");
         showPostsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 commentButtonActionPerformed(evt);
@@ -222,9 +220,7 @@ public class CoursesForm extends javax.swing.JFrame {
                                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 72, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(coursenameLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jLabel4)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -238,8 +234,6 @@ public class CoursesForm extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(coursenameLabel)
                                         .addComponent(userLabel)
                                         .addComponent(profileButton)
                                         .addComponent(jLabel4))
@@ -256,7 +250,9 @@ public class CoursesForm extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        PostForm postForm = new PostForm(user, this.viewCourse);
+        postForm.setVisible(true);
+        this.setVisible(false);
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,7 +260,6 @@ public class CoursesForm extends javax.swing.JFrame {
     }
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         MakeACourse makeACourse = new MakeACourse(this.user);
         makeACourse.setVisible(true);
         this.setVisible(false);
@@ -285,10 +280,10 @@ public class CoursesForm extends javax.swing.JFrame {
     }
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         ProfilePage profilePage = new ProfilePage(this.user);
         profilePage.setVisible(true);
         this.setVisible(false);
+
 
     }
 
@@ -299,7 +294,7 @@ public class CoursesForm extends javax.swing.JFrame {
         instructorLabel.setText(String.valueOf(course.getInstructor()));
         postsLabel.setText(String.valueOf(course.getPosts().size()));
         descriptionLabel.setText(course.getDescription());
-
+        viewCourse = course;
 
 
     }
@@ -331,10 +326,8 @@ public class CoursesForm extends javax.swing.JFrame {
     // Variables declaration - do not modify
     private javax.swing.JLabel codeLabel;
     private javax.swing.JButton showPostsButton;
-    private javax.swing.JLabel coursenameLabel;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel instructorLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JList jList2;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel postsLabel;

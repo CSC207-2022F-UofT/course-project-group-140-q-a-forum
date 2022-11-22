@@ -4,16 +4,32 @@
  */
 package UI.PostingStuff;
 
+import UI.MainOfShowingContents.CoursesForm;
+import base.main;
+import controllers.CourseController;
+import controllers.PostControllers;
+import entities.Course;
+import entities.User;
+
+import java.util.HashMap;
+
 /**
  *
  * @author zhaoxiling
  */
 public class MakeAPost extends javax.swing.JFrame {
+    private final Course course;
+    private final User user;
+    private final PostControllers postControllers = main.postControllers;
+    private final CourseController courseController = main.courseController;
+
 
     /**
      * Creates new form CommentsForm
      */
-    public MakeAPost() {
+    public MakeAPost(Course course, User user) {
+        this.course = course;
+        this.user = user;
         initComponents();
     }
 
@@ -68,9 +84,11 @@ public class MakeAPost extends javax.swing.JFrame {
 
         buttonGroup1.add(userButton);
         userButton.setText("User");
+        userButton.setActionCommand("user");
 
         buttonGroup1.add(anoymousButton);
         anoymousButton.setText("Anonymous");
+        anoymousButton.setActionCommand("anonymous");
 
         backButton.setText("Back to the post");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,16 +178,27 @@ public class MakeAPost extends javax.swing.JFrame {
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        HashMap<String, String> PostInfo = new HashMap<String, String>();
+        PostInfo.put("title", titleText.getText());
+        PostInfo.put("text", contentTextA.getText());
+        PostInfo.put("user", buttonGroup1.getSelection().getActionCommand());
+        PostInfo.put("image", null);
+        System.out.println(buttonGroup1.getSelection().getActionCommand());
+
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
+        CoursesForm coursesForm = new CoursesForm(user, courses );
+        coursesForm.setVisible(true);
+        this.setVisible(false);
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -199,7 +228,9 @@ public class MakeAPost extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MakeAPost().setVisible(true);
+                Course course = new Course();
+                User user = new User();
+                new MakeAPost(course, user).setVisible(true);
             }
         });
     }

@@ -4,16 +4,28 @@
  */
 package UI.MainOfShowingContents;
 
+import base.main;
+import controllers.PostControllers;
+import controllers.UserController;
+import entities.Course;
+import entities.User;
+
 /**
  *
  * @author zhaoxiling
  */
 public class PostForm extends javax.swing.JFrame {
+    private final User user;
+    private final Course course;
+    private final PostControllers courseController =main.postControllers;
+    private final UserController userController = main.userController;
 
     /**
      * Creates new form PostForm
      */
-    public PostForm() {
+    public PostForm(User user, Course course) {
+        this.user = user;
+        this.course = course;
         initComponents();
     }
 
@@ -38,11 +50,17 @@ public class PostForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         commentButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        userNameLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        courseNameLabel = new javax.swing.JLabel();
+        postButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Posts"));
         jList2.setModel(new javax.swing.AbstractListModel() {
+            
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -53,8 +71,6 @@ public class PostForm extends javax.swing.JFrame {
         jLabel8.setText("topic:");
 
         nameLabel.setText("Name of the Course");
-
-        descriptionLabel.setText("jLabel4");
 
         showcommentButton.setText("Show All Comments");
         showcommentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +90,7 @@ public class PostForm extends javax.swing.JFrame {
 
         authorLabel.setText("Name of Author");
 
-        jLabel2.setText("Description of Course:");
+        jLabel2.setText("Post Content:");
 
         commentButton.setText("Comment on this Post");
         commentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +115,7 @@ public class PostForm extends javax.swing.JFrame {
                                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(nameLabel)
                                                         .addComponent(authorLabel)
-                                                        .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(jPanel7Layout.createSequentialGroup()
                                                 .addComponent(showcommentButton)
@@ -129,10 +145,30 @@ public class PostForm extends javax.swing.JFrame {
                                         .addComponent(showcommentButton)
                                         .addComponent(reportButton)
                                         .addComponent(commentButton))
-                                .addContainerGap(107, Short.MAX_VALUE))
+                                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         backButton.setText("Back to Courses Page");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("User:");
+
+        userNameLabel.setText(user.getUsername());
+
+        jLabel4.setText("Course:");
+
+        courseNameLabel.setText(course.getName());
+
+        postButton.setText("Post a Post");
+        postButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,21 +178,44 @@ public class PostForm extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jList2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(courseNameLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(backButton))
-                                .addContainerGap(75, Short.MAX_VALUE))
+                                                .addComponent(userNameLabel)
+                                                .addGap(82, 82, 82))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jList2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(backButton))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(postButton)
+                                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addContainerGap(75, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(backButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jList2, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(userNameLabel)
+                                        .addComponent(jLabel4)
+                                        .addComponent(courseNameLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(backButton)
+                                        .addComponent(postButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jList2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
 
@@ -172,6 +231,14 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -204,8 +271,10 @@ public class PostForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            User user = new User();
+            Course course = new Course();
             public void run() {
-                new PostForm().setVisible(true);
+                new PostForm(user, course).setVisible(true);
             }
         });
     }
@@ -214,14 +283,19 @@ public class PostForm extends javax.swing.JFrame {
     private javax.swing.JLabel authorLabel;
     private javax.swing.JButton backButton;
     private javax.swing.JButton commentButton;
+    private javax.swing.JLabel courseNameLabel;
     private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JButton postButton;
     private javax.swing.JButton reportButton;
     private javax.swing.JButton showcommentButton;
+    private javax.swing.JLabel userNameLabel;
     // End of variables declaration
 }
