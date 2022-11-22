@@ -2,11 +2,8 @@ package controllers;
 
 import entities.Course;
 import entities.Post;
-import exceptions.CourseAttributeNotModifiableException;
+import exceptions.*;
 
-import exceptions.CourseInfoNotFoundException;
-import exceptions.CourseNotFoundException;
-import exceptions.DuplicationException;
 import use_cases.CourseUseCaseInteractor;
 
 import java.util.ArrayList;
@@ -28,12 +25,16 @@ public class CourseController {
      * @return An integer indicating if successfully registered.
      * 1: Successfully registered.
      * -1: There is already a course with the same course code.
+     * -2: There is an empty entry.
      */
     public int registerCourse(HashMap<String, String> courseInfo){
         try{courseInteractor.registerACourse(courseInfo);}
         catch(DuplicationException e){
             // Call some presenter
             return -1;
+        }catch(EmptyEntryException e){
+            //Call some presenter
+            return -2;
         }
         return 1;
     }
@@ -173,5 +174,11 @@ public class CourseController {
             //call presenter
             return new ArrayList<>();
         }
+    }
+
+
+
+    public ArrayList<String> getAllCoursesName(){
+       return courseInteractor.getAllCoursesName();
     }
 }

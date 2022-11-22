@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface PostDataInterface extends DataInterface{
-    ArrayList<Post> getData();
-
     void addPost(Post post);
 
     void editPost(Post post, HashMap<String, Object> post_info);

@@ -4,16 +4,27 @@
  */
 package UI.PostingStuff;
 
+import Presenter.GeneralPresenter;
+import UI.MainOfShowingContents.CoursesForm;
+import base.main;
+import controllers.CourseController;
+import entities.Course;
+import entities.User;
+
+import java.util.HashMap;
+
 /**
  *
  * @author zhaoxiling
  */
 public class MakeACourse extends javax.swing.JFrame {
-
+    private final User user;
+    private final CourseController courseController =main.courseController;
     /**
      * Creates new form RegACourse
      */
-    public MakeACourse() {
+    public MakeACourse(User user) {
+        this.user = user;
         initComponents();
     }
 
@@ -166,10 +177,43 @@ public class MakeACourse extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        HashMap<String,String> CourseInfo = new HashMap<String, String>();
+        CourseInfo.put("Name", topicText.getText());
+        CourseInfo.put("Course Code", codeText.getText());
+        CourseInfo.put("Instructors", instructorText.getText());
+        CourseInfo.put("Semester", (String) semesterCombo.getSelectedItem());
+        CourseInfo.put("Description", descriptionTextA.getText());
+
+        int result = courseController.registerCourse(CourseInfo);
+
+        switch (result){
+            case -1 ->{
+                GeneralPresenter.showDuplicationError("Course");
+                topicText.setText("");
+                topicText.setFocusable(true);
+            }
+            case -2 -> {
+                GeneralPresenter.showEmptyEntryError();
+            }
+            case 1 ->{
+                GeneralPresenter.showSuccessMessage(topicText.getText());
+                Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
+                System.out.println(courseController.getAllCoursesName());
+                CoursesForm coursesForm = new CoursesForm(this.user, courses);
+                coursesForm.setVisible(true);
+                this.setVisible(false);
+            }
+
+        }
+
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
+        CoursesForm coursesForm = new CoursesForm(this.user, courses);
+        coursesForm.setVisible(true);
+        this.setVisible(false);
     }
 
     /**
@@ -203,7 +247,8 @@ public class MakeACourse extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MakeACourse().setVisible(true);
+                User user = new User();
+                new MakeACourse(user).setVisible(true);
             }
         });
     }
