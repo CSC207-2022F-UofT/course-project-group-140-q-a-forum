@@ -1,15 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI.PostingStuff;
 
 import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.PostForm;
 import base.main;
 import controllers.CourseController;
-import controllers.PostControllers;
+import controllers.PostController;
+
 import entities.Course;
+import entities.Post;
 import entities.User;
 
 import java.util.HashMap;
@@ -21,16 +19,18 @@ import java.util.HashMap;
 public class MakeAPost extends javax.swing.JFrame {
     private final User user;
     private final Course course;
+    private final Post[] posts;
     private final CourseController courseController = main.courseController;
-    private final PostControllers postControllers = main.postControllers;
+    private final PostController postControllers = main.postControllers;
 
 
     /**
      * Creates new form CommentsForm
      */
-    public MakeAPost(User user, Course course) {
+    public MakeAPost(User user, Course course, Post[] posts) {
         this.user = user;
         this.course = course;
+        this.posts = posts;
         initComponents();
     }
 
@@ -182,7 +182,8 @@ public class MakeAPost extends javax.swing.JFrame {
         HashMap<String, Object> PostInfo = new HashMap<String, Object>();
         PostInfo.put("title", titleText.getText());
         PostInfo.put("text", contentTextA.getText());
-        PostInfo.put("user", buttonGroup1.getSelection().getActionCommand());
+        PostInfo.put("user", user);
+        //PostInfo.put("user", buttonGroup1.getSelection().getActionCommand());
         PostInfo.put("images", null);
         PostInfo.put("course", course);
         int result = postControllers.createPost(PostInfo);
@@ -190,13 +191,14 @@ public class MakeAPost extends javax.swing.JFrame {
             GeneralPresenter.showEmptyEntryError();
         }
         GeneralPresenter.showSuccessMessage("Post");
-        PostForm postForm = new PostForm(user, course);
+        Post[] postsUpdate = courseController.getAllPosts(course.getCode()).toArray(new Post[0]);
+        PostForm postForm = new PostForm(user, course, postsUpdate);
         postForm.setVisible(true);
         this.setVisible(false);
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        PostForm postForm = new PostForm(user, course);
+        PostForm postForm = new PostForm(user, course, posts);
         postForm.setVisible(true);
         this.setVisible(false);
     }
@@ -236,7 +238,8 @@ public class MakeAPost extends javax.swing.JFrame {
             public void run() {
                 User user = new User();
                 Course course = new Course();
-                new MakeAPost(user, course).setVisible(true);
+                Post[] posts = {new Post("s", "s", null, user, course)};
+                new MakeAPost(user, course, posts).setVisible(true);
             }
         });
     }

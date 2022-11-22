@@ -196,7 +196,13 @@ public class CourseUseCaseInteractor {
         }
 
         Course course = courseDataInterface.getCourse(courseCode);
-        return course.getPostTitles();
+        Post[] posts = course.getPosts().toArray(new Post[0]);
+        ArrayList<String> postName = new ArrayList<String>();
+        for(Post post: posts){
+            postName.add(post.getTopic());
+        }
+        return postName;
+        //return course.getPostTitles();
     }
 }
 

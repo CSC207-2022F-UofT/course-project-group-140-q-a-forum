@@ -1,16 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI.MainOfShowingContents;
 
 import UI.PostingStuff.MakeAPost;
 import base.main;
 import controllers.CourseController;
-import controllers.PostControllers;
+import controllers.PostController;
 import entities.Course;
 import entities.Post;
 import entities.User;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -19,15 +17,19 @@ import entities.User;
 public class PostForm extends javax.swing.JFrame {
     private final User user;
     private final Course course;
+
+    private final Post[] posts;
     private final CourseController courseController = main.courseController;
-    private final PostControllers postControllers = main.postControllers;
+    private final PostController postControllers = main.postControllers;
 
     /**
      * Creates new form PostForm
      */
-    public PostForm(User user, Course course) {
+    public PostForm(User user, Course course, Post[] posts) {
         this.user = user;
         this.course = course;
+        this.posts = posts;
+
         initComponents();
     }
 
@@ -60,16 +62,22 @@ public class PostForm extends javax.swing.JFrame {
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Posts"));
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            // String[] strings = {"item1", "item2"};
+            String[] strings = courseController.getAllPostTitles(course.getCode()).toArray(new String[0]);
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+                jList2MouseClicked(evt);
+            }
         });
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Post Information"));
 
         jLabel8.setText("topic:");
 
-        nameLabel.setText(course.getName());
+        nameLabel.setText("topic of the Post");
 
         showcommentButton.setText("Show All Comments");
         showcommentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +168,7 @@ public class PostForm extends javax.swing.JFrame {
 
         jLabel4.setText("Course:");
 
-        courseNameLabel.setText("CoursesName");
+        courseNameLabel.setText(course.getName());
 
         postButton.setText("Post a Post");
         postButton.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +243,7 @@ public class PostForm extends javax.swing.JFrame {
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        MakeAPost makeAPost = new MakeAPost(user, course);
+        MakeAPost makeAPost = new MakeAPost(user, course, posts);
         makeAPost.setVisible(true);
         this.setVisible(false);
     }
@@ -246,6 +254,13 @@ public class PostForm extends javax.swing.JFrame {
         CoursesForm coursesForm = new CoursesForm(user, courses);
         coursesForm.setVisible(true);
         this.setVisible(false);
+
+    }
+
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt){
+        int chosenPostIndex = jList2.getSelectedIndex();
+        Post selectPost = posts[chosenPostIndex];
+        changePanel(selectPost);
 
     }
     private void changePanel(Post post){
@@ -283,10 +298,12 @@ public class PostForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            User user = new User();
-            Course course = new Course();
+            User user = new User("a", "d", "d");
+            Course course = new Course("c","d", "d", "d", new ArrayList<String>() );
+
+            Post[] posts = {new Post("s", "s", null, user, course)};
             public void run() {
-                new PostForm(user, course).setVisible(true);
+                new PostForm(user, course, posts).setVisible(true);
             }
         });
     }

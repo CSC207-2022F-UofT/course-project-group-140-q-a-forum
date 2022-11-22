@@ -4,7 +4,9 @@ import UI.PostingStuff.MakeACourse;
 import UI.UserdataRelated.ProfilePage;
 import base.main;
 import controllers.CourseController;
+import controllers.PostController;
 import entities.Course;
+import entities.Post;
 import entities.User;
 
 import javax.swing.*;
@@ -16,6 +18,8 @@ public class CoursesForm extends javax.swing.JFrame {
     private final User user;
     private final Course[] courses ;
     private final CourseController courseController = main.courseController;
+
+    private final PostController postController = main.postControllers;
 
     private Course viewCourse;
     /**
@@ -99,10 +103,10 @@ public class CoursesForm extends javax.swing.JFrame {
 
         descriptionLabel.setText("jLabel4");
 
-        showPostsButton.setText("Comment on this comment");
+        showPostsButton.setText("show all posts under this course");
         showPostsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                commentButtonActionPerformed(evt);
+                showPostsButtonActionPerformed(evt);
             }
         });
 
@@ -257,11 +261,6 @@ public class CoursesForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-
-    }
-
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -284,15 +283,7 @@ public class CoursesForm extends javax.swing.JFrame {
         int chosenCourseIndex = jList2.getSelectedIndex();
         Course selectCourse = courses[chosenCourseIndex];
         changePanel(selectCourse);
-
-    }
-
-    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        ProfilePage profilePage = new ProfilePage(this.user);
-        profilePage.setVisible(true);
-        this.setVisible(false);
-
+        viewCourse = selectCourse;
     }
 
     private void changePanel(Course course){
@@ -302,10 +293,25 @@ public class CoursesForm extends javax.swing.JFrame {
         instructorLabel.setText(String.valueOf(course.getInstructor()));
         postsLabel.setText(String.valueOf(course.getPosts().size()));
         descriptionLabel.setText(course.getDescription());
-        viewCourse = course;
+    }
 
+    private void showPostsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        Post[] posts = courseController.getAllPosts(viewCourse.getCode()).toArray(new Post[0]);
+        PostForm postForm = new PostForm(user, viewCourse, posts);
+        postForm.setVisible(true);
+        this.setVisible(false);
 
     }
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        ProfilePage profilePage = new ProfilePage(this.user);
+        profilePage.setVisible(true);
+        this.setVisible(false);
+
+    }
+
+
 
     /**
      * @param args the command line arguments
