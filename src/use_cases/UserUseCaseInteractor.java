@@ -3,8 +3,8 @@ package use_cases;
 import entities.User;
 import exceptions.*;
 import use_cases.DataBaseAccess.UserDataInterface;
-
 import java.util.*;
+import java.util.regex.Pattern;
 
 
 public class UserUseCaseInteractor {
@@ -26,28 +26,28 @@ public class UserUseCaseInteractor {
     public void createUser(Map<String, String> user) throws DifferentPasswordException {
 
         // Check if the user exists in Database.
-        if (userDataInterface.userExists(user)) {
+        if (!userDataInterface.userExists(user.get("Username"))) {
             throw new DuplicationException("user");
         }
 
         // Check if the password is valid.
-        if (!passwordCheck(user.get("password"))) {
-            throw new WrongPasswordException("password");
+        if (!passwordCheck(user.get("Password"))) {
+            throw new PasswordTooWeakException();
         }
 
         // Check if the reentered password is the same.
         if (!duoPasswordCheck(user.get("Password"), user.get("Re-entered Password"))) {
-            throw new DifferentPasswordException("Password");
+            throw new PasswordDoesNotMatchException();
         }
 
         // Check if the email is valid.
-        if (!emailCheck(user.get("email"))) {
+        if (!emailCheck(user.get("Email"))) {
             throw new InvalidFormatException("email");
         }
 
         // Check the email verification.
-        if (!verifyEmail(user.get("verfication"))) {
-            throw new EmailVerifyException("verfication number");
+        if (!verifyEmail(user.get("Verfication"))) {
+            throw new WrongPasswordException("verfication number");
         }
 
         // Register a new user.
@@ -60,7 +60,6 @@ public class UserUseCaseInteractor {
             User newUser = new User(user.get("Username"), user.get("Password"),
                     user.get("Email"));
             userDataInterface.addUser(newUser);
-
         }
     }
 
@@ -74,9 +73,6 @@ public class UserUseCaseInteractor {
      * @return if the password includes numbers, letters, and at least one upper letter.
      */
     public boolean passwordCheck(String password) {
-        //TODO: complete this method
-        //      If the passwords entered meets the requirement, return True
-        //      Otherwise, return False.
 
         // Check if the length of the password is greater than 8.
         return password.length() > 8;
@@ -91,11 +87,7 @@ public class UserUseCaseInteractor {
      * @return boo
      */
     public boolean duoPasswordCheck(String password, String reenteredpassword) {
-        //TODO: complete this method
-        //      If the two passwords entered is not the same, return False
-        //      Otherwise, return True
         return password.equals(reenteredpassword);
-
     }
 
     /**
@@ -107,12 +99,16 @@ public class UserUseCaseInteractor {
      */
 
     private boolean emailCheck(String email) {
-        StringBuilder email2 = new StringBuilder(email);
-
         // Reverse the email.
-        email2.reverse();
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
 
-        return email2.substring(0, 17).equals("ac.otnorotu.liam@");
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
     }
 
     /**
@@ -126,7 +122,21 @@ public class UserUseCaseInteractor {
         //      If the verify number be verified successfully, return True
         //      Otherwise, return False
 
-        return false;
+        return true;
+    }
+
+
+    /**
+     * Find the user with UserName
+     * @param userName  it is a string that stores the username
+     * @return  if there is an user with the input username in the database, then
+     *          return the user. Otherwise, throw EntryNotFoundException.
+     */
+    public User getUser(String userName){
+        if(!userDataInterface.userExists(userName)){
+            return userDataInterface.getUser(userName);
+        }
+       return null;
     }
 
 
@@ -139,21 +149,11 @@ public class UserUseCaseInteractor {
      * @param newUsername the new username user wants to change.
      * @return if successfully change the password.
      */
-    public boolean resetUsername(Map<String, String> user, String newUsername) {
-        //TODO: complete this method
-        //      If the password be verified successfully, return True and
-        //      reset a new password. the User's password is changed into DataBase(need to call the userDataInterface).
-        //      Otherwise, return False
 
-        ArrayList<User> users = userDataInterface.getData();
 
+
+    public boolean resetUsername(User user, String newUsername) {
         // If the given new username exists in database, return false.
-        for (User people : users){
-            if (people.getUsername().equals(newUsername)) {
-                return false;
-            }
-        }
-
         // Reset the password.
         userDataInterface.resetUsername(user, newUsername);
         return true;
@@ -169,50 +169,47 @@ public class UserUseCaseInteractor {
      * @param newPassword the new password user wants to change.
      * @return if successfully change the password.
      */
-    public boolean resetPassword(Map<String, String> user, String newPassword) {
-        //TODO: complete this method
-        //      If the password be verified successfully, return True and
-        //      reset a new password. the User's password is changed into DataBase(need to call the userDataInterface).
-        //      Otherwise, return False
-
+    public boolean resetPassword(User user, String oldPassword, String newPassword) {
         // If the given new password does not meet the requirement, return false.
         if (!passwordCheck(newPassword)) {
+            return false;
+        } else if (!user.getPassword().equals(oldPassword)) {
             return false;
         }
 
         // Reset the password.
-        userDataInterface.resetPassword(user, newPassword);
+        userDataInterface.resetPassword(user.getUsername(), newPassword);
         return true;
     }
-
-    /**
-     * This method reset the email of user.
-     * If the new email is correct and passes the verification reset email and return true
-     * Otherwise, it returns false.
-     *
-     * @param user     information user provided.
-     * @param newEmail the new email user wants to change.
-     * @return if successfully change the email.
-     */
-    public boolean resetEmail(Map<String, String> user, String newEmail) {
-        //TODO: complete this method
-        //      If the email be verified successfully, return True and reset a new email and verify the new email.
-        //       the User's email is changed into DataBase(need to call the userDataInterface).
-        //      Otherwise, return False
-
-        // If the given new email does not meet the requirement, return false.
-        if (!emailCheck(newEmail)) {
-            return false;
-        }
-
-        // If the given new email does not pass the verification, return false.
-        if (!verifyEmail(newEmail)) {
-            return false;
-        }
-
-        userDataInterface.resetEmail(user, newEmail);
-        return true;
-    }
+// I don't think we support this.
+//    /**
+//     * This method reset the email of user.
+//     * If the new email is correct and passes the verification reset email and return true
+//     * Otherwise, it returns false.
+//     *
+//     * @param user     information user provided.
+//     * @param newEmail the new email user wants to change.
+//     * @return if successfully change the email.
+//     */
+//    public boolean resetEmail(User user, String newEmail) {
+//        //TODO: complete this method
+//        //      If the email be verified successfully, return True and reset a new email and verify the new email.
+//        //       the User's email is changed into DataBase(need to call the userDataInterface).
+//        //      Otherwise, return False
+//
+//        // If the given new email does not meet the requirement, return false.
+//        if (!emailCheck(newEmail)) {
+//            return false;
+//        }
+//
+//        // If the given new email does not pass the verification, return false.
+//        if (!verifyEmail(newEmail)) {
+//            return false;
+//        }
+//
+//        userDataInterface.resetEmail(user, newEmail);
+//        return true;
+//    }
 
 
     /**
@@ -220,17 +217,33 @@ public class UserUseCaseInteractor {
      * It first checks if the user exists, and removes it if so;
      * otherwise, it returns false.
      *
-     * @param user Relevant information of this user.
+     * @param userName Relevant information of this user.
      * @return if successfully removed this user.
      */
-    public boolean removeAUser(Map<String, String> user) {
+    public boolean removeAUser(String userName) {
 
         // If the given user does not exist in the database, return false.
-        if (!userDataInterface.userExists(user)) {
+        if (!userDataInterface.userExists(userName)) {
             return false;
         }
 
-        userDataInterface.deleteUser(user.get("Username"));
+        userDataInterface.deleteUser(userName);
         return true;
+
     }
+
+    public boolean checkLogin(String userName, String password) {
+        User user = userDataInterface.getUser(userName);
+        if (user == null) {
+            throw new EntryNotFoundException("user");
+        }
+
+        if (!user.getPassword().equals(password)) {
+            throw new WrongPasswordException("password");
+        }
+    return true;
+
+    }
+
+
 }
