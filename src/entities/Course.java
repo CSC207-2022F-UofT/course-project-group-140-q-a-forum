@@ -73,6 +73,13 @@ public class Course {
         return posts;
     }
 
+    public ArrayList<String> getPostTitles(){
+        Set<String> keySet = topic2Post.keySet();
+        ArrayList<String> listOfKeys
+                = new ArrayList<>(keySet);
+        return listOfKeys;
+    }
+
     /**
      * Modify the content of a course.
      * @param part Which attribute of the course to be modified to.

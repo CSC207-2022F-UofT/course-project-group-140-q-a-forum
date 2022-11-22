@@ -1,7 +1,7 @@
 package base;
 
 import controllers.CourseController;
-import controllers.PostControllers;
+import controllers.PostController;
 import controllers.UserController;
 import database.DatabaseGateway;
 import entities.Course;
@@ -20,7 +20,7 @@ public class main {
 
     public static CourseController courseController = new CourseController(courseInteractor);
 
-    public static PostControllers postControllers = new PostControllers(postInteractor);
+    public static PostController postControllers = new PostController(postInteractor);
     public static UserController userController = new UserController(userInteractor);
 
 }
