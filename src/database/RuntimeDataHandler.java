@@ -19,11 +19,10 @@ public class RuntimeDataHandler implements DataHandlerInterface {
     /**
      * The method accepts a hashmap from an integer-valued key to a data and replace the original arraylist with the
      * new one
-     * It is not responsible of exception handling (i.e, data not in the arraylist)
+     * It is not responsible for exception handling (i.e, data not in the arraylist)
      * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of an
      *             arraylist}
      */
-
     @Override
     public void setData(HashMap<String, Object> info) {
         /*
@@ -48,12 +47,14 @@ public class RuntimeDataHandler implements DataHandlerInterface {
                     name2User.put(username, user);
                     email2User.put(email, user);
                 }
+                break;
             case 2:
                 courses = (ArrayList<Course>) value;
                 for (Course course : (ArrayList<Course>) value) {
                     String code = course.getCode();
                     code2Course.put(code, course);
                 }
+                break;
             case 3:
                 reports = (ArrayList<Report>) value;
                 for (Report report : (ArrayList<Report>) value) {
@@ -65,18 +66,18 @@ public class RuntimeDataHandler implements DataHandlerInterface {
                         type2Report.get(reportType).add(report);
                     }
                 }
+                break;
             default:
                 throw new RuntimeException();
         }
     }
 
     /**
-     * The method accepts a hashmap from a integer-valued key to a data and append it to the ararylist
-     * It is not responsible of exception handling (i.e, data not in the arraylist)
-     * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of an
+     * The method accepts a hashmap from an integer-valued key to a data and append it to the arraylist
+     * It is not responsible for exception handling (i.e, data not in the arraylist)
+     * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of a
      *             single course/user/report type object}
      */
-
     @Override
     public void addData(HashMap<String, Object> info) {
         /*
@@ -125,11 +126,10 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
     /**
      * The method accepts a hashmap from an integer-valued key to a data, and delete it from the list
-     * It is not responsible of exception handling (i.e, data not in the arraylist)
+     * It is not responsible for exception handling (i.e, data not in the arraylist)
      * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of a
      *             single course/user/report type object}
      */
-
     @Override
     public void deleteData(HashMap<String, Object> info) {
         /*
@@ -148,19 +148,30 @@ public class RuntimeDataHandler implements DataHandlerInterface {
                 users.remove(user);
                 name2User.remove(user.getUsername());
                 email2User.remove(user.getEmail());
+                break;
             case 2:
                 Course course = (Course) value;
                 courses.remove(course);
                 code2Course.remove(course.getCode());
+                break;
             case 3:
                 Report report = (Report) value;
                 reports.remove(report);
                 type2Report.remove(report.getReportType());
+                break;
             default:
                 throw new RuntimeException();
         }
     }
 
+    /**
+     * Return all data of users, courses and reports.
+     * @return A hashmap whose keys are integers representing the types of their values, whose values
+     * are users, courses and reports.
+     * 1: User;
+     * 2: Course;
+     * 3: Report.
+     */
     @Override
     public HashMap getData() {
         /*
@@ -178,6 +189,14 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         return map;
     }
 
+    /**
+     * Return a specific type of data in the current database.
+     * @param key An integer representing what type of data to be returned.
+     *            1: User;
+     *            2: Course;
+     *            3: Report.
+     * @return An arraylist consists of instances of the given type.
+     */
     @Override
     public ArrayList getData(int key) {
         /*
@@ -200,6 +219,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /**
+     * Get a user with the given username.
+     * @param username The username of the user to be searched for.
+     * @return The user with the given username.
+     */
     public User lookupUserfromName(String username) {
         if (name2User.containsKey(username)){
             return name2User.get(username);
@@ -209,6 +233,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /**
+     * Get a user with the given email.
+     * @param email The email of the user to be searched for.
+     * @return The user with the given email.
+     */
     public User lookupUserfromEmail(String email) {
         if (email2User.containsKey(email)){
             return email2User.get(email);
@@ -218,6 +247,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /**
+     * Get a course with the given course code.
+     * @param code The course code of the course to be searched for.
+     * @return The course with the given course code.
+     */
     public Course lookupCourse(String code) {
         if (code2Course.containsKey(code)) {
             return code2Course.get(code);
@@ -227,6 +261,14 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /**
+     * Get an arraylist of reports with the given type.
+     * @param key The type of reports to be returned to.
+     *            1: User;
+     *            2: Course;
+     *            3: Report;
+     * @return An arraylist of reports with the given type.
+     */
     public ArrayList<Report> getAllReportFromType(int key){
         return type2Report.get(key);
     }
