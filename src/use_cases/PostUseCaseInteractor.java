@@ -11,10 +11,8 @@ import java.util.HashMap;
 
 public class PostUseCaseInteractor {
 
-    final CourseDataInterface courseDataInterface;
 
-    public PostUseCaseInteractor(CourseDataInterface courseDataInterface) {
-        this.courseDataInterface = courseDataInterface;
+    public PostUseCaseInteractor() {
     }
 
     /**

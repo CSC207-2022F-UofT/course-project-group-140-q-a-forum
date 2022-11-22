@@ -2,17 +2,13 @@ package controllers;
 import exceptions.EmptyEntryException;
 import use_cases.LoginUseCaseInteractor;
 import use_cases.PostUseCaseInteractor;
+import use_cases.UserUseCaseInteractor;
 
 import java.util.HashMap;
 
 public class PostControllers {
-//    final LoginUseCaseInteractor loginUseCaseInteractor;
-    final PostUseCaseInteractor postUseCaseInteractor;
 
-//    public PostControllers(LoginUseCaseInteractor loginUseCaseInteractor, PostUseCaseInteractor postUseCaseInteractor){
-//        this.loginUseCaseInteractor = loginUseCaseInteractor;
-//        this.postUseCaseInteractor = postUseCaseInteractor;
-//    }
+    private final PostUseCaseInteractor postUseCaseInteractor;
     public PostControllers(PostUseCaseInteractor postUseCaseInteractor){
         this.postUseCaseInteractor = postUseCaseInteractor;
     }
@@ -24,7 +20,7 @@ public class PostControllers {
      * @param post information will be stored at the HashMap
      * @return  String for each state.
      */
-    public int passDataCreatePost(HashMap<String,Object> post){
+    public int createPost(HashMap<String,Object> post){
         try{
             postUseCaseInteractor.createPost(post);
         }
@@ -41,7 +37,7 @@ public class PostControllers {
      * @param post information will be stored at the HashMap
      * @return  String for each state.
      */
-    public int passDataEditPost(HashMap<String, Object> post) {
+    public int editPost(HashMap<String, Object> post) {
         try{
             postUseCaseInteractor.editPost(post);
         }
@@ -51,7 +47,7 @@ public class PostControllers {
         return 0;
     }
 
-    public int passDataRemovePost(HashMap<String, Object> post){
+    public int removePost(HashMap<String, Object> post){
         try{
             postUseCaseInteractor.removePost(post);
         }
