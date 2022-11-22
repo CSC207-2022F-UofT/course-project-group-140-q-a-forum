@@ -141,7 +141,7 @@ public class CourseUseCaseInteractor {
      * @param courseCode The course to be added in.
      * @param post The post to be added.
      */
-    public void createPost(String courseCode, Post post){
+    public void addPost(String courseCode, Post post){
         Course course = courseDataInterface.getCourse(courseCode);
 
         if (!course.addPost(post)){
