@@ -16,6 +16,8 @@ public class CoursesForm extends javax.swing.JFrame {
     private final User user;
     private final Course[] courses ;
     private final CourseController courseController = main.courseController;
+
+    private Course viewCourse;
     /**
      * Creates new form CoursesForm
      */
@@ -257,6 +259,7 @@ public class CoursesForm extends javax.swing.JFrame {
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,7 +302,7 @@ public class CoursesForm extends javax.swing.JFrame {
         instructorLabel.setText(String.valueOf(course.getInstructor()));
         postsLabel.setText(String.valueOf(course.getPosts().size()));
         descriptionLabel.setText(course.getDescription());
-
+        viewCourse = course;
 
 
     }

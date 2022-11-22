@@ -4,16 +4,33 @@
  */
 package UI.PostingStuff;
 
+import Presenter.GeneralPresenter;
+import UI.MainOfShowingContents.PostForm;
+import base.main;
+import controllers.CourseController;
+import controllers.PostControllers;
+import entities.Course;
+import entities.User;
+
+import java.util.HashMap;
+
 /**
  *
  * @author zhaoxiling
  */
 public class MakeAPost extends javax.swing.JFrame {
+    private final User user;
+    private final Course course;
+    private final CourseController courseController = main.courseController;
+    private final PostControllers postControllers = main.postControllers;
+
 
     /**
      * Creates new form CommentsForm
      */
-    public MakeAPost() {
+    public MakeAPost(User user, Course course) {
+        this.user = user;
+        this.course = course;
         initComponents();
     }
 
@@ -68,9 +85,11 @@ public class MakeAPost extends javax.swing.JFrame {
 
         buttonGroup1.add(userButton);
         userButton.setText("User");
+        userButton.setActionCommand("user");
 
         buttonGroup1.add(anoymousButton);
         anoymousButton.setText("Anonymous");
+        anoymousButton.setActionCommand("anonymous");
 
         backButton.setText("Back to the post");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,10 +179,26 @@ public class MakeAPost extends javax.swing.JFrame {
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        HashMap<String, Object> PostInfo = new HashMap<String, Object>();
+        PostInfo.put("title", titleText.getText());
+        PostInfo.put("text", contentTextA.getText());
+        PostInfo.put("user", buttonGroup1.getSelection().getActionCommand());
+        PostInfo.put("images", null);
+        PostInfo.put("course", course);
+        int result = postControllers.createPost(PostInfo);
+        if(result == -1){
+            GeneralPresenter.showEmptyEntryError();
+        }
+        GeneralPresenter.showSuccessMessage("Post");
+        PostForm postForm = new PostForm(user, course);
+        postForm.setVisible(true);
+        this.setVisible(false);
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        PostForm postForm = new PostForm(user, course);
+        postForm.setVisible(true);
+        this.setVisible(false);
     }
 
     /**
@@ -199,7 +234,9 @@ public class MakeAPost extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MakeAPost().setVisible(true);
+                User user = new User();
+                Course course = new Course();
+                new MakeAPost(user, course).setVisible(true);
             }
         });
     }
