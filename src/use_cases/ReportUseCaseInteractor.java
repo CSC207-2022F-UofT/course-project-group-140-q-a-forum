@@ -13,28 +13,23 @@ public class ReportUseCaseInteractor {
     final ReportDataInterface reportDataInterface;
     final UserDataInterface userDataInterface;
 
-    public ReportUseCaseInteractor(ReportDataInterface reportDataInterface, UserDataInterface userDataInterface){
+    public ReportUseCaseInteractor(ReportDataInterface reportDataInterface, UserDataInterface userDataInterface) {
         this.reportDataInterface = reportDataInterface;
         this.userDataInterface = userDataInterface;
     }
 
     /**
      * Create a report and setting UserName, Report type, Report content.
-     * If the report create successfully, return True and
-     the Report can be created into DataBase(need to call the userDataInterface).
-     * Otherwise, return False
+     * Throw the UserNotExistException if the user does not exist in the database.
+     *
      * @param reportInfor This is a Map that contains necessary information
      *                    needed to register a user. The keys must be
      *                    "Username", "ReportType", and "Content".
      */
-    public void createReport(Map<String,Object> reportInfor){
-        //TODO: complete this method
+    public void createReport(Map<String, Object> reportInfor) {
 
-        ArrayList<User> userData = userDataInterface.getData();
-        for (User user:userData){
-            if (user.getUsername()==reportInfor.get("Username")){
-                throw new UserNotExistException((String) reportInfor.get("Username"));
-            }
+        if (!userDataInterface.userExists((String) reportInfor.get("Username"))) {
+            throw new UserNotExistException("Usrname");
         }
 
         reportDataInterface.addReport(new Report((String) reportInfor.get("Username"),
@@ -45,12 +40,12 @@ public class ReportUseCaseInteractor {
 
 
     /**
-     * Remove a Report.
-     * @param reportToDelete This is report to be deleted.
+     * Remove a Report from the current database.
+     *
+     * @param reportToDelete This is a report to be deleted.
      */
 
     public void removeReport(Report reportToDelete) {
-        //TODO: complete this method
         reportDataInterface.removeReport(reportToDelete);
     }
 

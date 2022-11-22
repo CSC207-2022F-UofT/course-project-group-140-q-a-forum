@@ -3,6 +3,7 @@ package controllers;
 import java.util.*;
 
 import entities.Report;
+import exceptions.UserNotExistException;
 import use_cases.ReportUseCaseInteractor;
 
 public class ReportController {
@@ -20,18 +21,19 @@ public class ReportController {
      * @param reportInformation This is a Map that contains necessary information
      *                          needed to register a report. The keys must be
      *                          "Username", "Type", "Content"
-     * @return if successfully registered this student
+     * @return An integer indicating if successfully registered.
+     * 1: Successfully registered.
+     * 0: The user report does not exist.
      */
 
-    public boolean createAReport(Map<String, Object> reportInformation) {
-        // TODO: implement this method
+    public int createAReport(Map<String, Object> reportInformation) {
         try {
             reportUseCaseInteractor.createReport(reportInformation);
-        } catch (RuntimeException e) {
-
-        } finally {
-            return true;
+        } catch (UserNotExistException e) {
+            return 0;
         }
+        return 1;
+
     }
 
     /**
@@ -41,11 +43,11 @@ public class ReportController {
      * @param reportInformation This is a Map that contains necessary information
      *                          needed to remove a user. The keys must be
      *                          "Username", "Type", "Content"
-     * @return if successfully registered this student
+     * @return An integer indicating if successfully registered.
+     * 0: Successfully removed.
      */
 
-    public boolean removeAReport(Map<String, Object> reportInformation) {
-        // TODO: implement this method
+    public int removeAReport(Map<String, Object> reportInformation) {
         try {
             Report report = new Report((String) reportInformation.get("Username"),
                     (Integer) reportInformation.get("Type"),
@@ -53,9 +55,8 @@ public class ReportController {
             reportUseCaseInteractor.removeReport(report);
         } catch (RuntimeException e) {
 
-        } finally {
-            return true;
-        }
+        } return 0;
+
     }
 
 
