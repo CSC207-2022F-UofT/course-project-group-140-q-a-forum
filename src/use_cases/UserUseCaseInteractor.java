@@ -3,12 +3,22 @@ package use_cases;
 import entities.User;
 import exceptions.*;
 import use_cases.DataBaseAccess.UserDataInterface;
+
 import java.util.*;
 import java.util.regex.Pattern;
+import javax.mail.Transport;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.Date;
+import java.util.Properties;
 
 
 public class UserUseCaseInteractor {
     final UserDataInterface userDataInterface;
+    private String verifyNum;
 
     public UserUseCaseInteractor(UserDataInterface userDataInterface) {
         this.userDataInterface = userDataInterface;
@@ -21,7 +31,6 @@ public class UserUseCaseInteractor {
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @return if successfully registered this student
      */
     public void createUser(Map<String, String> user) throws RuntimeException {
 
@@ -75,7 +84,34 @@ public class UserUseCaseInteractor {
     public boolean passwordCheck(String password) {
 
         // Check if the length of the password is greater than 8.
-        return password.length() > 8;
+        if (password.length() < 8) {
+            return false;
+        } else {
+            char c;
+            int count = 1;
+            for (int i = 0; i < password.length() - 1; i++) {
+                c = password.charAt(i);
+
+                // Check if password has ','
+                if (c == ',') {
+                    return false;
+
+                } else if (Character.isDigit(c)) {
+                    count++; //Get the number of numbers in password
+
+                    //Check if the password has at least 2 numbers
+                    if (count < 2) {
+                        return false;
+
+                        // Check if the password are all numbers.
+                    } else if (count == password.length()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+
     }
 
 
@@ -112,31 +148,116 @@ public class UserUseCaseInteractor {
     }
 
     /**
+     * Send an email with "subject" and "content" to receiveMailAccount
+     *
+     * @param user This is a Map that contains necessary information
+     *             needed to register a user. The keys must be
+     *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
+     * @throws Exception
+     */
+    public void sendEmail(Map<String, String> user) throws Exception {
+        // 1. 创建参数配置, 用于连接邮件服务器的参数配置
+        Properties props = new Properties();                    // 参数配置
+        props.setProperty("mail.transport.protocol", "smtp");   // 使用的协议（JavaMail规范要求）
+        props.setProperty("mail.smtp.host", "smtp.qq.com");   // 发件人的邮箱的 SMTP 服务器地址
+        props.setProperty("mail.smtp.auth", "true");            // 需要请求认证
+
+        // PS: 某些邮箱服务器要求 SMTP 连接需要使用 SSL 安全认证 (为了提高安全性, 邮箱支持SSL连接, 也可以自己开启),
+        //     如果无法连接邮件服务器, 仔细查看控制台打印的 log, 如果有有类似 “连接失败, 要求 SSL 安全连接” 等错误,
+        //     打开下面 /* ... */ 之间的注释代码, 开启 SSL 安全连接。
+
+        final String smtpPort = "465";
+        props.setProperty("mail.smtp.port", smtpPort);
+        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        props.setProperty("mail.smtp.socketFactory.port", smtpPort);
+
+
+        // 2. 根据配置创建会话对象, 用于和邮件服务器交互
+        Session session = Session.getInstance(props);
+        session.setDebug(true);                                 // 设置为debug模式, 可以查看详细的发送 log
+
+        //Generate a verification code.
+        int num = (int) (Math.random() * 90000) + 100000;
+        String messagetosend = Integer.toString(num);
+        this.verifyNum = messagetosend;
+
+
+        // 3. Create a email.
+        MimeMessage message = createMimeMessage(session, "3232085039@qq.com", user.get("Email"), "Verify", messagetosend);
+
+        // 4. Get transport  object from Session
+        Transport transport = session.getTransport();
+
+        // 5. Connect email.
+        transport.connect("3232085039@qq.com", "cwuwfmohzmvddbfa");
+
+        // 6. Send email
+        transport.sendMessage(message, message.getAllRecipients());
+
+        // 7. Close connect
+        transport.close();
+    }
+
+    /**
+     * 创建一封只包含文本的简单邮件
+     *
+     * @param session     和服务器交互的会话
+     * @param sendMail    发件人邮箱
+     * @param receiveMail 收件人邮箱
+     * @param subject     "Verifying" or "Forget password"
+     * @param content     The random 6-digit int value
+     * @return message to send.
+     * @throws Exception
+     */
+    public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail, String subject, String content) throws Exception {
+        // 1.Create a default MimeMessage object.
+        MimeMessage message = new MimeMessage(session);
+
+        // 2. Set From: header field of the header.
+        message.setFrom(new InternetAddress(sendMail, "QAForum", "UTF-8"));
+
+        // 3. Set To: header field of the header.
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "XX用户", "UTF-8"));
+
+        // 4. Subject
+        message.setSubject(subject, "UTF-8");
+
+        // 5. Content
+        message.setContent(content, "text/html;charset=UTF-8");
+
+        // 6.time
+        message.setSentDate(new Date());
+
+        // 7. save
+        message.saveChanges();
+
+        return message;
+    }
+
+    /**
      * Take in the email, and send a random verify number to the email.
      *
-     * @param email email user provided.
-     * @return if the email passes the verification.
+     * @param verifyNumber verify number user provided.
+     * @return if the verify number is the same as verifyNum generated.
      */
-    public boolean verifyEmail(String email) {
-        //TODO: complete this method
-        //      If the verify number be verified successfully, return True
-        //      Otherwise, return False
-
-        return true;
+    public boolean verifyEmail(String verifyNumber) {
+        return verifyNumber.equals(verifyNum);
     }
 
 
     /**
      * Find the user with UserName
-     * @param userName  it is a string that stores the username
-     * @return  if there is an user with the input username in the database, then
-     *          return the user. Otherwise, throw EntryNotFoundException.
+     *
+     * @param userName it is a string that stores the username
+     * @return if there is an user with the input username in the database, then
+     * return the user. Otherwise, throw EntryNotFoundException.
      */
-    public User getUser(String userName){
-        if(!userDataInterface.userExists(userName)){
+    public User getUser(String userName) {
+        if (!userDataInterface.userExists(userName)) {
             return userDataInterface.getUser(userName);
         }
-       return null;
+        return null;
     }
 
 
@@ -149,7 +270,6 @@ public class UserUseCaseInteractor {
      * @param newUsername the new username user wants to change.
      * @return if successfully change the password.
      */
-
 
 
     public boolean resetUsername(User user, String newUsername) {
@@ -241,7 +361,7 @@ public class UserUseCaseInteractor {
         if (!user.getPassword().equals(password)) {
             throw new WrongPasswordException("password");
         }
-    return true;
+        return true;
 
     }
 
