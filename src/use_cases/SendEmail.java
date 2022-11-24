@@ -1,10 +1,9 @@
+package use_cases;
 
 import javax.mail.Transport;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.Properties;
 
@@ -103,6 +102,11 @@ public class SendEmail {
         message.saveChanges();
 
         return message;
+    }
+
+    public static void main(String[] args) throws Exception {
+        SendEmail x = new SendEmail();
+        x.sendEmail("jw.yu@mail.utoronto.ca", "hello", "hello world");
     }
 
 }
