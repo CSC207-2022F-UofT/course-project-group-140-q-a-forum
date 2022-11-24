@@ -9,10 +9,6 @@ import java.util.Date;
 import java.util.Properties;
 
 
-//I wrote the SendEmail which contains two main functions: getting a 6-bits random int value and sending an email.
-//I think my code is correct because my friend could use it to send an email with I some library source deleting.
-//I am not able to run it, but I will ask him and check every course after he wakes up.
-//You can use it and I will tell you which library source to change later.
 public class SendEmail {
 
     public static String myEmailAccount = "3232085039@qq.com";
@@ -44,9 +40,7 @@ public class SendEmail {
         props.setProperty("mail.smtp.host", myEmailSMTPHost);   // 发件人的邮箱的 SMTP 服务器地址
         props.setProperty("mail.smtp.auth", "true");            // 需要请求认证
 
-        // PS: 某些邮箱服务器要求 SMTP 连接需要使用 SSL 安全认证 (为了提高安全性, 邮箱支持SSL连接, 也可以自己开启),
-        //     如果无法连接邮件服务器, 仔细查看控制台打印的 log, 如果有有类似 “连接失败, 要求 SSL 安全连接” 等错误,
-        //     打开下面 /* ... */ 之间的注释代码, 开启 SSL 安全连接。
+        //开启 SSL 安全连接
 
         final String smtpPort = "465";
         props.setProperty("mail.smtp.port", smtpPort);
