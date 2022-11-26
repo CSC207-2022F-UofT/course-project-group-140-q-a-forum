@@ -22,7 +22,7 @@ public class MakeAPost extends javax.swing.JFrame {
     private final Course course;
     private final ArrayList<Post> posts;
     private final CourseController courseController = main.courseController;
-    private final PostController postControllers = main.postControllers;
+    private final PostController postControllers = main.postController;
 
 
     /**

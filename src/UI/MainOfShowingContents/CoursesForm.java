@@ -21,7 +21,7 @@ public class CoursesForm extends javax.swing.JFrame {
     private final ArrayList<Course> courses ;
     private final CourseController courseController = main.courseController;
 
-    private final PostController postController = main.postControllers;
+    private final PostController postController = main.postController;
 
     private Course viewCourse;
     /**
