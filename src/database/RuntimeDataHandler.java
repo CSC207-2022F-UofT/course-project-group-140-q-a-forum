@@ -48,12 +48,14 @@ public class RuntimeDataHandler implements DataHandlerInterface {
                     name2User.put(username, user);
                     email2User.put(email, user);
                 }
+                break;
             case 2:
                 courses = (ArrayList<Course>) value;
                 for (Course course : (ArrayList<Course>) value) {
                     String code = course.getCode();
                     code2Course.put(code, course);
                 }
+                break;
             case 3:
                 reports = (ArrayList<Report>) value;
                 for (Report report : (ArrayList<Report>) value) {
@@ -65,6 +67,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
                         type2Report.get(reportType).add(report);
                     }
                 }
+                break;
             default:
                 throw new RuntimeException();
         }

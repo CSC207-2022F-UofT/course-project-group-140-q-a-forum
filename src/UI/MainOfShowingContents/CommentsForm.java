@@ -4,18 +4,41 @@
  */
 package UI.MainOfShowingContents;
 
+import base.main;
+import controllers.CourseController;
+import controllers.PostController;
+import entities.Comment;
+import entities.Course;
+import entities.Post;
+import entities.User;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author zhaoxiling
  */
 public class CommentsForm extends javax.swing.JFrame {
+    private final User user;
+    private final Course course;
+
+    private final Post post;
+    private final CourseController courseController = main.courseController;
+    private final PostController postController = main.postController;
 
     /**
      * Creates new form CommentsForm
      */
-    public CommentsForm() {
+    public CommentsForm(User user, Course course, Post post) {
+        this.user = user;
+        this.course = course;
+        this.post = post;
         initComponents();
     }
+
+//    public CommentsForm(User user, Course course, Post post, Comment comment){
+//
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,14 +54,16 @@ public class CommentsForm extends javax.swing.JFrame {
         showingPostTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        showingUserLabel5 = new javax.swing.JLabel();
-        showContentLabel5 = new javax.swing.JLabel();
-        commentButton = new javax.swing.JButton();
-        reportButton = new javax.swing.JButton();
         gobackButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        UsernameLabel = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        showingUserLabel16 = new javax.swing.JLabel();
+        showContentLabel16 = new javax.swing.JLabel();
+        commentButton11 = new javax.swing.JButton();
+        reportButton11 = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -46,78 +71,86 @@ public class CommentsForm extends javax.swing.JFrame {
 
         jLabel1.setText("Comment on:");
 
-        showingPostTitleLabel.setText("Post/Comment Name");
+        showingPostTitleLabel.setText(post.getTopic());
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Comments"));
         jList2.setModel(new javax.swing.AbstractListModel() {
+           // String[] strings =
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList2);
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Comments Description"));
+        gobackButton.setText("Back to Post");
 
-        jLabel8.setText("Author:");
+        jLabel3.setText("User:");
 
-        showingUserLabel5.setText("Username");
+        UsernameLabel.setText(user.getUsername());
 
-        showContentLabel5.setText("jLabel4");
+        jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Comments Description"));
 
-        commentButton.setText("Comment on this comment");
-        commentButton.addActionListener(new java.awt.event.ActionListener() {
+        jLabel27.setText("Author:");
+
+        showingUserLabel16.setText("Username");
+
+        showContentLabel16.setText("jLabel4");
+
+        commentButton11.setText("Comment on this comment");
+        commentButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                commentButtonActionPerformed(evt);
+                commentButton11commentButtonActionPerformed(evt);
             }
         });
 
-        reportButton.setText("Report this comment");
-        reportButton.addActionListener(new java.awt.event.ActionListener() {
+        reportButton11.setText("Report this comment");
+        reportButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportButtonActionPerformed(evt);
+                reportButton11reportButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                                .addGap(15, 15, 15)
-                                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(showContentLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                                                .addComponent(jLabel8)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(showingUserLabel5))))
-                                        .addGroup(jPanel7Layout.createSequentialGroup()
+        jLabel28.setText("Content:");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel18Layout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .addComponent(commentButton)
+                                                .addComponent(commentButton11)
                                                 .addGap(58, 58, 58)
-                                                .addComponent(reportButton)))
-                                .addContainerGap(116, Short.MAX_VALUE))
+                                                .addComponent(reportButton11))
+                                        .addGroup(jPanel18Layout.createSequentialGroup()
+                                                .addGap(14, 14, 14)
+                                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabel27)
+                                                        .addComponent(jLabel28))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(showContentLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(showingUserLabel16))))
+                                .addContainerGap(57, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel7Layout.createSequentialGroup()
+        jPanel18Layout.setVerticalGroup(
+                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel8)
-                                        .addComponent(showingUserLabel5))
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel27)
+                                        .addComponent(showingUserLabel16))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(showContentLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel28)
+                                        .addComponent(showContentLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(commentButton)
-                                        .addComponent(reportButton))
-                                .addContainerGap(196, Short.MAX_VALUE))
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(commentButton11)
+                                        .addComponent(reportButton11))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jScrollPane2.setViewportView(jPanel7);
-
-        gobackButton.setText("Back to upper-level");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,15 +160,22 @@ public class CommentsForm extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(gobackButton))
+                                                .addContainerGap(29, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(showingPostTitleLabel))
-                                        .addComponent(gobackButton))
-                                .addContainerGap(758, Short.MAX_VALUE))
+                                                .addComponent(showingPostTitleLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(UsernameLabel)
+                                                .addGap(56, 56, 56))))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,75 +183,152 @@ public class CommentsForm extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel1)
-                                        .addComponent(showingPostTitleLabel))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(showingPostTitleLabel)
+                                        .addComponent(jLabel3)
+                                        .addComponent(UsernameLabel))
+                                .addGap(9, 9, 9)
                                 .addComponent(gobackButton)
-                                .addContainerGap(150, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
+                                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>
 
-    private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void commentButton11commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void reportButton11reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CommentsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CommentsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CommentsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CommentsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CommentsForm().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CommentsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CommentsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CommentsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CommentsForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CommentsForm(user, course, posts).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify
+    private javax.swing.JLabel UsernameLabel;
     private javax.swing.JButton commentButton;
+    private javax.swing.JButton commentButton1;
+    private javax.swing.JButton commentButton11;
+    private javax.swing.JButton commentButton2;
+    private javax.swing.JButton commentButton3;
+    private javax.swing.JButton commentButton4;
+    private javax.swing.JButton commentButton5;
+    private javax.swing.JButton commentButton6;
+    private javax.swing.JButton commentButton7;
+    private javax.swing.JButton commentButton8;
+    private javax.swing.JButton commentButton9;
     private javax.swing.JButton gobackButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList2;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton reportButton;
+    private javax.swing.JButton reportButton1;
+    private javax.swing.JButton reportButton11;
+    private javax.swing.JButton reportButton2;
+    private javax.swing.JButton reportButton3;
+    private javax.swing.JButton reportButton4;
+    private javax.swing.JButton reportButton5;
+    private javax.swing.JButton reportButton6;
+    private javax.swing.JButton reportButton7;
+    private javax.swing.JButton reportButton8;
+    private javax.swing.JButton reportButton9;
+    private javax.swing.JLabel showContentLabel10;
+    private javax.swing.JLabel showContentLabel11;
+    private javax.swing.JLabel showContentLabel12;
+    private javax.swing.JLabel showContentLabel13;
+    private javax.swing.JLabel showContentLabel14;
+    private javax.swing.JLabel showContentLabel16;
     private javax.swing.JLabel showContentLabel5;
+    private javax.swing.JLabel showContentLabel6;
+    private javax.swing.JLabel showContentLabel7;
+    private javax.swing.JLabel showContentLabel8;
+    private javax.swing.JLabel showContentLabel9;
     private javax.swing.JLabel showingPostTitleLabel;
+    private javax.swing.JLabel showingUserLabel10;
+    private javax.swing.JLabel showingUserLabel11;
+    private javax.swing.JLabel showingUserLabel12;
+    private javax.swing.JLabel showingUserLabel13;
+    private javax.swing.JLabel showingUserLabel14;
+    private javax.swing.JLabel showingUserLabel16;
     private javax.swing.JLabel showingUserLabel5;
+    private javax.swing.JLabel showingUserLabel6;
+    private javax.swing.JLabel showingUserLabel7;
+    private javax.swing.JLabel showingUserLabel8;
+    private javax.swing.JLabel showingUserLabel9;
     // End of variables declaration
 }
+
+
+

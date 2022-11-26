@@ -8,6 +8,8 @@ import Presenter.LoginPresenter;
 import entities.Course;
 import entities.User;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author zhaoxiling
@@ -138,11 +140,12 @@ public class LoginForm extends javax.swing.JFrame {
         String password = new String(passText.getPassword());
         int result = userController.loginUser(username, password);
         if(result == 1){
-            this.setVisible(true);
+            this.setVisible(false);
             User user = userController.getUser(username);
-            Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
+            ArrayList<Course> courses = courseController.getAllCourses();
             CoursesForm coursesForm = new CoursesForm(user, courses);
             coursesForm.setVisible(true);
+
         }
         else if(result == -2){
            LoginPresenter.showPasswordNotMatch();

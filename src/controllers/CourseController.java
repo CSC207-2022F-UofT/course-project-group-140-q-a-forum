@@ -181,4 +181,8 @@ public class CourseController {
     public ArrayList<String> getAllCoursesName(){
        return courseInteractor.getAllCoursesName();
     }
+
+    public ArrayList<String> getAllPostTitles(String courseCode){
+        return courseInteractor.getAllPostTitles(courseCode);
+    }
 }

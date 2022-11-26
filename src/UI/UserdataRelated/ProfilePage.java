@@ -11,6 +11,7 @@ import entities.Course;
 import entities.User;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -195,7 +196,7 @@ public class ProfilePage extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
+        ArrayList<Course> courses = courseController.getAllCourses();
         CoursesForm coursesForm = new CoursesForm(user, courses);
         coursesForm.setVisible(true);
         this.setVisible(false);

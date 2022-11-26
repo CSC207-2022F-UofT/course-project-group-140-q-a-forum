@@ -20,7 +20,10 @@ public class UserController {
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @return if successfully registered this student, if not return the error type
+     * @return if successfully registered this student return 0,
+     *  if EmptyEntryException return -1,
+     *  if InvalidFormatException return -2,
+     *  if WrongPasswordException return -3.
      */
     public int registerUser(Map<String, String> user){
         try{
@@ -47,6 +50,9 @@ public class UserController {
 
         return 1;
     }
+
+
+
 
 
     /**

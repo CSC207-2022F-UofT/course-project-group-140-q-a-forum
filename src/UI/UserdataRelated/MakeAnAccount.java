@@ -15,7 +15,7 @@ import java.util.HashMap;
  *
  * @author zhaoxiling
  */
-public class MakeAnAccount extends javax.swing.JFrame {
+public class MakeAnAccount extends  javax.swing.JFrame {
     private final UserController userController = main.userController;
     /**
      * Creates new form RegisterForm

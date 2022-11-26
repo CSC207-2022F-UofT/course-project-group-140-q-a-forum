@@ -24,16 +24,15 @@ public class ReportController {
         // TODO: implement this method
         try{
             reportUseCaseInteractor.createReport(
-                    (String)reportInformation.get("Username"),
-                    (Integer)reportInformation.get("Username"),
-                    reportInformation.get("Username"));
+                    (String)reportInformation.get("username"),
+                    (Integer)reportInformation.get("username"),
+                    reportInformation.get("username"));
         }catch (RuntimeException e){
 
         }finally {
             return true;
         }
     }
-
 
 
     public boolean searchReport(){return false;}

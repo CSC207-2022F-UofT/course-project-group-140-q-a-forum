@@ -1,16 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI.PostingStuff;
 
-import UI.MainOfShowingContents.CoursesForm;
+import Presenter.GeneralPresenter;
+import UI.MainOfShowingContents.PostForm;
 import base.main;
 import controllers.CourseController;
-import controllers.PostControllers;
+import controllers.PostController;
+
 import entities.Course;
+import entities.Post;
 import entities.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,18 +18,20 @@ import java.util.HashMap;
  * @author zhaoxiling
  */
 public class MakeAPost extends javax.swing.JFrame {
-    private final Course course;
     private final User user;
-    private final PostControllers postControllers = main.postControllers;
+    private final Course course;
+    private final ArrayList<Post> posts;
     private final CourseController courseController = main.courseController;
+    private final PostController postControllers = main.postController;
 
 
     /**
      * Creates new form CommentsForm
      */
-    public MakeAPost(Course course, User user) {
-        this.course = course;
+    public MakeAPost(User user, Course course, ArrayList<Post> posts) {
         this.user = user;
+        this.course = course;
+        this.posts = posts;
         initComponents();
     }
 
@@ -178,62 +180,70 @@ public class MakeAPost extends javax.swing.JFrame {
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        HashMap<String, String> PostInfo = new HashMap<String, String>();
+        HashMap<String, Object> PostInfo = new HashMap<String, Object>();
         PostInfo.put("title", titleText.getText());
         PostInfo.put("text", contentTextA.getText());
-        PostInfo.put("user", buttonGroup1.getSelection().getActionCommand());
-        PostInfo.put("image", null);
-        System.out.println(buttonGroup1.getSelection().getActionCommand());
-
+        PostInfo.put("user", user);
+        //PostInfo.put("user", buttonGroup1.getSelection().getActionCommand());
+        PostInfo.put("images", null);
+        PostInfo.put("course", course);
+        int result = postControllers.createPost(PostInfo);
+        if(result == -1){
+            GeneralPresenter.showEmptyEntryError();
+        }
+        GeneralPresenter.showSuccessMessage("Post");
+        ArrayList<Post> postsUpdate = courseController.getAllPosts(course.getCode());
+        PostForm postForm = new PostForm(user, course, postsUpdate);
+        postForm.setVisible(true);
+        this.setVisible(false);
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
-        CoursesForm coursesForm = new CoursesForm(user, courses );
-        coursesForm.setVisible(true);
+        PostForm postForm = new PostForm(user, course, posts);
+        postForm.setVisible(true);
         this.setVisible(false);
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Course course = new Course();
-                User user = new User();
-                new MakeAPost(course, user).setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                User user = new User();
+//                Course course = new Course();
+//                Post[] posts = {new Post("s", "s", null, user, course)};
+//                new MakeAPost(user, course, posts).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify
     private javax.swing.JRadioButton anoymousButton;

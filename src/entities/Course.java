@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.*;
 
 public class Course {
 
@@ -13,6 +14,8 @@ public class Course {
     private String semester;
 
     private ArrayList<Post> posts;
+
+    private HashMap<String, Post> topic2Post;
 
     /**
      *
@@ -40,6 +43,7 @@ public class Course {
         this.semester = semester;
         this.instructors = instructors;
         this.posts = new ArrayList<>();
+        this.topic2Post = new HashMap<>();
     }
 
     /**
@@ -67,6 +71,13 @@ public class Course {
 
     public ArrayList<Post> getPosts() {
         return posts;
+    }
+
+    public ArrayList<String> getPostTitles(){
+        Set<String> keySet = topic2Post.keySet();
+        ArrayList<String> listOfKeys
+                = new ArrayList<>(keySet);
+        return listOfKeys;
     }
 
     /**
@@ -134,6 +145,7 @@ public class Course {
             return false;
         }else{
             this.posts.add(post);
+            this.topic2Post.put(post.getTopic(), post);
             return true;
         }
     }
@@ -146,9 +158,20 @@ public class Course {
     public boolean removePost(Post post){
         if (this.posts.contains(post)){
             this.posts.remove(post);
+            this.topic2Post.remove(post.getTopic(), post);
             return true;
         }else{
             return false;
         }
+    }
+
+    public Post lookupPostFromTopic(String topic){
+        if (topic2Post.containsKey(topic)){
+            return topic2Post.get(topic);
+        }
+        else{
+            return null;
+        }
+
     }
 }
