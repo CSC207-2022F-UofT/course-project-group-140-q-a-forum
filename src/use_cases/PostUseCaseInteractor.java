@@ -81,12 +81,7 @@ public class PostUseCaseInteractor {
 
     public ArrayList<Comment> getAllCommentFromPost(String courseCode, String postTopic){
         Post post = courseDataInterface.getPost(courseCode, postTopic);
-        if (post == null){
-            throw new EntryNotFoundException("post");
-        }else {
-            return post.getComments();
-        }
-
+        return post.getComments();
     }
 
     public ArrayList<Comment> getAllCommentFromComment(Comment comment){
