@@ -79,7 +79,7 @@ public class PostUseCaseInteractor {
         return course.lookupPostFromTopic(title) != null;
     }
 
-    public ArrayList<Comment> getAllComment(String courseCode, String postTopic){
+    public ArrayList<Comment> getAllCommentFromPost(String courseCode, String postTopic){
         Post post = courseDataInterface.getPost(courseCode, postTopic);
         if (post == null){
             throw new EntryNotFoundException("post");
@@ -87,6 +87,10 @@ public class PostUseCaseInteractor {
             return post.getComments();
         }
 
+    }
+
+    public ArrayList<Comment> getAllCommentFromComment(Comment comment){
+        return comment.getComments();
     }
 
 
