@@ -37,31 +37,12 @@ public class Post {
         this.texts = texts;
         this.postedBy = postedBy;
         this.course = course;
-//        this.images = null;
     }
 
-
-//    public Post(String topic, String texts, ArrayList<Image> images, User postedBy, Course course){
-//        /**
-//         * Create a comment, with text, topic, and images.
-//         * The comment can be commented (nest) as well
-//         * The comment will only contain the content and the
-//         * information of the use who posted it
-//         */
-//        this.topic = topic;
-//        this.texts = texts;
-//        this.images = images;
-//        this.postedBy = postedBy;
-//        this.course = course;
-//    }
 
     public ArrayList<Comment> getComments() {
         return comments;
     }
-
-//    public ArrayList<Image> getImages() {
-//        return images;
-//    }
 
     public String getTexts() {
         return texts;
@@ -85,10 +66,6 @@ public class Post {
         this.comments.remove(comment);
     }
 
-//    public void setImages(ArrayList<Image> images) {
-//        this.images = images;
-//    }
-
     public void setTexts(String texts) {
         this.texts = texts;
     }
@@ -101,11 +78,9 @@ public class Post {
         this.course = course;
     }
 
-
     public void modifyPost(String topic, String texts){
         this.topic = topic;
         this.texts = texts;
-//        this.images = images;
     }
 
 

@@ -1,6 +1,8 @@
 package controllers;
 import entities.Comment;
 import entities.Post;
+import entities.User;
+import exceptions.DuplicationException;
 import exceptions.EmptyEntryException;
 import exceptions.EntryNotFoundException;
 import use_cases.LoginUseCaseInteractor;
@@ -18,20 +20,23 @@ public class PostController {
     }
 
     /**
-     * pass all post data from UI.
-     * Get the return of CreatePost and justify if get False, return "meaningless post".
-     * else, return "successfully post".
+     * Create a post with given information.
      * @param post information will be stored at the HashMap
-     * @return  String for each state.
+     * @return  An integer representing the success or why cannot create this post
+     * 1: Successfully created;
+     * -1: There is an empty entry;
+     * -2: There is a post with the same title.
      */
     public int createPost(HashMap<String,Object> post){
         try{
             postUseCaseInteractor.createPost(post);
         }
-        catch (EmptyEntryException e){
+        catch (EmptyEntryException e) {
             return -1;
+        }catch (DuplicationException e){
+            return -2;
         }
-        return 0;
+        return 1;
     }
 
     /**
@@ -86,6 +91,23 @@ public class PostController {
      */
     public ArrayList<Comment> getAllCommentFromComment(Comment comment){
         return postUseCaseInteractor.getAllCommentFromComment(comment);
+    }
+
+    /**
+     * Make a post that is posted by the given user under the given post
+     * with the given content.
+     * @param post The post under which the comment will be posted.
+     * @param user The user who posts this comment;
+     * @param content The content of the post.
+     * @return An integer representing the success of making a post or
+     * the reason of the failure.
+     * 1: Success;
+     * -1: The content is empty.
+     */
+    public int makeComment(Post post, User user, String content){
+        try{postUseCaseInteractor.makeCommentFromPost(post, user, content);}
+        catch(EmptyEntryException e){return -1;}
+        return 1;
     }
 
 
