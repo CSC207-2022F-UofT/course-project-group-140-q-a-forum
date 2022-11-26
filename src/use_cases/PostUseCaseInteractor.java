@@ -1,4 +1,5 @@
 package use_cases;
+import entities.Comment;
 import exceptions.*;
 import entities.Course;
 import entities.Post;
@@ -11,27 +12,29 @@ import java.util.HashMap;
 
 public class PostUseCaseInteractor {
 
-
-    public PostUseCaseInteractor() {
+    private final CourseDataInterface courseDataInterface;
+    public PostUseCaseInteractor(CourseDataInterface courseDataInterface) {
+        this.courseDataInterface = courseDataInterface;
     }
 
     /**
      * Post a post using the given information.
      * If the post can be succesfully posted, create such entity and return Ture
      * If the process cannot be completed, return False
-     * @param post_info
+     * @param post_info A hash map that contains the information of the post. The keys must be "title",
+     *                  "text", "user" and "course".
      * @return 0 if successfully created, 1 if not
      */
 
     public void createPost(HashMap<String, Object> post_info){
         String title = post_info.get("title").toString();
         String text = post_info.get("text").toString();
-        ArrayList<Image> images = (ArrayList<Image>) post_info.get("images");
+//        ArrayList<Image> images = (ArrayList<Image>) post_info.get("images");
         User postedBy = (User) post_info.get("user");
         Course course = (Course) post_info.get("course");
         boolean valid = checkPostValidity(title, text);
         if (valid){
-            Post new_post = new Post(title, text, images, postedBy, course);
+            Post new_post = new Post(title, text, postedBy, course);
             course.addPost(new_post);
         }
         else {
@@ -45,14 +48,12 @@ public class PostUseCaseInteractor {
      * @param post_info
      * @return boo
      */
-
     public void editPost(HashMap<String, Object> post_info){
         //TODO: rememeber to pass THE ORIGINAL POST INFORMATION (i.e, orgTitle)!!!1
         String orgTitle = (String) post_info.get("orgTitle");
         Course course = (Course) post_info.get("course");
         if (checkTopicExist(course, orgTitle)){
-            course.lookupPostFromTopic(orgTitle).modifyPost((String) post_info.get("title"), (String) post_info.get("text"),
-                    (ArrayList<Image>) post_info.get("images"));
+            course.lookupPostFromTopic(orgTitle).modifyPost((String) post_info.get("title"), (String) post_info.get("text"));
         }
         else {
             throw new EntryNotFoundException("Post");
@@ -71,16 +72,23 @@ public class PostUseCaseInteractor {
         }
     }
 
-
-
-
-
     public boolean checkPostValidity(String title, String text){
         return title != "" & text != "" ;
     }
     public boolean checkTopicExist(Course course, String title){
         return course.lookupPostFromTopic(title) != null;
     }
+
+    public ArrayList<Comment> getAllComment(String courseCode, String postTopic){
+        Post post = courseDataInterface.getPost(courseCode, postTopic);
+        if (post == null){
+            throw new EntryNotFoundException("post");
+        }else {
+            return post.getComments();
+        }
+
+    }
+
 
 
 }

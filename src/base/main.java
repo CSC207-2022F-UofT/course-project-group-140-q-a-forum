@@ -16,7 +16,7 @@ public class main {
 
     static  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
     static CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
-    static PostUseCaseInteractor postInteractor = new PostUseCaseInteractor();
+    static PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
 
     public static CourseController courseController = new CourseController(courseInteractor);
 

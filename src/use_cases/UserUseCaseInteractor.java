@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 
+
 public class UserUseCaseInteractor {
     final UserDataInterface userDataInterface;
 
@@ -21,7 +22,6 @@ public class UserUseCaseInteractor {
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @return if successfully registered this student
      */
     public void createUser(Map<String, String> user) throws RuntimeException {
 
@@ -99,7 +99,6 @@ public class UserUseCaseInteractor {
      */
 
     private boolean emailCheck(String email) {
-        // Reverse the email.
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
@@ -149,9 +148,6 @@ public class UserUseCaseInteractor {
      * @param newUsername the new username user wants to change.
      * @return if successfully change the password.
      */
-
-
-
     public boolean resetUsername(User user, String newUsername) {
         // If the given new username exists in database, return false.
         // Reset the password.

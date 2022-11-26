@@ -63,14 +63,15 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         user_entity.setPassword(newPassword);
     }
 
-//    @Override
-//    public void resetEmail(Map<String, String> user, String newEmail) {
-//        // WE CANNOT RESET EMAIL
-//    }
-
     @Override
     public Course getCourse(String courseCode) {
         return dataHandler.lookupCourse(courseCode);
+    }
+
+    @Override
+    public Post getPost(String courseCode, String postTopic) {
+        Course course = getCourse(courseCode);
+        return course.lookupPostFromTopic(postTopic);
     }
 
     @Override

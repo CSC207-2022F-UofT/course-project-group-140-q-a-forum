@@ -145,6 +145,7 @@ public class Course {
             return false;
         }else{
             this.posts.add(post);
+            this.topic2Post.put(post.getTopic(), post);
             return true;
         }
     }
@@ -157,6 +158,7 @@ public class Course {
     public boolean removePost(Post post){
         if (this.posts.contains(post)){
             this.posts.remove(post);
+            this.topic2Post.remove(post.getTopic(), post);
             return true;
         }else{
             return false;
