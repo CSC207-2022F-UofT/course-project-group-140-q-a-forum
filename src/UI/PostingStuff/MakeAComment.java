@@ -4,16 +4,36 @@
  */
 package UI.PostingStuff;
 
+import UI.MainOfShowingContents.PostForm;
+import base.main;
+import controllers.CourseController;
+import controllers.PostController;
+import entities.Comment;
+import entities.Course;
+import entities.Post;
+import entities.User;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author zhaoxiling
  */
 public class MakeAComment extends javax.swing.JFrame {
+    private final User user;
+    private final Course course;
+
+    private final Post post;
+    private final CourseController courseController = main.courseController;
+    private final PostController postController = main.postController;
 
     /**
      * Creates new form MakeAComment
      */
-    public MakeAComment() {
+    public MakeAComment(User user, Course course, Post post) {
+        this.user = user;
+        this.course = course;
+        this.post = post;
         initComponents();
     }
 
@@ -27,8 +47,6 @@ public class MakeAComment extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        titleText = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         commentLabel = new javax.swing.JLabel();
@@ -44,9 +62,7 @@ public class MakeAComment extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Make a comment"));
 
-        jLabel1.setText("Title:");
-
-        jLabel2.setText("Content of the post:");
+        jLabel2.setText("Content of the comment:");
 
         jLabel3.setText("Make the comment in :");
 
@@ -100,7 +116,6 @@ public class MakeAComment extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(jLabel2)
-                                                        .addComponent(jLabel1)
                                                         .addComponent(jLabel5))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +129,6 @@ public class MakeAComment extends javax.swing.JFrame {
                                                                         .addComponent(commentButton)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                                                                         .addComponent(backButton))
-                                                                .addComponent(titleText, javax.swing.GroupLayout.Alignment.LEADING)
                                                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))))
                                 .addContainerGap(132, Short.MAX_VALUE))
         );
@@ -125,14 +139,13 @@ public class MakeAComment extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
                                         .addComponent(commentLabel))
-                                .addGap(16, 16, 16)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(titleText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(26, 26, 26)
+                                                .addComponent(jLabel2)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(userButton)
@@ -150,7 +163,7 @@ public class MakeAComment extends javax.swing.JFrame {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(126, Short.MAX_VALUE)
+                                .addContainerGap(98, Short.MAX_VALUE)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(135, 135, 135))
         );
@@ -159,7 +172,7 @@ public class MakeAComment extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(64, 64, 64)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(74, Short.MAX_VALUE))
+                                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,46 +188,60 @@ public class MakeAComment extends javax.swing.JFrame {
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        String content = contentTextA.getText();
+        int result = postController.makeComment(post, user, content);
+        if(result == 1){
+            ArrayList<Post> posts = courseController.getAllPosts(course.getCode());
+            PostForm postForm = new PostForm(user, course, posts);
+            postForm.setVisible(true);
+            this.setVisible(false);
+        }
+        System.out.println("register fall");
+
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        ArrayList<Post> posts =  courseController.getAllPosts(course.getCode());
+        PostForm postForm = new PostForm(user, course, posts);
+        postForm.setVisible(true);
+        this.setVisible(false);
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MakeAComment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MakeAComment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MakeAComment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MakeAComment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MakeAComment().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(MakeAComment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(MakeAComment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(MakeAComment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MakeAComment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MakeAComment(user, course, post).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify
     private javax.swing.JRadioButton anonymousButton;
@@ -222,13 +249,11 @@ public class MakeAComment extends javax.swing.JFrame {
     private javax.swing.JButton commentButton;
     private javax.swing.JLabel commentLabel;
     private javax.swing.JTextArea contentTextA;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField titleText;
     private javax.swing.JRadioButton userButton;
     // End of variables declaration
 }

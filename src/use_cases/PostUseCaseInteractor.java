@@ -31,11 +31,11 @@ public class PostUseCaseInteractor {
         Course course = (Course) post_info.get("course");
         boolean empty = checkPostValidity(title, text);
         boolean duplicate = courseDataInterface.postExists(course.getCode(), title);
-        if (!empty && !duplicate){
+        if (empty && !duplicate){
             Post new_post = new Post(title, text, postedBy, course);
             course.addPost(new_post);
         }
-        else if(empty) {
+        else if(!empty) {
             throw new EmptyEntryException("title");
         }else{
             throw new DuplicationException("post");

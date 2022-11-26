@@ -1,5 +1,6 @@
 package UI.MainOfShowingContents;
 
+import UI.PostingStuff.MakeAComment;
 import UI.PostingStuff.MakeAPost;
 import base.main;
 import controllers.CourseController;
@@ -241,6 +242,9 @@ public class PostForm extends javax.swing.JFrame {
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        MakeAComment makeAComment = new MakeAComment(user, course, viewPost);
+        makeAComment.setVisible(true);
+        this.setVisible(false);
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {

@@ -145,7 +145,7 @@ public class LoginForm extends javax.swing.JFrame {
             ArrayList<Course> courses = courseController.getAllCourses();
             CoursesForm coursesForm = new CoursesForm(user, courses);
             coursesForm.setVisible(true);
-
+            this.setVisible(false);
         }
         else if(result == -2){
            LoginPresenter.showPasswordNotMatch();

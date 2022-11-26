@@ -80,10 +80,10 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         ArrayList<Post> posts = course.getPosts();
         for(Post post: posts){
             if (post.getTopic().equals(postTopic)){
-                return false;
+                return true;
             };
         }
-        return true;
+        return false;
     }
 
     @Override
