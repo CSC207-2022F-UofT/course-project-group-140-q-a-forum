@@ -11,6 +11,7 @@ import controllers.CourseController;
 import entities.Course;
 import entities.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -197,8 +198,7 @@ public class MakeACourse extends javax.swing.JFrame {
             }
             case 1 ->{
                 GeneralPresenter.showSuccessMessage(topicText.getText());
-                Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
-                System.out.println(courseController.getAllCoursesName());
+                ArrayList<Course> courses = courseController.getAllCourses();
                 CoursesForm coursesForm = new CoursesForm(this.user, courses);
                 coursesForm.setVisible(true);
                 this.setVisible(false);
@@ -210,7 +210,7 @@ public class MakeACourse extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
+        ArrayList<Course> courses = courseController.getAllCourses();
         CoursesForm coursesForm = new CoursesForm(this.user, courses);
         coursesForm.setVisible(true);
         this.setVisible(false);

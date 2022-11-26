@@ -18,14 +18,14 @@ public class PostForm extends javax.swing.JFrame {
     private final User user;
     private final Course course;
 
-    private final Post[] posts;
+    private final ArrayList<Post> posts;
     private final CourseController courseController = main.courseController;
     private final PostController postControllers = main.postControllers;
 
     /**
      * Creates new form PostForm
      */
-    public PostForm(User user, Course course, Post[] posts) {
+    public PostForm(User user, Course course, ArrayList<Post> posts) {
         this.user = user;
         this.course = course;
         this.posts = posts;
@@ -250,7 +250,7 @@ public class PostForm extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        Course[] courses = courseController.getAllCourses().toArray(new Course[0]);
+        ArrayList<Course> courses = courseController.getAllCourses();
         CoursesForm coursesForm = new CoursesForm(user, courses);
         coursesForm.setVisible(true);
         this.setVisible(false);
@@ -259,7 +259,7 @@ public class PostForm extends javax.swing.JFrame {
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt){
         int chosenPostIndex = jList2.getSelectedIndex();
-        Post selectPost = posts[chosenPostIndex];
+        Post selectPost = posts.get(chosenPostIndex);
         changePanel(selectPost);
 
     }
@@ -272,41 +272,41 @@ public class PostForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            User user = new User("a", "d", "d");
-            Course course = new Course("c","d", "d", "d", new ArrayList<String>() );
-
-            Post[] posts = {new Post("s", "s", null, user, course)};
-            public void run() {
-                new PostForm(user, course, posts).setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            User user = new User("a", "d", "d");
+//            Course course = new Course("c","d", "d", "d", new ArrayList<String>() );
+//            Post post = new Post("s", "s", null, user, course);
+//            ArrayList<Post> posts = new ArrayList<Post>();
+//            public void run() {
+//                new PostForm(user, course, posts).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify
     private javax.swing.JLabel authorLabel;

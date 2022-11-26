@@ -10,13 +10,15 @@ import entities.Post;
 import entities.User;
 
 import javax.swing.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author zhaoxiling
  */
 public class CoursesForm extends javax.swing.JFrame {
     private final User user;
-    private final Course[] courses ;
+    private final ArrayList<Course> courses ;
     private final CourseController courseController = main.courseController;
 
     private final PostController postController = main.postControllers;
@@ -25,7 +27,7 @@ public class CoursesForm extends javax.swing.JFrame {
     /**
      * Creates new form CoursesForm
      */
-    public CoursesForm(User user, Course[] courses) {
+    public CoursesForm(User user, ArrayList<Course> courses) {
         this.user = user;
         this.courses = courses;
         initComponents();
@@ -281,7 +283,7 @@ public class CoursesForm extends javax.swing.JFrame {
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         int chosenCourseIndex = jList2.getSelectedIndex();
-        Course selectCourse = courses[chosenCourseIndex];
+        Course selectCourse = courses.get(chosenCourseIndex);
         changePanel(selectCourse);
         viewCourse = selectCourse;
     }
@@ -297,7 +299,7 @@ public class CoursesForm extends javax.swing.JFrame {
 
     private void showPostsButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        Post[] posts = courseController.getAllPosts(viewCourse.getCode()).toArray(new Post[0]);
+        ArrayList<Post> posts = courseController.getAllPosts(viewCourse.getCode());
         PostForm postForm = new PostForm(user, viewCourse, posts);
         postForm.setVisible(true);
         this.setVisible(false);
