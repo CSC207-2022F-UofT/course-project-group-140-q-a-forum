@@ -75,6 +75,18 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     }
 
     @Override
+    public boolean postExists(String courseCode, String postTopic) {
+        Course course = getCourse(courseCode);
+        ArrayList<Post> posts = course.getPosts();
+        for(Post post: posts){
+            if (post.getTopic().equals(postTopic)){
+                return false;
+            };
+        }
+        return true;
+    }
+
+    @Override
     public User getUser(String userName) {return dataHandler.lookupUserfromName(userName);}
 
     @Override

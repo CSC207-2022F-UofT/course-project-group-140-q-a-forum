@@ -18,7 +18,7 @@ public class Comment {
          */
         this.postedBy = postedBy;
         this.texts = texts;
-//        this.images = null;
+
         this.comments = new ArrayList<>();
     }
 
