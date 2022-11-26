@@ -19,8 +19,10 @@ public class PostForm extends javax.swing.JFrame {
     private final Course course;
 
     private final ArrayList<Post> posts;
+
+    private Post viewPost = null;
     private final CourseController courseController = main.courseController;
-    private final PostController postControllers = main.postControllers;
+    private final PostController postControllers = main.postController;
 
     /**
      * Creates new form PostForm
@@ -231,6 +233,10 @@ public class PostForm extends javax.swing.JFrame {
 
     private void showcommentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        CommentsForm commentsForm = new CommentsForm(user, course, viewPost);
+        commentsForm.setVisible(true);
+        this.setVisible(false);
+
     }
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,6 +267,7 @@ public class PostForm extends javax.swing.JFrame {
         int chosenPostIndex = jList2.getSelectedIndex();
         Post selectPost = posts.get(chosenPostIndex);
         changePanel(selectPost);
+        viewPost = selectPost;
 
     }
     private void changePanel(Post post){
