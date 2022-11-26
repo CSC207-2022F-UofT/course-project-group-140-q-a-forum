@@ -20,7 +20,7 @@ public class main {
 
     public static CourseController courseController = new CourseController(courseInteractor);
 
-    public static PostController postControllers = new PostController(postInteractor);
+    public static PostController postController = new PostController(postInteractor);
     public static UserController userController = new UserController(userInteractor);
 
 }
