@@ -23,22 +23,22 @@ public class PostUseCaseInteractor {
      * If the process cannot be completed, return False
      * @param post_info A hash map that contains the information of the post. The keys must be "title",
      *                  "text", "user" and "course".
-     * @return 0 if successfully created, 1 if not
      */
-
     public void createPost(HashMap<String, Object> post_info){
         String title = post_info.get("title").toString();
         String text = post_info.get("text").toString();
-//        ArrayList<Image> images = (ArrayList<Image>) post_info.get("images");
         User postedBy = (User) post_info.get("user");
         Course course = (Course) post_info.get("course");
-        boolean valid = checkPostValidity(title, text);
-        if (valid){
+        boolean empty = checkPostValidity(title, text);
+        boolean duplicate = courseDataInterface.postExists(course.getCode(), title);
+        if (!empty && !duplicate){
             Post new_post = new Post(title, text, postedBy, course);
             course.addPost(new_post);
         }
-        else {
+        else if(empty) {
             throw new EmptyEntryException("title");
+        }else{
+            throw new DuplicationException("post");
         }
     }
 
@@ -93,6 +93,12 @@ public class PostUseCaseInteractor {
         return comment.getComments();
     }
 
-
+    public void makeCommentFromPost(Post post, User user, String content){
+        Comment newComment = new Comment(content, user);
+        if(content.equals("")){
+            throw new EmptyEntryException("content");
+        }
+        post.addComment(newComment);
+    }
 
 }

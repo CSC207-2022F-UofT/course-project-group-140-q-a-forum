@@ -33,6 +33,7 @@ public interface CourseDataInterface extends DataInterface {
      */
     boolean courseExists(String courseCode);
 
+    boolean postExists(String courseCode, String postTopic);
 
 
 }
