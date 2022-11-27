@@ -1,12 +1,24 @@
 # Group 140 CSC207 project: Q/A forum
+
 ## Group members (alphabetical order by last name):
-Chihan Cui(HermesCui), Qianjun Huang(cang-xue), Liwei Yang(Blair Yang), Jiawei Yu(JY3150),  Gangquan Zhang(jasongangquanzhang), Xiling Zhao(Teinble), Yuyang Zhao(NerverSoGoodStart), Jiajie Zhu(Christinjiajie)
-### Task assignment
-# Project introduction
+
+- Chihan Cui ([HermesCui](https://github.com/HermesCui))
+- Qianjun Huang ([cang-xue](https://github.com/cang-xue))
+- Liwei Yang ([Blair Yang](https://github.com/blairyeung))
+- Jiawei Yu ([JY3150](https://github.com/JY3150))
+- Gangquan Zhang ([jasongangquanzhang](https://github.com/jasongangquanzhang))
+- Xiling Zhao ([Teinble](https://github.com/Teinble))
+- Yuyang Zhao ([NerverSoGoodStart](https://github.com/NeverSoGoodStart))
+- Jiajie Zhu ([Christinjiajie](https://github.com/Christinjiajie))
+
+# Introduction
+
 ## 1. Entities
+
 ### 1.1 User.java
-User.java is a class that is used to store the data of each individual user/administrator of the forum. \
-\
+
+User.java is a class that is used to store the data of each individual user/administrator of the forum.
+
 The user object has the following attributes:
 * username
 * userid
@@ -59,177 +71,188 @@ All of the information of the Report object, once created, are immutable.
 ## 2. Use cases
 ### 2.1 Course use case
 The course use case provides interface to create, modify, and delete course information. It has following functions:
-* addCourse()
-Function **addCourse()** takes in the course information and attempt to create the course and 
-return *true*. If the course already exist, do nothing and return *false*. 
+
+* **addCourse()**
+  * Takes in the course information, attempts to create the course and
+    return *true* if succeeds. If the course already exists, do nothing and return *false*.
 
 
-* modifyCourse()
-Function **modifyCourse()** takes in the course information and attempt to modify the course and
-  return *true*. If the course does not exist, do nothing and return *false*.
+* **modifyCourse()**
+  * Takes in the course information, attempts to modify the course and
+    return *true* if succeeds. If the course does not exist, do nothing and return *false*.
 
 
-* deleteCourse()
-Function **deleteCourse()** takes some in the course information and attempt to create the course and
-  return *true*. If the course information does not match, do nothing and return *false*.
+* **deleteCourse()**
+  * Takes in the course information, attempts to delete the course and
+    return *true* if succeeds. If the course information does not match, do nothing and return *false*.
 
 ### 2.2 Login use case
+// TODO
+
 ### 2.3 User use case
+// TODO
+
 ### 2.4 Post use case
-### 2.5 report use case
+// TODO
+
+### 2.5 Report use case
+// TODO
 
 ## 3. Controllers
-## 4. Graphical User Interface
+## 4. Graphical User Interface (GUI)
+
 ### Figure 1.1 Login InterFace
-![](ScreenShot1/LoginForm.png)
+![Picture of the Login Form](ScreenShot/LoginForm.png)
 
-This is the First interface showed when opening the project 
-The User should enter Their **UserName**, their **Password** and press
-.Then they need to press **Login** to Enter to the CoursesPage
+This is the first interface showed when opening the project.
+The `User` should enter his/her **UserName** and his/her **Password**, then he/she needs to press `Login` to enter `Courses Page`.
 
-If they don't have any account yet, then press **Register** to enter the RegisterPage.
+If this is the first time that the user is opening this application, the user should press `Register` to enter `RegisterPage`.
 
 ### Figure 1.2 Register InterFace
-![](ScreenShot1/RegisterForm/RegisterAUser.png)
+![Picture of the Register Form](ScreenShot/RegisterForm/RegisterAUser.png)
 
-After click **Register** and enter the RegisterPage. Then user should fill 
-the first four information into the TextField, including enter Username, Password and Re-EnterPassword
+After clicking **Register** and entering `RegisterPage`, user should fill
+the first four information into the TextField, including Username, Password, Re-EnterPassword and Email.
 
-After Enter the Email, then click **Send Verification**, Then, it will check 
-whether the entered email is valid or no. If valid, the label under the **Send Verification**
-would have text and tell user an email contain verification code have already send email to the given email.
-If the verification code match with the sending code, then the user account would be created and go back to the 
-LoginPage. Otherwise, an error message would raise.
+After entering the Email, the user should click **Send Verification**, Then, it will check
+whether the entered email is valid or not. If valid, there will be text under **Send Verification** to
+tell the user that an email containing verification code has already been sent to the given email address.
+Then the user needs to enter the verification code and clicks `Register`.
+If the verification code matches with the sending code, the user account would be created and go back to  
+`LoginPage`. Otherwise, an error message would be raised.
 
 ### Figure 2.1 Courses Page
-![](ScreenShot1/MainForm(showingContent)/CoursesForm.png)
-After Login successfully from Login Page, then entered to the courses page. 
+![Picture of selecting courses](ScreenShot/MainForm(showingContent)/CoursesForm.png)
+After successfully logging in, the user will enter the `Courses Page`.
+
 In the left panel of the page, it shows all the courses with their titles stored in the system.
-Click one of the courses, the description of the course would appear on the right. 
+Click one of the courses, the description of the course will appear on the right.
 
-To see all posts in the chosen course, click **Show all Posts** to enter the Postpage. 
+To see all posts in the chosen course, click **Show all Posts** to enter `Postpage`.
 
-If there are any problem of the courses, click **Report this Course** to enter the ReportPage.
+If there are any problem of the courses, click **Report this Course** to enter `ReportPage`.
 
 
-In this page, User could click the top left button, **Register A new Course** and go to the MakeACourse Page.
+In this page, User could click the top left button, **Register A new Course** and go to `MakeACourse Page`.
 
 
 
 
 ### Figure 2.2 Post Page
-![](ScreenShot1/MainForm(showingContent)/PostForm.png)
+![Picture of a Post Form](ScreenShot/MainForm(showingContent)/PostForm.png)
 
-In this page, 
-In the top left of the page, it shows this is the posts page of the chosen course.
+In the top left of `Post Page`, it shows this is the posts page of the chosen course.
 
-In the left panel of the page, it shows all the posts in the course. 
+In the left panel of the page, it shows all the posts in the course.
 
 Click one of the post, the information of that post would appear on the right.
 
-To see all comments in the chosen course, click **Show all Posts** to enter the Postpage.
+To see all comments in the chosen course, click **Show all comments** to enter `CommentPage`.
 
-If user want to do more discussion, they could click **Comment this Post** button to go to **CommentPage**
+If the user want to have more discussion, he/she could click **Comment this Post** button to go to `CommentPage`.
 
-If there are any problem of the posts, click **Report this post** to enter the ReportPage.
+If there are any problems of the posts, click **Report this post** to enter `ReportPage`.
 
 
-In this page, User could click the top button, **Post a Post** and go to the MakeAPost Page.
+In this page, user could click the top button, **Post a Post**, and go to `MakeAPost Page`.
 
 ### Figure 2.3 Comments Page
-![](ScreenShot1/MainForm(showingContent)/CommentsForm.png)
+![Picture of a Comments Form](ScreenShot/MainForm(showingContent)/CommentsForm.png)
 
-In this page,
-In the top left of the page, it shows this is the comments page of the chosen post or comment.
+In the top left of this page, it shows this is the comments page of the chosen post or comment.
 
 In the left panel of the page, it shows all the comments with their title in post/comment.
 
 Click one of the comment, the information of that comment would appear on the right.
 
-If user want to do more discussion, they could click **Comment this Post** button to go to **CommentPage**
+If the user wants to do more discussion, he/she could click **Comment this Post** button to go to `Make A Comment`.
 
-If there are any problem of the comment, click **Report this Comment** to enter the ReportPage.
+If there are any problems of the comment, click **Report this Comment** to enter `ReportPage`.
 
 
-In this page, User could click the top button, **Back to upper-level** and go to the MakeAPost Page.
+In this page, User could click the top button, **Back to upper-level** and go to `MakeAPost Page`.
 
 
 ### Figure 3.1 Register A Course
-![](ScreenShot1/RegisterForm/MakeACourse.png)
+![Picture of Making a Course form](ScreenShot/RegisterForm/MakeACourse.png)
 
-User enter all needed information and select the "Fall", "Winter", "Summer"
-from the Semester ComboBox. 
+User enter all needed information and select one of "Fall", "Winter", "Summer"
+from the Semester ComboBox.
 
-After filled all information, usr could click the **Register the Course** to register the Course
-and go back to CoursePage.
+After filling in all the correct information, the user could click the **Register the Course** to get enrolled in the Course
+and go back to `Course Page`.
 
-If user want to skip register the course, they also could go back to CoursePage by click **Back to the Course Page** 
+If the user wants to skip registering the course, he/she also could go back to `CoursePage` by clicking **Back to the Course Page**.
 
 
 ### Figure 3.2 Make A Post
-![](ScreenShot1/RegisterForm/MakeAPost.png)
+![Picture of Making a Post form](ScreenShot/RegisterForm/MakeAPost.png)
 
-User enter all needed information for a post. In the top label, it shows it is under which course in the top label
+In this page, the user needs to fill in all needed information for a post.
 
-After filled all information, usr could click the **Post the post** to register the Course
-and go back to CoursePage.
+In the top label, it shows the course that this post will belong to.
 
-User also could choose post as the username or anonymous by selecting the comboButtons.
+After filling in all the information, the user could click **Post the post**
+and go back to `Course Page`.
 
-If user want to skip Make the Post, they also could go back to PostPage by click **Back to the Course Page** 
+The user also could choose to post anonymously or not by selecting the comboButtons.
+
+If the user wants to skip making the post, he/she also could go back to `PostPage` by clicking **Back to the Course Page**.
 
 
 ### Figure 3.3 Make A Comment
-![](ScreenShot1/RegisterForm/MakeAComment.png)
+![Picture of making a comment form](ScreenShot/RegisterForm/MakeAComment.png)
 
-User enter all needed information for a comment. In the top label, it shows it is under which post/comment the top label
+In this page, the user needs to fill in all needed information for a comment.
 
-After filled all information, usr could click the **Make the comment** to make a commment
+In the top label, it shows it is under which post/comment.
+
+After filling in all the information, the user could click **Make the comment** to make a comment
 and go back to PostPage/CommentPage.
 
-User also could choose post as the username or anonymous by selecting the comboButtons.
+The user also could choose to post anonymously or not by selecting the comboButtons.
 
 
-If user want to skip make the comment, they also could go back to PostPage by click **Back to the Course Page** 
+If the user wants to skip making the comment, he/she also could go back to `PostPage` by clicking **Back to the Course Page**.
 
 
 
 ### Figure 3.4 Make A Report
-![](ScreenShot1/RegisterForm/MakeAReportUI.png)
+![Picture of making a report Form](ScreenShot/RegisterForm/MakeAReport.png)
 
-User enter all needed information for a report. In the top label, it shows it is under which course/post/comment the top label
+In this page, the user needs to enter all needed information for a report.
 
-After filled all information, usr could click the **Report** to send the report
-and go back to CoursePage.
+In the top label, it shows it is under which course/post/comment.
 
-User also could choose post as the username or anonymous by selecting the comboButtons.
+After filling in all information, the user could click **Report** to send the report
+and go back to `CoursePage`.
+
+The user also could choose to post anonymously or not by selecting the comboButtons.
 
 
-If user want to skip register the course, they also could go back to CoursePage by click **Back to the Course Page** 
+If the user wants to skip making the report, he/she also could go back to `CoursePage` by clicking **Back to the Course Page**.
 
 
 ### 4.1 Profile Page
-![](ScreenShot1/ProfilePage.png)
+![Picture of a profile page](ScreenShot/ProfilePage.png)
 
 This page shows all profile information related to the user.
 
-Moreover, it support edit the username by clicking
+Moreover, it supports editing the username by clicking
 **Edit**.
 
-Also, it could change the password by clicking **Change Password**.
+Also, it could change the password by clicking **Change Password**. Then it will go to `Change Password`.
 
-User can go back to the main page **Back to Main Page** by clicking button. 
-
-
-
+User can go back to the main page by clicking button **Back to Main Page**.
 
 
 ### Figure 4.2 Change Password
-![](ScreenShot1/ChangePassWordForm.png)
+![Picture of change a password form](ScreenShot/ChangePassWordForm.png)
 
-If user doesn't feel good about their password, they just typing the OldPassword
-and enter twice of their NewPassword. After click **Change Password**, if all
-password are valid. Then the Password would be reset and return to the profile page.
+If the user doesn't feel good about his/her password, he/she could just type his/her **OldPassword**
+and enter twice of his/her **NewPassword**. After clicking **Change Password**, if all
+passwords are valid, the password would be updated. Then it will return to `Profile Page`.
 
-If user doesn't want to change, they also can go back by clicking the **Back to Profile Page**
+If the user doesn't want to change, he/she also could go back by clicking **Back to Profile Page**.
 
