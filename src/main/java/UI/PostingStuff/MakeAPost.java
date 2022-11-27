@@ -187,14 +187,21 @@ public class MakeAPost extends javax.swing.JFrame {
         PostInfo.put("images", null);
         PostInfo.put("course", course);
         int result = postControllers.createPost(PostInfo);
-        if(result == -1){
-            GeneralPresenter.showEmptyEntryError();
+        switch (result){
+            case -1 -> {
+                GeneralPresenter.showEmptyEntryError();
+            }
+            case -2 -> {
+                GeneralPresenter.showDuplicationError("Post");
+            }
+            case 1 -> {
+                GeneralPresenter.showSuccessMessage("Post");
+                ArrayList<Post> postsUpdate = courseController.getAllPosts(course.getCode());
+                PostForm postForm = new PostForm(user, course, postsUpdate);
+                postForm.setVisible(true);
+                this.setVisible(false);
+            }
         }
-        GeneralPresenter.showSuccessMessage("Post");
-        ArrayList<Post> postsUpdate = courseController.getAllPosts(course.getCode());
-        PostForm postForm = new PostForm(user, course, postsUpdate);
-        postForm.setVisible(true);
-        this.setVisible(false);
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {

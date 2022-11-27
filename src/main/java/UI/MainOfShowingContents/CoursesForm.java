@@ -1,5 +1,6 @@
 package UI.MainOfShowingContents;
 
+import Presenter.GeneralPresenter;
 import UI.PostingStuff.MakeACourse;
 import UI.UserdataRelated.ProfilePage;
 import base.main;
@@ -281,11 +282,15 @@ public class CoursesForm extends JFrame {
     }
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
         int chosenCourseIndex = jList2.getSelectedIndex();
-        Course selectCourse = courses.get(chosenCourseIndex);
-        changePanel(selectCourse);
-        viewCourse = selectCourse;
+        if(chosenCourseIndex==-1){
+            GeneralPresenter.showEmptyEntryError();
+        }
+        else {
+            Course selectCourse = courses.get(chosenCourseIndex);
+            changePanel(selectCourse);
+            this.viewCourse = selectCourse;
+        }
     }
 
     private void changePanel(Course course){
@@ -299,11 +304,16 @@ public class CoursesForm extends JFrame {
 
     private void showPostsButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        if (this.viewCourse == null){
+            GeneralPresenter.showNotSelectError();
+        } else {
+        System.out.println(this.viewCourse);
         ArrayList<Post> posts = courseController.getAllPosts(viewCourse.getCode());
         PostForm postForm = new PostForm(user, viewCourse, posts);
         postForm.setVisible(true);
         this.setVisible(false);
 
+        }
     }
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:

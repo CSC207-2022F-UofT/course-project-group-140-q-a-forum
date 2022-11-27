@@ -20,6 +20,7 @@ public class CommentsForm extends javax.swing.JFrame {
     private final Course course;
 
     private final Post post;
+    private Comment viewComment = null;
     private final CourseController courseController = main.courseController;
     private final PostController postController = main.postController;
 
@@ -72,11 +73,19 @@ public class CommentsForm extends javax.swing.JFrame {
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Comments"));
         jList2.setModel(new javax.swing.AbstractListModel() {
-           // String[] strings =
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+           final int commentsSize  = postController.getAllCommentFromPost(course.getCode(), post.getTopic()).size();
+           String[] strings = getCommentArray(commentsSize);
+
+//            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+
         });
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+                                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                        jList2MouseClicked(evt);
+                                    }
+                                });
         jScrollPane1.setViewportView(jList2);
 
         gobackButton.setText("Back to Post");
@@ -201,6 +210,29 @@ public class CommentsForm extends javax.swing.JFrame {
 
     private void reportButton11reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        int chosenCommentIndex = jList2.getSelectedIndex();
+        Comment selectComment = post.getComments().get(chosenCommentIndex);
+        viewComment = selectComment;
+        changePanel(selectComment);
+
+    }
+
+    private void changePanel(Comment comment){
+       showingUserLabel6.setText(comment.getPostedBy().getUsername());
+       showContentLabel6.setText(comment.getTexts());
+
+    }
+
+    private String[] getCommentArray(int commentSize){
+        String[] comments = new String[commentSize];
+        for(int i = 0; i < commentSize; i ++){
+            comments[i] = "Comment " + String.valueOf(i);
+        }
+        return comments;
     }
 
     /**

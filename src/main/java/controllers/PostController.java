@@ -75,10 +75,7 @@ public class PostController {
      * @return If there is not such post, then return null; else, return an arraylist of comments.
      */
     public ArrayList<Comment> getAllCommentFromPost(String courseCode, String postTopic){
-        try{return postUseCaseInteractor.getAllCommentFromPost(courseCode, postTopic);}
-        catch(EmptyEntryException e){
-            return null;
-        }
+        return postUseCaseInteractor.getAllCommentFromPost(courseCode, postTopic);
     }
 
     /**
