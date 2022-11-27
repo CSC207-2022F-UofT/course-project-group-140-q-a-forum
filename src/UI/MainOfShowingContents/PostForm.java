@@ -1,5 +1,6 @@
 package UI.MainOfShowingContents;
 
+import Presenter.GeneralPresenter;
 import UI.PostingStuff.MakeAComment;
 import UI.PostingStuff.MakeAPost;
 import base.main;
@@ -234,10 +235,14 @@ public class PostForm extends javax.swing.JFrame {
 
     private void showcommentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        CommentsForm commentsForm = new CommentsForm(user, course, viewPost);
-        commentsForm.setVisible(true);
-        this.setVisible(false);
-
+        if(this.viewPost==null){
+            GeneralPresenter.showNotSelectError();
+        }
+        else {
+            CommentsForm commentsForm = new CommentsForm(user, course, viewPost);
+            commentsForm.setVisible(true);
+            this.setVisible(false);
+        }
     }
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,7 +276,7 @@ public class PostForm extends javax.swing.JFrame {
         int chosenPostIndex = jList2.getSelectedIndex();
         Post selectPost = posts.get(chosenPostIndex);
         changePanel(selectPost);
-        viewPost = selectPost;
+        this.viewPost = selectPost;
 
     }
     private void changePanel(Post post){

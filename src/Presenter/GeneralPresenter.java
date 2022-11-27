@@ -14,8 +14,13 @@ public class GeneralPresenter extends JOptionPane {
     }
 
     public static void showNotFoundError(String notFoundType){
-        JOptionPane.showMessageDialog(null, "This" + notFoundType +" is not found in the system, please check",
+        JOptionPane.showMessageDialog(null, "This " + notFoundType +" is not found in the system, please check",
                 notFoundType + " not find",ERROR_MESSAGE);
+    }
+
+    public static void showNotSelectError(){
+        JOptionPane.showMessageDialog(null, "Please select a course in the List or register a course first", "Empty Error",
+                ERROR_MESSAGE);
     }
 
     public static void showEmptyEntryError(){
