@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class RuntimeDataHandler implements DataHandlerInterface {
 
     private ArrayList<User> users = new ArrayList<>();
+
     private ArrayList<Course> courses = new ArrayList<>();
     private ArrayList<Report> reports = new ArrayList<>();
 
