@@ -37,6 +37,7 @@ public class Post {
         this.texts = texts;
         this.postedBy = postedBy;
         this.course = course;
+        this.comments = new ArrayList<Comment>();
     }
 
 
