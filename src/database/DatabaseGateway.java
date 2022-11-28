@@ -29,24 +29,23 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         return dataHandler.getData(3);
     }
 
-    @Override
 
     /**
      * Add a user<User> as a info <HashMap> into the dataHandler<HashMap>.
-     * @param user
+     * @param User user
      */
+    @Override
     public void addUser(User user) {
         HashMap<String, Object> info = new HashMap<>();
         info.put("key", 1);
         info.put("data", user);
         dataHandler.addData(info);
     }
-
-    @Override
     /**
      * Check if the user already existed in database by username<String>.
-     * @param userName
+     * @param String userName
      */
+    @Override
     public boolean userExists(String userName) {
         return dataHandler.lookupUserfromName(userName) == null;
     }
@@ -55,7 +54,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     /**
      * Search a user by userName<String>.
      * delete the user<User> as a info <HashMap> from the dataHandler<HashMap>.
-     * @param user
+     * @param String username
      */
     public void deleteUser(String username) {
         User user = dataHandler.lookupUserfromName(username);
@@ -64,52 +63,50 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         info.put("data", user);
         dataHandler.deleteData(info);
     }
-
-    @Override
     /**
      * Get user<User> information by user's email, and change user's username by newUsername<String>.
-     * @param user, newUsername
+     * @param User user, String newUsername
      */
+    @Override
     public void resetUsername(User user, String newUsername) {
         User user_entity = dataHandler.lookupUserfromName(user.getEmail());
         user_entity.setUsername(newUsername);
     }
-
-    @Override
     /**
      * Get user<User> information by user's email, and change user's password by newPassword<String>.
-     * @param user, newPassword
+     * @param String userName, String newPassword
      */
+    @Override
     public void resetPassword(String userName, String newPassword) {
         User user_entity = dataHandler.lookupUserfromName(userName);
         user_entity.setPassword(newPassword);
     }
-
-    @Override
     /**
      * Get course by  courseCode<String>.
-     * @param courseCode
+     * @param String courseCode
      */
+    @Override
     public Course getCourse(String courseCode) {
         return dataHandler.lookupCourse(courseCode);
     }
 
-    @Override
+
     /**
      * Get post by  postTopic<String>, return the courseM<Course>
-     * @param postTopic
+     * @param String courseCode, String postTopic
      */
+    @Override
     public Post getPost(String courseCode, String postTopic) {
         Course course = getCourse(courseCode);
         return course.lookupPostFromTopic(postTopic);
     }
 
-    @Override
     /**
      * Check if a post already existed in a course.
-     * @param courseCode, postTopic
-     * return bool
+     * @param String courseCode, String postTopic
      */
+    @Override
+
     public boolean postExists(String courseCode, String postTopic) {
         Course course = getCourse(courseCode);
         ArrayList<Post> posts = course.getPosts();
@@ -120,19 +117,18 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         }
         return false;
     }
-
-    @Override
     /**
      * Get user by  userName<String>, return the user<User>
-     * @param userName
+     * @param String userName
      */
+    @Override
     public User getUser(String userName) {return dataHandler.lookupUserfromName(userName);}
 
-    @Override
     /**
      * Add a course<Course> as a info <HashMap> into the dataHandler<course>.
-     * @param course
+     * @param Course course
      */
+    @Override
     public void addCourse(Course course) {
         HashMap<String, Object> info = new HashMap<>();
         info.put("key", 2);
@@ -140,12 +136,12 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         dataHandler.addData(info);
     }
 
-    @Override
     /**
      * Search a course by courseCode<String>.
      * delete the course as a info <HashMap> from the dataHandler<HashMap>.
-     * @param course
+     * @param String courseCode
      */
+    @Override
     public void deleteCourse(String courseCode) {
         Course course = dataHandler.lookupCourse(courseCode);
         HashMap<String, Object> info = new HashMap<>();
@@ -153,23 +149,21 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         info.put("data", course);
         dataHandler.addData(info);
     }
-
-    @Override
     /**
      * Check if a course already existed in database.
-     * @param courseCode
-     * return bool
+     * @param String courseCode
      */
+    @Override
     public boolean courseExists(String courseCode) {
         return dataHandler.lookupCourse(courseCode) != null;
     }
 
 
-    @Override
     /**
      * Add a report<Report> as a info <HashMap> into the dataHandler<course>.
-     * @param report
+     * @param Report report
      */
+    @Override
     public void addReport(Report report) {
         HashMap<String, Object> info = new HashMap<>();
         info.put("key", 3);
@@ -182,12 +176,12 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         return dataHandler.getAllReportFromType(type);
     }
 
-    @Override
     /**
      * Search a report by report<Report>.
      * delete the report as a info <HashMap> from the dataHandler<HashMap>.
-     * @param report
+     * @param Report report
      */
+    @Override
     public void removeReport(Report report) {
         HashMap<String, Object> info = new HashMap<>();
         info.put("key", 2);

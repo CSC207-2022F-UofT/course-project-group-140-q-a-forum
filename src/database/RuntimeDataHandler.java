@@ -164,6 +164,10 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /*
+     * build a map contains User, Course, Report
+     * return the map
+     */
     @Override
 
     public HashMap getData() {
@@ -182,6 +186,12 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         return map;
     }
 
+
+    /**
+     * get data by corrsponding key
+     * @param int key
+     * @return users when key == 1, course when key==2, reports when key==3
+     */
     @Override
     public ArrayList getData(int key) {
         /*
@@ -204,6 +214,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /**
+     * Find user by username
+     * @param String username
+     * @return if user is found return User user, otherwise null
+     */
     public User lookupUserfromName(String username) {
         if (name2User.containsKey(username)){
             return name2User.get(username);
@@ -213,6 +228,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /**
+     * Find email by email
+     * @param String email
+     * @return if email is found return String email, otherwise null
+     */
     public User lookupUserfromEmail(String email) {
         if (email2User.containsKey(email)){
             return email2User.get(email);
@@ -222,6 +242,12 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+
+    /**
+     * Find course by code
+     * @param String code
+     * @return if course is found return Course course, otherwise null
+     */
     public Course lookupCourse(String code) {
         if (code2Course.containsKey(code)) {
             return code2Course.get(code);
