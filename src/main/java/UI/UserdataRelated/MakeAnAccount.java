@@ -15,7 +15,7 @@ import java.util.HashMap;
  *
  * @author zhaoxiling
  */
-public class MakeAnAccount extends  JFrame {
+public class MakeAnAccount extends  javax.swing.JFrame {
     private final UserController userController = main.userController;
     /**
      * Creates new form RegisterForm
@@ -33,17 +33,17 @@ public class MakeAnAccount extends  JFrame {
     private void initComponents() {
         JButton backButton = new JButton();
         JPanel jPanel1 = new JPanel();
-        passWordText = new JTextField();
-        rePassText = new JTextField();
+        passWordText = new javax.swing.JTextField();
+        rePassText = new javax.swing.JTextField();
         JLabel jLabel1 = new JLabel();
-        emailText = new JTextField();
-        verificationText = new JTextField();
+        emailText = new javax.swing.JTextField();
+        verificationText = new javax.swing.JTextField();
         JLabel jLabel5 = new JLabel();
         JLabel jLabel2 = new JLabel();
         JLabel jLabel4 = new JLabel();
-        userNameText = new JTextField();
+        userNameText = new javax.swing.JTextField();
         JLabel jLabel3 = new JLabel();
-        showingSeding = new JLabel();
+        showingSeding = new javax.swing.JLabel();
         JLabel jLabel6 = new JLabel();
         JLabel jLabel7 = new JLabel();
         JLabel jLabel8 = new JLabel();
@@ -54,12 +54,12 @@ public class MakeAnAccount extends  JFrame {
         JLabel showVeriLabel = new JLabel();
 
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(BorderFactory.createTitledBorder("Set Up a Account"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Set Up a Account"));
 
         userNameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameTextActionPerformed(evt);
             }
         });
@@ -76,7 +76,7 @@ public class MakeAnAccount extends  JFrame {
 
         sendButton.setText("Send Verification");
         sendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendButtonActionPerformed(evt);
             }
         });
@@ -84,32 +84,32 @@ public class MakeAnAccount extends  JFrame {
 
         backButton.setText("Back to Login Page");
         backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
 
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerButtonActionPerformed(evt);
             }
         });
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                                 .addContainerGap()
                                                                 .addComponent(jLabel10)
-                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                                                 .addGap(136, 136, 136)
                                                                                 .addComponent(jLabel5))
@@ -125,46 +125,46 @@ public class MakeAnAccount extends  JFrame {
                                                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                                                 .addGap(168, 168, 168)
                                                                                 .addComponent(jLabel4)
-                                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                                 .addComponent(jLabel9)))
                                                                 .addGap(10, 10, 10)))
-                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addComponent(emailText, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(verificationText, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(emailText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(verificationText, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel6)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(userNameText, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(passWordText, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(passWordText, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel8)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(rePassText, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                .addComponent(rePassText, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(showingSeding, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(showingSeding, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(31, 31, 31)
                                                 .addComponent(sendButton))))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(265, 265, 265)
                                                 .addComponent(registerButton))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(74, 74, 74)
-                                                .addComponent(showVeriLabel, GroupLayout.PREFERRED_SIZE, 419, GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(showVeriLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel1)
                                                 .addGap(37, 37, 37)
@@ -175,55 +175,55 @@ public class MakeAnAccount extends  JFrame {
                                                 .addComponent(jLabel4))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(5, 5, 5)
-                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(userNameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel6))
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(passWordText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(passWordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel7))
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(rePassText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(rePassText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel8))
                                                 .addGap(18, 18, 18)
-                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(emailText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel9)
                                                         .addComponent(sendButton))))
                                 .addGap(9, 9, 9)
-                                .addComponent(showingSeding, GroupLayout.PREFERRED_SIZE, 12, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(showingSeding, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel5)
                                                 .addGap(74, 74, 74))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(showVeriLabel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(verificationText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(showVeriLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(verificationText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabel10))
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addComponent(registerButton)
                                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 611, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(backButton)
                                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(backButton)
                                 .addContainerGap(146, Short.MAX_VALUE))
         );
@@ -238,17 +238,17 @@ public class MakeAnAccount extends  JFrame {
 
     }
 
-    private void userNameTextActionPerformed(ActionEvent evt) {
+    private void userNameTextActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void sendButtonActionPerformed(ActionEvent evt) {
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         showingSeding.setText("Verification Send");
 
     }
 
-    private void registerButtonActionPerformed(ActionEvent evt) {
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         HashMap<String, String> RegInfo = new HashMap<>();
         String userName = userNameText.getText();
@@ -311,11 +311,11 @@ public class MakeAnAccount extends  JFrame {
     }
 
     // Variables declaration - do not modify
-    private JTextField emailText;
-    private JTextField passWordText;
-    private JTextField rePassText;
-    private JLabel showingSeding;
-    private JTextField userNameText;
-    private JTextField verificationText;
+    private javax.swing.JTextField emailText;
+    private javax.swing.JTextField passWordText;
+    private javax.swing.JTextField rePassText;
+    private javax.swing.JLabel showingSeding;
+    private javax.swing.JTextField userNameText;
+    private javax.swing.JTextField verificationText;
     // End of variables declaration
 }

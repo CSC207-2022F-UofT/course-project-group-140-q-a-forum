@@ -3,6 +3,7 @@ import entities.Course;
 import entities.Post;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public interface CourseDataInterface extends DataInterface {

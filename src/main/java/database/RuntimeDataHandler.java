@@ -4,11 +4,10 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class RuntimeDataHandler implements DataHandlerInterface {
-
     private ArrayList<User> users = new ArrayList<>();
-
     private ArrayList<Course> courses = new ArrayList<>();
     private ArrayList<Report> reports = new ArrayList<>();
 
@@ -24,6 +23,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of an
      *             arraylist}
      */
+
     @Override
     public void setData(HashMap<String, Object> info) {
         /*
@@ -79,6 +79,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of an
      *             single course/user/report type object}
      */
+
     @Override
     public void addData(HashMap<String, Object> info) {
         /*
@@ -163,6 +164,10 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /*
+     * build a map contains User, Course, Report
+     * return the map
+     */
     @Override
 
     public HashMap getData() {
@@ -181,6 +186,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         return map;
     }
 
+
+    /**
+     * @param key  get data by corrsponding key
+     * @return users when key == 1, course when key==2, reports when key==3
+     */
     @Override
     public ArrayList getData(int key) {
         /*
@@ -203,6 +213,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /**
+     * Find user by username
+     * @param username the name of user
+     * @return if user is found return User user, otherwise null
+     */
     public User lookupUserfromName(String username) {
         if (name2User.containsKey(username)){
             return name2User.get(username);
@@ -212,6 +227,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+    /**
+     * Find email by email
+     * @param email the email that needs to check
+     * @return if email is found return String email, otherwise null
+     */
     public User lookupUserfromEmail(String email) {
         if (email2User.containsKey(email)){
             return email2User.get(email);
@@ -221,6 +241,12 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         }
     }
 
+
+    /**
+     * Find course by code
+     * @param code  the code of course
+     * @return if course is found return Course course, otherwise null
+     */
     public Course lookupCourse(String code) {
         if (code2Course.containsKey(code)) {
             return code2Course.get(code);

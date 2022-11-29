@@ -2,7 +2,9 @@ package use_cases.DataBaseAccess;
 
 import entities.Comment;
 import entities.Post;
+import entities.PostInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface PostDataInterface extends DataInterface{

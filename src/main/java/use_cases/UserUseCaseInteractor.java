@@ -1,9 +1,9 @@
 package use_cases;
 
 import entities.User;
-import use_cases.DataBaseAccess.UserDataInterface;
 import exceptions.*;
-import java.util.Map;
+import use_cases.DataBaseAccess.UserDataInterface;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
@@ -21,6 +21,7 @@ public class UserUseCaseInteractor {
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
+     * @return if successfully registered this student
      */
     public void createUser(Map<String, String> user) throws RuntimeException {
 
@@ -65,30 +66,16 @@ public class UserUseCaseInteractor {
 
     /**
      * This method check the password user entered.
-     * The password must contain at least an upper and a lower case letter, a digit, and its length is greater than 8
-     * return true, otherwise, return false.
-     * @param password the password.
-     * @return true when the password is strong enough, otherwise, return false.
+     * If the password meets the requirement, return true.
+     * Otherwise, returns false.
+     *
+     * @param password information user provided.
+     * @return if the password includes numbers, letters, and at least one upper letter.
      */
     public boolean passwordCheck(String password) {
-        boolean lowerCase = false;
-        boolean upperCase = false;
-        boolean digit = false;
-        int n = password.length();
 
-        for (int i = 0; i < n; i++) {
-            if (Character.isUpperCase(password.charAt(i))){
-                upperCase = true;
-            }
-            if (Character.isLowerCase(password.charAt(i))){
-                lowerCase = true;
-            }
-            if (Character.isDigit(password.charAt(i))){
-                digit = true;
-            }
-        }
-
-        return password.length() > 8 && lowerCase && upperCase && digit;
+        // Check if the length of the password is greater than 8.
+        return password.length() > 8;
     }
 
 
@@ -194,7 +181,6 @@ public class UserUseCaseInteractor {
         userDataInterface.resetPassword(user.getUsername(), newPassword);
         return true;
     }
-
 
     /**
      * This removes a user from the current Database.

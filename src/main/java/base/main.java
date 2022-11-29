@@ -1,12 +1,17 @@
 package base;
 
+import UI.MainOfShowingContents.CoursesForm;
 import controllers.CourseController;
 import controllers.PostController;
 import controllers.UserController;
 import database.DatabaseGateway;
+import entities.Course;
+import entities.User;
 import use_cases.CourseUseCaseInteractor;
 import use_cases.PostUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
+
+import java.util.ArrayList;
 
 public class main {
     static DatabaseGateway gateway = new DatabaseGateway();
@@ -19,5 +24,12 @@ public class main {
 
     public static PostController postController = new PostController(postInteractor);
     public static UserController userController = new UserController(userInteractor);
+
+    public static void main(String[] args) {
+        User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose", " ");
+        ArrayList<Course> courses = courseController.getAllCourses();
+        CoursesForm coursesForm =new CoursesForm(user, courses);
+        coursesForm.setVisible(true);
+    }
 
 }

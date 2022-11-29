@@ -1,10 +1,10 @@
 package UI.UserdataRelated;
-
-import Presenter.LoginPresenter;
 import UI.MainOfShowingContents.CoursesForm;
 import base.main;
 import controllers.CourseController;
 import controllers.UserController;
+
+import Presenter.LoginPresenter;
 import entities.Course;
 import entities.User;
 
@@ -139,7 +139,6 @@ public class LoginForm extends javax.swing.JFrame {
         String username = usernameText.getText();
         String password = new String(passText.getPassword());
         int result = userController.loginUser(username, password);
-
         if(result == 1){
             this.setVisible(false);
             User user = userController.getUser(username);

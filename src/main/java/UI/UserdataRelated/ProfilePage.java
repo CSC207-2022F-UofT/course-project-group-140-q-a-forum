@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author zhaoxiling
  */
-public class ProfilePage extends JFrame {
+public class ProfilePage extends javax.swing.JFrame {
     private final User user;
     private final CourseController courseController =main.courseController;
 
@@ -37,23 +37,23 @@ public class ProfilePage extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        jPanel1 = new JPanel();
-        JLabel jLabel6 = new JLabel();
-        JLabel jLabel7 = new JLabel();
-        JLabel jLabel8 = new JLabel();
-        JLabel jLabel9 = new JLabel();
-        changeButton = new JButton();
-        doneButton = new JButton();
-        userLabel = new JLabel();
-        passLabel = new JLabel();
-        emailLabel = new JLabel();
-        numberPosts = new JLabel();
-        editUserButton = new JButton();
-        backButton = new JButton();
+        jPanel1 = new javax.swing.JPanel();
+        javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel8 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel9 = new javax.swing.JLabel();
+        changeButton = new javax.swing.JButton();
+        doneButton = new javax.swing.JButton();
+        userLabel = new javax.swing.JLabel();
+        passLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        numberPosts = new javax.swing.JLabel();
+        editUserButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(BorderFactory.createTitledBorder("Profile Page"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Profile Page"));
 
         jLabel6.setText("UserName:");
 
@@ -78,16 +78,16 @@ public class ProfilePage extends JFrame {
         });
 
         userLabel.setText(user.getUsername());
-        userLabel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        userLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         passLabel.setText(user.getPassword());
-        passLabel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        passLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         emailLabel.setText(user.getEmail());
-        emailLabel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        emailLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         numberPosts.setText("int of total posts");
-        numberPosts.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        numberPosts.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         editUserButton.setText("Edit");
         editUserButton.addActionListener(new java.awt.event.ActionListener() {
@@ -103,56 +103,56 @@ public class ProfilePage extends JFrame {
             }
         });
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(180, 180, 180)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel9, GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel8, GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel7, GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel6, GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(passLabel, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(passLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(changeButton))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(userLabel, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(editUserButton))
-                                        .addComponent(numberPosts, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(emailLabel, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(numberPosts, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(308, 308, 308))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(135, 135, 135)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(backButton)
                                         .addComponent(doneButton))
                                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel6)
                                         .addComponent(userLabel)
                                         .addComponent(editUserButton))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel7)
                                         .addComponent(passLabel)
                                         .addComponent(changeButton))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel8)
                                         .addComponent(emailLabel))
                                 .addGap(22, 22, 22)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel9)
                                         .addComponent(numberPosts))
                                 .addGap(24, 24, 24)
@@ -162,20 +162,20 @@ public class ProfilePage extends JFrame {
                                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 783, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
-                                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(129, Short.MAX_VALUE))
         );
 
@@ -212,9 +212,9 @@ public class ProfilePage extends JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -233,14 +233,14 @@ public class ProfilePage extends JFrame {
     }
 
     // Variables declaration - do not modify
-    private JButton backButton;
-    private JButton changeButton;
-    private JButton doneButton;
-    private JButton editUserButton;
-    private JLabel emailLabel;
-    private JPanel jPanel1;
-    private JLabel numberPosts;
-    private JLabel passLabel;
-    private JLabel userLabel;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton changeButton;
+    private javax.swing.JButton doneButton;
+    private javax.swing.JButton editUserButton;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel numberPosts;
+    private javax.swing.JLabel passLabel;
+    private javax.swing.JLabel userLabel;
     // End of variables declaration
 }

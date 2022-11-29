@@ -3,6 +3,7 @@ package use_cases.DataBaseAccess;
 import entities.User;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface UserDataInterface extends DataInterface{
 

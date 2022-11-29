@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Post {
@@ -36,6 +37,7 @@ public class Post {
         this.texts = texts;
         this.postedBy = postedBy;
         this.course = course;
+        this.comments = new ArrayList<Comment>();
     }
 
 

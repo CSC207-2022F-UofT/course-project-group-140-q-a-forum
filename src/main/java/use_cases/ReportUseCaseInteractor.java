@@ -2,6 +2,7 @@ package use_cases;
 
 import entities.Report;
 import use_cases.DataBaseAccess.ReportDataInterface;
+import use_cases.DataBaseAccess.UserDataInterface;
 
 public class ReportUseCaseInteractor {
     final ReportDataInterface reportDataInterface;

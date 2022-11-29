@@ -1,11 +1,12 @@
 package use_cases;
 import entities.Comment;
+import exceptions.*;
 import entities.Course;
 import entities.Post;
 import entities.User;
-import exceptions.*;
 import use_cases.DataBaseAccess.CourseDataInterface;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
