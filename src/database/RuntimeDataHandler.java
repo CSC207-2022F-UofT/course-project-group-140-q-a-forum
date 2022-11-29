@@ -188,8 +188,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
 
     /**
-     * get data by corrsponding key
-     * @param int key
+     * @param key  get data by corrsponding key
      * @return users when key == 1, course when key==2, reports when key==3
      */
     @Override
@@ -216,7 +215,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
     /**
      * Find user by username
-     * @param String username
+     * @param username the name of user
      * @return if user is found return User user, otherwise null
      */
     public User lookupUserfromName(String username) {
@@ -230,7 +229,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
     /**
      * Find email by email
-     * @param String email
+     * @param email the email that needs to check
      * @return if email is found return String email, otherwise null
      */
     public User lookupUserfromEmail(String email) {
@@ -245,7 +244,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
     /**
      * Find course by code
-     * @param String code
+     * @param code  the code of course
      * @return if course is found return Course course, otherwise null
      */
     public Course lookupCourse(String code) {
