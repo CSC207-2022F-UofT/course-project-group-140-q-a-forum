@@ -173,8 +173,8 @@ public class CourseUseCaseInteractor {
     public ArrayList<String> getAllCoursesName(){
         ArrayList<Course> courses = courseDataInterface.getAllCourses();
         ArrayList<String> coursesName = new ArrayList<String>();
-        for (Course cours : courses) {
-            coursesName.add(cours.getName());
+        for (Course course : courses) {
+            coursesName.add(course.getName());
         }
 
         return coursesName;
@@ -202,7 +202,6 @@ public class CourseUseCaseInteractor {
             postName.add(post.getTopic());
         }
         return postName;
-        //return course.getPostTitles();
     }
 }
 
