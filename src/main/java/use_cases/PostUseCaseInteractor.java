@@ -49,7 +49,6 @@ public class PostUseCaseInteractor {
      * @return boo
      */
     public void editPost(HashMap<String, Object> post_info){
-        //TODO: rememeber to pass THE ORIGINAL POST INFORMATION (i.e, orgTitle)!!!1
         String orgTitle = (String) post_info.get("orgTitle");
         Course course = (Course) post_info.get("course");
         if (checkTopicExist(course, orgTitle)){

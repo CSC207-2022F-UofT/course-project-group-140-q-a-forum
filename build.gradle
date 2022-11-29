@@ -5,16 +5,16 @@ plugins {
 
 repositories {
     mavenCentral()
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
-}
+}//
+//java {
+//    toolchain {
+//        languageVersion.set(JavaLanguageVersion.of(17))
+//    }
+//}
 
 dependencies {
     implementation 'junit:junit:4.13.1'
+    implementation 'org.testng:testng:7.1.0'
     testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
 
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
@@ -22,6 +22,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     testImplementation 'org.testng:testng:7.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }
 
 test {

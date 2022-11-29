@@ -6,8 +6,6 @@ import java.util.ArrayList;
 public class Post {
     private String topic;
     private String texts;
-
-//    private ArrayList<Image> images;
     private ArrayList<Comment> comments;
 
     private User postedBy;
@@ -27,12 +25,6 @@ public class Post {
      * @param course The course that this post belongs to.
      */
     public Post(String topic, String texts, User postedBy, Course course){
-        /**
-         * Create a comment, with text, topic, and without images.
-         * The comment can be commented (nest) as well
-         * The comment will only contain the content and the
-         * information of the use who posted it
-         */
         this.topic = topic;
         this.texts = texts;
         this.postedBy = postedBy;

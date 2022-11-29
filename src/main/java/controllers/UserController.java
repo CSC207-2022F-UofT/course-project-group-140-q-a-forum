@@ -1,10 +1,7 @@
 package controllers;
 
-import Presenter.RegisterPresenter;
 import entities.User;
 import exceptions.*;
-import use_cases.LoginUseCaseInteractor;
-import use_cases.UserUseCase;
 import use_cases.UserUseCaseInteractor;
 import java.util.*;
 

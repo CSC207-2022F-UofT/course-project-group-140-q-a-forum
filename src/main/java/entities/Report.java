@@ -20,7 +20,6 @@ public class Report {
      * @param content
      */
     public Report(String username, int reportType, Object content){
-
         this.user = username;
         this.reportType = reportType;
         this.content = content;

@@ -5,7 +5,6 @@ import entities.User;
 import exceptions.DuplicationException;
 import exceptions.EmptyEntryException;
 import exceptions.EntryNotFoundException;
-import use_cases.LoginUseCaseInteractor;
 import use_cases.PostUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 
