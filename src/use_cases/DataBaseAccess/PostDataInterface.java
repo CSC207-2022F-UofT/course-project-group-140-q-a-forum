@@ -5,11 +5,12 @@ import entities.Post;
 import entities.PostInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface PostDataInterface extends DataInterface{
     void addPost(Post post);
 
-    void editPost(Post post, PostInfo info);
+    void editPost(Post post, HashMap<String, Object> post_info);
 
     void removePost(Post post);
 

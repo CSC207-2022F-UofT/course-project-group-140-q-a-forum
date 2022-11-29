@@ -98,4 +98,13 @@ public class Post {
         this.course = course;
     }
 
+
+    public void modifyPost(String topic, String texts, ArrayList<Image> images){
+        this.topic = topic;
+        this.texts = texts;
+        this.images = images;
+        this.postedBy = postedBy;
+    }
+
+
 }

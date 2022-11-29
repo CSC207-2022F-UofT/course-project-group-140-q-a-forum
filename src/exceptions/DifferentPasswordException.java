@@ -1,8 +1,8 @@
 package exceptions;
 
 public class DifferentPasswordException extends Exception{
-    public DifferentPasswordException() {
-        super("Different password from the first entry!");
+    public DifferentPasswordException(String type) {
+        super("Different" + type +"from the first entry!");
     }
 }
 

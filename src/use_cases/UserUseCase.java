@@ -1,5 +1,7 @@
 package use_cases;
 
+import entities.User;
+import exceptions.EntryNotFoundException;
 import use_cases.DataBaseAccess.UserDataInterface;
 
 public class UserUseCase {

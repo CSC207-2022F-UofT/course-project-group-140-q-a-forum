@@ -19,7 +19,7 @@ public class ReportUseCaseInteractor {
      * @return boo
      */
     public void createReport(String username, int type, Object content){
-        //TODO: complete this method
+
     }
 
 

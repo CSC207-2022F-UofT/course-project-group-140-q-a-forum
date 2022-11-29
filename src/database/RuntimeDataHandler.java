@@ -98,12 +98,14 @@ public class RuntimeDataHandler implements DataHandlerInterface {
                 String email = user.getEmail();
                 name2User.put(username, user);
                 email2User.put(email, user);
+                break;
             case 2:
                 Course course = (Course) value;
                 courses.add(course);
                 // Put into a dictionary for faster search and access
                 String code = course.getCode();
                 code2Course.put(code, course);
+                break;
             case 3:
                 Report report = (Report) value;
                 reports.add(report);
@@ -115,6 +117,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
                 else{
                     type2Report.get(reportType).add(report);
                 }
+                break;
             default:
                 throw new RuntimeException();
         }
@@ -198,7 +201,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
     }
 
     public User lookupUserfromName(String username) {
-        if (email2User.containsKey(username)){
+        if (name2User.containsKey(username)){
             return name2User.get(username);
          }
         else{

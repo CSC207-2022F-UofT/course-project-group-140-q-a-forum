@@ -16,15 +16,11 @@ public class main {
 
     static  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
     static CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
-    static PostUseCaseInteractor postInteractor = new PostUseCaseInteractor((gateway));
+    static PostUseCaseInteractor postInteractor = new PostUseCaseInteractor();
 
-    CourseController courseController = new CourseController(courseInteractor);
-    PostControllers postControllers = new PostControllers(postInteractor);
+    public static CourseController courseController = new CourseController(courseInteractor);
+
+    public static PostControllers postControllers = new PostControllers(postInteractor);
     public static UserController userController = new UserController(userInteractor);
-    public static void main(String[] args) {
 
-
-
-
-    }
 }
