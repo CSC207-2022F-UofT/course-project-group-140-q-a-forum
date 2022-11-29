@@ -37,10 +37,6 @@ public class CommentsForm extends javax.swing.JFrame {
         initComponents();
     }
 
-//    public CommentsForm(User user, Course course, Post post, Comment comment){
-//
-//    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -361,6 +357,3 @@ public class CommentsForm extends javax.swing.JFrame {
     private javax.swing.JLabel showingUserLabel9;
     // End of variables declaration
 }
-
-
-
