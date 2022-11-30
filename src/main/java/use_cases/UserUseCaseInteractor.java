@@ -78,7 +78,7 @@ public class UserUseCaseInteractor {
      * If the password meets the requirement, return true.
      * Otherwise, returns false.
      *
-     * @param password information user provided.
+     * @param password password user provided.
      * @return if the password includes numbers, letters, and at least one upper letter.
      */
     public boolean passwordCheck(String password) {
@@ -320,7 +320,7 @@ public class UserUseCaseInteractor {
      * It first checks if the user exists, and removes it if so;
      * otherwise, it returns false.
      *
-     * @param userName Relevant information of this user.
+     * @param userName username of the user to be removed.
      * @return if successfully removed this user.
      */
     public boolean removeAUser(String userName) {
@@ -340,8 +340,8 @@ public class UserUseCaseInteractor {
      * It first checks if the user exists, and removes it if so;
      * otherwise, it returns false.
      *
-     * @param userName username the user provide.
-     * @param password password the user provide.
+     * @param userName username provided by the login user.
+     * @param password password provided by the login user.
      * @return if successfully login this user.
      */
     public boolean checkLogin(String userName, String password) throws RuntimeException {

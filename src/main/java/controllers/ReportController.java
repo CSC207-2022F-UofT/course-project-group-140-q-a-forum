@@ -44,7 +44,7 @@ public class ReportController {
      *                          needed to remove a user. The keys must be
      *                          "Username", "Type", "Content"
      * @return An integer indicating if successfully registered.
-     * 0: Successfully removed.
+     * 0: Successfully removed the report.
      */
 
     public int removeAReport(Map<String, Object> reportInformation) {
