@@ -104,13 +104,13 @@ public class CourseUseCaseInteractor {
             }
         }
 
-        if (found){
-            boolean success = course.modifyCourseContent(part, newPart);
-            if (!success){
-                throw new CourseAttributeNotModifiableException(part);
-            }
+        if (!found){
+            throw new WrongInforException("course attribute");
         }
+        else course.modifyCourseContent(part, newPart);
+
     }
+
 
     /**
      * Add an instructor to a given course. Returns true if successfully added, returns false otherwise.

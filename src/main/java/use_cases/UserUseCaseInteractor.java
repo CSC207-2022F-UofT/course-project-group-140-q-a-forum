@@ -184,7 +184,8 @@ public class UserUseCaseInteractor {
 
 
         // 3. Create a email.
-        MimeMessage message = createMimeMessage(session, "3232085039@qq.com", email, "Verify", messagetosend);
+        MimeMessage message = createMimeMessage(session, "3232085039@qq.com", email, "Verify",
+                messagetosend);
 
         // 4. Get transport  object from Session
         Transport transport = session.getTransport();
@@ -219,7 +220,8 @@ public class UserUseCaseInteractor {
         message.setFrom(new InternetAddress(sendMail, "QAForum", "UTF-8"));
 
         // 3. Set To: header field of the header.
-        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "XX用户", "UTF-8"));
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "XX User",
+                "UTF-8"));
 
         // 4. Set Subject to send.
         message.setSubject(subject, "UTF-8");
@@ -251,7 +253,7 @@ public class UserUseCaseInteractor {
      * Find the user with UserName
      *
      * @param userName it is a string that stores the username
-     * @return if there is an user with the input username in the database, then
+     * @return if there is a user with the input username in the database, then
      * return the user. Otherwise, throw NotFoundException.
      */
     public User getUser(String userName) {
@@ -293,15 +295,15 @@ public class UserUseCaseInteractor {
      * @return if successfully change the password.
      */
     public void resetPassword(User user, String oldPassword, String newPassword, String reenteredPassword) throws
-            RuntimeException{
-        if (oldPassword.equals("")||newPassword.equals("")||reenteredPassword.equals("")){
+            RuntimeException {
+        if (oldPassword.equals("") || newPassword.equals("") || reenteredPassword.equals("")) {
             throw new EmptyEntryException("password");
         }
         // If the given new password does not meet the requirement, return false.
         if (!passwordCheck(newPassword)) {
             throw new InvalidFormatException("password");
             // Check if the two new password matches
-        } else if (!duoPasswordCheck(newPassword,reenteredPassword)) {
+        } else if (!duoPasswordCheck(newPassword, reenteredPassword)) {
             throw new WrongInforException("re-entered password");
             // Check if the old password matches the password in database.
         } else if (!user.getPassword().equals(oldPassword)) {
@@ -332,6 +334,7 @@ public class UserUseCaseInteractor {
         return true;
 
     }
+
     /**
      * This checks the login status of a user.
      * It first checks if the user exists, and removes it if so;
@@ -341,7 +344,7 @@ public class UserUseCaseInteractor {
      * @param password password the user provide.
      * @return if successfully login this user.
      */
-    public boolean checkLogin(String userName, String password) throws RuntimeException{
+    public boolean checkLogin(String userName, String password) throws RuntimeException {
         User user = userDataInterface.getUser(userName);
         if (user == null) {
             throw new NotFoundException("User");

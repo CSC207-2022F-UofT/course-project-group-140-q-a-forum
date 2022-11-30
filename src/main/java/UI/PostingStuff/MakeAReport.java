@@ -4,6 +4,8 @@
  */
 package UI.PostingStuff;
 
+import java.util.HashMap;
+
 /**
  *
  * @author zhaoxiling
@@ -165,6 +167,8 @@ public class MakeAReport extends javax.swing.JFrame {
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        HashMap<String, String> ReportInfo = new HashMap<>();
+
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
