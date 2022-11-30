@@ -104,11 +104,12 @@ public class CourseUseCaseInteractor {
             }
         }
 
-        if (!found){
-            throw new WrongInforException("course attribute");
+        if (found) {
+            boolean success = course.modifyCourseContent(part, newPart);
+            if (!success) {
+                throw new WrongInforException(part);
+            }
         }
-        else course.modifyCourseContent(part, newPart);
-
     }
 
 
