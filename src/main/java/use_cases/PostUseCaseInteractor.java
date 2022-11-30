@@ -55,7 +55,7 @@ public class PostUseCaseInteractor {
             course.lookupPostFromTopic(orgTitle).modifyPost((String) post_info.get("title"), (String) post_info.get("text"));
         }
         else {
-            throw new EntryNotFoundException("Post");
+            throw new NotFoundException("Post");
         }
 
     }
@@ -67,7 +67,7 @@ public class PostUseCaseInteractor {
             course.removePost(course.lookupPostFromTopic(title));
         }
         else{
-            throw new EntryNotFoundException("Post");
+            throw new NotFoundException("Post");
         }
     }
 

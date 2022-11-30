@@ -79,10 +79,10 @@ public class CourseController {
         }
 
         try{courseInteractor.modifyCourseContent(courseCode, part, changeTo);}
-        catch(CourseNotFoundException e){
+        catch(NotFoundException e){
             //Call presenter
             return -1;
-        }catch(CourseAttributeNotModifiableException e){
+        }catch(WrongInforException e){
             //Call presenter
             return -2;
         }
@@ -123,7 +123,7 @@ public class CourseController {
             return 0;
         }
         try{courseInteractor.removeInstructor(courseCode, instructor);}
-        catch(CourseInfoNotFoundException e){
+        catch(NotFoundException e){
             //Call presenter
             return -1;
         }
@@ -148,7 +148,7 @@ public class CourseController {
         }
 
         try{courseInteractor.removePost(courseCode, post);}
-        catch(CourseInfoNotFoundException e){
+        catch(NotFoundException e){
             return -1;
         }
         return 1;
@@ -170,7 +170,7 @@ public class CourseController {
      */
     public ArrayList<Post> getAllPosts(String courseCode){
         try{return courseInteractor.getAllPosts(courseCode);}
-        catch(CourseNotFoundException e){
+        catch(NotFoundException e){
             //call presenter
             return new ArrayList<>();
         }
@@ -179,7 +179,7 @@ public class CourseController {
 
 
     public ArrayList<String> getAllCoursesName(){
-       return courseInteractor.getAllCoursesName();
+        return courseInteractor.getAllCoursesName();
     }
 
     public ArrayList<String> getAllPostTitles(String courseCode){

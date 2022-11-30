@@ -75,7 +75,7 @@ public class CourseUseCaseInteractor {
     public void removeACourse(String courseCode){
         // if the given course does not exist in the database, return false.
         if (!courseDataInterface.courseExists(courseCode)){
-            throw new CourseNotFoundException(courseCode);
+            throw new NotFoundException("The course "+courseCode);
         }
 
         courseDataInterface.deleteCourse(courseCode);
@@ -90,7 +90,7 @@ public class CourseUseCaseInteractor {
     public void modifyCourseContent(String courseCode, String part, String newPart){
         // if the given course does not exist in the database, return false.
         if (!courseDataInterface.courseExists(courseCode)){
-            throw new CourseNotFoundException(courseCode);
+            throw new NotFoundException("The course "+courseCode);
         }
 
         Course course = courseDataInterface.getCourse(courseCode);
@@ -132,7 +132,7 @@ public class CourseUseCaseInteractor {
     public void removeInstructor(String courseCode, String instructor){
         Course course = courseDataInterface.getCourse(courseCode);
         if (course.removeInstructor(instructor)){
-            throw new CourseInfoNotFoundException("instructor", course.getCode());
+            throw new NotFoundException("Instructor in " + course.getCode());
         }
     }
 
@@ -158,7 +158,7 @@ public class CourseUseCaseInteractor {
         Course course = courseDataInterface.getCourse(courseCode);
 
         if (!course.removePost(post)){
-            throw new CourseInfoNotFoundException("Post", course.getCode());
+            throw new NotFoundException("Post");
         }
     }
 
@@ -183,7 +183,7 @@ public class CourseUseCaseInteractor {
 
     public ArrayList<Post> getAllPosts(String courseCode){
         if (!courseDataInterface.courseExists(courseCode)){
-            throw new CourseNotFoundException(courseCode);
+            throw new NotFoundException("The course "+ courseCode);
         }
 
         Course course = courseDataInterface.getCourse(courseCode);
@@ -192,7 +192,7 @@ public class CourseUseCaseInteractor {
 
     public ArrayList<String> getAllPostTitles(String courseCode){
         if (!courseDataInterface.courseExists(courseCode)){
-            throw new CourseNotFoundException(courseCode);
+            throw new NotFoundException("The course "+courseCode);
         }
 
         Course course = courseDataInterface.getCourse(courseCode);

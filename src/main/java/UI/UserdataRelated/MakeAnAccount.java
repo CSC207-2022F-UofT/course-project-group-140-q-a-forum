@@ -280,14 +280,15 @@ public class MakeAnAccount extends  javax.swing.JFrame {
                 passWordText.setFocusable(true);
             }
             case -3 -> {
-                RegisterPresenter.showWrongRePassError();
-                rePassText.setText("");
-                rePassText.setFocusable(true);
-            }
-            case -4 -> {
                 RegisterPresenter.showNonValidEmailError();
                 emailText.setText("");
                 emailText.setFocusable(true);
+
+            }
+            case -4 -> {
+                RegisterPresenter.showWrongRePassError();
+                rePassText.setText("");
+                rePassText.setFocusable(true);
             }
             case -5 -> {
                 RegisterPresenter.showVerificationError();
