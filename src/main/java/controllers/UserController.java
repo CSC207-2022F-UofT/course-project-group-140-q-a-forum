@@ -34,21 +34,24 @@ public class UserController {
 
             return -1;
         } catch (InvalidFormatException e) {
-            String msg = e.getMessage();
-            if (msg.equals("password")){return -2;}
-            return -3;
+            String msg = e.getMessage();// Get the error message.
+            if (msg.equals("The password is not formatted correctly.")) {
+                return -2;
+            }
+            return -3;// Another situation catches InvalidFormatException is the error email format.
 
 
         } catch (WrongInforException e) {
-            String msg = e.getMessage();
-            if (msg.equals("re-entered password")){return -4;}
-            return -5;
+            String msg = e.getMessage();// get the error message.
+            if (msg.equals("Wrong re-entered password !")) {
+                return -4;
+            }
+            return -5;// Another situation catches WrongInforException is the wrong verification number.
         }
 
 
-        return 1;
+        return 1;// Register succeed.
     }
-
 
 
     /**

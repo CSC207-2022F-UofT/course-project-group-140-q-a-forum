@@ -61,13 +61,11 @@ public class UserUseCaseInteractor {
 
         // Register a new user.
         if (user.get("isAdmin") != null) {
-            User newUser = new User(user.get("Username"), user.get("Password"),
-                    user.get("Email"), "");
+            User newUser = new User(user.get("Username"), user.get("Password"), user.get("Email"), "");
             userDataInterface.addUser(newUser);
         } else {
             // Register a new user.
-            User newUser = new User(user.get("Username"), user.get("Password"),
-                    user.get("Email"));
+            User newUser = new User(user.get("Username"), user.get("Password"), user.get("Email"));
             userDataInterface.addUser(newUser);
         }
     }
@@ -88,7 +86,7 @@ public class UserUseCaseInteractor {
             return false;
         } else {
             char c;
-            int count = 1;
+            int countNum = 0;
             for (int i = 0; i < password.length() - 1; i++) {
                 c = password.charAt(i);
 
@@ -97,20 +95,17 @@ public class UserUseCaseInteractor {
                     return false;
 
                 } else if (Character.isDigit(c)) {
-                    count++; //Get the number of numbers in password
-
-                    //Check if the password has at least 2 numbers
-                    if (count < 2) {
-                        return false;
-
-                        // Check if the password are all numbers.
-                    } else if (count == password.length()) {
-                        return false;
-                    }
+                    countNum++;
                 }
-            }
+            }//Get the number of numbers in password
+
+            //Check if the password has at least 2 numbers
+            if (countNum < 2) {
+                return false;
+
+                // Check if the password are all numbers.
+            } else return countNum != password.length();
         }
-        return true;
 
     }
 
@@ -136,14 +131,10 @@ public class UserUseCaseInteractor {
 
     private boolean emailCheck(String email) {
         // Reverse the email.
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z" + "A-Z]{2,7}$";
 
         Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
-            return false;
+        if (email == null) return false;
         return pat.matcher(email).matches();
     }
 
@@ -184,8 +175,7 @@ public class UserUseCaseInteractor {
 
 
         // 3. Create a email.
-        MimeMessage message = createMimeMessage(session, "3232085039@qq.com", email, "Verify",
-                messagetosend);
+        MimeMessage message = createMimeMessage(session, "3232085039@qq.com", email, "Verify", messagetosend);
 
         // 4. Get transport  object from Session
         Transport transport = session.getTransport();
@@ -211,8 +201,7 @@ public class UserUseCaseInteractor {
      * @return message to send.
      * @throws Exception
      */
-    public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail, String subject,
-                                                String content) throws Exception {
+    public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail, String subject, String content) throws Exception {
         // 1.Create a default MimeMessage object.
         MimeMessage message = new MimeMessage(session);
 
@@ -220,8 +209,7 @@ public class UserUseCaseInteractor {
         message.setFrom(new InternetAddress(sendMail, "QAForum", "UTF-8"));
 
         // 3. Set To: header field of the header.
-        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "XX User",
-                "UTF-8"));
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "XX User", "UTF-8"));
 
         // 4. Set Subject to send.
         message.setSubject(subject, "UTF-8");
@@ -294,8 +282,7 @@ public class UserUseCaseInteractor {
      * @param reenteredPassword reentered new password.
      * @return if successfully change the password.
      */
-    public void resetPassword(User user, String oldPassword, String newPassword, String reenteredPassword) throws
-            RuntimeException {
+    public void resetPassword(User user, String oldPassword, String newPassword, String reenteredPassword) throws RuntimeException {
         if (oldPassword.equals("") || newPassword.equals("") || reenteredPassword.equals("")) {
             throw new EmptyEntryException("password");
         }
