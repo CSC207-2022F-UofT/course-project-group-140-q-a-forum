@@ -22,8 +22,10 @@ public class UserController {
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
      * @return if successfully registered this student return 0,
      * if EmptyEntryException return -1,
-     * if InvalidFormatException return -2 or -3,
-     * if WrongInforException return -4 or -5.
+     * if InvalidFormatException thrown by invalid password format return -2,
+     * if InvalidFormatException thrown by invalid email format return -3,
+     * if WrongInforException thrown by reentered password does not match return -4,
+     * if WrongInforException thrown by wrong verification number return -5.
      */
     public int registerUser(Map<String, String> user) {
 
