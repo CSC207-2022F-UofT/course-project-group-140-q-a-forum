@@ -4,6 +4,7 @@ import entities.User;
 import exceptions.*;
 import use_cases.UserUseCaseInteractor;
 
+import javax.mail.MessagingException;
 import java.util.*;
 
 public class UserController {
@@ -53,6 +54,29 @@ public class UserController {
         return 1;// Register succeed.
     }
 
+    /**
+     * Send a verification email the register user.
+     *
+     * @param email the email address the user provided.
+     * @return if successfully send the email return 0;
+     * if the email format is wrong, return -1;
+     * if message send failed, return -2;
+     */
+    public int sendEmail(String email) {
+        try {
+            userUseCaseInteractor.sendEmail(email);
+        } catch (InvalidFormatException e) {
+            return -1;// Email format is not valid.
+
+
+        } catch (Exception e) {
+            return -2;// Fail to send the message.
+
+        }
+        return 0;
+
+    }
+
 
     /**
      * Login the user
@@ -60,7 +84,9 @@ public class UserController {
      * @param userName it is a string that stores the username
      *                 password  used to check whether the password match with username in the database
      * @param password This is the password we input
-     * @return the string "Correct Password" or "Wrong Password"
+     * @return if the user do not exist, return -1;
+     * if the username and password do not match, return -2;
+     * if successfully login the user, return 1.
      */
 
     public int loginUser(String userName, String password) {

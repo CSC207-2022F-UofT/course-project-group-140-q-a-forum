@@ -30,7 +30,7 @@ public class UserUseCaseInteractor {
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
      *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @return if successfully registered this student
+     * @throws RuntimeException
      */
     public void createUser(Map<String, String> user) throws RuntimeException {
 
@@ -147,7 +147,7 @@ public class UserUseCaseInteractor {
     public void sendEmail(String email) throws Exception {
         // Check the email format.
         if (!emailCheck(email)) {
-            throw new RuntimeException("");
+            throw new InvalidFormatException("email");
         }
 
         // 1. Create parameter configuration
@@ -201,7 +201,7 @@ public class UserUseCaseInteractor {
      * @return message to send.
      * @throws Exception
      */
-    public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail, String subject, String content) throws Exception {
+    public MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail, String subject, String content) throws Exception {
         // 1.Create a default MimeMessage object.
         MimeMessage message = new MimeMessage(session);
 
