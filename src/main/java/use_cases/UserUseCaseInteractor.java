@@ -87,7 +87,7 @@ public class UserUseCaseInteractor {
         } else {
             char c;
             int countNum = 0;
-            for (int i = 0; i < password.length() - 1; i++) {
+            for (int i = 0; i < password.length(); i++) {
                 c = password.charAt(i);
 
                 // Check if password has ','
