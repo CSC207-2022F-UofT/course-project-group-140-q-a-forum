@@ -46,7 +46,7 @@ public class UserUseCaseInteractor {
 
         // Check if the reentered password is the same.
         if (!duoPasswordCheck(user.get("Password"), user.get("Re-entered Password"))) {
-            throw new WrongInforException("re-entered password");
+            throw new WrongInfoException("re-entered password");
         }
 
         // Check if the email is valid.
@@ -56,7 +56,7 @@ public class UserUseCaseInteractor {
 
         // Check the email verification.
         if (!verifyEmail(user.get("Verfication"))) {
-            throw new WrongInforException("verfication number");
+            throw new WrongInfoException("verfication number");
         }
 
         // Register a new user.
@@ -291,10 +291,10 @@ public class UserUseCaseInteractor {
             throw new InvalidFormatException("password");
             // Check if the two new password matches
         } else if (!duoPasswordCheck(newPassword, reenteredPassword)) {
-            throw new WrongInforException("re-entered password");
+            throw new WrongInfoException("re-entered password");
             // Check if the old password matches the password in database.
         } else if (!user.getPassword().equals(oldPassword)) {
-            throw new WrongInforException("password");
+            throw new WrongInfoException("password");
         }
 
         // Reset the password.
@@ -338,7 +338,7 @@ public class UserUseCaseInteractor {
         }
 
         if (!user.getPassword().equals(password)) {
-            throw new WrongInforException("password");
+            throw new WrongInfoException("password");
         }
         return true;
 

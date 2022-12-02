@@ -4,7 +4,6 @@ import entities.User;
 import exceptions.*;
 import use_cases.UserUseCaseInteractor;
 
-import javax.mail.MessagingException;
 import java.util.*;
 
 public class UserController {
@@ -24,8 +23,8 @@ public class UserController {
      * if EmptyEntryException return -1,
      * if InvalidFormatException thrown by invalid password format return -2,
      * if InvalidFormatException thrown by invalid email format return -3,
-     * if WrongInforException thrown by reentered password does not match return -4,
-     * if WrongInforException thrown by wrong verification number return -5.
+     * if WrongInfoException thrown by reentered password does not match return -4,
+     * if WrongInfoException thrown by wrong verification number return -5.
      */
     public int registerUser(Map<String, String> user) {
 
@@ -44,12 +43,12 @@ public class UserController {
             return -3;// Another situation catches InvalidFormatException is the error email format.
 
 
-        } catch (WrongInforException e) {
+        } catch (WrongInfoException e) {
             String msg = e.getMessage();// get the error message.
             if (msg.equals("Wrong re-entered password !")) {
                 return -4;
             }
-            return -5;// Another situation catches WrongInforException is the wrong verification number.
+            return -5;// Another situation catches WrongInfoException is the wrong verification number.
         }
 
 
@@ -96,7 +95,7 @@ public class UserController {
             userUseCaseInteractor.checkLogin(userName, password);
         } catch (NotFoundException e) {
             return -1;
-        } catch (WrongInforException e) {
+        } catch (WrongInfoException e) {
             return -2;
         }
         return 1;

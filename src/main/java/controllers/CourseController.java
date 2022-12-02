@@ -82,7 +82,7 @@ public class CourseController {
         catch(NotFoundException e){
             //Call presenter
             return -1;
-        }catch(WrongInforException e){
+        }catch(WrongInfoException e){
             //Call presenter
             return -2;
         }

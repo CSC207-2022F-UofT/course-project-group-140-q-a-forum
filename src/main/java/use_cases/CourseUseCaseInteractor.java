@@ -1,14 +1,11 @@
 package use_cases;
 import entities.Course;
 import entities.Post;
-import entities.User;
 import use_cases.DataBaseAccess.CourseDataInterface;
 import exceptions.*;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 public class CourseUseCaseInteractor {
@@ -107,7 +104,7 @@ public class CourseUseCaseInteractor {
         if (found) {
             boolean success = course.modifyCourseContent(part, newPart);
             if (!success) {
-                throw new WrongInforException(part);
+                throw new WrongInfoException(part);
             }
         }
     }
