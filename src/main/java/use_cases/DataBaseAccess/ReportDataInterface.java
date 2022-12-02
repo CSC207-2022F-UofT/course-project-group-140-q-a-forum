@@ -2,7 +2,9 @@ package use_cases.DataBaseAccess;
 
 import entities.Report;
 
-import java.util.ArrayList;
+import java.util.*;
+
+
 
 public interface ReportDataInterface extends DataInterface{
     ArrayList<Report> getAllReport();
@@ -11,16 +13,15 @@ public interface ReportDataInterface extends DataInterface{
 
 
     /**
-     * add a report in DataBase
-     * @param report/
+     * Add a report in DataBase
+     * @param report the report to be added to the database.
      */
     void addReport(Report report);
 
 
-
     /**
-     * delete a report in DataBase
-     * @param report/
+     * Delete a report in DataBase
+     * @param report the report to be deleted from the database.
      */
     void removeReport(Report report);
 

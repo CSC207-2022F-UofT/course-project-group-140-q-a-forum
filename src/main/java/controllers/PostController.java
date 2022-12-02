@@ -4,9 +4,8 @@ import entities.Post;
 import entities.User;
 import exceptions.DuplicationException;
 import exceptions.EmptyEntryException;
-import exceptions.EntryNotFoundException;
+import exceptions.NotFoundException;
 import use_cases.PostUseCaseInteractor;
-import use_cases.UserUseCaseInteractor;
 
 import java.util.ArrayList;
 import java.util.HashMap;

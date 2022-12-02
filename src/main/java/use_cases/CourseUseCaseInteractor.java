@@ -1,14 +1,11 @@
 package use_cases;
 import entities.Course;
 import entities.Post;
-import entities.User;
 import use_cases.DataBaseAccess.CourseDataInterface;
 import exceptions.*;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 public class CourseUseCaseInteractor {
@@ -75,7 +72,7 @@ public class CourseUseCaseInteractor {
     public void removeACourse(String courseCode){
         // if the given course does not exist in the database, return false.
         if (!courseDataInterface.courseExists(courseCode)){
-            throw new CourseNotFoundException(courseCode);
+            throw new NotFoundException("The course "+courseCode);
         }
 
         courseDataInterface.deleteCourse(courseCode);
@@ -90,7 +87,7 @@ public class CourseUseCaseInteractor {
     public void modifyCourseContent(String courseCode, String part, String newPart){
         // if the given course does not exist in the database, return false.
         if (!courseDataInterface.courseExists(courseCode)){
-            throw new CourseNotFoundException(courseCode);
+            throw new NotFoundException("The course "+courseCode);
         }
 
         Course course = courseDataInterface.getCourse(courseCode);
@@ -104,13 +101,14 @@ public class CourseUseCaseInteractor {
             }
         }
 
-        if (found){
+        if (found) {
             boolean success = course.modifyCourseContent(part, newPart);
-            if (!success){
-                throw new CourseAttributeNotModifiableException(part);
+            if (!success) {
+                throw new WrongInfoException(part);
             }
         }
     }
+
 
     /**
      * Add an instructor to a given course. Returns true if successfully added, returns false otherwise.
@@ -132,7 +130,7 @@ public class CourseUseCaseInteractor {
     public void removeInstructor(String courseCode, String instructor){
         Course course = courseDataInterface.getCourse(courseCode);
         if (course.removeInstructor(instructor)){
-            throw new CourseInfoNotFoundException("instructor", course.getCode());
+            throw new NotFoundException("Instructor in " + course.getCode());
         }
     }
 
@@ -158,7 +156,7 @@ public class CourseUseCaseInteractor {
         Course course = courseDataInterface.getCourse(courseCode);
 
         if (!course.removePost(post)){
-            throw new CourseInfoNotFoundException("Post", course.getCode());
+            throw new NotFoundException("Post");
         }
     }
 
@@ -183,7 +181,7 @@ public class CourseUseCaseInteractor {
 
     public ArrayList<Post> getAllPosts(String courseCode){
         if (!courseDataInterface.courseExists(courseCode)){
-            throw new CourseNotFoundException(courseCode);
+            throw new NotFoundException("The course "+ courseCode);
         }
 
         Course course = courseDataInterface.getCourse(courseCode);
@@ -192,7 +190,7 @@ public class CourseUseCaseInteractor {
 
     public ArrayList<String> getAllPostTitles(String courseCode){
         if (!courseDataInterface.courseExists(courseCode)){
-            throw new CourseNotFoundException(courseCode);
+            throw new NotFoundException("The course "+courseCode);
         }
 
         Course course = courseDataInterface.getCourse(courseCode);

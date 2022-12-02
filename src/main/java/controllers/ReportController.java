@@ -1,5 +1,9 @@
 package controllers;
+
 import java.util.*;
+
+import entities.Report;
+import exceptions.*;
 import use_cases.ReportUseCaseInteractor;
 
 public class ReportController {
@@ -15,25 +19,45 @@ public class ReportController {
      * Returns the situation of registration.
      *
      * @param reportInformation This is a Map that contains necessary information
-     *                          needed to register a user. The keys must be
+     *                          needed to register a report. The keys must be
      *                          "Username", "Type", "Content"
-     * @return if successfully registered this student
+     * @return An integer indicating if successfully registered.
+     * 1: Successfully registered.
+     * 0: The user report does not exist.
      */
 
-    public boolean createAReport(Map<String,Object> reportInformation){
-        // TODO: implement this method
-        try{
-            reportUseCaseInteractor.createReport(
-                    (String)reportInformation.get("username"),
-                    (Integer)reportInformation.get("username"),
-                    reportInformation.get("username"));
-        }catch (RuntimeException e){
-
-        }finally {
-            return true;
+    public int createAReport(Map<String, Object> reportInformation) {
+        try {
+            reportUseCaseInteractor.createReport(reportInformation);
+        } catch (NotFoundException e) {
+            return 0;
         }
+        return 1;
+
+    }
+
+    /**
+     * Remove a report.
+     * Returns the situation of removal.
+     *
+     * @param reportInformation This is a Map that contains necessary information
+     *                          needed to remove a user. The keys must be
+     *                          "Username", "Type", "Content"
+     * @return An integer indicating if successfully registered.
+     * 0: Successfully removed the report.
+     */
+
+    public int removeAReport(Map<String, Object> reportInformation) {
+        try {
+            Report report = new Report((String) reportInformation.get("Username"),
+                    (Integer) reportInformation.get("Type"),
+                    reportInformation.get("Content"));
+            reportUseCaseInteractor.removeReport(report);
+        } catch (RuntimeException e) {
+
+        } return 0;
+
     }
 
 
-    public boolean searchReport(){return false;}
 }

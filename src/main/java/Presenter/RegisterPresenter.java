@@ -21,7 +21,7 @@ public class RegisterPresenter extends JOptionPane {
     }
 
     public static void showNonValidEmailError(){
-        JOptionPane.showMessageDialog(null, "The email you enter is not valid.",
+        JOptionPane.showMessageDialog(null, "The email you enter is not a valid email.",
                 "Email UnValid",ERROR_MESSAGE);
     }
 
