@@ -97,6 +97,23 @@ class UserUseCaseInteractorTest {
     }
 
     @Test
+    void loginUserSuccessfully(){
+        assertEquals(1, userController.loginUser("admin", "QNAForum140"));
+    }
+
+    @Test
+    //Try login with a user that is not in the database
+    void loginNoUser(){
+        assertEquals(-1, userController.loginUser("admin2", "QNAForum140"));
+    }
+
+    @Test
+    //Try login with a wrong password
+    void loginWrongPassword() {
+        assertEquals(-2, userController.loginUser("admin", "QNAForum1"));
+    }
+
+    @Test
     void getUserSuccess(){
         User user = userController.getUser("admin");
         assertEquals(user.getUsername(), "admin");
