@@ -14,8 +14,6 @@ import entities.Course;
 import entities.Post;
 import entities.User;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author zhaoxiling
