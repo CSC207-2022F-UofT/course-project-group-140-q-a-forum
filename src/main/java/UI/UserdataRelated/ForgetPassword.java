@@ -1,11 +1,16 @@
 package UI.UserdataRelated;
 
+import Presenter.RegisterPresenter;
+import base.main;
+import controllers.UserController;
+
 /**
  *
  * @author zhaoxiling
  */
 public class ForgetPassword extends javax.swing.JFrame {
-
+    private final UserController userController = main.userController;
+    private String correctVerification;
     /**
      * Creates new form ForgetPassword
      */
@@ -193,6 +198,20 @@ public class ForgetPassword extends javax.swing.JFrame {
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        String email = emailText.getText();
+        int resultOrCode = userController.sendEmail(email);
+        switch (resultOrCode){
+            case -1 ->{
+                RegisterPresenter.showNonValidEmailError();
+            }
+            case -2 ->{
+                RegisterPresenter.showVerificationError();
+            }
+            default -> {
+                this.correctVerification = String.valueOf(resultOrCode);
+            }
+        }
+        showingSeding.setText("Verification Send");
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {

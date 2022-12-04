@@ -4,6 +4,9 @@
  */
 package UI.UserdataRelated;
 
+import Presenter.GeneralPresenter;
+import Presenter.LoginPresenter;
+import Presenter.RegisterPresenter;
 import base.main;
 import controllers.CourseController;
 import controllers.UserController;
@@ -159,11 +162,35 @@ public class ChangePasswordForm extends javax.swing.JFrame {
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        ProfilePage profilePage = new ProfilePage(user);
+        profilePage.setVisible(true);
+        this.setVisible(false);
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        String oldPassword = jTextField1.getText();
+        String newPassword = enterText.getText();
+        String reenterPass = reText.getText();
+        int result = userController.changePassword(user, oldPassword,newPassword, reenterPass);
+        System.out.println(result);
+        switch (result){
+            case -1->{
+                GeneralPresenter.showEmptyEntryError();
+            }
+            case -2 ->{
+                RegisterPresenter.showWrongPasswordError();
+            }
+            case -3->{
+                LoginPresenter.showPasswordNotMatch();
+            }
+            case -4 ->{
+                RegisterPresenter.showWrongRePassError();
+            }
+            case 1 ->{
+                GeneralPresenter.showSuccessMessage("Reset Password");
+            }
+        }
+
 
     }
 

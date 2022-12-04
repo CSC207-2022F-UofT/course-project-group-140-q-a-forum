@@ -27,9 +27,9 @@ public class UserController {
      * if WrongInfoException thrown by reentered password does not match return -4,
      * if WrongInfoException thrown by wrong verification number return -5.
      */
-    public int registerUser(Map<String, String> user) {
+    public int registerUser(Map<String, String> user, String correctVerification) {
         try {
-            userUseCaseInteractor.createUser(user);
+            userUseCaseInteractor.createUser(user, correctVerification);
         } catch (DuplicationException e) {
             //A bunch of possible exceptions here, later I will add details.
             return -1;
@@ -55,19 +55,19 @@ public class UserController {
      * Send a verification email the register user.
      *
      * @param email the email address the user provided.
-     * @return if successfully send the email return 1;
+     * @return if successfully send the email return verification code;
      * if the email format is wrong, return -1;
      * if message send failed, return -2;
      */
     public int sendEmail(String email) {
         try {
-            userUseCaseInteractor.sendEmail(email);
+           return userUseCaseInteractor.sendEmail(email);
         } catch (InvalidFormatException e) {
             return -1;// Email format is not valid.
         } catch (Exception e) {
             return -2;// Fail to send the message.
         }
-        return 1;
+
 
     }
 
@@ -109,7 +109,7 @@ public class UserController {
 
     /**
      * Change the Password of the User if the user knows their oldPassword and want to change it
-     * @param user  User wait to be changed the password
+     * @param user          User wait to be changed the password
      * @param oldPassword   String, the old password
      * @param newPassword   String, new Password
      * @param reenteredPassword String, make sure user doesn't type the wrong pass

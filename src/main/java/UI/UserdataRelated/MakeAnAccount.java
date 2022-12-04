@@ -17,6 +17,7 @@ import java.util.HashMap;
  */
 public class MakeAnAccount extends  javax.swing.JFrame {
     private final UserController userController = main.userController;
+    private String correctVerification;
     /**
      * Creates new form RegisterForm
      */
@@ -229,7 +230,18 @@ public class MakeAnAccount extends  javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         String email = emailText.getText();
-        userController.sendEmail(email);
+        int resultOrCode = userController.sendEmail(email);
+        switch (resultOrCode){
+            case -1 ->{
+                RegisterPresenter.showNonValidEmailError();
+            }
+            case -2 ->{
+                RegisterPresenter.showVerificationError();
+            }
+            default -> {
+                this.correctVerification = String.valueOf(resultOrCode);
+            }
+        }
         showingSeding.setText("Verification Send");
 
 
@@ -248,7 +260,9 @@ public class MakeAnAccount extends  javax.swing.JFrame {
         RegInfo.put("Email", email);
         String isAdmin = null;
         RegInfo.put("isAdmin", isAdmin);
-        int result = userController.registerUser(RegInfo);
+        String verification = verificationText.getText();
+        RegInfo.put("Verification", verification);
+        int result = userController.registerUser(RegInfo, correctVerification);
         switch (result) {
             case 1 -> {
                 RegisterPresenter.showRegisterSuccess();

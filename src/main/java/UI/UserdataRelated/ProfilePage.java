@@ -212,10 +212,12 @@ public class ProfilePage extends javax.swing.JFrame {
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        ChangePasswordForm changePasswordForm = new ChangePasswordForm(user);
+        changePasswordForm.setVisible(true);
+        this.setVisible(false);
     }
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         String changeUserName = changeUserNameText.getText();
         int result = userController.resetUsername(user, changeUserName);
 

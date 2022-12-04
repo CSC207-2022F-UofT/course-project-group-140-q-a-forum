@@ -36,8 +36,9 @@ public class UserUseCaseInteractor {
      *             needed to register a user. The keys must be
      *             "Username", "Password", "Re-entered Password", "Email",
      *             "Verification" and "isAdmin".
+     * @param correctVerification verification send to the user
      */
-    public void createUser(Map<String, String> user) throws RuntimeException {
+    public void createUser(Map<String, String> user, String correctVerification) throws RuntimeException {
 
         // Check if the user exists in Database.
         if (userDataInterface.userExists(user.get("Username"))) {
@@ -60,7 +61,7 @@ public class UserUseCaseInteractor {
         }
 
         // Check the email verification.
-        if (!verifyEmail(user.get("Verification"))) {
+        if (!user.get("Verification").equals(correctVerification)) {
             throw new WrongInfoException("Verification number");
         }
 
@@ -137,8 +138,10 @@ public class UserUseCaseInteractor {
     /**
      * Send an email with "subject" and "content" to receiveMailAccount
      * @param email the email address to sent email.
+     * @return verification Code
+     *
      */
-    public void sendEmail(String email) throws Exception {
+    public int sendEmail(String email) throws Exception {
         // Check the email format.
         if (emailInvalid(email)) {
             throw new InvalidFormatException("email");
@@ -183,6 +186,7 @@ public class UserUseCaseInteractor {
 
         // 7. Close connect
         transport.close();
+        return code;
     }
 
     /**
@@ -220,15 +224,15 @@ public class UserUseCaseInteractor {
         return message;
     }
 
-    /**
-     * Take in the email, and send a random verify number to the email.
-     *
-     * @param verifyNumber verify number user provided.
-     * @return if the verify number is the same as verifyNum generated.
-     */
-    public boolean verifyEmail(String verifyNumber) {
-        return verifyNumber.equals(verifyNum);
-    }
+//    /**
+//     * Take in the email, and send a random verify number to the email.
+//     *
+//     * @param verifyNumber verify number user provided.
+//     * @return if the verify number is the same as verifyNum generated.
+//     */
+//    public boolean verifyEmail(String verifyNumber) {
+//        return verifyNumber.equals(verifyNum);
+//    }
 
 
     /**
