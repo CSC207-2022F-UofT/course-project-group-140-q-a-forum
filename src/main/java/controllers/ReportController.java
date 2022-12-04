@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.*;
 
-import entities.Report;
+import entities.*;
 import exceptions.*;
 import use_cases.ReportUseCaseInteractor;
 
@@ -49,10 +49,8 @@ public class ReportController {
 
     public int removeAReport(Map<String, Object> reportInformation) {
         try {
-            Report report = new Report((String) reportInformation.get("Username"),
-                    (Integer) reportInformation.get("Type"),
-                    reportInformation.get("Content"));
-            reportUseCaseInteractor.removeReport(report);
+
+            reportUseCaseInteractor.removeReport(reportInformation);
         } catch (RuntimeException e) {
 
         } return 0;

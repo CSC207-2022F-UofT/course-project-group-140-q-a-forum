@@ -4,7 +4,6 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class RuntimeDataHandler implements DataHandlerInterface {
     private ArrayList<User> users = new ArrayList<>();
@@ -19,7 +18,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
     /**
      * The method accepts a hashmap from an integer-valued key to a data and replace the original arraylist with the
      * new one
-     * It is not responsible of exception handling (i.e, data not in the arraylist)
+     * It is not responsible for exception handling (i.e, data not in the arraylist)
      * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of an
      *             arraylist}
      */
@@ -74,9 +73,9 @@ public class RuntimeDataHandler implements DataHandlerInterface {
     }
 
     /**
-     * The method accepts a hashmap from a integer-valued key to a data and append it to the ararylist
-     * It is not responsible of exception handling (i.e, data not in the arraylist)
-     * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of an
+     * The method accepts a hashmap from an integer-valued key to a data and append it to the arraylist
+     * It is not responsible for exception handling (i.e, data not in the arraylist)
+     * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of a
      *             single course/user/report type object}
      */
 
@@ -128,7 +127,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
     /**
      * The method accepts a hashmap from an integer-valued key to a data, and delete it from the list
-     * It is not responsible of exception handling (i.e, data not in the arraylist)
+     * It is not responsible for exception handling (i.e, data not in the arraylist)
      * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of a
      *             single course/user/report type object}
      */
@@ -188,7 +187,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
 
     /**
-     * @param key  get data by corrsponding key
+     * @param key  get data by corresponding key
      * @return users when key == 1, course when key==2, reports when key==3
      */
     @Override
@@ -216,7 +215,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
     /**
      * Find user by username
      * @param username the name of user
-     * @return if user is found return User user, otherwise null
+     * @return if user is found return the username of the user, otherwise null
      */
     public User lookupUserfromName(String username) {
         if (name2User.containsKey(username)){
@@ -245,7 +244,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
     /**
      * Find course by code
      * @param code  the code of course
-     * @return if course is found return Course course, otherwise null
+     * @return if course is found return the course's code, otherwise null
      */
     public Course lookupCourse(String code) {
         if (code2Course.containsKey(code)) {

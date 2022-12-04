@@ -5,7 +5,6 @@ import use_cases.DataBaseAccess.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
 
@@ -31,7 +30,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
 
     /**
-     * Add a user as a info into the dataHandler.
+     * Add a user as a piece of info into the dataHandler.
      * @param user  the user who needs to add
      */
     @Override
@@ -53,7 +52,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     @Override
     /**
      * Search a user by userName<.
-     * delete the user as a info  from the dataHandler.
+     * delete the user as a piece of info  from the dataHandler.
      * @param userName  the name of user
      */
     public void deleteUser(String username) {
@@ -66,7 +65,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     /**
      * Get user information by user's email, and change user's username by newUsername.
      * @param user  the user who needs to reset
-     * @param userName  the name of user
+     * @param newUsername  the name of user
      */
     @Override
     public void resetUsername(User user, String newUsername) {
@@ -119,7 +118,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         for(Post post: posts){
             if (post.getTopic().equals(postTopic)){
                 return true;
-            };
+            }
         }
         return false;
     }
@@ -131,7 +130,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     public User getUser(String userName) {return dataHandler.lookupUserfromName(userName);}
 
     /**
-     * Add a course as a info into the dataHandler.
+     * Add a course as a piece of info into the dataHandler.
      * @param course  the course that needs to add
      */
     @Override
@@ -144,7 +143,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
     /**
      * Search a course by courseCode.
-     * delete the course as a info from the dataHandler.
+     * delete the course as a piece of info from the dataHandler.
      * @param courseCode  the code of course
      */
     @Override
@@ -166,7 +165,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
 
     /**
-     * Add a report as a info into the dataHandle.
+     * Add a report as a piece of info into the dataHandle.
      * @param report the report that needs to add
      */
     @Override
@@ -184,7 +183,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
     /**
      * Search a report by report.
-     * delete the report as a info from the dataHandler.
+     * delete the report as a piece of info from the dataHandler.
      * @param report the report that needs to remove
      */
     @Override
