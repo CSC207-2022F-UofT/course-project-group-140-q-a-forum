@@ -5,6 +5,7 @@ import use_cases.DataBaseAccess.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
@@ -112,10 +113,9 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
      * @return bool
      */
     @Override
-
     public boolean postExists(String courseCode, String postTopic) {
         Course course = getCourse(courseCode);
-        ArrayList<Post> posts = course.getPosts();
+        List<Post> posts = course.getPosts();
         for(Post post: posts){
             if (post.getTopic().equals(postTopic)){
                 return true;

@@ -10,7 +10,7 @@ public class Course {
     private String courseCode;
     private String description;
 
-    private ArrayList<String> instructors;
+    private List<String> instructors;
     private String semester;
 
     private ArrayList<Post> posts;
@@ -33,10 +33,10 @@ public class Course {
      * @param code the course code of the course
      * @param description a description of the course
      * @param semester the start and end date of the course
-     * @param instructors an array list of instructors
+     * @param instructors a list of instructors
      */
 
-    public Course(String name, String code, String description, String semester, ArrayList<String> instructors){
+    public Course(String name, String code, String description, String semester, List<String> instructors){
         this.name = name;
         this.courseCode = code;
         this.description = description;
@@ -65,7 +65,7 @@ public class Course {
         return this.semester;
     }
 
-    public ArrayList<String> getInstructor() {
+    public List<String> getInstructor() {
         return this.instructors;
     }
 
