@@ -34,6 +34,7 @@ public class PostUseCaseInteractorTest {
         user.put("Re-entered Password", "QNAForum140");
         user.put("Email", "3232085039@qq.com");
         user.put("isAdmin", "True");
+        user.put("Verification", "DebugCode");
         userController.registerUser(user);
 
         HashMap<String, String> course = new HashMap<>();

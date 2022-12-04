@@ -23,14 +23,19 @@ public class UserUseCaseInteractor {
         this.userDataInterface = userDataInterface;
     }
 
+    //This constructor should only be used as for testing purposes.
+    public UserUseCaseInteractor(UserDataInterface userDataInterface, String verificationCode) {
+        this.userDataInterface = userDataInterface;
+        this.verifyNum = verificationCode;
+    }
     /**
      * Register a user if it is not present in the current database.
      * Returns the situation of registration
      *
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
-     *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
-     * @throws RuntimeException
+     *             "Username", "Password", "Re-entered Password", "Email",
+     *             "Verification" and "isAdmin".
      */
     public void createUser(Map<String, String> user) throws RuntimeException {
 
@@ -40,23 +45,23 @@ public class UserUseCaseInteractor {
         }
 
         // Check if the password is valid.
-        if (!passwordCheck(user.get("Password"))) {
+        if (passwordInvalid(user.get("Password"))) {
             throw new InvalidFormatException("password");
         }
 
         // Check if the reentered password is the same.
-        if (!duoPasswordCheck(user.get("Password"), user.get("Re-entered Password"))) {
+        if (duoPasswordInvalid(user.get("Password"), user.get("Re-entered Password"))) {
             throw new WrongInfoException("re-entered password");
         }
 
         // Check if the email is valid.
-        if (!emailCheck(user.get("Email"))) {
+        if (emailInvalid(user.get("Email"))) {
             throw new InvalidFormatException("email");
         }
 
         // Check the email verification.
-        if (!verifyEmail(user.get("Verfication"))) {
-            throw new WrongInfoException("verfication number");
+        if (!verifyEmail(user.get("Verification"))) {
+            throw new WrongInfoException("Verification number");
         }
 
         // Register a new user.
@@ -73,52 +78,44 @@ public class UserUseCaseInteractor {
 
     /**
      * This method check the password user entered.
-     * If the password meets the requirement, return true.
+     * If the password has at least 9 characters, all from numbers and letters and does not contain a comma, return true.
      * Otherwise, returns false.
-     *
      * @param password password user provided.
-     * @return if the password includes numbers, letters, and at least one upper letter.
+     * @return true if this password is invalid.
      */
-    public boolean passwordCheck(String password) {
+    public boolean passwordInvalid(String password) {
+        boolean containLetter = false;
+        boolean containDigit = false;
+        int length = password.length();
 
-        // Check if the length of the password is greater than 8.
-        if (password.length() < 8) {
-            return false;
-        } else {
-            char c;
-            int countNum = 0;
-            for (int i = 0; i < password.length(); i++) {
-                c = password.charAt(i);
+        for (int i = 0; i < length; i++) {
+            char c = password.charAt(i);
 
-                // Check if password has ','
-                if (c == ',') {
-                    return false;
+            if (c == ','){
+                return true;
+            }
 
-                } else if (Character.isDigit(c)) {
-                    countNum++;
-                }
-            }//Get the number of numbers in password
+            if (!containDigit && Character.isDigit(c)){
+                containDigit = true;
+            }
 
-            //Check if the password has at least 2 numbers
-            if (countNum < 2) {
-                return false;
-
-                // Check if the password are all numbers.
-            } else return countNum != password.length();
+            if (!containLetter && Character.isLetter(c)){
+                containLetter = true;
+            }
         }
 
+        return length <= 8 || !containLetter || !containDigit;
     }
 
 
     /**
      * Check the password and re-entered password
-     *
      * @param password          password user provided.
-     * @param reenteredpassword password user provided for the second time.
-     * @return boo
+     * @param reenteredPassword password user provided for the second time.
+     * @return true if these two passwords are not the same.
      */
-    public boolean duoPasswordCheck(String password, String reenteredpassword) {
-        return password.equals(reenteredpassword);
+    public boolean duoPasswordInvalid(String password, String reenteredPassword) {
+        return !password.equals(reenteredPassword);
     }
 
     /**
@@ -126,27 +123,24 @@ public class UserUseCaseInteractor {
      * Otherwise, it returns false
      *
      * @param email email user provided.
-     * @return if the email entered is valid.
+     * @return true if the email entered is invalid.
      */
-
-    private boolean emailCheck(String email) {
+    private boolean emailInvalid(String email) {
         // Reverse the email.
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z" + "A-Z]{2,7}$";
 
         Pattern pat = Pattern.compile(emailRegex);
-        if (email == null) return false;
-        return pat.matcher(email).matches();
+        if (email == null) return true;
+        return !pat.matcher(email).matches();
     }
 
     /**
      * Send an email with "subject" and "content" to receiveMailAccount
-     *
      * @param email the email address to sent email.
-     * @throws Exception
      */
     public void sendEmail(String email) throws Exception {
         // Check the email format.
-        if (!emailCheck(email)) {
+        if (emailInvalid(email)) {
             throw new InvalidFormatException("email");
         }
 
@@ -168,9 +162,10 @@ public class UserUseCaseInteractor {
         Session session = Session.getInstance(props);
         session.setDebug(true);                                 // Set to debug mode, view detailed sending log
 
-        //Generate a verification code.
-        int num = (int) (Math.random() * 90000) + 100000;
-        String messagetosend = Integer.toString(num);
+        //Generate a random integer between 100000 and 999999 inclusive.
+        Random rand = new Random();
+        int code = rand.nextInt(900000) + 100000;
+        String messagetosend = Integer.toString(code);
         this.verifyNum = messagetosend;
 
 
@@ -192,14 +187,13 @@ public class UserUseCaseInteractor {
 
     /**
      * Create a simple email containing only text
-     *
      * @param session     session with the server
      * @param sendMail    sender email
      * @param receiveMail recipient email
      * @param subject     "Verifying" or "Forget password"
      * @param content     The random 6-digit int value
      * @return message to send.
-     * @throws Exception
+     * @throws Exception if fail to send a message.
      */
     public MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail, String subject, String content) throws Exception {
         // 1.Create a default MimeMessage object.
@@ -256,20 +250,19 @@ public class UserUseCaseInteractor {
      * This method reset the username of user.
      * If the new username is not in database, it resets username and returns true.
      * Otherwise, it returns false.
-     *
      * @param user        the user to change username.
      * @param newUsername the new username user wants to change.
-     * @return if successfully change the password.
+     * @return If the username is reset successfully.
      */
-
-
     public boolean resetUsername(User user, String newUsername) {
-        // If the given new username exists in database, return false.
-        // Reset the password.
-        userDataInterface.resetUsername(user, newUsername);
-        return true;
+        boolean userExists = userDataInterface.userExists(user.getUsername());
+        if (userExists){
+            return false;
+        }else{
+            userDataInterface.resetUsername(user, newUsername);
+            return true;
+        }
     }
-
 
     /**
      * This method reset the password of user.
@@ -280,23 +273,21 @@ public class UserUseCaseInteractor {
      * @param oldPassword       the old password user wants to change.
      * @param newPassword       the new password user wants to change to.
      * @param reenteredPassword reentered new password.
-     * @return if successfully change the password.
      */
     public void resetPassword(User user, String oldPassword, String newPassword, String reenteredPassword) throws RuntimeException {
         if (oldPassword.equals("") || newPassword.equals("") || reenteredPassword.equals("")) {
             throw new EmptyEntryException("password");
         }
         // If the given new password does not meet the requirement, return false.
-        if (!passwordCheck(newPassword)) {
+        if (passwordInvalid(newPassword)) {
             throw new InvalidFormatException("password");
             // Check if the two new password matches
-        } else if (!duoPasswordCheck(newPassword, reenteredPassword)) {
+        } else if (duoPasswordInvalid(newPassword, reenteredPassword)) {
             throw new WrongInfoException("re-entered password");
             // Check if the old password matches the password in database.
         } else if (!user.getPassword().equals(oldPassword)) {
             throw new WrongInfoException("password");
         }
-
         // Reset the password.
         userDataInterface.resetPassword(user.getUsername(), newPassword);
 
@@ -329,19 +320,15 @@ public class UserUseCaseInteractor {
      *
      * @param userName username provided by the login user.
      * @param password password provided by the login user.
-     * @return if successfully login this user.
      */
-    public boolean checkLogin(String userName, String password) throws RuntimeException {
+    public void checkLogin(String userName, String password) throws RuntimeException {
         User user = userDataInterface.getUser(userName);
         if (user == null) {
             throw new NotFoundException("User");
         }
-
         if (!user.getPassword().equals(password)) {
             throw new WrongInfoException("password");
         }
-        return true;
-
     }
 
 

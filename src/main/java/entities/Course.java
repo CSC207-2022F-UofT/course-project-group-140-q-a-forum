@@ -166,12 +166,6 @@ public class Course {
     }
 
     public Post lookupPostFromTopic(String topic){
-        if (topic2Post.containsKey(topic)){
-            return topic2Post.get(topic);
-        }
-        else{
-            return null;
-        }
-
+        return topic2Post.getOrDefault(topic, null);
     }
 }

@@ -18,7 +18,8 @@ public class UserController {
      *
      * @param user This is a Map that contains necessary information
      *             needed to register a user. The keys must be
-     *             "Username", "Password", "Re-entered Password", "Email", and "isAdmin".
+     *             "Username", "Password", "Re-entered Password", "Email",
+     *             "Verification" and "isAdmin".
      * @return if successfully registered this student return 0,
      * if EmptyEntryException return -1,
      * if InvalidFormatException thrown by invalid password format return -2,
@@ -27,13 +28,10 @@ public class UserController {
      * if WrongInfoException thrown by wrong verification number return -5.
      */
     public int registerUser(Map<String, String> user) {
-
         try {
             userUseCaseInteractor.createUser(user);
-
         } catch (DuplicationException e) {
             //A bunch of possible exceptions here, later I will add details.
-
             return -1;
         } catch (InvalidFormatException e) {
             String msg = e.getMessage();// Get the error message.
@@ -41,8 +39,6 @@ public class UserController {
                 return -2;
             }
             return -3;// Another situation catches InvalidFormatException is the error email format.
-
-
         } catch (WrongInfoException e) {
             String msg = e.getMessage();// get the error message.
             if (msg.equals("Wrong re-entered password !")) {
@@ -59,7 +55,7 @@ public class UserController {
      * Send a verification email the register user.
      *
      * @param email the email address the user provided.
-     * @return if successfully send the email return 0;
+     * @return if successfully send the email return 1;
      * if the email format is wrong, return -1;
      * if message send failed, return -2;
      */
@@ -68,20 +64,15 @@ public class UserController {
             userUseCaseInteractor.sendEmail(email);
         } catch (InvalidFormatException e) {
             return -1;// Email format is not valid.
-
-
         } catch (Exception e) {
             return -2;// Fail to send the message.
-
         }
-        return 0;
+        return 1;
 
     }
 
-
     /**
      * Login the user
-     *
      * @param userName it is a string that stores the username
      *                 password  used to check whether the password match with username in the database
      * @param password This is the password we input

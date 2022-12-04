@@ -48,7 +48,7 @@ public class PostController {
         try{
             postUseCaseInteractor.editPost(post);
         }
-        catch(EmptyEntryException e){
+        catch(NotFoundException e){
             return -1;
         }
         return 0;
@@ -104,6 +104,5 @@ public class PostController {
         catch(EmptyEntryException e){return -1;}
         return 1;
     }
-
 
 }
