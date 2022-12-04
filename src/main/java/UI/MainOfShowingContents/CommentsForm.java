@@ -4,6 +4,7 @@
  */
 package UI.MainOfShowingContents;
 
+import Presenter.GeneralPresenter;
 import UI.PostingStuff.MakeAReport;
 import base.main;
 import controllers.CourseController;
@@ -197,10 +198,13 @@ public class CommentsForm extends javax.swing.JFrame {
     }
 
     private void reportButton11reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        MakeAReport makeAReport = new MakeAReport(this.user, this.course, this.post);
-        makeAReport.setVisible(true);
-        this.setVisible(false);
+//        if (viewComment == null){
+//            GeneralPresenter.showNotSelectError("Comment");
+//        }else {
+//            MakeAReport makeAReport = new MakeAReport(this.user, this.course, this.post, viewComment);
+//            makeAReport.setVisible(true);
+//            this.setVisible(false);
+//        }
     }
 
     private void gobackButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,11 +214,15 @@ public class CommentsForm extends javax.swing.JFrame {
     }
 
     private void jList2MouseClicked() {
-        // TODO add your handling code here:
         int chosenCommentIndex = jList2.getSelectedIndex();
-        Comment selectComment = post.getComments().get(chosenCommentIndex);
-        this.viewComment = selectComment;
-        changePanel(selectComment);
+        if (chosenCommentIndex == - 1){
+            GeneralPresenter.showNotSelectError("Comment");
+        }
+        else {
+            Comment selectComment = post.getComments().get(chosenCommentIndex);
+            this.viewComment = selectComment;
+            changePanel(selectComment);
+        }
     }
 
     private void changePanel(Comment comment){

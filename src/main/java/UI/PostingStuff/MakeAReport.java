@@ -10,12 +10,14 @@ import UI.MainOfShowingContents.PostForm;
 import base.main;
 import controllers.CourseController;
 import controllers.PostController;
+import controllers.ReportController;
 import entities.Comment;
 import entities.Course;
 import entities.Post;
 import entities.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -27,9 +29,9 @@ public class MakeAReport extends javax.swing.JFrame {
     private final Course course;
     private final Post post;
     private final Comment comment;
-    private String reportType;
+    private final int reportType;
     private final CourseController courseController = main.courseController;
-    private final PostController postController = main.postController;
+    private final ReportController reportController = main.reportController;
 
 
 
@@ -38,7 +40,7 @@ public class MakeAReport extends javax.swing.JFrame {
         this.post = null;
         this.course = null;
         this.comment = null;
-        this.reportType = "Course";
+        this.reportType = 0;
         initComponents();
     }
 
@@ -47,7 +49,7 @@ public class MakeAReport extends javax.swing.JFrame {
         this.course= course;
         this.post = null;
         this.comment = null;
-        this.reportType = "Course";
+        this.reportType = 2;
         initComponents();
     }
 
@@ -56,18 +58,18 @@ public class MakeAReport extends javax.swing.JFrame {
         this.course= course;
         this.post = post;
         this.comment = null;
-        this.reportType = "Post";
+        this.reportType = 1;
         initComponents();
     }
 
-    public MakeAReport(User user, Course course, Post post, Comment comment){
-        this.user = user;
-        this.course= course;
-        this.post = post;
-        this.comment = comment;
-        this.reportType = "Post";
-        initComponents();
-    }
+//    public MakeAReport(User user, Course course, Post post, Comment comment){
+//        this.user = user;
+//        this.course= course;
+//        this.post = post;
+//        this.comment = comment;
+//        this.reportType = "Comment";
+//        initComponents();
+//    }
 
 
     private void initComponents() {
@@ -97,14 +99,18 @@ public class MakeAReport extends javax.swing.JFrame {
 
         jLabel3.setText("Make the report for:");
 
-        if (this.reportType.equals("Comment")) {
-            titleLabel.setText("comment");
+
+        if (this.reportType == 0) {
+            titleLabel.setText("user");
+            typeLabel.setText("User");
         }
-        if (this.reportType.equals("Post")) {
-            typeLabel.setText(this.post.getTopic());
+        if (this.reportType == 1) {
+            titleLabel.setText(this.post.getTopic());
+            typeLabel.setText("Post");
         }
-        if (this.reportType.equals("Course")) {
-            typeLabel.setText(this.course.getName());
+        if (this.reportType == 2) {
+            titleLabel.setText(this.course.getName());
+            typeLabel.setText("Course");
         }
 
         reasonText.setColumns(20);
@@ -117,8 +123,18 @@ public class MakeAReport extends javax.swing.JFrame {
         jLabel5.setText("Post as: ");
 
         userButton.setText("User");
+        userButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userButtonActionPerformed(evt);
+            }
+        });
 
         anonymousButton.setText("Anonymous");
+        anonymousButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anonymousButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back to the page");
         backButton.addActionListener(this::backButtonActionPerformed);
@@ -209,30 +225,40 @@ public class MakeAReport extends javax.swing.JFrame {
         pack();
     }
 
-    private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void reportButtonActionPerformed(java.awt.event.ActionEvent evt){
+        HashMap<String, Object> reportInfo = new HashMap<>();
+        reportInfo.put("Username", user.getUsername());
+        reportInfo.put("Type", reportType);
+        reportInfo.put("Content", reasonText.getText());
+        int result = reportController.createAReport(reportInfo);
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-
-        if (this.reportType.equals("Comment")) {
+        if (this.reportType == 0) {
             CommentsForm commentsForm = new CommentsForm(this.user, this.course, this.post);
             commentsForm.setVisible(true);
             this.setVisible(false);
         }
-        if (this.reportType.equals("Post")) {
+        if (this.reportType == 1) {
             PostForm postForm = new PostForm(this.user,this.course);
             postForm.setVisible(true);
             this.setVisible(false);
         }
-        if (this.reportType.equals("Course")) {
+        if (this.reportType == 2) {
             ArrayList<Course> courses = courseController.getAllCourses();
             CoursesForm coursesForm = new CoursesForm(this.user, courses);
             coursesForm.setVisible(true);
             this.setVisible(false);
         }
 
+    }
+
+    private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void anonymousButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
 

@@ -174,7 +174,6 @@ public class MakeAComment extends javax.swing.JFrame {
     }
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         String content = contentTextA.getText();
         int result = postController.makeComment(post, user, content);
         if(result == 1){

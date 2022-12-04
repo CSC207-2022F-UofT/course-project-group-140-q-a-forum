@@ -3,6 +3,7 @@ package UI.MainOfShowingContents;
 import Presenter.GeneralPresenter;
 import UI.PostingStuff.MakeAComment;
 import UI.PostingStuff.MakeAPost;
+import UI.PostingStuff.MakeAReport;
 import base.main;
 import controllers.CourseController;
 import entities.Course;
@@ -80,7 +81,7 @@ public class PostForm extends javax.swing.JFrame {
         nameLabel.setText("topic of the Post");
 
         showcommentButton.setText("Show All Comments");
-        showcommentButton.addActionListener(this::showcommentButtonActionPerformed);
+        showcommentButton.addActionListener(this::showCommentButtonActionPerformed);
 
         reportButton.setText("Report this Post");
         reportButton.addActionListener(this::reportButtonActionPerformed);
@@ -223,9 +224,9 @@ public class PostForm extends javax.swing.JFrame {
         pack();
     }
 
-    private void showcommentButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void showCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(this.viewPost==null){
-            GeneralPresenter.showNotSelectError();
+            GeneralPresenter.showNotSelectError("Post");
         }
         else {
             CommentsForm commentsForm = new CommentsForm(user, course, viewPost);
@@ -236,7 +237,7 @@ public class PostForm extends javax.swing.JFrame {
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if (this.viewPost == null) {
-            GeneralPresenter.showNotSelectError();
+            GeneralPresenter.showNotSelectError("Post");
         } else {
             MakeAComment makeAComment = new MakeAComment(user, course, viewPost);
             makeAComment.setVisible(true);
@@ -245,15 +246,21 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-
+        if (this.viewPost == null) {
+            GeneralPresenter.showNotSelectError("Post");
+        } else {
+            MakeAReport makeAReport = new MakeAReport(this.user, this.course, viewPost);
+            makeAReport.setVisible(true);
+            this.setVisible(false);
+        }
     }
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());
-        MakeAPost makeAPost = new MakeAPost(user, course, posts);
-        makeAPost.setVisible(true);
-        this.setVisible(false);
+            ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());
+            MakeAPost makeAPost = new MakeAPost(user, course, posts);
+            makeAPost.setVisible(true);
+            this.setVisible(false);
+
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,7 +274,7 @@ public class PostForm extends javax.swing.JFrame {
     private void jList2MouseClicked(){
         int chosenPostIndex = jList2.getSelectedIndex();
         if (chosenPostIndex == - 1){
-            GeneralPresenter.showNotSelectError();
+            GeneralPresenter.showNotSelectError("Post");
         }
         else {
             ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());

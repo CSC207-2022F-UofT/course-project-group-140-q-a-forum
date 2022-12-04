@@ -18,8 +18,9 @@ public class GeneralPresenter extends JOptionPane {
                 notFoundType + " not find",ERROR_MESSAGE);
     }
 
-    public static void showNotSelectError(){
-        JOptionPane.showMessageDialog(null, "Please select a course in the List or register a course first", "Empty Error",
+    public static void showNotSelectError(String selectType){
+        JOptionPane.showMessageDialog(null, "Please select a "  + selectType +
+                        " in the List or register a " + selectType + " first", "Not Select Error",
                 ERROR_MESSAGE);
     }
 

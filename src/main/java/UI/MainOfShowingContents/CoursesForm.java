@@ -243,9 +243,13 @@ public class CoursesForm extends javax.swing.JFrame {
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        MakeAReport makeAReport = new MakeAReport(this.user, this.viewCourse);
-        makeAReport.setVisible(true);
-        this.setVisible(false);
+        if (this.viewCourse == null){
+            GeneralPresenter.showNotSelectError("Course");
+        } else {
+            MakeAReport makeAReport = new MakeAReport(this.user, this.viewCourse);
+            makeAReport.setVisible(true);
+            this.setVisible(false);
+        }
     }
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,7 +264,7 @@ public class CoursesForm extends javax.swing.JFrame {
     private void jList2MouseClicked() {
         int chosenCourseIndex = jList2.getSelectedIndex();
         if(chosenCourseIndex==-1){
-            GeneralPresenter.showEmptyEntryError();
+            GeneralPresenter.showNotSelectError("Course");
         }
         else {
             Course selectCourse = courses.get(chosenCourseIndex);
@@ -279,18 +283,15 @@ public class CoursesForm extends javax.swing.JFrame {
     }
 
     private void showPostsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         if (this.viewCourse == null){
-            GeneralPresenter.showNotSelectError();
+            GeneralPresenter.showNotSelectError("Course");
         } else {
         PostForm postForm = new PostForm(user, viewCourse);
         postForm.setVisible(true);
         this.setVisible(false);
-
         }
     }
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         ProfilePage profilePage = new ProfilePage(this.user);
         profilePage.setVisible(true);
         this.setVisible(false);
