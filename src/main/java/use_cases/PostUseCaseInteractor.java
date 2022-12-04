@@ -14,6 +14,7 @@ public class PostUseCaseInteractor {
 
     private final CourseDataInterface courseDataInterface;
     public PostUseCaseInteractor(CourseDataInterface courseDataInterface) {
+
         this.courseDataInterface = courseDataInterface;
     }
 
@@ -29,14 +30,14 @@ public class PostUseCaseInteractor {
         String text = post_info.get("text").toString();
         User postedBy = (User) post_info.get("user");
         Course course = (Course) post_info.get("course");
-        boolean empty = checkPostValidity(title, text);
+        boolean notEmpty = checkPostValidity(title, text);
         boolean duplicate = courseDataInterface.postExists(course.getCode(), title);
-        if (empty && !duplicate){
+        if (notEmpty && !duplicate){
             Post new_post = new Post(title, text, postedBy, course);
             course.addPost(new_post);
         }
-        else if(!empty) {
-            throw new EmptyEntryException("title");
+        else if(!notEmpty) {
+            throw new EmptyEntryException("title or content");
         }else{
             throw new DuplicationException("post");
         }
@@ -72,7 +73,7 @@ public class PostUseCaseInteractor {
     }
 
     public boolean checkPostValidity(String title, String text){
-        return title != "" & text != "" ;
+        return !title.strip().equals("")  && !text.strip().equals("");
     }
     public boolean checkTopicExist(Course course, String title){
         return course.lookupPostFromTopic(title) != null;

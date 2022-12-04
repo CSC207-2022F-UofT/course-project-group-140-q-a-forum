@@ -150,11 +150,7 @@ public class UserUseCaseInteractor {
      * @return if successfully change the password.
      */
 
-
-
     public boolean resetUsername(User user, String newUsername) {
-        // If the given new username exists in database, return false.
-        // Reset the password.
         userDataInterface.resetUsername(user, newUsername);
         return true;
     }
@@ -169,17 +165,18 @@ public class UserUseCaseInteractor {
      * @param newPassword the new password user wants to change.
      * @return if successfully change the password.
      */
-    public boolean resetPassword(User user, String oldPassword, String newPassword) {
-        // If the given new password does not meet the requirement, return false.
+    public void resetPassword(User user, String oldPassword, String newPassword) {
+        if (oldPassword.equals("") || newPassword.equals("")){
+            throw new EmptyEntryException("password");
+        }
         if (!passwordCheck(newPassword)) {
-            return false;
+            throw new PasswordTooWeakException();
         } else if (!user.getPassword().equals(oldPassword)) {
-            return false;
+            throw new WrongPasswordException("old Password");
         }
 
         // Reset the password.
         userDataInterface.resetPassword(user.getUsername(), newPassword);
-        return true;
     }
 
     /**
@@ -191,8 +188,6 @@ public class UserUseCaseInteractor {
      * @return if successfully removed this user.
      */
     public boolean removeAUser(String userName) {
-
-        // If the given user does not exist in the database, return false.
         if (!userDataInterface.userExists(userName)) {
             return false;
         }

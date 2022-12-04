@@ -81,6 +81,27 @@ public class UserController {
      return userUseCaseInteractor.getUser(userName);
     }
 
+    /**
+     *
+     * @param user Pass in the user we are going to change the password
+     * @param oldPassword Pass in the
+     * @param newPassword
+     * @return
+     */
+    public int chagnePassword(User user, String oldPassword, String newPassword){
+        try{ userUseCaseInteractor.resetPassword(user, oldPassword, newPassword);}
+        catch(EntryNotFoundException e){
+            return -1;
+        }
+        catch (WrongPasswordException e){
+            return -2;
+        }
+        catch (PasswordDoesNotMatchException e){
+            return -3;
+        }
+        return 1;
+    }
+
 
 
 
