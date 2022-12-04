@@ -102,7 +102,7 @@ public class CourseUseCaseInteractorTest  {
 
     @Test
     public void NotfoundModify(){
-        assertEquals(-1,courseController.modifyCourse(true,"CSC148","Semester", ""));
+        assertEquals(-1,courseController.modifyCourse(true,"CSC207","Semester", ""));
     }
 
     @Test
