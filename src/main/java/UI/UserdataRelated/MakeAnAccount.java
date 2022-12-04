@@ -58,11 +58,7 @@ public class MakeAnAccount extends  javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Set Up a Account"));
 
-        userNameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameTextActionPerformed(evt);
-            }
-        });
+        userNameText.addActionListener(this::userNameTextActionPerformed);
 
         jLabel6.setText("UserName:");
 
@@ -75,26 +71,14 @@ public class MakeAnAccount extends  javax.swing.JFrame {
         jLabel10.setText("Verification:");
 
         sendButton.setText("Send Verification");
-        sendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendButtonActionPerformed(evt);
-            }
-        });
+        sendButton.addActionListener(this::sendButtonActionPerformed);
 
 
         backButton.setText("Back to Login Page");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         registerButton.setText("Register");
-        registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerButtonActionPerformed(evt);
-            }
-        });
+        registerButton.addActionListener(this::registerButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -298,19 +282,6 @@ public class MakeAnAccount extends  javax.swing.JFrame {
                 verificationText.setFocusable(true);
             }
         }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MakeAnAccount().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify

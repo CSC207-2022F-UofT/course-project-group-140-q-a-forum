@@ -5,7 +5,6 @@ import UI.PostingStuff.MakeAComment;
 import UI.PostingStuff.MakeAPost;
 import base.main;
 import controllers.CourseController;
-import controllers.PostController;
 import entities.Course;
 import entities.Post;
 import entities.User;
@@ -20,20 +19,15 @@ public class PostForm extends javax.swing.JFrame {
     private final User user;
     private final Course course;
 
-    private final ArrayList<Post> posts;
-
     private Post viewPost = null;
     private final CourseController courseController = main.courseController;
-    private final PostController postControllers = main.postController;
 
     /**
      * Creates new form PostForm
      */
-    public PostForm(User user, Course course, ArrayList<Post> posts) {
+    public PostForm(User user, Course course) {
         this.user = user;
         this.course = course;
-        this.posts = posts;
-
         initComponents();
     }
 
@@ -45,35 +39,37 @@ public class PostForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jList2 = new javax.swing.JList();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel7 = new javax.swing.JPanel();
+        javax.swing.JLabel jLabel8 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
-        showcommentButton = new javax.swing.JButton();
-        reportButton = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        javax.swing.JButton showcommentButton = new javax.swing.JButton();
+        javax.swing.JButton reportButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel9 = new javax.swing.JLabel();
         authorLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        commentButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        userNameLabel = new javax.swing.JLabel();
+        commentNumberLabel = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+        javax.swing.JButton commentButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
+        javax.swing.JButton backButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel userNameLabel = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel4 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        courseNameLabel = new javax.swing.JLabel();
-        postButton = new javax.swing.JButton();
+        javax.swing.JLabel courseNameLabel = new javax.swing.JLabel();
+        javax.swing.JButton postButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Posts"));
         jList2.setModel(new javax.swing.AbstractListModel() {
-            // String[] strings = {"item1", "item2"};
-            String[] strings = courseController.getAllPostTitles(course.getCode()).toArray(new String[0]);
+            final String[] strings = courseController.getAllPostTitles(course.getCode()).toArray(new String[0]);
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         jList2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt){
-                jList2MouseClicked(evt);
+                jList2MouseClicked();
             }
         });
 
@@ -84,18 +80,10 @@ public class PostForm extends javax.swing.JFrame {
         nameLabel.setText("topic of the Post");
 
         showcommentButton.setText("Show All Comments");
-        showcommentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showcommentButtonActionPerformed(evt);
-            }
-        });
+        showcommentButton.addActionListener(this::showcommentButtonActionPerformed);
 
         reportButton.setText("Report this Post");
-        reportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportButtonActionPerformed(evt);
-            }
-        });
+        reportButton.addActionListener(this::reportButtonActionPerformed);
 
         jLabel9.setText("Author Name:");
 
@@ -104,11 +92,11 @@ public class PostForm extends javax.swing.JFrame {
         jLabel2.setText("Post Content:");
 
         commentButton.setText("Comment on this Post");
-        commentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                commentButtonActionPerformed(evt);
-            }
-        });
+        commentButton.addActionListener(this::commentButtonActionPerformed);
+
+        jLabel3.setText("Number of Comments:");
+
+        commentNumberLabel.setText("Number of Comments");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -118,6 +106,12 @@ public class PostForm extends javax.swing.JFrame {
                                 .addGap(15, 15, 15)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel7Layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(commentNumberLabel)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                                .addGap(53, 53, 53)
                                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(jLabel8)
                                                         .addComponent(jLabel9)
@@ -151,7 +145,11 @@ public class PostForm extends javax.swing.JFrame {
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel2)
                                         .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(89, 89, 89)
+                                .addGap(16, 16, 16)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(commentNumberLabel))
+                                .addGap(56, 56, 56)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(showcommentButton)
                                         .addComponent(reportButton)
@@ -160,11 +158,7 @@ public class PostForm extends javax.swing.JFrame {
         );
 
         backButton.setText("Back to Courses Page");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         jLabel1.setText("User:");
 
@@ -175,11 +169,7 @@ public class PostForm extends javax.swing.JFrame {
         courseNameLabel.setText(course.getName());
 
         postButton.setText("Post a Post");
-        postButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postButtonActionPerformed(evt);
-            }
-        });
+        postButton.addActionListener(this::postButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,10 +221,9 @@ public class PostForm extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>
+    }
 
     private void showcommentButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         if(this.viewPost==null){
             GeneralPresenter.showNotSelectError();
         }
@@ -246,25 +235,28 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        MakeAComment makeAComment = new MakeAComment(user, course, viewPost);
-        makeAComment.setVisible(true);
-        this.setVisible(false);
+        if (this.viewPost == null) {
+            GeneralPresenter.showNotSelectError();
+        } else {
+            MakeAComment makeAComment = new MakeAComment(user, course, viewPost);
+            makeAComment.setVisible(true);
+            this.setVisible(false);
+        }
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+
     }
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());
         MakeAPost makeAPost = new MakeAPost(user, course, posts);
         makeAPost.setVisible(true);
         this.setVisible(false);
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         ArrayList<Course> courses = courseController.getAllCourses();
         CoursesForm coursesForm = new CoursesForm(user, courses);
         coursesForm.setVisible(true);
@@ -272,77 +264,33 @@ public class PostForm extends javax.swing.JFrame {
 
     }
 
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt){
+    private void jList2MouseClicked(){
         int chosenPostIndex = jList2.getSelectedIndex();
-        Post selectPost = posts.get(chosenPostIndex);
-        changePanel(selectPost);
-        this.viewPost = selectPost;
+        if (chosenPostIndex == - 1){
+            GeneralPresenter.showNotSelectError();
+        }
+        else {
+            ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());
+            Post selectPost = posts.get(chosenPostIndex);
+            this.viewPost = selectPost;
+            changePanel(selectPost);
+        }
 
     }
     private void changePanel(Post post){
         nameLabel.setText(post.getTopic());
         authorLabel.setText("user");
         descriptionLabel.setText(post.getTexts());
+        String numberComments = String.valueOf(viewPost.getComments().size());
+        commentNumberLabel.setText(numberComments);
     }
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(PostForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            User user = new User("a", "d", "d");
-//            Course course = new Course("c","d", "d", "d", new ArrayList<String>() );
-//            Post post = new Post("s", "s", null, user, course);
-//            ArrayList<Post> posts = new ArrayList<Post>();
-//            public void run() {
-//                new PostForm(user, course, posts).setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify
     private javax.swing.JLabel authorLabel;
-    private javax.swing.JButton backButton;
-    private javax.swing.JButton commentButton;
-    private javax.swing.JLabel courseNameLabel;
+    private javax.swing.JLabel commentNumberLabel;
     private javax.swing.JLabel descriptionLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList2;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JButton postButton;
-    private javax.swing.JButton reportButton;
-    private javax.swing.JButton showcommentButton;
-    private javax.swing.JLabel userNameLabel;
-    // End of variables declaration
 }
 
 

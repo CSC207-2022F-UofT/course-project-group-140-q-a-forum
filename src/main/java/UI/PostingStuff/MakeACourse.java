@@ -38,30 +38,32 @@ public class MakeACourse extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         topicText = new javax.swing.JTextField();
         codeText = new javax.swing.JTextField();
         instructorText = new javax.swing.JTextField();
         semesterCombo = new javax.swing.JComboBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         descriptionTextA = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        registerButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel4 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
+        javax.swing.JButton registerButton = new javax.swing.JButton();
+        // Variables declaration - do not modify
+        javax.swing.JButton backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Register a Course"));
 
-        semesterCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fall", "Winter", "Summer", " " }));
+        semesterCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fall", "Winter", "Summer"}));
 
         descriptionTextA.setColumns(20);
         descriptionTextA.setRows(5);
+        descriptionTextA.setLineWrap(true);
         jScrollPane1.setViewportView(descriptionTextA);
 
         jLabel1.setText("Course Topic:");
@@ -75,18 +77,10 @@ public class MakeACourse extends javax.swing.JFrame {
         jLabel6.setText("Description:");
 
         registerButton.setText("Register the Course");
-        registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerButtonActionPerformed(evt);
-            }
-        });
+        registerButton.addActionListener(this::registerButtonActionPerformed);
 
         backButton.setText("Back to the Course Page");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -178,7 +172,7 @@ public class MakeACourse extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        HashMap<String,String> CourseInfo = new HashMap<String, String>();
+        HashMap<String,String> CourseInfo = new HashMap<>();
         CourseInfo.put("Name", topicText.getText());
         CourseInfo.put("Course Code", codeText.getText());
         CourseInfo.put("Instructors", instructorText.getText());
@@ -193,9 +187,7 @@ public class MakeACourse extends javax.swing.JFrame {
                 topicText.setText("");
                 topicText.setFocusable(true);
             }
-            case -2 -> {
-                GeneralPresenter.showEmptyEntryError();
-            }
+            case -2 -> GeneralPresenter.showEmptyEntryError();
             case 1 ->{
                 GeneralPresenter.showSuccessMessage(topicText.getText());
                 ArrayList<Course> courses = courseController.getAllCourses();
@@ -216,57 +208,10 @@ public class MakeACourse extends javax.swing.JFrame {
         this.setVisible(false);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MakeACourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MakeACourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MakeACourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MakeACourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                User user = new User();
-                new MakeACourse(user).setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify
-    private javax.swing.JButton backButton;
     private javax.swing.JTextField codeText;
     private javax.swing.JTextArea descriptionTextA;
     private javax.swing.JTextField instructorText;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton registerButton;
     private javax.swing.JComboBox semesterCombo;
     private javax.swing.JTextField topicText;
     // End of variables declaration

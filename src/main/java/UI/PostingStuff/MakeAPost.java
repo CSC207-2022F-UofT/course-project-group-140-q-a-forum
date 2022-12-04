@@ -44,20 +44,21 @@ public class MakeAPost extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        javax.swing.ButtonGroup buttonGroup1 = new javax.swing.ButtonGroup();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         titleText = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
+        javax.swing.JLabel nameLabel = new javax.swing.JLabel();
+        javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         contentTextA = new javax.swing.JTextArea();
-        postButton = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        userButton = new javax.swing.JRadioButton();
-        anoymousButton = new javax.swing.JRadioButton();
-        backButton = new javax.swing.JButton();
+        javax.swing.JButton postButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
+        javax.swing.JRadioButton userButton = new javax.swing.JRadioButton();
+        // Variables declaration - do not modify
+        javax.swing.JRadioButton anoymousButton = new javax.swing.JRadioButton();
+        javax.swing.JButton backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,11 +77,7 @@ public class MakeAPost extends javax.swing.JFrame {
         jScrollPane1.setViewportView(contentTextA);
 
         postButton.setText("Post the post");
-        postButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postButtonActionPerformed(evt);
-            }
-        });
+        postButton.addActionListener(this::postButtonActionPerformed);
 
         jLabel5.setText("Post as: ");
 
@@ -93,11 +90,7 @@ public class MakeAPost extends javax.swing.JFrame {
         anoymousButton.setActionCommand("anonymous");
 
         backButton.setText("Back to the post");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,25 +173,19 @@ public class MakeAPost extends javax.swing.JFrame {
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        HashMap<String, Object> PostInfo = new HashMap<String, Object>();
+        HashMap<String, Object> PostInfo = new HashMap<>();
         PostInfo.put("title", titleText.getText());
         PostInfo.put("text", contentTextA.getText());
         PostInfo.put("user", user);
-        //PostInfo.put("user", buttonGroup1.getSelection().getActionCommand());
         PostInfo.put("images", null);
         PostInfo.put("course", course);
         int result = postControllers.createPost(PostInfo);
         switch (result){
-            case -1 -> {
-                GeneralPresenter.showEmptyEntryError();
-            }
-            case -2 -> {
-                GeneralPresenter.showDuplicationError("Post");
-            }
+            case -1 -> GeneralPresenter.showEmptyEntryError();
+            case -2 -> GeneralPresenter.showDuplicationError("Post");
             case 1 -> {
                 GeneralPresenter.showSuccessMessage("Post");
-                ArrayList<Post> postsUpdate = courseController.getAllPosts(course.getCode());
-                PostForm postForm = new PostForm(user, course, postsUpdate);
+                PostForm postForm = new PostForm(user, course);
                 postForm.setVisible(true);
                 this.setVisible(false);
             }
@@ -206,66 +193,12 @@ public class MakeAPost extends javax.swing.JFrame {
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        PostForm postForm = new PostForm(user, course, posts);
+        PostForm postForm = new PostForm(user, course);
         postForm.setVisible(true);
         this.setVisible(false);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(MakeAPost.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                User user = new User();
-//                Course course = new Course();
-//                Post[] posts = {new Post("s", "s", null, user, course)};
-//                new MakeAPost(user, course, posts).setVisible(true);
-//            }
-//        });
-//    }
-
-    // Variables declaration - do not modify
-    private javax.swing.JRadioButton anoymousButton;
-    private javax.swing.JButton backButton;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextArea contentTextA;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel nameLabel;
-    private javax.swing.JButton postButton;
     private javax.swing.JTextField titleText;
-    private javax.swing.JRadioButton userButton;
     // End of variables declaration
 }
