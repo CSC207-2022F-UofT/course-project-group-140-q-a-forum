@@ -88,6 +88,12 @@ public class CommentsForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList2);
 
         gobackButton.setText("Back to Post");
+        gobackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gobackButtonActionPerformed(evt);
+            }
+        });
+
 
         jLabel3.setText("User:");
 
@@ -205,10 +211,19 @@ public class CommentsForm extends javax.swing.JFrame {
 
     private void commentButton11commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+
     }
 
     private void reportButton11reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    private void gobackButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        ArrayList<Post> posts = courseController.getAllPosts(course.getCode());
+        PostForm postForm = new PostForm(user, course, posts);
+        postForm.setVisible(true);
+        this.setVisible(false);
     }
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
@@ -221,8 +236,8 @@ public class CommentsForm extends javax.swing.JFrame {
     }
 
     private void changePanel(Comment comment){
-       showingUserLabel6.setText(comment.getPostedBy().getUsername());
-       showContentLabel6.setText(comment.getTexts());
+       showingUserLabel16.setText(comment.getPostedBy().getUsername());
+       showContentLabel16.setText(comment.getTexts());
 
     }
 
@@ -271,89 +286,21 @@ public class CommentsForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify
     private javax.swing.JLabel UsernameLabel;
-    private javax.swing.JButton commentButton;
-    private javax.swing.JButton commentButton1;
+
     private javax.swing.JButton commentButton11;
-    private javax.swing.JButton commentButton2;
-    private javax.swing.JButton commentButton3;
-    private javax.swing.JButton commentButton4;
-    private javax.swing.JButton commentButton5;
-    private javax.swing.JButton commentButton6;
-    private javax.swing.JButton commentButton7;
-    private javax.swing.JButton commentButton8;
-    private javax.swing.JButton commentButton9;
     private javax.swing.JButton gobackButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList2;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton reportButton;
-    private javax.swing.JButton reportButton1;
     private javax.swing.JButton reportButton11;
-    private javax.swing.JButton reportButton2;
-    private javax.swing.JButton reportButton3;
-    private javax.swing.JButton reportButton4;
-    private javax.swing.JButton reportButton5;
-    private javax.swing.JButton reportButton6;
-    private javax.swing.JButton reportButton7;
-    private javax.swing.JButton reportButton8;
-    private javax.swing.JButton reportButton9;
-    private javax.swing.JLabel showContentLabel10;
-    private javax.swing.JLabel showContentLabel11;
-    private javax.swing.JLabel showContentLabel12;
-    private javax.swing.JLabel showContentLabel13;
-    private javax.swing.JLabel showContentLabel14;
     private javax.swing.JLabel showContentLabel16;
-    private javax.swing.JLabel showContentLabel5;
-    private javax.swing.JLabel showContentLabel6;
-    private javax.swing.JLabel showContentLabel7;
-    private javax.swing.JLabel showContentLabel8;
-    private javax.swing.JLabel showContentLabel9;
     private javax.swing.JLabel showingPostTitleLabel;
-    private javax.swing.JLabel showingUserLabel10;
-    private javax.swing.JLabel showingUserLabel11;
-    private javax.swing.JLabel showingUserLabel12;
-    private javax.swing.JLabel showingUserLabel13;
-    private javax.swing.JLabel showingUserLabel14;
     private javax.swing.JLabel showingUserLabel16;
-    private javax.swing.JLabel showingUserLabel5;
-    private javax.swing.JLabel showingUserLabel6;
-    private javax.swing.JLabel showingUserLabel7;
-    private javax.swing.JLabel showingUserLabel8;
-    private javax.swing.JLabel showingUserLabel9;
+
     // End of variables declaration
 }
