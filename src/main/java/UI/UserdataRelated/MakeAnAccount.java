@@ -229,8 +229,9 @@ public class MakeAnAccount extends  javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         String email = emailText.getText();
-
+        userController.sendEmail(email);
         showingSeding.setText("Verification Send");
+
 
     }
 

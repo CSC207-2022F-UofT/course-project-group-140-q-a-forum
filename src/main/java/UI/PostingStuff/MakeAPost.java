@@ -6,6 +6,7 @@ import base.main;
 import controllers.CourseController;
 import controllers.PostController;
 
+import controllers.UserController;
 import entities.Course;
 import entities.Post;
 import entities.User;
@@ -21,7 +22,7 @@ public class MakeAPost extends javax.swing.JFrame {
     private final User user;
     private final Course course;
     private final ArrayList<Post> posts;
-    private final CourseController courseController = main.courseController;
+    private final UserController userController = main.userController;
     private final PostController postControllers = main.postController;
 
 
@@ -44,7 +45,7 @@ public class MakeAPost extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        javax.swing.ButtonGroup buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         titleText = new javax.swing.JTextField();
@@ -176,7 +177,17 @@ public class MakeAPost extends javax.swing.JFrame {
         HashMap<String, Object> PostInfo = new HashMap<>();
         PostInfo.put("title", titleText.getText());
         PostInfo.put("text", contentTextA.getText());
-        PostInfo.put("user", user);
+        String getSelect = buttonGroup1.getSelection().getActionCommand();
+
+        if(getSelect.equals("user")){
+            PostInfo.put("user", user);
+        }else {
+            User anonymous = userController.getUser("Anonymous");
+
+            System.out.println();
+            PostInfo.put("user", anonymous);
+        }
+
         PostInfo.put("images", null);
         PostInfo.put("course", course);
         int result = postControllers.createPost(PostInfo);
@@ -200,5 +211,6 @@ public class MakeAPost extends javax.swing.JFrame {
 
     private javax.swing.JTextArea contentTextA;
     private javax.swing.JTextField titleText;
+    private  javax.swing.ButtonGroup buttonGroup1;
     // End of variables declaration
 }

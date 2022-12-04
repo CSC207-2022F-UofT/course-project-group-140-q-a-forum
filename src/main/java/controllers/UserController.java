@@ -101,29 +101,65 @@ public class UserController {
      * return the user. Otherwise, return null.
      */
     public User getUser(String userName) {
-        return userUseCaseInteractor.getUser(userName);
+        try{return userUseCaseInteractor.getUser(userName);}
+        catch (NotFoundException e){
+            return null;
+        }
     }
 
-//    /**
-//     *
-//     * @param user Pass in the user we are going to change the password
-//     * @param oldPassword Pass in the
-//     * @param newPassword
-//     * @return
-//     */
-//    public int chagnePassword(User user, String oldPassword, String newPassword){
-//        try{ userUseCaseInteractor.resetPassword(user, oldPassword, newPassword);}
-//        catch(EntryNotFoundException e){
-//            return -1;
-//        }
-//        catch (WrongPasswordException e){
-//            return -2;
-//        }
-//        catch (PasswordDoesNotMatchException e){
-//            return -3;
-//        }
-//        return 1;
-//    }
+    /**
+     * Change the Password of the User if the user knows their oldPassword and want to change it
+     * @param user  User wait to be changed the password
+     * @param oldPassword   String, the old password
+     * @param newPassword   String, new Password
+     * @param reenteredPassword String, make sure user doesn't type the wrong pass
+     * @return  int
+     *          1: change password successfully
+     *          -1: Some entries left as empty
+     *          -2: The new password is Invalid
+     *          -3: Old password doesn't match the original pass
+     *          -4: re-enter Password doesn't match new Password
+     *
+     *
+     */
+    public int changePassword(User user, String oldPassword, String newPassword, String reenteredPassword){
+        try{ userUseCaseInteractor.resetPassword(user, oldPassword, newPassword, reenteredPassword);}
+        catch(EmptyEntryException e){
+            return -1;
+        }
+        catch (InvalidFormatException e){
+            return -2;
+        }
+        catch (WrongInfoException e){
+            String msg = e.getMessage();// get the error message.
+            if (msg.equals("Wrong password !")) {
+                return -3;
+            }
+            return -4;
+
+        }
+        return 1;
+    }
+
+    /**
+     * Reset User's username through Profile Page
+     * @param user          User The user who want to change the password
+     * @param newUsername   String the userName which want to change
+     * @return  int -1 Username already exists
+     *              -2 Some entries are empty
+     *              1 reset Username successfully
+     */
+    public int resetUsername(User user, String newUsername){
+        try {
+            userUseCaseInteractor.resetUsername(user, newUsername);
+        }catch (DuplicationException e){
+            return -1;
+        }catch (EmptyEntryException e){
+            return -2;
+        }
+            return 1;
+        }
+
+    }
 
 
-}

@@ -286,7 +286,7 @@ public class PostForm extends javax.swing.JFrame {
     }
     private void changePanel(Post post){
         nameLabel.setText(post.getTopic());
-        authorLabel.setText("user");
+        authorLabel.setText(post.getPostedBy().getUsername());
         descriptionLabel.setText(post.getTexts());
         String numberComments = String.valueOf(viewPost.getComments().size());
         commentNumberLabel.setText(numberComments);

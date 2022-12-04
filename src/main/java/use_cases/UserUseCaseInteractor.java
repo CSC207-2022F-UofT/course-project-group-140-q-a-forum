@@ -40,7 +40,7 @@ public class UserUseCaseInteractor {
     public void createUser(Map<String, String> user) throws RuntimeException {
 
         // Check if the user exists in Database.
-        if (!userDataInterface.userExists(user.get("Username"))) {
+        if (userDataInterface.userExists(user.get("Username"))) {
             throw new DuplicationException("user");
         }
 
@@ -239,10 +239,10 @@ public class UserUseCaseInteractor {
      * return the user. Otherwise, throw NotFoundException.
      */
     public User getUser(String userName) {
-        if (!userDataInterface.userExists(userName)) {
+        if (userDataInterface.userExists(userName)) {
             return userDataInterface.getUser(userName);
         }
-        return null;
+       throw new NotFoundException("user");
     }
 
 
@@ -252,15 +252,15 @@ public class UserUseCaseInteractor {
      * Otherwise, it returns false.
      * @param user        the user to change username.
      * @param newUsername the new username user wants to change.
-     * @return If the username is reset successfully.
      */
-    public boolean resetUsername(User user, String newUsername) {
-        boolean userExists = userDataInterface.userExists(user.getUsername());
+    public void resetUsername(User user, String newUsername) {
+        boolean userExists = userDataInterface.userExists(newUsername);
         if (userExists){
-            return false;
-        }else{
-            userDataInterface.resetUsername(user, newUsername);
-            return true;
+            throw new DuplicationException("username");
+        } else if (newUsername.strip().equals("")) {
+            throw new EmptyEntryException("username");
+        } else{
+           userDataInterface.resetUsername(user, newUsername);
         }
     }
 
@@ -299,18 +299,15 @@ public class UserUseCaseInteractor {
      * otherwise, it returns false.
      *
      * @param userName username of the user to be removed.
-     * @return if successfully removed this user.
      */
-    public boolean removeAUser(String userName) {
+    public void removeAUser(String userName) {
 
         // If the given user does not exist in the database, return false.
         if (!userDataInterface.userExists(userName)) {
-            return false;
+            throw new NotFoundException("user");
         }
 
         userDataInterface.deleteUser(userName);
-        return true;
-
     }
 
     /**
