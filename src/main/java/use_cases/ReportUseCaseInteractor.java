@@ -20,10 +20,9 @@ public class ReportUseCaseInteractor {
 
     /**
      * Create a report and setting UserName, Report type, Report content.
-     * Throw the UserNotExistException if the user does not exist in the database.
      *
      * @param reportInfo This is a Map that contains necessary information
-     *                    needed to register a user. The keys must be
+     *                    needed to register a report. The keys must be
      *                    "Username", "ReportType", and "Content".
      *                    The report type is identified by int,
      *                    0 for report on user,
@@ -49,7 +48,13 @@ public class ReportUseCaseInteractor {
     /**
      * Remove a Report from the current database.
      *
-     * @param reportToDelete This is a report to be deleted.
+     * @param reportToDelete This is a Map that contains necessary information
+     *                       needed to register a report. The keys must be
+     *                       "Username", "ReportType", and "Content".
+     *                       The report type is identified by int,
+     *                       0 for report on user,
+     *                       1 for report on post,
+     *                       2 for report on course.
      */
 
     public void removeReport(Map<String, Object> reportToDelete) {
