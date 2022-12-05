@@ -31,23 +31,24 @@ public class ProfilePage extends javax.swing.JFrame {
 
     private void initComponents() {
 
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        reputationTitle = new javax.swing.JLabel();
-        changeButton = new javax.swing.JButton();
+        javax.swing.JFormattedTextField jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+        javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel8 = new javax.swing.JLabel();
+        javax.swing.JLabel reputationTitle = new javax.swing.JLabel();
+        javax.swing.JButton changeButton = new javax.swing.JButton();
         doneButton = new javax.swing.JButton();
         userLabel = new javax.swing.JLabel();
         passLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
         reputationLabel = new javax.swing.JLabel();
-        editUserButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
+        javax.swing.JButton editUserButton = new javax.swing.JButton();
+        // Variables declaration - do not modify
+        javax.swing.JButton backButton = new javax.swing.JButton();
         changeUserNameText = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         totalLikeLabel = new javax.swing.JLabel();
 
         jFormattedTextField1.setText("jFormattedTextField1");
@@ -65,18 +66,10 @@ public class ProfilePage extends javax.swing.JFrame {
         reputationTitle.setText("Reputation:");
 
         changeButton.setText("Change Password");
-        changeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeButtonActionPerformed(evt);
-            }
-        });
+        changeButton.addActionListener(this::changeButtonActionPerformed);
 
         doneButton.setText("Done");
-        doneButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doneButtonActionPerformed(evt);
-            }
-        });
+        doneButton.addActionListener(this::doneButtonActionPerformed);
 
         // userLabel.setText("Username");
         userLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -93,18 +86,10 @@ public class ProfilePage extends javax.swing.JFrame {
         setInitial();
 
         editUserButton.setText("Edit");
-        editUserButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUserButtonActionPerformed(evt);
-            }
-        });
+        editUserButton.addActionListener(this::editUserButtonActionPerformed);
 
         backButton.setText("Back to Upper-Level");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         jLabel1.setText("Type in the UserName want to change:");
 
@@ -260,23 +245,12 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
 
-        // Variables declaration - do not modify
-    private javax.swing.JButton backButton;
-    private javax.swing.JButton changeButton;
     private javax.swing.JTextField changeUserNameText;
     private javax.swing.JButton doneButton;
-    private javax.swing.JButton editUserButton;
     private javax.swing.JLabel emailLabel;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel passLabel;
     private javax.swing.JLabel reputationLabel;
-    private javax.swing.JLabel reputationTitle;
     private javax.swing.JLabel totalLikeLabel;
     private javax.swing.JLabel userLabel;
     // End of variables declaration

@@ -34,4 +34,9 @@ public class GeneralPresenter extends JOptionPane {
                 "Register Success",INFORMATION_MESSAGE);
     }
 
+    public static void showDuplicateLikeError(String likeType){
+        JOptionPane.showMessageDialog(null, "You have already " + likeType +" the post",
+                "Duplicate Like",ERROR_MESSAGE);
+    }
+
 }

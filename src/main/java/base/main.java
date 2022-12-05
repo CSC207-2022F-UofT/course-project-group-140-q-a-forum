@@ -43,14 +43,14 @@ public class main {
         adminInfo.put("Email", "3232085039@qq.com");
         adminInfo.put("isAdmin", "True");
         adminInfo.put("Verification", "DebugCode");
-//        userController1.registerUser(adminInfo);
+        //userController1.registerUser(adminInfo);
        // System.out.println( userController1.registerUser(adminInfo));
         User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
         ArrayList<Course> courses = courseController.getAllCourses();
-//        CoursesForm coursesForm =new CoursesForm(user, courses);
-//         coursesForm.setVisible(true);
-        MakeAnAccount makeAnAccount = new MakeAnAccount();
-        makeAnAccount.setVisible(true);
+       CoursesForm coursesForm =new CoursesForm(user, courses);
+       coursesForm.setVisible(true);
+//        MakeAnAccount makeAnAccount = new MakeAnAccount();
+//        makeAnAccount.setVisible(true);
     }
 
 }
