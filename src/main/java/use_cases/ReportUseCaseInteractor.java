@@ -12,10 +12,12 @@ import java.util.Map;
 public class ReportUseCaseInteractor {
     final ReportDataInterface reportDataInterface;
     final UserDataInterface userDataInterface;
+    final ReportFactory factory;
 
-    public ReportUseCaseInteractor(ReportDataInterface reportDataInterface, UserDataInterface userDataInterface) {
+    public ReportUseCaseInteractor(ReportDataInterface reportDataInterface, UserDataInterface userDataInterface, ReportFactory factory) {
         this.reportDataInterface = reportDataInterface;
         this.userDataInterface = userDataInterface;
+        this.factory = factory;
     }
 
     /**
@@ -30,16 +32,14 @@ public class ReportUseCaseInteractor {
      *                    2 for report on course.
      */
     public void createReport(Map<String, Object> reportInfo) {
-        switch ((int) reportInfo.get("ReportType")) {
-            case 0 -> reportDataInterface.addReport(new ReportOnUser((String) reportInfo.get("Username"),
-                    reportInfo.get("Content")));
 
-            case 1 -> reportDataInterface.addReport(new ReportOnPost((String) reportInfo.get("Username"),
-                    reportInfo.get("Content")));
-
-            case 2 -> reportDataInterface.addReport(new ReportOnCourse((String) reportInfo.get("Username"),
-                    reportInfo.get("Content")));
-
+        if (!userDataInterface.getUser((String) reportInfo.get("Username")).isAdmin()){
+            throw new NotFoundException("Administrator "+ reportInfo.get("Username"));
+        }
+        Report report;
+        report = factory.getReport(reportInfo);
+        if (report!=null) {
+            reportDataInterface.addReport(report);
         }
 
     }
@@ -58,16 +58,10 @@ public class ReportUseCaseInteractor {
      */
 
     public void removeReport(Map<String, Object> reportToDelete) {
-        switch ((int) reportToDelete.get("ReportType")) {
-            case 0 -> reportDataInterface.removeReport(new ReportOnUser((String) reportToDelete.get("Username"),
-                    reportToDelete.get("Content")));
-
-            case 1 -> reportDataInterface.removeReport(new ReportOnPost((String) reportToDelete.get("Username"),
-                    reportToDelete.get("Content")));
-
-            case 2 -> reportDataInterface.removeReport(new ReportOnCourse((String) reportToDelete.get("Username"),
-                    reportToDelete.get("Content")));
-
+        Report report;
+        report = factory.getReport(reportToDelete);
+        if (report!=null) {
+            reportDataInterface.removeReport(report);
         }
 
     }
