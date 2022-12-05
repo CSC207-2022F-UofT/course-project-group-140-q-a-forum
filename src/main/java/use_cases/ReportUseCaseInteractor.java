@@ -49,7 +49,7 @@ public class ReportUseCaseInteractor {
      * Remove a Report from the current database.
      *
      * @param reportToDelete This is a Map that contains necessary information
-     *                       needed to register a report. The keys must be
+     *                       needed to delete a report. The keys must be
      *                       "Username", "ReportType", and "Content".
      *                       The report type is identified by the value of "ReportType",
      *                       0 for report on user,
