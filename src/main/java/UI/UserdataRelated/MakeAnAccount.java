@@ -240,11 +240,9 @@ public class MakeAnAccount extends  javax.swing.JFrame {
             }
             default -> {
                 this.correctVerification = String.valueOf(resultOrCode);
+                showingSeding.setText("Verification Send");
             }
         }
-        showingSeding.setText("Verification Send");
-
-
     }
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {

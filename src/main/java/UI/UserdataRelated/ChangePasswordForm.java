@@ -172,7 +172,6 @@ public class ChangePasswordForm extends javax.swing.JFrame {
         String newPassword = enterText.getText();
         String reenterPass = reText.getText();
         int result = userController.changePassword(user, oldPassword,newPassword, reenterPass);
-        System.out.println(result);
         switch (result){
             case -1->{
                 GeneralPresenter.showEmptyEntryError();
