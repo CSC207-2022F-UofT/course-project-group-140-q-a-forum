@@ -6,9 +6,7 @@ public class ReportOnUser implements Report {
     //ReportType: 0 report on User, 1 report on Post, 2 report on Course.
     private Object content;
 
-//    public ReportOnUser(){
-//
-//    }
+
 
     /**
      * Create a report on User.

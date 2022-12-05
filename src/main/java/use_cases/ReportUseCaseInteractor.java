@@ -24,7 +24,7 @@ public class ReportUseCaseInteractor {
      * @param reportInfo This is a Map that contains necessary information
      *                    needed to register a report. The keys must be
      *                    "Username", "ReportType", and "Content".
-     *                    The report type is identified by int,
+     *                    The report type is identified by the value of "ReportType",
      *                    0 for report on user,
      *                    1 for report on post,
      *                    2 for report on course.
@@ -51,7 +51,7 @@ public class ReportUseCaseInteractor {
      * @param reportToDelete This is a Map that contains necessary information
      *                       needed to register a report. The keys must be
      *                       "Username", "ReportType", and "Content".
-     *                       The report type is identified by int,
+     *                       The report type is identified by the value of "ReportType",
      *                       0 for report on user,
      *                       1 for report on post,
      *                       2 for report on course.
