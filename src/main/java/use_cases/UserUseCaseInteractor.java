@@ -16,18 +16,11 @@ import java.util.Properties;
 
 public class UserUseCaseInteractor {
     final UserDataInterface userDataInterface;
-    private String verifyNum;
-
 
     public UserUseCaseInteractor(UserDataInterface userDataInterface) {
         this.userDataInterface = userDataInterface;
     }
 
-    //This constructor should only be used as for testing purposes.
-    public UserUseCaseInteractor(UserDataInterface userDataInterface, String verificationCode) {
-        this.userDataInterface = userDataInterface;
-        this.verifyNum = verificationCode;
-    }
     /**
      * Register a user if it is not present in the current database.
      * Returns the situation of registration
@@ -169,7 +162,6 @@ public class UserUseCaseInteractor {
         Random rand = new Random();
         int code = rand.nextInt(900000) + 100000;
         String messagetosend = Integer.toString(code);
-        this.verifyNum = messagetosend;
 
 
         // 3. Create a email.
@@ -224,15 +216,6 @@ public class UserUseCaseInteractor {
         return message;
     }
 
-//    /**
-//     * Take in the email, and send a random verify number to the email.
-//     *
-//     * @param verifyNumber verify number user provided.
-//     * @return if the verify number is the same as verifyNum generated.
-//     */
-//    public boolean verifyEmail(String verifyNumber) {
-//        return verifyNumber.equals(verifyNum);
-//    }
 
 
     /**

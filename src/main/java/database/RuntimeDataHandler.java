@@ -2,11 +2,12 @@ package database;
 
 import entities.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class RuntimeDataHandler implements DataHandlerInterface {
+public class RuntimeDataHandler implements DataHandlerInterface, Serializable {
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Course> courses = new ArrayList<>();
     private ArrayList<Report> reports = new ArrayList<>();

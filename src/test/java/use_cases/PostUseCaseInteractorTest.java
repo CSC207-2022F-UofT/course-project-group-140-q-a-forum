@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class PostUseCaseInteractorTest {
     private final DatabaseGateway gateway = new DatabaseGateway();
 
-    private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");
+    private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
     private final CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
     private final PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
 
@@ -35,7 +35,7 @@ public class PostUseCaseInteractorTest {
         user.put("Email", "3232085039@qq.com");
         user.put("isAdmin", "True");
         user.put("Verification", "DebugCode");
-        userController.registerUser(user);
+        userController.registerUser(user, "DebugCode");
 
         HashMap<String, String> course = new HashMap<>();
         course.put("Name", "Introduction to Software Design");

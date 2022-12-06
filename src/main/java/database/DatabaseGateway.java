@@ -3,12 +3,13 @@ package database;
 import entities.*;
 import use_cases.DataBaseAccess.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
+public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface, Serializable {
 
     final RuntimeDataHandler dataHandler;
 
