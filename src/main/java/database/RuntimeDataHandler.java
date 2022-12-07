@@ -66,6 +66,12 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
     }
 
+    public void updateUsername(String oldUsername, String newUsername){
+        User user = name2User.get(oldUsername);
+        name2User.remove(oldUsername);
+        name2User.put(newUsername, user);
+    }
+
     /**
      * The method accepts a hashmap from a integer-valued key to a data and append it to the ararylist
      * It is not responsible of exception handling (i.e, data not in the arraylist)

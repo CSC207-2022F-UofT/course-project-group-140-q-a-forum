@@ -7,6 +7,7 @@ import entities.User;
 import use_cases.DataBaseAccess.CourseDataInterface;
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.HashMap;
 
@@ -41,6 +42,12 @@ public class PostUseCaseInteractor {
         }else{
             throw new DuplicationException("post");
         }
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -58,6 +65,12 @@ public class PostUseCaseInteractor {
         else {
             throw new NotFoundException("Post");
         }
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public void removePost(HashMap<String, Object> post_info){
@@ -68,6 +81,12 @@ public class PostUseCaseInteractor {
         }
         else{
             throw new NotFoundException("Post");
+        }
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
         }
     }
 
