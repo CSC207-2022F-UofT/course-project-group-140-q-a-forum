@@ -3,6 +3,7 @@ package database;
 import entities.*;
 import use_cases.DataBaseAccess.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +11,11 @@ import java.util.Map;
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
 
     final RuntimeDataHandler dataHandler;
+    final DatabaseDataHandler databaseHandler;
 
     public DatabaseGateway() {
         this.dataHandler = new RuntimeDataHandler();
+        this.databaseHandler = new DatabaseDataHandler();
     }
 
     @Override
@@ -193,6 +196,14 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         info.put("key", 2);
         info.put("data", report);
         dataHandler.deleteData(info);
+    }
+
+    public void saveToFile() throws IOException {
+        databaseHandler.saveToFile(dataHandler.getData());
+    }
+
+    public void readFromFile() throws IOException, ClassNotFoundException {
+        dataHandler.setData((HashMap<String, Object>) databaseHandler.readFromFile());
     }
 
 }
