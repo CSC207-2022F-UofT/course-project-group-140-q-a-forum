@@ -27,11 +27,14 @@ public class ReportController {
      */
 
     public int createAReport(Map<String, Object> reportInformation) {
+        System.err.println("Problem here!");
         try {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
+            System.out.println(0);
             return 0;
         }
+        System.out.println(1);
         return 1;
 
     }

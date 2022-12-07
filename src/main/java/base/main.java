@@ -9,6 +9,8 @@ import controllers.ReportController;
 import controllers.UserController;
 import database.DatabaseGateway;
 import entities.Course;
+import entities.Post;
+import entities.Report;
 import entities.User;
 import use_cases.CourseUseCaseInteractor;
 import use_cases.DataBaseAccess.ReportDataInterface;
@@ -39,7 +41,7 @@ public class main {
     public static void main(String[] args) {
         try{
             gateway.readFromFile();
-            System.out.println(gateway.getAllUsers());
+
         }catch (IOException | ClassNotFoundException e){
             // Create file
             try{
@@ -60,11 +62,59 @@ public class main {
             User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
             ArrayList<Course> courses = courseController.getAllCourses();
         }
-
+        debug();
 //       CoursesForm coursesForm =new CoursesForm(user, courses);
 //       coursesForm.setVisible(true);
         MakeAnAccount makeAnAccount = new MakeAnAccount();
         makeAnAccount.setVisible(true);
+    }
+
+    public static void debug(){
+        ArrayList<User> users = gateway.getAllUsers();
+        ArrayList<Course> courses = gateway.getAllCourses();
+        ArrayList<Report> reports = gateway.getAllReport();
+
+        System.out.println("SERIALIZATION INFO");
+
+        System.out.println("================================================");
+        System.out.println("================================================");
+        for (User user: users){
+            System.out.println("Username: " + user.getUsername()) ;
+            System.out.println("Email: " + user.getEmail()) ;
+            System.out.println("Password: " + user.getPassword()) ;
+            System.out.println("================================================");
+        }
+
+        System.out.println();
+
+        System.out.println("================================================");
+        System.out.println("================================================");
+
+        System.out.println();
+        for (Course course: courses){
+            System.out.println("Course:" + course.getCode() + " " + course.getName());
+
+            ArrayList<String> posts = course.getPostTitles();
+
+            System.out.println();
+            System.out.println("================================================");
+            System.out.println();
+
+            for (String post: posts){
+                System.out.println("Post: " + post);
+            }
+
+        }
+
+        System.out.println();
+        System.out.println("================================================");
+        System.out.println("================================================");
+        System.out.println();
+
+        for (Report report: reports){
+            System.out.println("Report: " + report.getContent());
+        }
+
     }
 
 }
