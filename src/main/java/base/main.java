@@ -57,9 +57,18 @@ public class main {
             adminInfo.put("Email", "3232085039@qq.com");
             adminInfo.put("isAdmin", "True");
             adminInfo.put("Verification", "DebugCode");
-            //userController1.registerUser(adminInfo);
-            // System.out.println( userController1.registerUser(adminInfo));
-            User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
+            userController1.registerUser(adminInfo, "DebugCode");
+
+            HashMap<String, String> adminInfo2 = new HashMap<>();
+            adminInfo2.put("Username", "Teinble");
+            adminInfo2.put("Password", "qwer123456");
+            adminInfo2.put("Re-entered Password", "qwer123456");
+            adminInfo2.put("Email", "xinlingzhao16@gmail.com");
+            adminInfo2.put("isAdmin", "True");
+            adminInfo2.put("Verification", "DebugCode");
+            userController1.registerUser(adminInfo2, "DebugCode");
+
+            // User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
             ArrayList<Course> courses = courseController.getAllCourses();
         }
         debug();
