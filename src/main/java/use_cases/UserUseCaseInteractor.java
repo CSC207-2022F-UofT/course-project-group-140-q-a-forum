@@ -67,6 +67,7 @@ public class UserUseCaseInteractor {
             User newUser = new User(user.get("Username"), user.get("Password"), user.get("Email"));
             userDataInterface.addUser(newUser);
         }
+        userDataInterface.save();
     }
 
 
@@ -249,6 +250,7 @@ public class UserUseCaseInteractor {
         } else{
            userDataInterface.resetUsername(user, newUsername);
         }
+        userDataInterface.save();
     }
 
     /**
@@ -277,7 +279,7 @@ public class UserUseCaseInteractor {
         }
         // Reset the password.
         userDataInterface.resetPassword(user.getUsername(), newPassword);
-
+        userDataInterface.save();
     }
 
     /**
@@ -295,6 +297,7 @@ public class UserUseCaseInteractor {
         }
 
         userDataInterface.deleteUser(userName);
+        userDataInterface.save();
     }
 
     /**

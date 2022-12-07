@@ -116,7 +116,7 @@ public class ChangePasswordForm extends javax.swing.JFrame {
                                 .addContainerGap())
         );
 
-        jLabel4.setText("User：");
+        jLabel4.setText("User:");
 
         userLabel.setText(user.getUsername());
 

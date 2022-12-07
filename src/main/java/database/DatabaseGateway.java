@@ -3,6 +3,8 @@ package database;
 import entities.*;
 import use_cases.DataBaseAccess.*;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +12,26 @@ import java.util.List;
 import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface, Serializable {
+//    private static final long serialVersionUID = 6529685098267757690L;
 
     final RuntimeDataHandler dataHandler;
 
     public DatabaseGateway() {
         this.dataHandler = new RuntimeDataHandler();
+    }
+
+    @Override
+    public void save(){
+        try{
+            FileOutputStream fout = new FileOutputStream("data.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            out.writeObject(this);
+            out.flush();
+            out.close();
+            System.out.println("successfully saved");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -74,6 +91,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     public void resetUsername(User user, String newUsername) {
         user.setUsername(newUsername);
     }
+
     /**
      * Get user information by user's email, and change user's password by newPassword.
      * @param userName  the name of user
@@ -194,5 +212,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         info.put("data", report);
         dataHandler.deleteData(info);
     }
+
+
 
 }

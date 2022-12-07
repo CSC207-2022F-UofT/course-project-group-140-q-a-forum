@@ -7,6 +7,8 @@ import java.util.*;
 
 
 public interface ReportDataInterface extends DataInterface{
+    void save();
+
     ArrayList<Report> getAllReport();
 
     ArrayList<Report> getAllReportFromType(int type);

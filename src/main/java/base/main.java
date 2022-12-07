@@ -15,57 +15,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class main {
-
-//    static DatabaseGateway gateway = new DatabaseGateway();
-
     static ObjectInputStream in;
-
-    static {
-        try {
-            in = new ObjectInputStream(new FileInputStream("f.txt"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     static DatabaseGateway gateway;
 
-    static {
+
+    public static CourseController courseController;
+    public static PostController postController;
+    public static UserController userController;
+
+    public static ReportController reportController;
+
+    public static void main(String[] args) throws IOException {
         try {
+            in = new ObjectInputStream(new FileInputStream("data.ser"));
             gateway = (DatabaseGateway) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    static  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
-    static CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
-    static PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
-
-    static ReportUseCaseInteractor reportUseCaseInteractor = new ReportUseCaseInteractor(gateway, gateway);
-
-    public static CourseController courseController = new CourseController(courseInteractor);
-    public static PostController postController = new PostController(postInteractor);
-    public static UserController userController = new UserController(userInteractor);
-
-    public static ReportController reportController = new ReportController(reportUseCaseInteractor);
-
-    public static void main(String[] args) {
-        run();
-        System.out.println(userController.getUser("Anonymous"));
-        try{
-            FileOutputStream fout = new FileOutputStream("f.txt");
+            FileOutputStream fout = new FileOutputStream("data.ser");
             ObjectOutputStream out = new ObjectOutputStream(fout);
+            DatabaseGateway gateway = new DatabaseGateway();
             out.writeObject(gateway);
             out.flush();
             out.close();
             System.out.println("success");
-        }catch(Exception e){
-            System.out.println(e.getMessage());
         }
 
-    }
-    public static void run() {
+        UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
+        CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
+        PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
+        ReportUseCaseInteractor reportUseCaseInteractor = new ReportUseCaseInteractor(gateway, gateway);
+
+        courseController = new CourseController(courseInteractor);
+        postController = new PostController(postInteractor);
+        userController = new UserController(userInteractor);
+
+        reportController = new ReportController(reportUseCaseInteractor);
 
 //        HashMap<String, String> adminInfo = new HashMap<>();
 //        adminInfo.put("Username", "Anonymous");
@@ -76,16 +59,12 @@ public class main {
 //        adminInfo.put("Verification", "DebugCode");
 //        userController.registerUser(adminInfo, "DebugCode");
         User user = userController.getUser("Anonymous");
-
-        // System.out.println( userController1.registerUser(adminInfo));
-//        User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
         ArrayList<Course> courses = courseController.getAllCourses();
         CoursesForm coursesForm = new CoursesForm(user, courses);
         coursesForm.setVisible(true);
-
+        System.out.println(userController.getUser("giaogiao") == null);
     }
-//        MakeAnAccount makeAnAccount = new MakeAnAccount();
-//        makeAnAccount.setVisible(true);
+
 }
 
 

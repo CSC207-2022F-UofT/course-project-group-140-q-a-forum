@@ -35,6 +35,7 @@ public class ReportUseCaseInteractor {
         reportDataInterface.addReport(new Report((String) reportInfor.get("Username"),
                 (Integer) reportInfor.get("Type"),
                 reportInfor.get("Content")));
+        reportDataInterface.save();
 
     }
 
@@ -47,6 +48,8 @@ public class ReportUseCaseInteractor {
 
     public void removeReport(Report reportToDelete) {
         reportDataInterface.removeReport(reportToDelete);
+        reportDataInterface.save();
+
     }
 
 

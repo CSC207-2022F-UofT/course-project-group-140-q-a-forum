@@ -41,6 +41,8 @@ public class PostUseCaseInteractor {
         }else{
             throw new DuplicationException("post");
         }
+        courseDataInterface.save();
+
     }
 
     /**
@@ -58,6 +60,8 @@ public class PostUseCaseInteractor {
         else {
             throw new NotFoundException("Post");
         }
+        courseDataInterface.save();
+
     }
 
     public void removePost(HashMap<String, Object> post_info){
@@ -69,6 +73,8 @@ public class PostUseCaseInteractor {
         else{
             throw new NotFoundException("Post");
         }
+        courseDataInterface.save();
+
     }
 
     /**
@@ -123,6 +129,8 @@ public class PostUseCaseInteractor {
             throw new EmptyEntryException("content");
         }
         post.addComment(newComment);
+        courseDataInterface.save();
+
     }
 
     /**
@@ -145,6 +153,8 @@ public class PostUseCaseInteractor {
 
         author.like();
         post.like(email);
+        courseDataInterface.save();
+
     }
 
     /**
@@ -168,5 +178,7 @@ public class PostUseCaseInteractor {
 
         author.dislike();
         post.dislike(email);
+        courseDataInterface.save();
+
     }
 }

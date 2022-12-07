@@ -18,4 +18,6 @@ public interface PostDataInterface extends DataInterface{
 
     void removeComment(Post post, Comment comment);
 
+
+
 }

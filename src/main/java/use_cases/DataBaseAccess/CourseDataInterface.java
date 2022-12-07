@@ -7,6 +7,8 @@ import java.util.Map;
 
 
 public interface CourseDataInterface extends DataInterface {
+    void save();
+
     ArrayList<Course> getAllCourses();
 
     Course getCourse(String courseCode);

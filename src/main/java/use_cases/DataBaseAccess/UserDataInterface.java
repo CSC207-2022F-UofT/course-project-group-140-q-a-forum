@@ -8,6 +8,8 @@ import java.util.Map;
 
 public interface UserDataInterface extends DataInterface{
 
+    void save();
+
     ArrayList<User> getAllUsers();
 
     User getUser(String userName);

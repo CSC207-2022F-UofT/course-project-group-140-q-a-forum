@@ -45,6 +45,8 @@ public class CourseUseCaseInteractor {
                 courseInfo.get("Semester"),
                 instructors);
         courseDataInterface.addCourse(course);
+
+        courseDataInterface.save();
     }
 
     /**
@@ -77,6 +79,8 @@ public class CourseUseCaseInteractor {
         }
 
         courseDataInterface.deleteCourse(courseCode);
+        courseDataInterface.save();
+
     }
 
     /**
@@ -108,6 +112,7 @@ public class CourseUseCaseInteractor {
                 throw new WrongInfoException(part);
             }
         }
+        courseDataInterface.save();
     }
 
 
@@ -121,6 +126,8 @@ public class CourseUseCaseInteractor {
         if (!course.addInstructor(instructor)){
             throw new DuplicationException("instructor");
         }
+        courseDataInterface.save();
+
     }
 
     /**
@@ -133,6 +140,8 @@ public class CourseUseCaseInteractor {
         if (course.removeInstructor(instructor)){
             throw new NotFoundException("Instructor in " + course.getCode());
         }
+        courseDataInterface.save();
+
     }
 
     /**
@@ -146,6 +155,8 @@ public class CourseUseCaseInteractor {
         if (!course.addPost(post)){
             throw new DuplicationException("Post");
         }
+        courseDataInterface.save();
+
     }
 
     /**
@@ -159,6 +170,8 @@ public class CourseUseCaseInteractor {
         if (!course.removePost(post)){
             throw new NotFoundException("Post");
         }
+        courseDataInterface.save();
+
     }
 
     /**
