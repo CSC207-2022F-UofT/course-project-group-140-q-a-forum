@@ -3,6 +3,7 @@ package use_cases.DataBaseAccess;
 import entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public interface UserDataInterface extends DataInterface{
@@ -43,12 +44,5 @@ public interface UserDataInterface extends DataInterface{
      * @param newPassword the new password to be changed.
      */
     void resetPassword(String userName, String newPassword);
-
-//    /**
-//     * Change email of a user in DataBase
-//     * @param user     information user provided.
-//     * @param newEmail the new email user wants to change.
-//     */
-//    void resetEmail(String userName, String newEmail);
-
+    
 }

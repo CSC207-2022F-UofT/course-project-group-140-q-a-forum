@@ -4,16 +4,29 @@
  */
 package UI.UserdataRelated;
 
+import Presenter.GeneralPresenter;
+import Presenter.LoginPresenter;
+import Presenter.RegisterPresenter;
+import base.main;
+import controllers.CourseController;
+import controllers.UserController;
+import entities.User;
+
 /**
  *
  * @author zhaoxiling
  */
 public class ChangePasswordForm extends javax.swing.JFrame {
+    private final User user;
+    private final CourseController courseController = main.courseController;
+    private final UserController userController = main.userController;
 
     /**
      * Creates new form ChangePasswordForm
      */
-    public ChangePasswordForm() {
+
+    public ChangePasswordForm(User user) {
+        this.user = user;
         initComponents();
     }
 
@@ -35,6 +48,8 @@ public class ChangePasswordForm extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,11 +72,6 @@ public class ChangePasswordForm extends javax.swing.JFrame {
         jLabel1.setText("OldPassword:");
 
         reText.setText("Re-Enter Password");
-        reText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reTextActionPerformed(evt);
-            }
-        });
 
         enterText.setText("Enter_password");
 
@@ -106,6 +116,10 @@ public class ChangePasswordForm extends javax.swing.JFrame {
                                 .addContainerGap())
         );
 
+        jLabel4.setText("User：");
+
+        userLabel.setText(user.getUsername());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,79 +127,79 @@ public class ChangePasswordForm extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGap(73, 73, 73)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(changeButton)
-                                                        .addComponent(backButton)))
-                                        .addGroup(layout.createSequentialGroup()
                                                 .addGap(130, 130, 130)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(changeButton)))
                                 .addContainerGap(127, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(backButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(userLabel)
+                                .addGap(111, 111, 111))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(backButton)
-                                .addGap(39, 39, 39)
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(backButton)
+                                        .addComponent(jLabel4)
+                                        .addComponent(userLabel))
+                                .addGap(59, 59, 59)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)
+                                .addGap(48, 48, 48)
                                 .addComponent(changeButton)
-                                .addContainerGap(155, Short.MAX_VALUE))
+                                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>
 
-    private void reTextActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        ProfilePage profilePage = new ProfilePage(user);
+        profilePage.setVisible(true);
+        this.setVisible(false);
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+        String oldPassword = jTextField1.getText();
+        String newPassword = enterText.getText();
+        String reenterPass = reText.getText();
+        int result = userController.changePassword(user, oldPassword,newPassword, reenterPass);
+        switch (result){
+            case -1->{
+                GeneralPresenter.showEmptyEntryError();
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            case -2 ->{
+                RegisterPresenter.showWrongPasswordError();
+            }
+            case -3->{
+                LoginPresenter.showPasswordNotMatch();
+            }
+            case -4 ->{
+                RegisterPresenter.showWrongRePassError();
+            }
+            case 1 ->{
+                GeneralPresenter.showSuccessMessage("Reset Password");
+            }
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChangePasswordForm().setVisible(true);
-            }
-        });
+
     }
+
 
     // Variables declaration - do not modify
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel jLabel4;
+
+    private javax.swing.JLabel userLabel;
+
     private javax.swing.JButton changeButton;
     private javax.swing.JTextField enterText;
     private javax.swing.JLabel jLabel1;

@@ -2,9 +2,10 @@ package database;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public interface DataHandlerInterface {
-    void setData(HashMap<String, Object> info);
+    void setData(HashMap<Integer, Object> info);
 
     void addData(HashMap<String, Object> info);
 

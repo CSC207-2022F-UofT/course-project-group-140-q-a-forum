@@ -1,5 +1,6 @@
 package controllers;
 
+import database.DatabaseGateway;
 import entities.Course;
 import entities.Post;
 import exceptions.*;
@@ -8,6 +9,7 @@ import use_cases.CourseUseCaseInteractor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class CourseController {
     private final CourseUseCaseInteractor courseInteractor;

@@ -7,6 +7,8 @@ import exceptions.*;
 import use_cases.DataBaseAccess.ReportDataInterface;
 import use_cases.DataBaseAccess.UserDataInterface;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class ReportUseCaseInteractor {
@@ -40,6 +42,11 @@ public class ReportUseCaseInteractor {
             reportDataInterface.addReport(report);
         }
 
+        try{
+            reportDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
 
@@ -61,8 +68,6 @@ public class ReportUseCaseInteractor {
         if (report!=null) {
             reportDataInterface.removeReport(report);
         }
-
     }
-
 
 }

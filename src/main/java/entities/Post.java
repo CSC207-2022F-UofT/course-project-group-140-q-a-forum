@@ -1,16 +1,24 @@
 package entities;
 
-import java.awt.*;
-import java.util.ArrayList;
 
-public class Post {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Post implements Serializable {
     private String topic;
     private String texts;
-    private ArrayList<Comment> comments;
+    private List<Comment> comments;
 
     private User postedBy;
 
     private Course course;
+
+    private int likeNumber;
+
+    private List<String> likeUser;
+
+    private List<String> dislikeUser;
 
     public Post(){
 
@@ -29,11 +37,14 @@ public class Post {
         this.texts = texts;
         this.postedBy = postedBy;
         this.course = course;
-        this.comments = new ArrayList<Comment>();
+        this.comments = new ArrayList<>();
+        this.likeNumber = 0;
+        this.likeUser = new ArrayList<>();
+        this.dislikeUser = new ArrayList<>();
     }
 
 
-    public ArrayList<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
@@ -49,6 +60,18 @@ public class Post {
 
     public User getPostedBy() {
         return postedBy;
+    }
+
+    public int getLikeNumber(){
+        return likeNumber;
+    }
+
+    public List<String> getLikeUser(){
+        return this.likeUser;
+    }
+
+    public List<String> getDislikeUser(){
+        return this.dislikeUser;
     }
 
     public void addComment(Comment comment) {
@@ -76,6 +99,24 @@ public class Post {
         this.texts = texts;
     }
 
+    public void like(String email){
+        this.likeUser.add(email);
+        boolean found = this.dislikeUser.remove(email);
+        if (found){
+            // If a person changes from dislike to like, then the like number should increment by 2
+            this.likeNumber += 1;
+        }
+        this.likeNumber += 1;
+    }
 
+    public void dislike(String email){
+        this.dislikeUser.add(email);
+        boolean found = this.likeUser.remove(email);
+        if (found){
+            // If a person changes from like to dislike, then the like number should decrement by 2
+            this.likeNumber -= 1;
+        }
+        this.likeNumber -= 1;
+    }
 
 }
