@@ -279,7 +279,7 @@ public class CoursesForm extends javax.swing.JFrame {
         semesterLabel.setText(course.getSemester());
         instructorLabel.setText(String.valueOf(course.getInstructor()));
         postsLabel.setText(String.valueOf(course.getPosts().size()));
-        descriptionLabel.setText("<html>" +course.getDescription()+ "</html>");
+        descriptionLabel.setText("<html>"+course.getDescription()+ "</html>");
     }
 
     private void showPostsButtonActionPerformed(java.awt.event.ActionEvent evt) {

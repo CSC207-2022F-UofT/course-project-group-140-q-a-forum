@@ -8,6 +8,7 @@ import controllers.UserController;
 import entities.Course;
 import entities.User;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 
@@ -30,7 +31,7 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void initComponents() {
-
+        javax.swing.JButton reportButton = new JButton();
         javax.swing.JFormattedTextField jFormattedTextField1 = new javax.swing.JFormattedTextField();
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
@@ -97,6 +98,8 @@ public class ProfilePage extends javax.swing.JFrame {
 
         totalLikeLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        reportButton.setText("report this user");
+        reportButton.addActionListener(this::reportButtonActionPerformed);
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,7 +107,10 @@ public class ProfilePage extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(backButton)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(reportButton)
+                                .addGap(245, 245, 245))
+
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -165,6 +171,7 @@ public class ProfilePage extends javax.swing.JFrame {
                                         .addComponent(reputationLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                                 .addComponent(backButton)
+                                .addComponent(reportButton)
                                 .addGap(26, 26, 26))
         );
 
@@ -196,7 +203,6 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         ChangePasswordForm changePasswordForm = new ChangePasswordForm(user);
         changePasswordForm.setVisible(true);
         this.setVisible(false);
@@ -215,7 +221,6 @@ public class ProfilePage extends javax.swing.JFrame {
             changeUserNameText.setText("");
             changeUserNameText.setFocusable(true);
         }else {
-            System.out.println("success");
             GeneralPresenter.showSuccessMessage("reset username");
             this.setVisible(false);
             ProfilePage profilePage = new ProfilePage(user);
@@ -231,6 +236,9 @@ public class ProfilePage extends javax.swing.JFrame {
         this.setVisible(false);
     }
 
+    private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
     private void setInitial() {
         userLabel.setText(user.getUsername());
         passLabel.setText(user.getPassword());
@@ -240,8 +248,6 @@ public class ProfilePage extends javax.swing.JFrame {
         changeUserNameText.setVisible(false);
         jLabel1.setVisible(false);
         doneButton.setVisible(false);
-        System.out.println(user.getLikeNumber());
-        System.out.println(user.getReputation());
     }
 
 

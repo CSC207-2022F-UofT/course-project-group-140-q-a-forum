@@ -183,8 +183,6 @@ public class MakeAPost extends javax.swing.JFrame {
             PostInfo.put("user", user);
         }else {
             User anonymous = userController.getUser("Anonymous");
-
-            System.out.println();
             PostInfo.put("user", anonymous);
         }
 

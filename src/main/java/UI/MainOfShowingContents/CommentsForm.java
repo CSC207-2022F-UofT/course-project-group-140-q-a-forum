@@ -5,6 +5,7 @@
 package UI.MainOfShowingContents;
 
 import Presenter.GeneralPresenter;
+import UI.PostingStuff.MakeAComment;
 import UI.PostingStuff.MakeAReport;
 import base.main;
 import controllers.CourseController;
@@ -192,6 +193,13 @@ public class CommentsForm extends javax.swing.JFrame {
 
     private void commentButton11commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        if (this.viewComment == null) {
+            GeneralPresenter.showNotSelectError("Post");
+        } else {
+            MakeAComment makeAComment = new MakeAComment(user, course, this.viewComment);
+            makeAComment.setVisible(true);
+            this.setVisible(false);
+        }
 
     }
 

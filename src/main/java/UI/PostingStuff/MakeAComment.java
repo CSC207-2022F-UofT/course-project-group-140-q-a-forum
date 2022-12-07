@@ -9,9 +9,12 @@ import UI.MainOfShowingContents.PostForm;
 import base.main;
 import controllers.CourseController;
 import controllers.PostController;
+import entities.Comment;
 import entities.Course;
 import entities.Post;
 import entities.User;
+
+import static base.main.userController;
 
 /**
  *
@@ -20,7 +23,8 @@ import entities.User;
 public class MakeAComment extends javax.swing.JFrame {
     private final User user;
     private final Course course;
-
+    private final Comment comment;
+    private final String commentType;
     private final Post post;
     private final CourseController courseController = main.courseController;
     private final PostController postController = main.postController;
@@ -32,6 +36,16 @@ public class MakeAComment extends javax.swing.JFrame {
         this.user = user;
         this.course = course;
         this.post = post;
+        this.comment = null;
+        this.commentType = "post";
+        initComponents();
+    }
+    public MakeAComment(User user, Course course, Comment comment) {
+        this.user = user;
+        this.course = course;
+        this.comment = comment;
+        this.post = null;
+        this.commentType = "comment";
         initComponents();
     }
 
@@ -43,11 +57,11 @@ public class MakeAComment extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
-
+        buttonGroup1 = new javax.swing.ButtonGroup();
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
-        javax.swing.JLabel commentLabel = new javax.swing.JLabel();
+        commentLabel = new javax.swing.JLabel();
         javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         contentTextA = new javax.swing.JTextArea();
         javax.swing.JButton commentButton = new javax.swing.JButton();
@@ -76,13 +90,14 @@ public class MakeAComment extends javax.swing.JFrame {
 
         jLabel5.setText("Post as: ");
 
+        buttonGroup1.add(userButton);
         userButton.setText("User");
-        userButton.addActionListener(this::userButtonActionPerformed);
+        userButton.setActionCommand("user");
 
+        buttonGroup1.add(anonymousButton);
         anonymousButton.setText("Anonymous");
-        anonymousButton.addActionListener(evt -> {
-            anonymousButtonActionPerformed(evt);
-        });
+        anonymousButton.setActionCommand("anonymous");
+
 
         backButton.setText("Back to the page");
         backButton.addActionListener(this::backButtonActionPerformed);
@@ -159,21 +174,22 @@ public class MakeAComment extends javax.swing.JFrame {
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(77, Short.MAX_VALUE))
         );
-
+        changePanel();
         pack();
-    }// </editor-fold>
-
-    private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
     }
 
-    private void anonymousButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String getSelect = buttonGroup1.getSelection().getActionCommand();
+        User postby;
+        if(getSelect.equals("user")){
+            postby = user;
+        }else {
+            postby = userController.getUser("Anonymous");
+        }
+
         String content = contentTextA.getText();
-        int result = postController.makeComment(post, user, content);
+        int result = postController.makeComment(post, postby, content);
         if(result == 1){
             PostForm postForm = new PostForm(user, course);
             postForm.setVisible(true);
@@ -191,7 +207,20 @@ public class MakeAComment extends javax.swing.JFrame {
         this.setVisible(false);
     }
 
+    private void changePanel(){
+        if(this.commentType.equals("post")){
+            commentLabel.setText(this.post.getTopic());
+        }else{
+            commentLabel.setText("comment");
+        }
+
+
+    }
+
 
     private javax.swing.JTextArea contentTextA;
+    private javax.swing.JLabel commentLabel;
+    private  javax.swing.ButtonGroup buttonGroup1;
+
     // End of variables declaration
 }
