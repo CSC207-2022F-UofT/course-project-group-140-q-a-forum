@@ -42,7 +42,7 @@ public class PostUseCaseInteractorTest {
         user.put("Email", "3232085039@qq.com");
         user.put("isAdmin", "True");
         user.put("Verification", "DebugCode");
-        userController.registerUser(user, "000000");
+        userController.registerUser(user, "DebugCode");
 
         HashMap<String, String> course = new HashMap<>();
         course.put("Name", "Introduction to Software Design");
