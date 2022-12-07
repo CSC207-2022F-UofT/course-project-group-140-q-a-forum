@@ -39,7 +39,7 @@ class UserUseCaseInteractorTest {
         adminInfo.put("Email", "3232085039@qq.com");
         adminInfo.put("isAdmin", "True");
         adminInfo.put("Verification", "DebugCode");
-        userController.registerUser(adminInfo);
+        userController.registerUser(adminInfo, "000000");
     }
 
     @Test
@@ -51,7 +51,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(1, userController.registerUser(userInfo));
+        assertEquals(1, userController.registerUser(userInfo, "111111"));
     }
 
     @Test
@@ -63,7 +63,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(-1, userController.registerUser(userInfo));
+        assertEquals(-1, userController.registerUser(userInfo, "123456"));
     }
 
     @Test
@@ -75,7 +75,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "123456s@gmail.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(-2, userController.registerUser(userInfo));
+        assertEquals(-2, userController.registerUser(userInfo, "123237"));
     }
 
     @Test
@@ -87,7 +87,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(-4, userController.registerUser(userInfo));
+        assertEquals(-4, userController.registerUser(userInfo, "258207"));
     }
 
     @Test
@@ -99,7 +99,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "ThisIsNotAnEmail@email.e");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(-3, userController.registerUser(userInfo));
+        assertEquals(-3, userController.registerUser(userInfo, "420412"));
     }
 
     @Test
@@ -111,7 +111,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "ThisIsNotAnEmail@email.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "NotDebugCode");
-        assertEquals(-5, userController.registerUser(userInfo));
+        assertEquals(-5, userController.registerUser(userInfo, "999999"));
     }
 
     @Test
