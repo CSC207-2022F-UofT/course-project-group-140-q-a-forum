@@ -4,6 +4,7 @@ import entities.User;
 import exceptions.*;
 import use_cases.DataBaseAccess.UserDataInterface;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
 import javax.mail.Transport;
@@ -42,6 +43,7 @@ public class UserUseCaseInteractor {
 
         // Check if the user exists in Database.
         if (userDataInterface.userExists(user.get("Username"))) {
+            System.err.println("FUCK! BUG");
             throw new DuplicationException("user");
         }
 
@@ -74,6 +76,12 @@ public class UserUseCaseInteractor {
             User newUser = new User(user.get("Username"), user.get("Password"), user.get("Email"));
             userDataInterface.addUser(newUser);
         }
+
+        try{
+            userDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
 
@@ -103,6 +111,13 @@ public class UserUseCaseInteractor {
             if (!containLetter && Character.isLetter(c)){
                 containLetter = true;
             }
+        }
+
+
+        try{
+            userDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
         }
 
         return length <= 8 || !containLetter || !containDigit;
@@ -169,7 +184,8 @@ public class UserUseCaseInteractor {
         Random rand = new Random();
         int code = rand.nextInt(900000) + 100000;
         String messagetosend = Integer.toString(code);
-        this.verifyNum = messagetosend;
+        // this.verifyNum = messagetosend; FOR DEBUG
+        this.verifyNum = "100000";
 
 
         // 3. Create a email.
@@ -266,6 +282,14 @@ public class UserUseCaseInteractor {
         } else{
            userDataInterface.resetUsername(user, newUsername);
         }
+
+
+        try{
+            userDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -295,6 +319,13 @@ public class UserUseCaseInteractor {
         // Reset the password.
         userDataInterface.resetPassword(user.getUsername(), newPassword);
 
+
+        try{
+            userDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -312,6 +343,13 @@ public class UserUseCaseInteractor {
         }
 
         userDataInterface.deleteUser(userName);
+
+
+        try{
+            userDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     /**

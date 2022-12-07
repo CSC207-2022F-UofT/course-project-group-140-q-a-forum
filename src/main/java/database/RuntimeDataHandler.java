@@ -23,7 +23,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      *             arraylist}
      */
     @Override
-    public void setData(HashMap<String, Object> info) {
+    public void setData(HashMap<Integer, Object> info) {
         /*
          * Value of key indicates the following type of data
          * 1: User
@@ -32,43 +32,44 @@ public class RuntimeDataHandler implements DataHandlerInterface {
          * All the other types of data (Post, Comment) are stored directly in its corresponding branching class
          * (i.e, Posts of a course are stored in Course. posts)
          */
-        int key = (int) info.get("key");
-        Object value = info.get("data");
-        switch (key){
-            case 1:
-                users = (ArrayList<User>) value;
+        Object value = info.get(1);
+        users = (ArrayList<User>) value;
 
-                name2User = new HashMap<>();
-                email2User = new HashMap<>();
-                for (User user : (ArrayList<User>) value) {
-                    String username = user.getUsername();
-                    String email = user.getEmail();
-                    name2User.put(username, user);
-                    email2User.put(email, user);
-                }
-                break;
-            case 2:
-                courses = (ArrayList<Course>) value;
-                for (Course course : (ArrayList<Course>) value) {
-                    String code = course.getCode();
-                    code2Course.put(code, course);
-                }
-                break;
-            case 3:
-                reports = (ArrayList<Report>) value;
-                for (Report report : (ArrayList<Report>) value) {
-                    int reportType = report.getReportType();
-                    if (! type2Report.containsKey(reportType)){
-                        type2Report.put(reportType, new ArrayList<Report>());
-                    }
-                    else{
-                        type2Report.get(reportType).add(report);
-                    }
-                }
-                break;
-            default:
-                throw new RuntimeException();
+        name2User = new HashMap<>();
+        email2User = new HashMap<>();
+        for (User user : (ArrayList<User>) value) {
+            String username = user.getUsername();
+            String email = user.getEmail();
+            name2User.put(username, user);
+            email2User.put(email, user);
         }
+
+        value = info.get(2);
+        courses = (ArrayList<Course>) value;
+        for (Course course : (ArrayList<Course>) value) {
+            String code = course.getCode();
+            code2Course.put(code, course);
+        }
+
+
+        value = info.get(3);
+        reports = (ArrayList<Report>) value;
+        for (Report report : (ArrayList<Report>) value) {
+            int reportType = report.getReportType();
+            if (! type2Report.containsKey(reportType)){
+                type2Report.put(reportType, new ArrayList<Report>());
+            }
+            else{
+                type2Report.get(reportType).add(report);
+            }
+        }
+
+    }
+
+    public void updateUsername(String oldUsername, String newUsername){
+        User user = name2User.get(oldUsername);
+        name2User.remove(oldUsername);
+        name2User.put(newUsername, user);
     }
 
     /**

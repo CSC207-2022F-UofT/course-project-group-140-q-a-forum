@@ -5,6 +5,7 @@ import use_cases.DataBaseAccess.CourseDataInterface;
 import exceptions.*;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,11 @@ public class CourseUseCaseInteractor {
                 courseInfo.get("Semester"),
                 instructors);
         courseDataInterface.addCourse(course);
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -60,7 +66,6 @@ public class CourseUseCaseInteractor {
         for(String instructor: original.split(",")){
             instructors.add(instructor.strip());
         }
-
         return instructors;
     }
 
@@ -108,6 +113,12 @@ public class CourseUseCaseInteractor {
                 throw new WrongInfoException(part);
             }
         }
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
 
@@ -121,6 +132,12 @@ public class CourseUseCaseInteractor {
         if (!course.addInstructor(instructor)){
             throw new DuplicationException("instructor");
         }
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -132,6 +149,12 @@ public class CourseUseCaseInteractor {
         Course course = courseDataInterface.getCourse(courseCode);
         if (course.removeInstructor(instructor)){
             throw new NotFoundException("Instructor in " + course.getCode());
+        }
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
         }
     }
 
@@ -146,6 +169,12 @@ public class CourseUseCaseInteractor {
         if (!course.addPost(post)){
             throw new DuplicationException("Post");
         }
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -158,6 +187,12 @@ public class CourseUseCaseInteractor {
 
         if (!course.removePost(post)){
             throw new NotFoundException("Post");
+        }
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
         }
     }
 
@@ -179,7 +214,6 @@ public class CourseUseCaseInteractor {
         for (Course course : courses) {
             coursesName.add(course.getName());
         }
-
         return coursesName;
     }
 

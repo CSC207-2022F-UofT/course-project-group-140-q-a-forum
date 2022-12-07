@@ -1,10 +1,11 @@
 package entities;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Comment {
+public class Comment implements Serializable {
     private User postedBy;
     private String texts;
     private List<Comment> comments;

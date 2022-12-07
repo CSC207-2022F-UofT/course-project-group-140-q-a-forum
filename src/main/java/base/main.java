@@ -16,6 +16,7 @@ import use_cases.PostUseCaseInteractor;
 import use_cases.ReportUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,21 +37,34 @@ public class main {
     public static ReportController reportController = new ReportController(reportUseCaseInteractor);
 
     public static void main(String[] args) {
-        HashMap<String, String> adminInfo = new HashMap<>();
-        adminInfo.put("Username", "Anonymous");
-        adminInfo.put("Password", "QNAForum140");
-        adminInfo.put("Re-entered Password", "QNAForum140");
-        adminInfo.put("Email", "3232085039@qq.com");
-        adminInfo.put("isAdmin", "True");
-        adminInfo.put("Verification", "DebugCode");
-        //userController1.registerUser(adminInfo);
-       // System.out.println( userController1.registerUser(adminInfo));
-        User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
-        ArrayList<Course> courses = courseController.getAllCourses();
-       CoursesForm coursesForm =new CoursesForm(user, courses);
-       coursesForm.setVisible(true);
-//        MakeAnAccount makeAnAccount = new MakeAnAccount();
-//        makeAnAccount.setVisible(true);
+        try{
+            gateway.readFromFile();
+            System.out.println(gateway.getAllUsers());
+        }catch (IOException | ClassNotFoundException e){
+            // Create file
+            try{
+                gateway.saveToFile();
+            }catch (IOException err){
+                System.err.println(err.getMessage());
+            }
+            // Create admin
+            HashMap<String, String> adminInfo = new HashMap<>();
+            adminInfo.put("Username", "Anonymous");
+            adminInfo.put("Password", "QNAForum140");
+            adminInfo.put("Re-entered Password", "QNAForum140");
+            adminInfo.put("Email", "3232085039@qq.com");
+            adminInfo.put("isAdmin", "True");
+            adminInfo.put("Verification", "DebugCode");
+            //userController1.registerUser(adminInfo);
+            // System.out.println( userController1.registerUser(adminInfo));
+            User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
+            ArrayList<Course> courses = courseController.getAllCourses();
+        }
+
+//       CoursesForm coursesForm =new CoursesForm(user, courses);
+//       coursesForm.setVisible(true);
+        MakeAnAccount makeAnAccount = new MakeAnAccount();
+        makeAnAccount.setVisible(true);
     }
 
 }

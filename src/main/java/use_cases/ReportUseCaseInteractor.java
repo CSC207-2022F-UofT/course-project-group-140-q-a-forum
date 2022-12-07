@@ -6,6 +6,7 @@ import exceptions.*;
 import use_cases.DataBaseAccess.ReportDataInterface;
 import use_cases.DataBaseAccess.UserDataInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -36,6 +37,11 @@ public class ReportUseCaseInteractor {
                 (Integer) reportInfor.get("Type"),
                 reportInfor.get("Content")));
 
+        try{
+            reportDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
 
@@ -47,6 +53,12 @@ public class ReportUseCaseInteractor {
 
     public void removeReport(Report reportToDelete) {
         reportDataInterface.removeReport(reportToDelete);
+        
+        try{
+            reportDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
 

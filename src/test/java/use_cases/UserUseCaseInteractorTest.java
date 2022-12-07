@@ -1,6 +1,8 @@
 package use_cases;
 
+import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +16,8 @@ import use_cases.CourseUseCaseInteractor;
 import use_cases.PostUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 class UserUseCaseInteractorTest {
@@ -32,6 +36,11 @@ class UserUseCaseInteractorTest {
 
     @BeforeEach
     public void setUp() {
+        File orgFile = new File("data.ser");
+        File newFile = new File("protected_data.ser");
+        if (orgFile.exists()) {
+            orgFile.renameTo(newFile);
+        }
         HashMap<String, String> adminInfo = new HashMap<>();
         adminInfo.put("Username", "admin");
         adminInfo.put("Password", "QNAForum140");
@@ -39,7 +48,7 @@ class UserUseCaseInteractorTest {
         adminInfo.put("Email", "3232085039@qq.com");
         adminInfo.put("isAdmin", "True");
         adminInfo.put("Verification", "DebugCode");
-        userController.registerUser(adminInfo);
+        userController.registerUser(adminInfo, "DebugCode");
     }
 
     @Test
@@ -51,7 +60,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(1, userController.registerUser(userInfo));
+        assertEquals(1, userController.registerUser(userInfo, "DebugCode"));
     }
 
     @Test
@@ -63,7 +72,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(-1, userController.registerUser(userInfo));
+        assertEquals(-1, userController.registerUser(userInfo, "DebugCode"));
     }
 
     @Test
@@ -75,7 +84,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "123456s@gmail.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(-2, userController.registerUser(userInfo));
+        assertEquals(-2, userController.registerUser(userInfo, "DebugCode"));
     }
 
     @Test
@@ -87,7 +96,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(-4, userController.registerUser(userInfo));
+        assertEquals(-4, userController.registerUser(userInfo, "DebugCode"));
     }
 
     @Test
@@ -99,7 +108,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "ThisIsNotAnEmail@email.e");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "DebugCode");
-        assertEquals(-3, userController.registerUser(userInfo));
+        assertEquals(-3, userController.registerUser(userInfo, "DebugCode"));
     }
 
     @Test
@@ -111,7 +120,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Email", "ThisIsNotAnEmail@email.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "NotDebugCode");
-        assertEquals(-5, userController.registerUser(userInfo));
+        assertEquals(-5, userController.registerUser(userInfo, "DebugCode"));
     }
 
     @Test
@@ -151,5 +160,17 @@ class UserUseCaseInteractorTest {
     @Test
     void loginNoAccount(){
         assertEquals(-1, userController.loginUser("adminNoAccount", "Wrongpassword"));
+    }
+
+    @AfterEach
+    public void tearDown(){
+        File orgFile = new File("protected_data.ser");
+        File newFile = new File("data.ser");
+
+        newFile.delete();
+
+        if (orgFile.exists()) {
+            orgFile.renameTo(newFile);
+        }
     }
 }
