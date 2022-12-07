@@ -8,6 +8,9 @@ public class User {
 
     private String email;
 
+    private int likeNumber;
+    private String reputation;
+
     public User() {
 
     }
@@ -22,10 +25,11 @@ public class User {
 
     public User(String username, String password, String email) {
         this.username = username;
-
         this.password = password;
         this.email = email;
         this.isAdmin = false;
+        this.likeNumber = 0;
+        this.reputation = "Average";
 
     }
 
@@ -94,5 +98,33 @@ public class User {
      */
     public boolean isAdmin() {
         return isAdmin;
+    }
+
+    public String getReputation(){
+        return reputation;
+    }
+
+    public int getLikeNumber(){
+        return likeNumber;
+    }
+
+    public void like(){
+        this.likeNumber += 1;
+        this.updateReputation();
+    }
+
+    public void dislike(){
+        this.likeNumber -= 1;
+        this.updateReputation();
+    }
+
+    public void updateReputation(){
+        if (likeNumber > 10){
+            this.reputation = "Popular";
+        }else if(likeNumber < 10){
+            this.reputation = "Notorious";
+        }else{
+            this.reputation = "Average";
+        }
     }
 }

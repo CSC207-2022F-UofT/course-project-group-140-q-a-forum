@@ -20,7 +20,7 @@ class UserUseCaseInteractorTest {
 
     private final DatabaseGateway gateway = new DatabaseGateway();
 
-    private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
+    private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");
     private final CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
     private final PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
 
@@ -38,6 +38,7 @@ class UserUseCaseInteractorTest {
         adminInfo.put("Re-entered Password", "QNAForum140");
         adminInfo.put("Email", "3232085039@qq.com");
         adminInfo.put("isAdmin", "True");
+        adminInfo.put("Verification", "DebugCode");
         userController.registerUser(adminInfo);
     }
 
@@ -49,6 +50,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Re-entered Password", "Jordan123");
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
+        userInfo.put("Verification", "DebugCode");
         assertEquals(1, userController.registerUser(userInfo));
     }
 
@@ -60,6 +62,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Re-entered Password", "Jordan123");
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
+        userInfo.put("Verification", "DebugCode");
         assertEquals(-1, userController.registerUser(userInfo));
     }
 
@@ -69,8 +72,9 @@ class UserUseCaseInteractorTest {
         userInfo.put("Username", "Jordan");
         userInfo.put("Password", "1");
         userInfo.put("Re-entered Password", "1");
-        userInfo.put("Email", "123456@gmail.com");
+        userInfo.put("Email", "123456s@gmail.com");
         userInfo.put("isAdmin", null);
+        userInfo.put("Verification", "DebugCode");
         assertEquals(-2, userController.registerUser(userInfo));
     }
 
@@ -82,7 +86,8 @@ class UserUseCaseInteractorTest {
         userInfo.put("Re-entered Password", "Jordan321");
         userInfo.put("Email", "123456@gmail.com");
         userInfo.put("isAdmin", null);
-        assertEquals(-3, userController.registerUser(userInfo));
+        userInfo.put("Verification", "DebugCode");
+        assertEquals(-4, userController.registerUser(userInfo));
     }
 
     @Test
@@ -93,7 +98,20 @@ class UserUseCaseInteractorTest {
         userInfo.put("Re-entered Password", "Jordan123");
         userInfo.put("Email", "ThisIsNotAnEmail@email.e");
         userInfo.put("isAdmin", null);
-        assertEquals(-4, userController.registerUser(userInfo));
+        userInfo.put("Verification", "DebugCode");
+        assertEquals(-3, userController.registerUser(userInfo));
+    }
+
+    @Test
+    void createUserWrongVerification(){
+        HashMap<String, String> userInfo = new HashMap<>();
+        userInfo.put("Username", "Jordan");
+        userInfo.put("Password", "Jordan123");
+        userInfo.put("Re-entered Password", "Jordan123");
+        userInfo.put("Email", "ThisIsNotAnEmail@email.com");
+        userInfo.put("isAdmin", null);
+        userInfo.put("Verification", "NotDebugCode");
+        assertEquals(-5, userController.registerUser(userInfo));
     }
 
     @Test
@@ -108,12 +126,6 @@ class UserUseCaseInteractorTest {
     }
 
     @Test
-    //Try login with a wrong password
-    void loginWrongPassword() {
-        assertEquals(-2, userController.loginUser("admin", "QNAForum1"));
-    }
-
-    @Test
     void getUserSuccess(){
         User user = userController.getUser("admin");
         assertEquals(user.getUsername(), "admin");
@@ -124,5 +136,20 @@ class UserUseCaseInteractorTest {
     void getUserFailure(){
         User user = userController.getUser("This is not a user");
         assertNull(user);
+    }
+
+    @Test
+    void loginSuccess(){
+        assertEquals(1, userController.loginUser("admin", "QNAForum140"));
+    }
+
+    @Test
+    void loginWrongPassword(){
+        assertEquals(-2, userController.loginUser("admin", "Wrongpassword"));
+    }
+
+    @Test
+    void loginNoAccount(){
+        assertEquals(-1, userController.loginUser("adminNoAccount", "Wrongpassword"));
     }
 }

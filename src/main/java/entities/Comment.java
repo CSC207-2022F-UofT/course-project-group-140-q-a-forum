@@ -1,12 +1,13 @@
 package entities;
 
-import java.awt.*;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Comment {
     private User postedBy;
     private String texts;
-    private ArrayList<Comment> comments;
+    private List<Comment> comments;
     /**
      * Create a comment to a Post, with only text.
      * The comment can be commented (nest) as well
@@ -25,7 +26,7 @@ public class Comment {
         return texts;
     }
 
-    public ArrayList<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 

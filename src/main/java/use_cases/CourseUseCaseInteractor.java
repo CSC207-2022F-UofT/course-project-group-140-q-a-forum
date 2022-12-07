@@ -6,6 +6,7 @@ import exceptions.*;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class CourseUseCaseInteractor {
@@ -139,7 +140,7 @@ public class CourseUseCaseInteractor {
      * @param courseCode The course to be added in.
      * @param post The post to be added.
      */
-    public void createPost(String courseCode, Post post){
+    public void addPost(String courseCode, Post post){
         Course course = courseDataInterface.getCourse(courseCode);
 
         if (!course.addPost(post)){
@@ -168,6 +169,10 @@ public class CourseUseCaseInteractor {
         return courseDataInterface.getAllCourses();
     }
 
+    /**
+     * Get the names of all courses that are currently in database.
+     * @return An arraylist containing the names of the courses.
+     */
     public ArrayList<String> getAllCoursesName(){
         ArrayList<Course> courses = courseDataInterface.getAllCourses();
         ArrayList<String> coursesName = new ArrayList<String>();
@@ -178,16 +183,24 @@ public class CourseUseCaseInteractor {
         return coursesName;
     }
 
-
+    /**
+     * Get all posts of the course with the given course code.
+     * @param courseCode The course code of the course.
+     * @return An arraylist of posts that are under this course.
+     */
     public ArrayList<Post> getAllPosts(String courseCode){
         if (!courseDataInterface.courseExists(courseCode)){
             throw new NotFoundException("The course "+ courseCode);
         }
-
         Course course = courseDataInterface.getCourse(courseCode);
         return course.getPosts();
     }
 
+    /**
+     * Get all titles of posts under the course with the given course code.
+     * @param courseCode The course code of the course.
+     * @return An arraylist of strings that represent the titles of the posts.
+     */
     public ArrayList<String> getAllPostTitles(String courseCode){
         if (!courseDataInterface.courseExists(courseCode)){
             throw new NotFoundException("The course "+courseCode);

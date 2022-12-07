@@ -5,6 +5,7 @@ import use_cases.DataBaseAccess.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
@@ -47,7 +48,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
      */
     @Override
     public boolean userExists(String userName) {
-        return dataHandler.lookupUserfromName(userName) == null;
+        return dataHandler.lookupUserfromName(userName) != null;
     }
 
     @Override
@@ -66,12 +67,11 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     /**
      * Get user information by user's email, and change user's username by newUsername.
      * @param user  the user who needs to reset
-     * @param userName  the name of user
+     * @param newUsername  the name of user want to change
      */
     @Override
     public void resetUsername(User user, String newUsername) {
-        User user_entity = dataHandler.lookupUserfromName(user.getEmail());
-        user_entity.setUsername(newUsername);
+        user.setUsername(newUsername);
     }
     /**
      * Get user information by user's email, and change user's password by newPassword.
@@ -112,10 +112,9 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
      * @return bool
      */
     @Override
-
     public boolean postExists(String courseCode, String postTopic) {
         Course course = getCourse(courseCode);
-        ArrayList<Post> posts = course.getPosts();
+        List<Post> posts = course.getPosts();
         for(Post post: posts){
             if (post.getTopic().equals(postTopic)){
                 return true;

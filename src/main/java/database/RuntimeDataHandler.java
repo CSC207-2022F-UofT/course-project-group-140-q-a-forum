@@ -10,7 +10,6 @@ public class RuntimeDataHandler implements DataHandlerInterface {
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Course> courses = new ArrayList<>();
     private ArrayList<Report> reports = new ArrayList<>();
-
     private HashMap<String, User> name2User = new HashMap<>();
     private HashMap<String, User> email2User = new HashMap<>();
     private HashMap<String, Course> code2Course = new HashMap<>();
@@ -23,7 +22,6 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      * @param info is a hashmap in the form: {"key": <type_of_data>, "data": <value_of_data>, in the form of an
      *             arraylist}
      */
-
     @Override
     public void setData(HashMap<String, Object> info) {
         /*
