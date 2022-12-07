@@ -3,9 +3,15 @@ package UI.UserdataRelated;
 import Presenter.GeneralPresenter;
 import Presenter.LoginPresenter;
 import Presenter.RegisterPresenter;
+import UI.MainOfShowingContents.CoursesForm;
 import base.main;
 import controllers.UserController;
+import entities.Course;
 import entities.User;
+
+import java.util.ArrayList;
+
+import static base.main.courseController;
 
 /**
  *
@@ -149,8 +155,9 @@ public class ChangePasswordForm extends javax.swing.JFrame {
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(this.user,this.viewUser);
-        profilePage.setVisible(true);
+        ArrayList<Course> courses = courseController.getAllCourses();
+        CoursesForm coursesForm = new CoursesForm(this.user, courses);
+        coursesForm.setVisible(true);
         this.setVisible(false);
     }
 

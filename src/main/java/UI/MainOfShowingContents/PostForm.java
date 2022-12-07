@@ -375,7 +375,7 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void checkProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(this.user, viewPost.getPostedBy());
+        ProfilePage profilePage = new ProfilePage(this.user, viewPost.getPostedBy(), this.course, this.viewPost);
         profilePage.setVisible(true);
         this.setVisible(false);
     }
