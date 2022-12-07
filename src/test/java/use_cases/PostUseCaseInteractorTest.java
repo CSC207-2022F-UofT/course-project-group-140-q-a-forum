@@ -7,12 +7,14 @@ import controllers.PostController;
 import controllers.UserController;
 import database.DatabaseGateway;
 import entities.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_cases.CourseUseCaseInteractor;
 import use_cases.PostUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
 
+import java.io.File;
 import java.util.HashMap;
 
 public class PostUseCaseInteractorTest {
@@ -28,6 +30,11 @@ public class PostUseCaseInteractorTest {
 
     @BeforeEach
     public void setUp() {
+        File orgFile = new File("data.ser");
+        File newFile = new File("protected_data.ser");
+        if (orgFile.exists()) {
+            orgFile.renameTo(newFile);
+        }
         HashMap<String, String> user = new HashMap<>();
         user.put("Username", "admin");
         user.put("Password", "QNAForum140");
@@ -195,5 +202,17 @@ public class PostUseCaseInteractorTest {
 
         assertEquals(-1, user.getLikeNumber());
         assertEquals(-1, post.getLikeNumber());
+    }
+
+    @AfterEach
+    public void tearDown(){
+        File orgFile = new File("protected_data.ser");
+        File newFile = new File("data.ser");
+
+        newFile.delete();
+
+        if (orgFile.exists()) {
+            orgFile.renameTo(newFile);
+        }
     }
 }
