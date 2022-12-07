@@ -69,7 +69,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     /**
      * Get user information by user's email, and change user's username by newUsername.
      * @param user  the user who needs to reset
-     * @param userName  the name of user
+     * @param newUsername the updated name of user
      */
     @Override
     public void resetUsername(User user, String newUsername) {
