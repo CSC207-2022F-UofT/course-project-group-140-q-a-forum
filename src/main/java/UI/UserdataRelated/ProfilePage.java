@@ -19,14 +19,16 @@ import java.util.ArrayList;
  */
 public class ProfilePage extends javax.swing.JFrame {
     private final User user;
+    private final User viewUser;
     private final CourseController courseController =main.courseController;
     private final UserController userController = main.userController;
 
     /**
      * Creates new form ProfilePage
      */
-    public ProfilePage(User user) {
+    public ProfilePage(User user, User viewUser) {
         this.user = user;
+        this.viewUser = viewUser;
         initComponents();
     }
 
@@ -35,10 +37,10 @@ public class ProfilePage extends javax.swing.JFrame {
         javax.swing.JFormattedTextField jFormattedTextField1 = new javax.swing.JFormattedTextField();
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel8 = new javax.swing.JLabel();
         javax.swing.JLabel reputationTitle = new javax.swing.JLabel();
-        javax.swing.JButton changeButton = new javax.swing.JButton();
+        changeButton = new javax.swing.JButton();
         doneButton = new javax.swing.JButton();
         userLabel = new javax.swing.JLabel();
         passLabel = new javax.swing.JLabel();
@@ -51,6 +53,8 @@ public class ProfilePage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         totalLikeLabel = new javax.swing.JLabel();
+        showReportPanel = new javax.swing.JPanel();
+        showReportButton = new javax.swing.JButton();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -99,7 +103,35 @@ public class ProfilePage extends javax.swing.JFrame {
         totalLikeLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         reportButton.setText("report this user");
-        reportButton.addActionListener(this::reportButtonActionPerformed);
+        reportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportButtonActionPerformed(evt);
+            }
+        });
+
+        showReportButton.setText("Show All Report");
+        showReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showReportButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout showReportPanelLayout = new javax.swing.GroupLayout(showReportPanel);
+        showReportPanel.setLayout(showReportPanelLayout);
+        showReportPanelLayout.setHorizontalGroup(
+                showReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, showReportPanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(showReportButton)
+                                .addContainerGap())
+        );
+        showReportPanelLayout.setVerticalGroup(
+                showReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, showReportPanelLayout.createSequentialGroup()
+                                .addGap(0, 77, Short.MAX_VALUE)
+                                .addComponent(showReportButton))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,10 +139,11 @@ public class ProfilePage extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(backButton)
+                                .addGap(116, 116, 116)
+                                .addComponent(showReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(reportButton)
                                 .addGap(245, 245, 245))
-
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -135,8 +168,8 @@ public class ProfilePage extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(changeButton)
                                                         .addComponent(doneButton)))
-                                        .addComponent(reputationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(totalLikeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(totalLikeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(reputationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(333, 333, 333))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,9 +202,12 @@ public class ProfilePage extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(reputationTitle)
                                         .addComponent(reputationLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
-                                .addComponent(backButton)
-                                .addComponent(reportButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(backButton)
+                                                .addComponent(reportButton))
+                                        .addComponent(showReportPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26))
         );
 
@@ -193,9 +229,26 @@ public class ProfilePage extends javax.swing.JFrame {
         );
 
         pack();
+       initialPanel();
     }// </editor-fold>
 
-
+    public void initialPanel(){
+        if(this.user.equals(viewUser)){
+            setPassVisible(true);
+            if(this.user.isAdmin()){
+                showReportPanel.setVisible(true);
+            }
+        }
+        else {
+            setPassVisible(false);
+            showReportPanel.setVisible(false);
+        }
+    }
+    public void setPassVisible(boolean result){
+        jLabel7.setVisible(result);
+        passLabel.setVisible(result);
+        changeButton.setVisible(result);
+    }
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {
         jLabel1.setVisible(true);
         changeUserNameText.setVisible(true);
@@ -203,7 +256,7 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ChangePasswordForm changePasswordForm = new ChangePasswordForm(user);
+        ChangePasswordForm changePasswordForm = new ChangePasswordForm(this.user, this.viewUser);
         changePasswordForm.setVisible(true);
         this.setVisible(false);
     }
@@ -223,7 +276,7 @@ public class ProfilePage extends javax.swing.JFrame {
         }else {
             GeneralPresenter.showSuccessMessage("reset username");
             this.setVisible(false);
-            ProfilePage profilePage = new ProfilePage(user);
+            ProfilePage profilePage = new ProfilePage(user, viewUser);
             profilePage.setVisible(true);
         }
     }
@@ -240,18 +293,24 @@ public class ProfilePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
     private void setInitial() {
-        userLabel.setText(user.getUsername());
-        passLabel.setText(user.getPassword());
-        emailLabel.setText(user.getEmail());
-        totalLikeLabel.setText(String.valueOf(user.getLikeNumber()));
-        reputationLabel.setText(user.getReputation());
+        userLabel.setText(this.viewUser.getUsername());
+        passLabel.setText(this.viewUser.getPassword());
+        emailLabel.setText(this.viewUser.getEmail());
+        totalLikeLabel.setText(String.valueOf(this.viewUser.getLikeNumber()));
+        reputationLabel.setText(this.viewUser.getReputation());
         changeUserNameText.setVisible(false);
         jLabel1.setVisible(false);
         doneButton.setVisible(false);
     }
 
+    private void showReportButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
 
     private javax.swing.JTextField changeUserNameText;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JButton changeButton;
     private javax.swing.JButton doneButton;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel jLabel1;

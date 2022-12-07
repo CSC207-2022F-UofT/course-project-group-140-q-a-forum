@@ -292,10 +292,9 @@ public class CoursesForm extends javax.swing.JFrame {
         }
     }
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(this.user);
+        ProfilePage profilePage = new ProfilePage(this.user, this.user);
         profilePage.setVisible(true);
         this.setVisible(false);
-
     }
 
 

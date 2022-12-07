@@ -106,7 +106,7 @@ public class PostForm extends javax.swing.JFrame {
 
         commentNumberLabel.setText("Number of Comments");
 
-        reputationLabel.setText("reputaion");
+        reputationLabel.setText("reputation");
 
         jLabel7.setText("Like number:");
 
@@ -246,7 +246,7 @@ public class PostForm extends javax.swing.JFrame {
 
         jLabel1.setText("User:");
 
-        userNameLabel.setText("UserName");
+        userNameLabel.setText(this.user.getUsername());
 
         jLabel4.setText("Course:");
 
@@ -375,7 +375,7 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void checkProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(viewPost.getPostedBy());
+        ProfilePage profilePage = new ProfilePage(this.user, viewPost.getPostedBy());
         profilePage.setVisible(true);
         this.setVisible(false);
     }
