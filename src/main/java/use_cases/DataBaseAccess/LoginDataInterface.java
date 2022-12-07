@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface LoginDataInterface extends DataInterface{
     ArrayList<User> getData();
+    
 }

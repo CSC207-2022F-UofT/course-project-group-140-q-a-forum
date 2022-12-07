@@ -3,17 +3,19 @@ package database;
 import entities.*;
 import use_cases.DataBaseAccess.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
 
     final RuntimeDataHandler dataHandler;
+    final DatabaseDataHandler databaseHandler;
 
     public DatabaseGateway() {
         this.dataHandler = new RuntimeDataHandler();
+        this.databaseHandler = new DatabaseDataHandler();
     }
 
     @Override
@@ -67,11 +69,12 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     /**
      * Get user information by user's email, and change user's username by newUsername.
      * @param user  the user who needs to reset
-     * @param newUsername  the name of user want to change
+     * @param newUsername the updated name of user
      */
     @Override
     public void resetUsername(User user, String newUsername) {
-        user.setUsername(newUsername);
+        User user_entity = dataHandler.lookupUserfromName(user.getEmail());
+        user_entity.setUsername(newUsername);
     }
     /**
      * Get user information by user's email, and change user's password by newPassword.
@@ -112,9 +115,10 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
      * @return bool
      */
     @Override
+
     public boolean postExists(String courseCode, String postTopic) {
         Course course = getCourse(courseCode);
-        List<Post> posts = course.getPosts();
+        ArrayList<Post> posts = course.getPosts();
         for(Post post: posts){
             if (post.getTopic().equals(postTopic)){
                 return true;
@@ -192,6 +196,14 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         info.put("key", 2);
         info.put("data", report);
         dataHandler.deleteData(info);
+    }
+
+    public void saveToFile() throws IOException {
+        databaseHandler.saveToFile(dataHandler.getData());
+    }
+
+    public void readFromFile() throws IOException, ClassNotFoundException {
+        dataHandler.setData((HashMap<Integer, Object>) databaseHandler.readFromFile());
     }
 
 }

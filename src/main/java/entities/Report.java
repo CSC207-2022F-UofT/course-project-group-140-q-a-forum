@@ -1,8 +1,9 @@
 package entities;
 
 import javax.lang.model.type.UnionType;
+import java.io.Serializable;
 
-public class Report {
+public class Report implements Serializable {
     private String user;
     private int reportType;
     //ReportType: 0 report on User, 1 report on Post, 2 report on Course.

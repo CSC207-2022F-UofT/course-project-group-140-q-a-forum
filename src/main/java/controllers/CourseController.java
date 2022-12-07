@@ -1,5 +1,6 @@
 package controllers;
 
+import database.DatabaseGateway;
 import entities.Course;
 import entities.Post;
 import exceptions.*;
