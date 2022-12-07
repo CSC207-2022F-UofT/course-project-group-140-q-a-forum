@@ -17,13 +17,14 @@
 
 ### 1.1 User.java
 
-User.java is a class that is used to store the data of each individual user/administrator of the forum.
+`User.java` is a class that is used to store the data of each individual user/administrator of the forum. It implements
+the `Serializable` interface for serialization.
 
 The user object has the following attributes:
-* username
-* userid
-* password
-* email
+* `username`
+* `userid`
+* `password`
+* `email`
 
 The entity provides interfaces for other functions to modify the username, password, and email. The userid, however,
 is immutable once registration.
@@ -31,10 +32,10 @@ is immutable once registration.
 Course.java is a class that is used to store the data of each specific course registrated on the forum.
 \
 The course object  has the following attributes:
-* course name
-* course code
-* course description
-* semester offering
+* `course_name`
+* `course_code`
+* `course description`
+* `semester offering`
 * course instructor(s)
 * students
 
