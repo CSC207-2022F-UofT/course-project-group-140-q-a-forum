@@ -257,6 +257,8 @@ public class ProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel passLabel;
     private javax.swing.JLabel reputationLabel;
+    private javax.swing.JButton showReportButton;
+    private javax.swing.JPanel showReportPanel;
     private javax.swing.JLabel totalLikeLabel;
     private javax.swing.JLabel userLabel;
     // End of variables declaration
