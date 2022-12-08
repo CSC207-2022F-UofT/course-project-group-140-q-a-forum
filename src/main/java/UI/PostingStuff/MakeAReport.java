@@ -104,6 +104,7 @@ public class MakeAReport extends javax.swing.JFrame {
         reasonText.setColumns(20);
         reasonText.setRows(5);
         jScrollPane1.setViewportView(reasonText);
+        reasonText.setLineWrap(true);
 
         reportButton.setText("Report ");
         reportButton.addActionListener(this::reportButtonActionPerformed);

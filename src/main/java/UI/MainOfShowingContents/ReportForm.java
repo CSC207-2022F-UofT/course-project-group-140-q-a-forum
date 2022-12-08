@@ -50,18 +50,14 @@ public class ReportForm extends javax.swing.JFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Report Description"));
 
-        jLabel8.setText("Report Type:");
+        jLabel8.setText("Report on:");
 
         titleLabel.setText("Report Type");
 
         contentLabel.setText("Report Content");
 
         resolveButton.setText("resolve this report");
-        resolveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resolveButtonActionPerformed(evt);
-            }
-        });
+        resolveButton.addActionListener(this::resolveButtonActionPerformed);
 
         jLabel2.setText("Report Content:");
         typeLabel.setText("Type");
@@ -118,11 +114,7 @@ public class ReportForm extends javax.swing.JFrame {
         });
 
         backButton.setText("Back to Profile Page");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

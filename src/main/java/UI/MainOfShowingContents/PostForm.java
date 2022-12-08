@@ -361,7 +361,7 @@ public class PostForm extends javax.swing.JFrame {
         nameLabel.setText(post.getTopic());
         authorLabel.setText(post.getPostedBy().getUsername());
         //descriptionLabel.setText("fajowefpoajwpo");
-        descriptionLabel.setText("<html><p align=\"center\">"+post.getTexts()+ "</p></html>");
+        descriptionLabel.setText("<html>"+post.getTexts()+ "</html>");
         String numberComments = String.valueOf(viewPost.getComments().size());
         commentNumberLabel.setText(numberComments);
         likesLabel.setText(String.valueOf(post.getLikeNumber()));

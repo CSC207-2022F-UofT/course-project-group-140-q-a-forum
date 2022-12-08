@@ -213,7 +213,7 @@ public class CommentsForm extends javax.swing.JFrame {
 
     private void changePanel(Comment comment){
        showingUserLabel16.setText(comment.getPostedBy().getUsername());
-       showContentLabel16.setText(comment.getTexts());
+       showContentLabel16.setText("<html>"+comment.getTexts() + "</html>");
 
     }
 
