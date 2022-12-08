@@ -29,12 +29,12 @@ public class ReportUseCaseInteractor{
      */
     public void createReport(Map<String, String> reportInfo) {
 
-        if (!userDataInterface.userExists((String) reportInfo.get("Username"))) {
+        if (!userDataInterface.userExists(reportInfo.get("Username"))) {
             throw new NotFoundException("Username");
         }
 
         reportDataInterface.addReport(new Report(reportInfo.get("Username"),
-                reportInfo.get("Type"), reportInfo.get("Content")));
+                reportInfo.get("Type"), reportInfo.get("Content"), reportInfo.get("attachedTo")));
 
         try{
             reportDataInterface.saveToFile();

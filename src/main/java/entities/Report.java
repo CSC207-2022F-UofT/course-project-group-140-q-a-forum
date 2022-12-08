@@ -10,6 +10,8 @@ public class Report implements Serializable {
     // Possible entries: user, post, course
     private String content;
 
+    public String attachedTo;
+
     public Report(){
 
     }
@@ -20,10 +22,11 @@ public class Report implements Serializable {
      * @param reportType
      * @param content
      */
-    public Report(String username, String reportType, String content){
+    public Report(String username, String reportType, String content, String attachedTo){
         this.user = username;
         this.reportType = reportType;
         this.content = content;
+        this.attachedTo = attachedTo;
     }
 
     /**
@@ -50,6 +53,8 @@ public class Report implements Serializable {
         return content;
     }
 
-
+    public String getAttachedTo() {
+        return attachedTo;
+    }
 }
 

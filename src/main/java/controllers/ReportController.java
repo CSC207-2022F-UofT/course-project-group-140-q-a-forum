@@ -1,10 +1,10 @@
 package controllers;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import entities.Report;
 import exceptions.*;
+import entities.*;
 import use_cases.ReportUseCaseInteractor;
 
 public class ReportController {
@@ -27,8 +27,30 @@ public class ReportController {
      * 0: The user report does not exist.
      */
 
-    public int createAReport(Map<String, String> reportInformation) {
-        System.err.println("Problem here!");
+    public int createReportForUser(Map<String, String> reportInformation, User user) {
+        reportInformation.put("attachedTo", user.getUsername());
+        try {
+            reportUseCaseInteractor.createReport(reportInformation);
+        } catch (NotFoundException e) {
+            return 0;
+        }
+        return 1;
+
+    }
+
+    public int createReportForPost(Map<String, String> reportInformation, Post post) {
+        reportInformation.put("attachedTo", post.getTopic());
+        try {
+            reportUseCaseInteractor.createReport(reportInformation);
+        } catch (NotFoundException e) {
+            return 0;
+        }
+        return 1;
+
+    }
+
+    public int createReportForCourse(Map<String, String> reportInformation, Course course) {
+        reportInformation.put("attachedTo", course.getCode());
         try {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
@@ -43,16 +65,14 @@ public class ReportController {
      * Returns the situation of removal.
      *
      * @param report The report to be deleted.
-     * @return An integer indicating if successfully registered.
-     * 0: Successfully removed the report.
      */
 
-    public int removeAReport(Report report) {
+    public void removeAReport(Report report) {
         try {
             reportUseCaseInteractor.removeReport(report);
         } catch (RuntimeException e) {
-            return -1;
-        } return 0;
+            System.err.println(e.getMessage());
+        }
 
     }
 
