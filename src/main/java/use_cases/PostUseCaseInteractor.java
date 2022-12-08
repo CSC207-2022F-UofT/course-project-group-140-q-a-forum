@@ -32,7 +32,7 @@ public class PostUseCaseInteractor {
         User postedBy = (User) post_info.get("user");
         Course course = (Course) post_info.get("course");
         boolean notEmpty = checkPostValidity(title, text);
-        boolean duplicate = courseDataInterface.postExists(course.getCode(), title);
+        boolean duplicate = courseDataInterface.postExists(course, title);
         if (notEmpty && !duplicate){
             Post new_post = new Post(title, text, postedBy, course);
             course.addPost(new_post);
@@ -121,22 +121,11 @@ public class PostUseCaseInteractor {
 
     /**
      * Get all comments from a post with given topic under given course.
-     * @param courseCode The course code of the course under which the post exists.
-     * @param postTopic The title of the post.
+     * @param post The post.
      * @return A list containing all comments from the post.
      */
-    public List<Comment> getAllCommentFromPost(String courseCode, String postTopic){
-        Post post = courseDataInterface.getPost(courseCode, postTopic);
+    public List<Comment> getAllCommentFromPost(Post post){
         return post.getComments();
-    }
-
-    /**
-     * Get all comments from a comment.
-     * @param comment The comment whose comments are queried.
-     * @return A list of comments from this comment.
-     */
-    public List<Comment> getAllCommentFromComment(Comment comment){
-        return comment.getComments();
     }
 
     /**

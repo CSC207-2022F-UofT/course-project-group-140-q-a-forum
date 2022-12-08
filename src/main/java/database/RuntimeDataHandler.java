@@ -241,14 +241,14 @@ public class RuntimeDataHandler<T> implements DataHandlerInterface<T> {
 
     /**
      * Find course by code
-     * @param code  the code of course
-     * @return if course is found return Course course, otherwise null
+     * @param code the code of course
+     * @return if course is found return Course, otherwise null
      */
     public Course lookupCourse(String code) {
         return code2Course.getOrDefault(code, null);
     }
 
-    public ArrayList<Report> getAllReportFromType(int key){
+    public ArrayList<Report> getAllReportFromType(String key){
         return type2Report.get(key);
     }
 

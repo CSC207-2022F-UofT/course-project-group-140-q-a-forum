@@ -65,7 +65,7 @@ public class CommentsForm extends javax.swing.JFrame {
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Comments"));
         jList2.setModel(new javax.swing.AbstractListModel() {
-           final int commentsSize  = postController.getAllCommentFromPost(course.getCode(), post.getTopic()).size();
+           final int commentsSize  = postController.getAllCommentFromPost(post).size();
            final String[] strings = getCommentArray(commentsSize);
 
 //            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
