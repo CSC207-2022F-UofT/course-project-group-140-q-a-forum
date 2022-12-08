@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import controllers.CourseController;
 import controllers.PostController;
 import controllers.UserController;
+import database.DatabaseDataHandler;
 import database.DatabaseGateway;
+import database.RuntimeDataHandler;
 import entities.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +20,9 @@ import java.io.File;
 import java.util.HashMap;
 
 public class PostUseCaseInteractorTest {
-    private final DatabaseGateway gateway = new DatabaseGateway();
+    static RuntimeDataHandler<Object> dataHandler = new RuntimeDataHandler<Object>();
+    static DatabaseDataHandler databaseDataHandler = new DatabaseDataHandler();
+    static DatabaseGateway gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
 
     private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");
     private final CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
