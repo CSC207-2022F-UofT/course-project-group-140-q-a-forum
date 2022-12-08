@@ -32,10 +32,8 @@ public class ReportController {
         try {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
-            System.out.println(0);
             return 0;
         }
-        System.out.println(1);
         return 1;
 
     }
@@ -44,18 +42,13 @@ public class ReportController {
      * Remove a report.
      * Returns the situation of removal.
      *
-     * @param reportInformation This is a Map that contains necessary information
-     *                          needed to remove a user. The keys must be
-     *                          "Username", "Type", "Content"
+     * @param report The report to be deleted.
      * @return An integer indicating if successfully registered.
      * 0: Successfully removed the report.
      */
 
-    public int removeAReport(Map<String, String> reportInformation) {
+    public int removeAReport(Report report) {
         try {
-            Report report = new Report(reportInformation.get("Username"),
-                    reportInformation.get("Type"),
-                    reportInformation.get("Content"));
             reportUseCaseInteractor.removeReport(report);
         } catch (RuntimeException e) {
             return -1;

@@ -3,6 +3,7 @@ package UI.UserdataRelated;
 import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.CoursesForm;
 import UI.MainOfShowingContents.PostForm;
+import UI.MainOfShowingContents.ReportForm;
 import base.main;
 import controllers.CourseController;
 import controllers.UserController;
@@ -233,7 +234,7 @@ public class ProfilePage extends javax.swing.JFrame {
 
         pack();
        initialPanel();
-    }// </editor-fold>
+    }
     private void setSelfInitial() {
         userLabel.setText(this.viewUser.getUsername());
         passLabel.setText(this.viewUser.getPassword());
@@ -303,13 +304,15 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+
     }
 
 
 
     private void showReportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        ReportForm reportForm = new ReportForm(this.user, this.viewUser, this.course);
+        reportForm.setVisible(true);
+        this.setVisible(false);
     }
 
 
