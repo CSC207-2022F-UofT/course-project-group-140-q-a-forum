@@ -142,6 +142,13 @@ public class PostUseCaseInteractor {
             throw new EmptyEntryException("content");
         }
         post.addComment(newComment);
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -164,6 +171,12 @@ public class PostUseCaseInteractor {
 
         author.like();
         post.like(email);
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -187,5 +200,11 @@ public class PostUseCaseInteractor {
 
         author.dislike();
         post.dislike(email);
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 }
