@@ -1,14 +1,15 @@
 package entities;
 
-import javax.lang.model.type.UnionType;
 import java.io.Serializable;
 
 public class Report implements Serializable {
-    private String user;
+    private User user;
     private String reportType;
 
     // Possible entries: user, post, course
     private String content;
+
+    public String attachedTo;
 
     public Report(){
 
@@ -16,21 +17,23 @@ public class Report implements Serializable {
 
     /**
      * Create a report to a post. ReportType: User, Post, Course
-     * @param username
-     * @param reportType
-     * @param content
+     * @param user User who made the report
+     * @param reportType Whicih type of entity is the report made to
+     * @param content Content of the report
+     * @param attachedTo The reported subject
      */
-    public Report(String username, String reportType, String content){
-        this.user = username;
+    public Report(User user, String reportType, String content, String attachedTo){
+        this.user = user;
         this.reportType = reportType;
         this.content = content;
+        this.attachedTo = attachedTo;
     }
 
     /**
      * Get the username in the report
      * @return the string that represent the user
      */
-    public String getUser() {
+    public User getUser() {
         return this.user;
     }
 
@@ -50,6 +53,8 @@ public class Report implements Serializable {
         return content;
     }
 
-
+    public String getAttachedTo() {
+        return attachedTo;
+    }
 }
 

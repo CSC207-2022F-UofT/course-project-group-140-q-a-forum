@@ -4,9 +4,7 @@
  */
 package UI.UserdataRelated;
 
-import Presenter.GeneralPresenter;
-import Presenter.LoginPresenter;
-import Presenter.RegisterPresenter;
+import Presenter.*;
 import base.main;
 import controllers.UserController;
 import entities.User;

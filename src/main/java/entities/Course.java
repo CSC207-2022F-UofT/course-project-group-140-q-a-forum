@@ -2,8 +2,9 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 public class Course implements Serializable {
 
@@ -76,9 +77,7 @@ public class Course implements Serializable {
 
     public ArrayList<String> getPostTitles(){
         Set<String> keySet = topic2Post.keySet();
-        ArrayList<String> listOfKeys
-                = new ArrayList<>(keySet);
-        return listOfKeys;
+        return new ArrayList<>(keySet);
     }
 
     /**
@@ -139,15 +138,11 @@ public class Course implements Serializable {
     /**
      * Add a post to the post list of this course.
      * @param post The post to be added in.
-     * @return If the post is successfully added.
      */
-    public boolean addPost(Post post){
-        if (this.posts.contains(post)){
-            return false;
-        }else{
+    public void addPost(Post post){
+        if (! this.posts.contains(post)){
             this.posts.add(post);
             this.topic2Post.put(post.getTopic(), post);
-            return true;
         }
     }
 

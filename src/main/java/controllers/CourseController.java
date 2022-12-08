@@ -1,15 +1,16 @@
 package controllers;
 
-import database.DatabaseGateway;
 import entities.Course;
 import entities.Post;
-import exceptions.*;
-
+import exceptions.DuplicationException;
+import exceptions.EmptyEntryException;
+import exceptions.NotFoundException;
+import exceptions.WrongInfoException;
 import use_cases.CourseUseCaseInteractor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 public class CourseController {
     private final CourseUseCaseInteractor courseInteractor;
@@ -52,8 +53,10 @@ public class CourseController {
      * 1: The course has been deleted successfully.
      */
     public int removeCourse(boolean isAdmin, String courseCode){
+        /*
+         * For admin use
+         */
         if (!isAdmin){
-            //Call presenter
             return 0;
         }
 
@@ -76,6 +79,10 @@ public class CourseController {
      */
     public int modifyCourse(boolean isAdmin, String courseCode,
                             String part, String changeTo){
+        /*
+         * For admin use
+         */
+
         if (!isAdmin){
             //Call presenter
             return 0;
@@ -101,6 +108,9 @@ public class CourseController {
      * -1: The instructor is already in this course.
      */
     public int addInstructor(String courseCode, String instructor){
+        /*
+            For admin use
+         */
         try{courseInteractor.addInstructor(courseCode, instructor);}
         catch(DuplicationException e){
             //Call presenter
@@ -121,6 +131,11 @@ public class CourseController {
      * -1: The instructor is not found in this course.
      */
     public int removeInstructor(boolean isAdmin, String courseCode, String instructor){
+
+        /*
+         * For admin use
+         */
+
         if (!isAdmin){
             //Call presenter
             return 0;

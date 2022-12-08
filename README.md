@@ -312,4 +312,3 @@ and enter twice of his/her **NewPassword**. After clicking **Change Password**, 
 passwords are valid, the password would be updated. Then it will return to `Profile Page`.
 
 If the user doesn't want to change, he/she also could go back by clicking **Back to Profile Page**.
-

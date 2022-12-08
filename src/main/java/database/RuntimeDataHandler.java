@@ -1,6 +1,9 @@
 package database;
 
-import entities.*;
+
+import entities.Course;
+import entities.Report;
+import entities.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;

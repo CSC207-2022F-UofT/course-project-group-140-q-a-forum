@@ -7,16 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
 
     final RuntimeDataHandler dataHandler;
     final DatabaseDataHandler databaseHandler;
 
-    public DatabaseGateway() {
-        this.dataHandler = new RuntimeDataHandler();
-        this.databaseHandler = new DatabaseDataHandler();
+    public DatabaseGateway(RuntimeDataHandler<Object> dataHandler, DatabaseDataHandler databaseHandler) {
+        this.dataHandler = dataHandler;
+        this.databaseHandler = databaseHandler;
     }
 
     @Override
@@ -79,7 +78,9 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
      */
     @Override
     public void resetUsername(User user, String newUsername) {
-        User userEntity = dataHandler.lookupUserfromName(user.getEmail());
+        System.out.println(user.getUsername());
+        System.out.println(newUsername);
+        User userEntity = dataHandler.lookupUserfromEmail(user.getEmail());
         dataHandler.updateUsername(userEntity.getUsername(), newUsername);
         userEntity.setUsername(newUsername);
     }
@@ -200,7 +201,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     @Override
     public void removeReport(Report report) {
         HashMap<String, Object> info = new HashMap<>();
-        info.put("key", 2);
+        info.put("key", 3);
         info.put("data", report);
         dataHandler.deleteData(info);
     }

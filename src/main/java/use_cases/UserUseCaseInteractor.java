@@ -339,6 +339,9 @@ public class UserUseCaseInteractor {
      * @param userName username of the user to be removed.
      */
     public void removeAUser(String userName) {
+        /*
+        For future administrator use
+         */
 
         // If the given user does not exist in the database, return false.
         if (!userDataInterface.userExists(userName)) {

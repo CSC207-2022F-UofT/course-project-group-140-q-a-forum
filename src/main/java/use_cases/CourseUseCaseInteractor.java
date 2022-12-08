@@ -6,9 +6,7 @@ import exceptions.*;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CourseUseCaseInteractor {
     final CourseDataInterface courseDataInterface;
@@ -139,25 +137,6 @@ public class CourseUseCaseInteractor {
         Course course = courseDataInterface.getCourse(courseCode);
         if (!course.removeInstructor(instructor)){
             throw new NotFoundException("Instructor in " + course.getCode());
-        }
-
-        try{
-            courseDataInterface.saveToFile();
-        }catch (IOException e){
-            System.err.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Add the given post to the course with the given course code.
-     * @param courseCode The course to be added in.
-     * @param post The post to be added.
-     */
-    public void addPost(String courseCode, Post post){
-        Course course = courseDataInterface.getCourse(courseCode);
-
-        if (!course.addPost(post)){
-            throw new DuplicationException("Post");
         }
 
         try{

@@ -3,6 +3,8 @@ package UI.UserdataRelated;
 import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.CoursesForm;
 import UI.MainOfShowingContents.PostForm;
+import UI.MainOfShowingContents.ReportForm;
+import UI.PostingStuff.MakeAReport;
 import base.main;
 import controllers.CourseController;
 import controllers.UserController;
@@ -46,7 +48,7 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void initComponents() {
-        javax.swing.JButton reportButton = new JButton();
+        reportButton = new JButton();
         javax.swing.JFormattedTextField jFormattedTextField1 = new javax.swing.JFormattedTextField();
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
@@ -116,7 +118,7 @@ public class ProfilePage extends javax.swing.JFrame {
         reportButton.setText("report this user");
         reportButton.addActionListener(this::reportButtonActionPerformed);
 
-        showReportButton.setText("Show All Report");
+        showReportButton.setText("Show All Report(Admin Only )");
         showReportButton.addActionListener(this::showReportButtonActionPerformed);
 
         javax.swing.GroupLayout showReportPanelLayout = new javax.swing.GroupLayout(showReportPanel);
@@ -233,7 +235,7 @@ public class ProfilePage extends javax.swing.JFrame {
 
         pack();
        initialPanel();
-    }// </editor-fold>
+    }
     private void setSelfInitial() {
         userLabel.setText(this.viewUser.getUsername());
         passLabel.setText(this.viewUser.getPassword());
@@ -250,11 +252,13 @@ public class ProfilePage extends javax.swing.JFrame {
         if(this.user.equals(viewUser)){
             setSelfInitial();
             setPassVisible(true);
+            reportButton.setVisible(false);
             if(this.user.isAdmin()){
                 showReportPanel.setVisible(true);
             }
         }
         else {
+            setSelfInitial();
             setPassVisible(false);
             editUserButton.setVisible(false);
         }
@@ -264,7 +268,7 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ChangePasswordForm changePasswordForm = new ChangePasswordForm(this.user, this.viewUser);
+        ChangePasswordForm changePasswordForm = new ChangePasswordForm(this.user, this.viewUser, this.course);
         changePasswordForm.setVisible(true);
         this.setVisible(false);
     }
@@ -284,6 +288,9 @@ public class ProfilePage extends javax.swing.JFrame {
         }else {
             GeneralPresenter.showSuccessMessage("reset username");
             setChangeUserVisible(false);
+            ProfilePage profilePage = new ProfilePage(this.user, this.viewUser, this.course);
+            profilePage.setVisible(true);
+            this.setVisible(false);
         }
     }
 
@@ -303,13 +310,17 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        MakeAReport makeAReport = new MakeAReport(this.viewUser);
+        makeAReport.setVisible(true);
+        this.setVisible(false);
     }
 
 
 
     private void showReportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        ReportForm reportForm = new ReportForm(this.user, this.viewUser, this.course);
+        reportForm.setVisible(true);
+        this.setVisible(false);
     }
 
 
@@ -324,6 +335,7 @@ public class ProfilePage extends javax.swing.JFrame {
         changeUserNameText.setVisible(result);
         doneButton.setVisible(result);
     }
+    private javax.swing.JButton reportButton;
     private javax.swing.JTextField changeUserNameText;
     private javax.swing.JButton editUserButton;
     private javax.swing.JLabel jLabel7;

@@ -79,14 +79,23 @@ public class Post implements Serializable {
     }
 
     public void removeComment(Comment comment) {
+        /*
+         * For admin use
+         */
         this.comments.remove(comment);
     }
 
     public void setTexts(String texts) {
+        /*
+         * For admin use
+         */
         this.texts = texts;
     }
 
     public void setTopic(String topic) {
+        /*
+         * For admin use
+         */
         this.topic = topic;
     }
 

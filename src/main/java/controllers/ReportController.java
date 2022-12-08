@@ -1,11 +1,15 @@
 package controllers;
 
-import java.lang.reflect.Array;
-import java.util.*;
 
+import entities.Course;
+import entities.Post;
 import entities.Report;
-import exceptions.*;
+import entities.User;
+import exceptions.NotFoundException;
 import use_cases.ReportUseCaseInteractor;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class ReportController {
     private final ReportUseCaseInteractor reportUseCaseInteractor;
@@ -17,7 +21,7 @@ public class ReportController {
 
     /**
      * Register a report.
-     * Returns the situation of registration.
+     * Returns the situation of registrati  on.
      *
      * @param reportInformation This is a Map that contains necessary information
      *                          needed to register a report. The keys must be
@@ -27,15 +31,35 @@ public class ReportController {
      * 0: The user report does not exist.
      */
 
-    public int createAReport(Map<String, String> reportInformation) {
-        System.err.println("Problem here!");
+    public int createReportForUser(Map<String, Object> reportInformation, User user) {
+        reportInformation.put("attachedTo", user.getUsername());
         try {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
-            System.out.println(0);
             return 0;
         }
-        System.out.println(1);
+        return 1;
+
+    }
+
+    public int createReportForPost(Map<String, Object> reportInformation, Post post) {
+        reportInformation.put("attachedTo", post.getTopic());
+        try {
+            reportUseCaseInteractor.createReport(reportInformation);
+        } catch (NotFoundException e) {
+            return 0;
+        }
+        return 1;
+
+    }
+
+    public int createReportForCourse(Map<String, Object> reportInformation, Course course) {
+        reportInformation.put("attachedTo", course.getCode());
+        try {
+            reportUseCaseInteractor.createReport(reportInformation);
+        } catch (NotFoundException e) {
+            return 0;
+        }
         return 1;
 
     }
@@ -44,22 +68,15 @@ public class ReportController {
      * Remove a report.
      * Returns the situation of removal.
      *
-     * @param reportInformation This is a Map that contains necessary information
-     *                          needed to remove a user. The keys must be
-     *                          "Username", "Type", "Content"
-     * @return An integer indicating if successfully registered.
-     * 0: Successfully removed the report.
+     * @param report The report to be deleted.
      */
 
-    public int removeAReport(Map<String, String> reportInformation) {
+    public void removeAReport(Report report) {
         try {
-            Report report = new Report(reportInformation.get("Username"),
-                    reportInformation.get("Type"),
-                    reportInformation.get("Content"));
             reportUseCaseInteractor.removeReport(report);
         } catch (RuntimeException e) {
-            return -1;
-        } return 0;
+            System.err.println(e.getMessage());
+        }
 
     }
 
