@@ -35,9 +35,6 @@ public class ReportUseCaseInteractor {
      *                    2 for report on course.
      */
     public void createReport(Map<String, String> reportInfo) {
-        if (!userDataInterface.getUser(reportInfo.get("Username")).isAdmin()) {
-            throw new NotFoundException("Username");
-        }
 
         Report report;
         report = factory.getReport(reportInfo);
