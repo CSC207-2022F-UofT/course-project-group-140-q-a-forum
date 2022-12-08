@@ -95,22 +95,13 @@ public class CourseUseCaseInteractor {
         }
 
         Course course = courseDataInterface.getCourse(courseCode);
-        String[] attributes = {"name", "courseCode", "description", "semester"};
 
-        boolean found = false;
-        for (String attribute: attributes){
-            if (attribute.equals(part)) {
-                found = true;
-                break;
-            }
+
+        boolean success = course.modifyCourseContent(part, newPart);
+        if (!success) {
+            throw new WrongInfoException(part);
         }
 
-        if (found) {
-            boolean success = course.modifyCourseContent(part, newPart);
-            if (!success) {
-                throw new WrongInfoException(part);
-            }
-        }
 
         try{
             courseDataInterface.saveToFile();
@@ -144,7 +135,7 @@ public class CourseUseCaseInteractor {
      * @param instructor the instructor to be added to the course
      */
     public void removeInstructor(Course course, String instructor){
-        if (course.removeInstructor(instructor)){
+        if (!course.removeInstructor(instructor)){
             throw new NotFoundException("Instructor in " + course.getCode());
         }
 

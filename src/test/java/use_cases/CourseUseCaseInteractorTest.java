@@ -2,6 +2,8 @@ package use_cases;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import database.DatabaseDataHandler;
+import database.RuntimeDataHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +17,8 @@ import java.io.File;
 import java.util.HashMap;
 
 public class CourseUseCaseInteractorTest  {
-
+    static RuntimeDataHandler<Object> dataHandler;
+    static DatabaseDataHandler databaseDataHandler;
     static DatabaseGateway gateway;
 
     static   UserUseCaseInteractor userInteractor;
@@ -28,7 +31,10 @@ public class CourseUseCaseInteractorTest  {
 
     @BeforeEach
     public void setup(){
-         gateway = new DatabaseGateway();
+        dataHandler = new RuntimeDataHandler<Object>();
+        databaseDataHandler = new DatabaseDataHandler();
+        gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
+
 
          userInteractor = new UserUseCaseInteractor(gateway);
          courseInteractor = new CourseUseCaseInteractor((gateway));
@@ -95,11 +101,11 @@ public class CourseUseCaseInteractorTest  {
     }
     @Test
     public  void UnsuccessfulRemove(){
-        assertEquals(0, courseController.removeCourse(false, "CSC207"));
+        assertEquals(0, courseController.removeCourse(false, courseController.getAllCourses().get(0)));
     }
     @Test
     public void SuccessfulRemove(){
-        assertEquals(1,courseController.removeCourse(true,"CSC207"));
+        assertEquals(1,courseController.removeCourse(true,courseController.getAllCourses().get(0)));
     }
 
     @Test
@@ -130,17 +136,19 @@ public class CourseUseCaseInteractorTest  {
 
     @Test
     public void UnsuccessfulRemoveInstructor(){
-        assertEquals(0,courseController.removeInstructor(false,"CSC207","Ray Huong"));
+        assertEquals(0,courseController.removeInstructor(false,courseController.getAllCourses().get(0),"Ray Huong"));
     }
 
     @Test
     public void NotfoundInstructor(){
-        assertEquals(-1,courseController.removeInstructor(true,"CSC207","Ray Huong"));
+        System.err.println(courseController.getAllCourses().get(0).getInstructor());
+        assertEquals(-1,courseController.removeInstructor(true,courseController.getAllCourses().get(0),"Ray"));
     }
 
     @Test
     public void SuccessfulRemoveInstructor(){
-        assertEquals(1,courseController.removeInstructor(true,"CSC207","Charlie"));
+        System.err.println(courseController.getAllCourses().get(0).getInstructor());
+        assertEquals(1,courseController.removeInstructor(true,courseController.getAllCourses().get(0),"Charlie"));
     }
 
     @AfterEach
