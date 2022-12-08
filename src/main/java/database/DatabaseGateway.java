@@ -55,6 +55,11 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     }
 
     @Override
+    public boolean emailExists(String email) {
+        return dataHandler.lookupUserfromEmail(email) != null;
+    }
+
+    @Override
     /**
      * Search a user by userName<.
      * delete the user as a info  from the dataHandler.

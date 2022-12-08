@@ -43,8 +43,11 @@ public class UserUseCaseInteractor {
 
         // Check if the user exists in Database.
         if (userDataInterface.userExists(user.get("Username"))) {
-            System.err.println("FUCK! BUG");
             throw new DuplicationException("user");
+        }
+
+        if (userDataInterface.emailExists(user.get("Email"))) {
+            throw new DuplicationException("email");
         }
 
         // Check if the password is valid.

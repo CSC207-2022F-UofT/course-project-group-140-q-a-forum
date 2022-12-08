@@ -21,18 +21,25 @@ public class UserController {
      *             "Username", "Password", "Re-entered Password", "Email",
      *             "Verification" and "isAdmin".
      * @return if successfully registered this student return 0,
-     * if EmptyEntryException return -1,
+     * if DuplicationException from username return -1,
      * if InvalidFormatException thrown by invalid password format return -2,
      * if InvalidFormatException thrown by invalid email format return -3,
      * if WrongInfoException thrown by reentered password does not match return -4,
      * if WrongInfoException thrown by wrong verification number return -5.
+     * if DuplicationException from email return -6,
      */
     public int registerUser(Map<String, String> user, String correctVerification) {
         try {
             userUseCaseInteractor.createUser(user, correctVerification);
         } catch (DuplicationException e) {
             //A bunch of possible exceptions here, later I will add details.
-            return -1;
+            String message = e.getMessage();
+            if (message.contains("email")){
+                return -6;
+            }
+            else{
+                return -1;
+            }
         } catch (InvalidFormatException e) {
             String msg = e.getMessage();// Get the error message.
             if (msg.equals("The password is not formatted correctly.")) {
