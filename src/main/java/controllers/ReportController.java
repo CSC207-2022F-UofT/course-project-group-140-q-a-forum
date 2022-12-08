@@ -27,7 +27,7 @@ public class ReportController {
      * 0: The user report does not exist.
      */
 
-    public int createReportForUser(Map<String, String> reportInformation, User user) {
+    public int createReportForUser(Map<String, Object> reportInformation, User user) {
         reportInformation.put("attachedTo", user.getUsername());
         try {
             reportUseCaseInteractor.createReport(reportInformation);
@@ -38,7 +38,7 @@ public class ReportController {
 
     }
 
-    public int createReportForPost(Map<String, String> reportInformation, Post post) {
+    public int createReportForPost(Map<String, Object> reportInformation, Post post) {
         reportInformation.put("attachedTo", post.getTopic());
         try {
             reportUseCaseInteractor.createReport(reportInformation);
@@ -49,7 +49,7 @@ public class ReportController {
 
     }
 
-    public int createReportForCourse(Map<String, String> reportInformation, Course course) {
+    public int createReportForCourse(Map<String, Object> reportInformation, Course course) {
         reportInformation.put("attachedTo", course.getCode());
         try {
             reportUseCaseInteractor.createReport(reportInformation);
