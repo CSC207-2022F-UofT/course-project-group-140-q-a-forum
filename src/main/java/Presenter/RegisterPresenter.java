@@ -9,6 +9,11 @@ public class RegisterPresenter extends JOptionPane {
                 "This UserName already exists Please try another","UserAlreadyExists", ERROR_MESSAGE );
     }
 
+    public static void showEMailDuplicationError(){
+        JOptionPane.showMessageDialog(null,
+                "This Email is already registered. Please try another","EmailAlreadyExists", ERROR_MESSAGE );
+    }
+
     public static void showWrongPasswordError(){
         JOptionPane.showMessageDialog(null,
                 "The password is not Valid\n Password has to have contain both characters and numbers\n" +

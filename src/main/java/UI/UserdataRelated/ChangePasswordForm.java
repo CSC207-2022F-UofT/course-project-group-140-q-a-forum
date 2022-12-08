@@ -151,7 +151,7 @@ public class ChangePasswordForm extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>
+    }
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,12 +174,10 @@ public class ChangePasswordForm extends javax.swing.JFrame {
             case 1 -> GeneralPresenter.showSuccessMessage("Reset Password");
         }
 
-
     }
 
 
     private javax.swing.JTextField enterText;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField reText;
-    // End of variables declaration
 }
