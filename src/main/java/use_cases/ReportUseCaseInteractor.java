@@ -27,24 +27,24 @@ public class ReportUseCaseInteractor {
      * Create a report and setting UserName, Report type, Report content.
      *
      * @param reportInfo This is a Map that contains necessary information
-     *                    needed to register a report. The keys must be
-     *                    "Username", "ReportType", and "Content".
-     *                    The report type is identified by the value of "ReportType",
-     *                    0 for report on user,
-     *                    1 for report on post,
-     *                    2 for report on course.
+     *                   needed to register a report. The keys must be
+     *                   "Username", "ReportType", and "Content".
+     *                   The report type is identified by the value of "ReportType",
+     *                   0 for report on user,
+     *                   1 for report on post,
+     *                   2 for report on course.
      */
     public void createReport(Map<String, String> reportInfo) {
 
         Report report;
         report = factory.getReport(reportInfo);
-        if (report!=null) {
+        if (report != null) {
             reportDataInterface.addReport(report);
         }
 
-        try{
+        try {
             reportDataInterface.saveToFile();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -65,12 +65,17 @@ public class ReportUseCaseInteractor {
     public void removeReport(Map<String, String> reportToDelete) {
         Report report;
         report = factory.getReport(reportToDelete);
-        if (report!=null) {
+        if (report != null) {
             reportDataInterface.removeReport(report);
+            try {
+                reportDataInterface.saveToFile();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
         }
     }
 
-    public ArrayList<Report> getAllReport(){
+    public ArrayList<Report> getAllReport() {
         return reportDataInterface.getAllReport();
     }
 
