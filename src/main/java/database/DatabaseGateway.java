@@ -200,7 +200,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     @Override
     public void removeReport(Report report) {
         HashMap<String, Object> info = new HashMap<>();
-        info.put("key", 2);
+        info.put("key", 3);
         info.put("data", report);
         dataHandler.deleteData(info);
     }

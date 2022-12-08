@@ -205,18 +205,14 @@ public class MakeAReport extends javax.swing.JFrame {
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt){
-        HashMap<String, String> reportInfo = new HashMap<>();
-        reportInfo.put("Username", user.getUsername());
-        reportInfo.put("Type", reportType);
-        reportInfo.put("Content", reasonText.getText());
-//        int result = reportController.(reportInfo);
-//        switch (result){
-//            case 0-> GeneralPresenter.showNotFoundError("Report type");
-//            case 1->{
-//                GeneralPresenter.showSuccessMessage("Report");
-//                goBackUpper();
-//            }
-//        }
+        int result = reportBasedType();
+        switch (result){
+            case 0-> GeneralPresenter.showNotFoundError("Report type");
+            case 1->{
+                GeneralPresenter.showSuccessMessage("Report");
+                goBackUpper();
+            }
+        }
 
     }
 
@@ -224,10 +220,19 @@ public class MakeAReport extends javax.swing.JFrame {
         goBackUpper();
 
     }
-    private void reportBasedType(){
-
-
-
+    private int reportBasedType(){
+        HashMap<String, Object> reportInfo = new HashMap<>();
+        reportInfo.put("Username", user);
+        reportInfo.put("Type", reportType);
+        reportInfo.put("Content", reasonText.getText());
+        if (post != null){
+            return reportController.createReportForPost(reportInfo, this.post);
+        } else if (course != null) {
+            return reportController.createReportForCourse(reportInfo, this.course);
+        }
+        else{
+            return  reportController.createReportForUser(reportInfo, this.user);
+        }
     }
 
     private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {

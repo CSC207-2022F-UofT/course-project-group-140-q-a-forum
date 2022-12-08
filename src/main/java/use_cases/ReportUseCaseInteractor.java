@@ -53,6 +53,7 @@ public class ReportUseCaseInteractor{
      */
 
     public void removeReport(Report reportToDelete) {
+        System.out.println(reportToDelete.getContent());
         reportDataInterface.removeReport(reportToDelete);
         
         try{
