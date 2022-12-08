@@ -6,5 +6,7 @@ public interface Report {
      *
      * @return the int that represent the report type.
      */
-    int getReportType();
+    String getReportType();
+
+    String getContent();
 }

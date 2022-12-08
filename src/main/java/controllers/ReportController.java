@@ -1,8 +1,9 @@
 package controllers;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
-import entities.*;
+import entities.Report;
 import exceptions.*;
 import use_cases.ReportUseCaseInteractor;
 
@@ -26,12 +27,15 @@ public class ReportController {
      * 0: The user report does not exist.
      */
 
-    public int createAReport(Map<String, Object> reportInformation) {
+    public int createAReport(Map<String, String> reportInformation) {
+        System.err.println("Problem here!");
         try {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
+            System.out.println(0);
             return 0;
         }
+        System.out.println(1);
         return 1;
 
     }
@@ -45,16 +49,21 @@ public class ReportController {
      *                          "Username", "ReportType", "Content"
      * @return An integer indicating if successfully registered.
      * 0: Successfully removed the report.
+     * -1:Some RuntimeException occur.
      */
 
-    public int removeAReport(Map<String, Object> reportInformation) {
+    public int removeAReport(Map<String, String> reportInformation) {
         try {
 
             reportUseCaseInteractor.removeReport(reportInformation);
         } catch (RuntimeException e) {
-
+            return -1;
         } return 0;
 
+    }
+
+    public ArrayList<Report> getAllReport(){
+        return reportUseCaseInteractor.getAllReport();
     }
 
 

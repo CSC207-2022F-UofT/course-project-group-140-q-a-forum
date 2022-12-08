@@ -12,11 +12,8 @@ import entities.Course;
 import entities.Post;
 import entities.Report;
 import entities.User;
-import use_cases.CourseUseCaseInteractor;
+import use_cases.*;
 import use_cases.DataBaseAccess.ReportDataInterface;
-import use_cases.PostUseCaseInteractor;
-import use_cases.ReportUseCaseInteractor;
-import use_cases.UserUseCaseInteractor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,12 +21,13 @@ import java.util.HashMap;
 
 public class main {
     static DatabaseGateway gateway = new DatabaseGateway();
+    static ReportFactory factory = new ReportFactory();
     static  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
     static  UserUseCaseInteractor userInteractor1 = new UserUseCaseInteractor(gateway,"DebugCode");
     static CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
     static PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
 
-    static ReportUseCaseInteractor reportUseCaseInteractor = new ReportUseCaseInteractor(gateway, gateway);
+    static ReportUseCaseInteractor reportUseCaseInteractor = new ReportUseCaseInteractor(gateway, gateway, factory);
 
     public static CourseController courseController = new CourseController(courseInteractor);
     public static PostController postController = new PostController(postInteractor);

@@ -2,9 +2,9 @@ package entities;
 
 public class ReportOnPost implements Report {
     private String user;
-    final int reportType = 1;
-    //ReportType: 0 report on User, 1 report on Post, 2 report on Course.
-    private Object content;
+    final String reportType = "post";
+    // Possible entries: user, post, course
+    private String content;
 
     /**
      * Create a report on Post.
@@ -12,7 +12,7 @@ public class ReportOnPost implements Report {
      * @param username the username of the user
      * @param content  the content of the report.
      */
-    public ReportOnPost(String username, Object content) {
+    public ReportOnPost(String username, String content) {
         this.user = username;
         this.content = content;
     }
@@ -34,7 +34,7 @@ public class ReportOnPost implements Report {
      * @return the int that represent the report type.
      */
     @Override
-    public int getReportType() {
+    public String getReportType() {
         return this.reportType;
     }
 
@@ -44,7 +44,7 @@ public class ReportOnPost implements Report {
      *
      * @return An Object representing content of the report
      */
-    public Object getContent() {
+    public String getContent() {
         return content;
     }
 }

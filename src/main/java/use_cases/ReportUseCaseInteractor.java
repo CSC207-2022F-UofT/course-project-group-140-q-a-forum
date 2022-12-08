@@ -16,7 +16,8 @@ public class ReportUseCaseInteractor {
     final UserDataInterface userDataInterface;
     final ReportFactory factory;
 
-    public ReportUseCaseInteractor(ReportDataInterface reportDataInterface, UserDataInterface userDataInterface, ReportFactory factory) {
+    public ReportUseCaseInteractor(ReportDataInterface reportDataInterface, UserDataInterface userDataInterface,
+                                   ReportFactory factory) {
         this.reportDataInterface = reportDataInterface;
         this.userDataInterface = userDataInterface;
         this.factory = factory;
@@ -33,8 +34,8 @@ public class ReportUseCaseInteractor {
      *                    1 for report on post,
      *                    2 for report on course.
      */
-    public void createReport(Map<String, Object> reportInfo) {
-        if (!userDataInterface.getUser((String) reportInfo.get("Username")).isAdmin()) {
+    public void createReport(Map<String, String> reportInfo) {
+        if (!userDataInterface.getUser(reportInfo.get("Username")).isAdmin()) {
             throw new NotFoundException("Username");
         }
 
@@ -64,12 +65,16 @@ public class ReportUseCaseInteractor {
      *                       2 for report on course.
      */
 
-    public void removeReport(Map<String, Object> reportToDelete) {
+    public void removeReport(Map<String, String> reportToDelete) {
         Report report;
         report = factory.getReport(reportToDelete);
         if (report!=null) {
             reportDataInterface.removeReport(report);
         }
+    }
+
+    public ArrayList<Report> getAllReport(){
+        return reportDataInterface.getAllReport();
     }
 
 }
