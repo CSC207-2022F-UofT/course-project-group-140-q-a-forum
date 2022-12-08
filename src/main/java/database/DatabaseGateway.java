@@ -6,6 +6,8 @@ import use_cases.DataBaseAccess.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
 
@@ -19,21 +21,21 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
     @Override
     public ArrayList<User> getAllUsers() {
-        return dataHandler.getData(1);
+        return (ArrayList<User>) dataHandler.getData(1);
     }
     @Override
     public ArrayList<Course> getAllCourses() {
-        return dataHandler.getData(2);
+        return (ArrayList<Course>) dataHandler.getData(2);
     }
 
     @Override
     public ArrayList<Report> getAllReport() {
-        return dataHandler.getData(3);
+        return (ArrayList<Report>) dataHandler.getData(3);
     }
 
 
     /**
-     * Add a user as a piece of info into the dataHandler.
+     * Add a user as a info into the dataHandler.
      * @param user  the user who needs to add
      */
     @Override
@@ -53,9 +55,14 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     }
 
     @Override
+    public boolean emailExists(String email) {
+        return dataHandler.lookupUserfromEmail(email) != null;
+    }
+
+    @Override
     /**
      * Search a user by userName<.
-     * delete the user as a piece of info  from the dataHandler.
+     * delete the user as a info  from the dataHandler.
      * @param userName  the name of user
      */
     public void deleteUser(String username) {
@@ -122,7 +129,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         for(Post post: posts){
             if (post.getTopic().equals(postTopic)){
                 return true;
-            }
+            };
         }
         return false;
     }
@@ -134,7 +141,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     public User getUser(String userName) {return dataHandler.lookupUserfromName(userName);}
 
     /**
-     * Add a course as a piece of info into the dataHandler.
+     * Add a course as a info into the dataHandler.
      * @param course  the course that needs to add
      */
     @Override
@@ -147,7 +154,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
     /**
      * Search a course by courseCode.
-     * delete the course as a piece of info from the dataHandler.
+     * delete the course as a info from the dataHandler.
      * @param courseCode  the code of course
      */
     @Override
@@ -169,7 +176,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
 
     /**
-     * Add a report as a piece of info into the dataHandle.
+     * Add a report as a info into the dataHandle.
      * @param report the report that needs to add
      */
     @Override
@@ -187,7 +194,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
     /**
      * Search a report by report.
-     * delete the report as a piece of info from the dataHandler.
+     * delete the report as a info from the dataHandler.
      * @param report the report that needs to remove
      */
     @Override
@@ -203,7 +210,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     }
 
     public void readFromFile() throws IOException, ClassNotFoundException {
-        dataHandler.setData((HashMap<Integer, Object>) databaseHandler.readFromFile());
+        dataHandler.setData((HashMap<Integer, List>) databaseHandler.readFromFile());
     }
 
 }

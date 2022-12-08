@@ -87,6 +87,8 @@ public class PostForm extends javax.swing.JFrame {
 
         nameLabel.setText("Name of the Course");
 
+        descriptionLabel.setText("Post Content");
+
         showcommentButton.setText("Show All Comments");
         showcommentButton.addActionListener(this::showCommentButtonActionPerformed);
 
@@ -106,7 +108,7 @@ public class PostForm extends javax.swing.JFrame {
 
         commentNumberLabel.setText("Number of Comments");
 
-        reputationLabel.setText("reputaion");
+        reputationLabel.setText("reputation");
 
         jLabel7.setText("Like number:");
 
@@ -148,105 +150,98 @@ public class PostForm extends javax.swing.JFrame {
         checkProfileButton.setText("check Profile");
         checkProfileButton.addActionListener(this::checkProfileButtonActionPerformed);
 
-    javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
                 jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel2))
-            .addGap(18, 18, 18)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameLabel)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(authorLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(reputationLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(checkProfileButton))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel3))
-            .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(commentNumberLabel)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(likesLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        )))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(showcommentButton)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(commentButton))
-            .addGap(214, 214, 214))))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(251, 251, 251)
-                .addComponent(reportButton)
-                .addGap(0, 0, Short.MAX_VALUE))
-            );
+                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                                .addGap(53, 53, 53)
+                                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabel8)
+                                                        .addComponent(jLabel9)
+                                                        .addComponent(jLabel2))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(nameLabel)
+                                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                                                .addComponent(authorLabel)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(reputationLabel)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(checkProfileButton))
+                                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                                                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                                                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(46, 46, 46))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                                                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(jLabel7)
+                                                                        .addComponent(jLabel3))
+                                                                .addGap(18, 18, 18)
+                                                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(commentNumberLabel)
+                                                                        .addComponent(likesLabel)))
+                                                        .addComponent(showcommentButton, javax.swing.GroupLayout.Alignment.LEADING))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(commentButton)
+                                                .addGap(214, 214, 214))))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(251, 251, 251)
+                                .addComponent(reportButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
+        );
         jPanel7Layout.setVerticalGroup(
                 jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(nameLabel))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(authorLabel)
-                    .addComponent(reputationLabel)
-                    .addComponent(checkProfileButton))
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGap(16, 16, 16)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(commentNumberLabel))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(likesLabel))
-            .addGap(47, 47, 47)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(showcommentButton)
-                    .addComponent(commentButton))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(reportButton)
-                .addGap(21, 21, 21))
-            );
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel8)
+                                        .addComponent(nameLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel9)
+                                        .addComponent(authorLabel)
+                                        .addComponent(reputationLabel)
+                                        .addComponent(checkProfileButton))
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel2))
+                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                                .addGap(23, 23, 23)
+                                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                                .addGap(12, 12, 12)
+                                                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(16, 16, 16)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(commentNumberLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(likesLabel))
+                                .addGap(47, 47, 47)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(showcommentButton)
+                                        .addComponent(commentButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                                .addComponent(reportButton)
+                                .addGap(21, 21, 21))
+        );
 
         backButton.setText("Back to Courses Page");
         backButton.addActionListener(this::backButtonActionPerformed);
 
         jLabel1.setText("User:");
 
-        userNameLabel.setText("UserName");
+        userNameLabel.setText(this.user.getUsername());
 
         jLabel4.setText("Course:");
 
@@ -339,7 +334,6 @@ public class PostForm extends javax.swing.JFrame {
         MakeAPost makeAPost = new MakeAPost(user, course, posts);
         makeAPost.setVisible(true);
         this.setVisible(false);
-
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,12 +355,13 @@ public class PostForm extends javax.swing.JFrame {
             this.viewPost = selectPost;
             changePanel(selectPost);
         }
-
     }
+
     private void changePanel(Post post){
         nameLabel.setText(post.getTopic());
         authorLabel.setText(post.getPostedBy().getUsername());
-        descriptionLabel.setText(post.getTexts());
+        //descriptionLabel.setText("fajowefpoajwpo");
+        descriptionLabel.setText("<html><p align=\"center\">"+post.getTexts()+ "</p></html>");
         String numberComments = String.valueOf(viewPost.getComments().size());
         commentNumberLabel.setText(numberComments);
         likesLabel.setText(String.valueOf(post.getLikeNumber()));
@@ -375,7 +370,7 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void checkProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(viewPost.getPostedBy());
+        ProfilePage profilePage = new ProfilePage(this.user, viewPost.getPostedBy(), this.course, this.viewPost);
         profilePage.setVisible(true);
         this.setVisible(false);
     }

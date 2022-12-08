@@ -142,6 +142,13 @@ public class PostUseCaseInteractor {
             throw new EmptyEntryException("content");
         }
         post.addComment(newComment);
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -151,6 +158,10 @@ public class PostUseCaseInteractor {
      */
     public void likePost(Post post, User user){
         String email = user.getEmail();
+
+        if (post.getPostedBy() == user){
+            return;
+        }
 
         if (post.getLikeUser().contains(email)){
             throw new DuplicationException("like");
@@ -164,6 +175,12 @@ public class PostUseCaseInteractor {
 
         author.like();
         post.like(email);
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
@@ -173,6 +190,11 @@ public class PostUseCaseInteractor {
      */
     public void dislikePost(Post post, User user) {
         String email = user.getEmail();
+
+
+        if (post.getPostedBy() == user){
+            return;
+        }
 
         if (post.getDislikeUser().contains(email)) {
             throw new DuplicationException("dislike");
@@ -187,5 +209,11 @@ public class PostUseCaseInteractor {
 
         author.dislike();
         post.dislike(email);
+
+        try{
+            courseDataInterface.saveToFile();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 }

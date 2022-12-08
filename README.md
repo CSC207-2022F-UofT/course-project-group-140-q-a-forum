@@ -13,17 +13,23 @@
 
 # Introduction
 
+## 0. Design patterns
+We used the following design patterns in our project.
+* Dependency injection
+* Observer
+
 ## 1. Entities
 
 ### 1.1 User.java
 
-User.java is a class that is used to store the data of each individual user/administrator of the forum.
+`User.java` is a class that is used to store the data of each individual user/administrator of the forum. It implements
+the `Serializable` interface for serialization.
 
 The user object has the following attributes:
-* username
-* userid
-* password
-* email
+* `username`
+* `userid`
+* `password`
+* `email`
 
 The entity provides interfaces for other functions to modify the username, password, and email. The userid, however,
 is immutable once registration.
@@ -31,60 +37,65 @@ is immutable once registration.
 Course.java is a class that is used to store the data of each specific course registrated on the forum.
 \
 The course object  has the following attributes:
-* course name
-* course code
-* course description
-* semester offering
-* course instructor(s)
-* students
+* `name`
+* `courseCode`
+* `description`
+* `instructors`
+* `semester`
+* `posts`
 
 Most attributes for the course objects, once created, are immutable. The object only provides two
 functions to add/remove students.
 ### 1.3 Post.java
 Post.java is a class that is used to store the data of the posts in the forum. \
 The posts has the following attributes:
-* topic
-* texts
-* images
-* comments
-* posted by which user
+* `topic`
+* `texts`
+* `comments`
+* `user`
+* `likedUser`
+* `unlikedUser`
 
 The post object, once created, are modifiable, and can be commented by other user objects. \
 Some attributes, however, like the user who posted this thread, is immutable and viewable to everyone.
 ### 1.4 Comment.java
 Comment.java is a class that used to store the data of each comment to a post.\
 The posts has the following attributes.
-* texts
-* images
-* comments
-* posted by which user
+* `texts`
+* `comments`
+* `user`
 
 The comment object is very similar to a post. However, it must be attached to a post or another comment.
 ### 1.5 Report.java
 Comment.java is a class that used to store the data of a report of a problem in a forum to be viewed and resolved by the administrator.\
 The posts has the following attributes.
-* report type
-* content
-* posted by which user
+* `type`
+* `content`
+* `user`
 
 All of the information of the Report object, once created, are immutable.
 ## 2. Use cases
 ### 2.1 Course use case
 The course use case provides interface to create, modify, and delete course information. It has following functions:
 
-* **addCourse()**
+* `getAllCourses()`
+  * Fetch all courses previously registered. No input parameters is needed.
+* `addCourse()`
   * Takes in the course information, attempts to create the course and
-    return *true* if succeeds. If the course already exists, do nothing and return *false*.
+    return `true` if succeeds. If the course already exists, it will throw
+  an `DuplicationException`; if the course information are invalid, it will throw
+  an EmptyEntryException.
 
 
-* **modifyCourse()**
-  * Takes in the course information, attempts to modify the course and
-    return *true* if succeeds. If the course does not exist, do nothing and return *false*.
+* `modifyCourse()`
+  * Takes in the course information, attempts to modify the course. 
+  * If the course does not exist, do nothing and throw an exception.
 
 
 * **deleteCourse()**
   * Takes in the course information, attempts to delete the course and
-    return *true* if succeeds. If the course information does not match, do nothing and return *false*.
+    return *true* if succeeds. If the course information does not match, 
+  do nothing and throw an exception
 
 ### 2.2 Login use case
 // TODO
@@ -98,8 +109,52 @@ The course use case provides interface to create, modify, and delete course info
 ### 2.5 Report use case
 // TODO
 
-## 3. Controllers
-## 4. Graphical User Interface (GUI)
+## 3. Database
+### 3.1 Data storage
+We used three classes to handle the data, being `DatabaseDataHandler`, `RuntimeDataHandler`, and `DatabaseGateway`. \
+\
+The use cases andcontrollers interacts with `DatabaseGataway` to set, get, and edit the (non-attributive) data. \
+\
+`DatabaseGataway` implements three data interfaces, being 
+`CourseDataInterface`, `UserDataInterface`, `ReportDataInterface`.
+It has the following methods that could be called for data handling:
+* `getAllUsers()`, `getAllCourses()`, `getAllReports()` \
+Which fetches and returns all of the above data from the database.
+* `getUser()`, `getCourse()`, `getPost()` \
+Which gets the corresponding `user`, `course`, and `post` from their
+`username`, `code`, and `title`, respectively, in ***O(1)***.
+* `addUser`, `addReport`, `addCourse`
+* `deleteUser`, `delete
+### Use of data structure
+The run-time data are stored in the `RuntimeDataHandler`, in the following way:
+* `ArrayList<User> users`
+* `ArrayList<Course> courses`
+* `ArrayList<Report> reports `
+
+The actual objects are stored in these `ArrayLists`. Furthermore, we
+made use of `Hashmaps` to achieve a better `time-complexity`, and look up.
+* `Hashmap name2User`
+* `Hashmap email2User`
+* `Hashmap code2Course`
+* `Hashmap type2Report`
+
+Using these `Hashmaps`, our database provides *O(1)* complexity for 
+searching and fetching.
+
+### Serialization
+We serialized the data as a single object called 
+`Hashmap<Integer, Object> Info`. The hashmap has the following structure.
+
+| `key` | `value`     | `type`              | Serializable object | Non-native Attributes                   |
+|-------|-------------|---------------------|---------------------|-----------------------------------------|
+| `1`   | all users   | `ArrayList<User>`   | `User`              | `null`                                  |
+| `2`   | all courses | `ArrayList<Course>` | `Course`            | `null`                                  |
+| `3`   | all reports | `ArrayList<Report>` | `Report`            | `user`, `course`, `Arraylist<Comments>` |
+The a
+
+
+## 4. Controllers
+## 5. Graphical User Interface (GUI)
 
 ### Figure 1.1 Login InterFace
 ![Picture of the Login Form](ScreenShot/LoginForm.png)

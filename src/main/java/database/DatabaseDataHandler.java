@@ -65,7 +65,7 @@ public class DatabaseDataHandler{
 
 
 
-    public Map readFromFile() throws IOException, ClassNotFoundException {
+    public Map<Integer, List> readFromFile() throws IOException, ClassNotFoundException {
 
         String filePath = "data.ser";
 
@@ -80,7 +80,7 @@ public class DatabaseDataHandler{
 
         // serialize the Map
 
-        HashMap info = (HashMap) input.readObject();
+        HashMap<Integer, List> info = (HashMap<Integer, List>) input.readObject();
 
         input.close();
 
