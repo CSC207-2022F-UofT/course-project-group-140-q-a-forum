@@ -14,7 +14,7 @@ public class RuntimeDataHandler<T> implements DataHandlerInterface<T> {
     private Map<String, User> name2User;
     private Map<String, User> email2User;
     private final Map<String, Course> code2Course;
-    private final Map<Integer, ArrayList<Report>> type2Report;
+    private final Map<String, ArrayList<Report>> type2Report;
 
     public RuntimeDataHandler(){
         users = new ArrayList<>();
@@ -66,7 +66,7 @@ public class RuntimeDataHandler<T> implements DataHandlerInterface<T> {
         value = info.get(3);
         reports = (ArrayList<Report>) value;
         for (Report report : (ArrayList<Report>) value) {
-            int reportType = report.getReportType();
+            String reportType = report.getReportType();
             if (! type2Report.containsKey(reportType)){
                 type2Report.put(reportType, new ArrayList<Report>());
             }
@@ -123,7 +123,7 @@ public class RuntimeDataHandler<T> implements DataHandlerInterface<T> {
                 Report report = (Report) value;
                 reports.add(report);
                 // Put into a dictionary for faster search and access
-                int reportType = report.getReportType();
+                String reportType = report.getReportType();
                 if (!type2Report.containsKey(reportType)) {
                     type2Report.put(reportType, new ArrayList<Report>());
                 } else {

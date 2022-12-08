@@ -27,15 +27,14 @@ public class ReportUseCaseInteractor{
      *                    needed to register a user. The keys must be
      *                    "Username", "ReportType", and "Content".
      */
-    public void createReport(Map<String, Object> reportInfo) {
+    public void createReport(Map<String, String> reportInfo) {
 
         if (!userDataInterface.userExists((String) reportInfo.get("Username"))) {
             throw new NotFoundException("Username");
         }
 
-        reportDataInterface.addReport(new Report((String) reportInfo.get("Username"),
-                (Integer) reportInfo.get("Type"),
-                (String) reportInfo.get("Content")));
+        reportDataInterface.addReport(new Report(reportInfo.get("Username"),
+                reportInfo.get("Type"), reportInfo.get("Content")));
 
         try{
             reportDataInterface.saveToFile();

@@ -27,7 +27,7 @@ public class ReportController {
      * 0: The user report does not exist.
      */
 
-    public int createAReport(Map<String, Object> reportInformation) {
+    public int createAReport(Map<String, String> reportInformation) {
         System.err.println("Problem here!");
         try {
             reportUseCaseInteractor.createReport(reportInformation);
@@ -54,7 +54,7 @@ public class ReportController {
     public int removeAReport(Map<String, String> reportInformation) {
         try {
             Report report = new Report(reportInformation.get("Username"),
-                    Integer.parseInt(reportInformation.get("Type")),
+                    reportInformation.get("Type"),
                     reportInformation.get("Content"));
             reportUseCaseInteractor.removeReport(report);
         } catch (RuntimeException e) {
