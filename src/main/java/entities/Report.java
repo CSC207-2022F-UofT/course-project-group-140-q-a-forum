@@ -4,7 +4,7 @@ import javax.lang.model.type.UnionType;
 import java.io.Serializable;
 
 public class Report implements Serializable {
-    private String user;
+    private User user;
     private String reportType;
 
     // Possible entries: user, post, course
@@ -18,12 +18,12 @@ public class Report implements Serializable {
 
     /**
      * Create a report to a post. ReportType: User, Post, Course
-     * @param username
+     * @param user
      * @param reportType
      * @param content
      */
-    public Report(String username, String reportType, String content, String attachedTo){
-        this.user = username;
+    public Report(User user, String reportType, String content, String attachedTo){
+        this.user = user;
         this.reportType = reportType;
         this.content = content;
         this.attachedTo = attachedTo;
@@ -33,7 +33,7 @@ public class Report implements Serializable {
      * Get the username in the report
      * @return the string that represent the user
      */
-    public String getUser() {
+    public User getUser() {
         return this.user;
     }
 

@@ -2,6 +2,7 @@ package use_cases;
 
 import entities.Report;
 
+import entities.User;
 import exceptions.*;
 import use_cases.DataBaseAccess.ReportDataInterface;
 import use_cases.DataBaseAccess.UserDataInterface;
@@ -27,14 +28,15 @@ public class ReportUseCaseInteractor{
      *                    needed to register a user. The keys must be
      *                    "Username", "ReportType", and "Content".
      */
-    public void createReport(Map<String, String> reportInfo) {
+    public void createReport(Map<String, Object> reportInfo) {
 
-        if (!userDataInterface.userExists(reportInfo.get("Username"))) {
+        if (!userDataInterface.userExists(((User) reportInfo.get("Username")).getUsername())) {
             throw new NotFoundException("Username");
         }
 
-        reportDataInterface.addReport(new Report(reportInfo.get("Username"),
-                reportInfo.get("Type"), reportInfo.get("Content"), reportInfo.get("attachedTo")));
+        reportDataInterface.addReport(new Report((User) reportInfo.get("Username"),
+                (String) reportInfo.get("Type"), (String) reportInfo.get("Content"),
+                (String) reportInfo.get("attachedTo")));
 
         try{
             reportDataInterface.saveToFile();
