@@ -10,6 +10,7 @@ import entities.Course;
 import entities.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static base.main.courseController;
 
@@ -164,7 +165,13 @@ public class ChangePasswordForm extends javax.swing.JFrame {
         String oldPassword = jTextField1.getText();
         String newPassword = enterText.getText();
         String reenterPass = reText.getText();
-        int result = userController.changePassword(user, oldPassword,newPassword, reenterPass);
+
+        HashMap<String, String> passwordInfo = new HashMap<>();
+        passwordInfo.put("oldPassword", oldPassword);
+        passwordInfo.put("newPassword", newPassword);
+        passwordInfo.put("reenteredPassword", reenterPass);
+
+        int result = userController.changePassword(user, passwordInfo);
         switch (result){
             case -1-> GeneralPresenter.showEmptyEntryError();
             case -2 -> RegisterPresenter.showWrongPasswordError();

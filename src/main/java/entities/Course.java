@@ -87,6 +87,7 @@ public class Course implements Serializable {
      * @return If the modification is successful.
      */
     public boolean modifyCourseContent(String part, String changTo){
+
         switch(part){
             case "name":
                 this.name = changTo;
