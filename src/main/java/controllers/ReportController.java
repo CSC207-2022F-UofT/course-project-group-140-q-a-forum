@@ -51,10 +51,10 @@ public class ReportController {
      * 0: Successfully removed the report.
      */
 
-    public int removeAReport(Map<String, Object> reportInformation) {
+    public int removeAReport(Map<String, String> reportInformation) {
         try {
-            Report report = new Report((String) reportInformation.get("Username"),
-                    (Integer) reportInformation.get("Type"),
+            Report report = new Report(reportInformation.get("Username"),
+                    Integer.parseInt(reportInformation.get("Type")),
                     reportInformation.get("Content"));
             reportUseCaseInteractor.removeReport(report);
         } catch (RuntimeException e) {
