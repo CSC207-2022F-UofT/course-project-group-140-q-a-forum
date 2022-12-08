@@ -8,6 +8,7 @@ import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.CommentsForm;
 import UI.MainOfShowingContents.CoursesForm;
 import UI.MainOfShowingContents.PostForm;
+import UI.UserdataRelated.ProfilePage;
 import base.main;
 import controllers.CourseController;
 import controllers.ReportController;
@@ -31,9 +32,12 @@ public class MakeAReport extends javax.swing.JFrame {
     private final CourseController courseController = main.courseController;
     private final ReportController reportController = main.reportController;
 
-
-
-    public MakeAReport(User user) {
+    /**
+     *
+     * @param user this user make the report
+     * @param viewUser  this user is reported
+     */
+    public MakeAReport(User user, User viewUser) {
         this.user = user;
         this.post = null;
         this.course = null;
@@ -208,7 +212,7 @@ public class MakeAReport extends javax.swing.JFrame {
     }
     private int reportBasedType(){
         HashMap<String, Object> reportInfo = new HashMap<>();
-        reportInfo.put("Username", user);
+        reportInfo.put("Username", this.user);
         reportInfo.put("Type", reportType);
         reportInfo.put("Content", reasonText.getText());
         if (post != null){
@@ -223,12 +227,7 @@ public class MakeAReport extends javax.swing.JFrame {
 
 
     private void goBackUpper(){
-        if (this.reportType.equals( "User")){
-            CommentsForm commentsForm = new CommentsForm(this.user, this.course, this.post);
-            commentsForm.setVisible(true);
-            this.setVisible(false);
-        }
-        if (this.reportType.equals("Post")) {
+        if (this.reportType.equals("Post") || this.reportType.equals( "User")) {
             PostForm postForm = new PostForm(this.user,this.course);
             postForm.setVisible(true);
             this.setVisible(false);

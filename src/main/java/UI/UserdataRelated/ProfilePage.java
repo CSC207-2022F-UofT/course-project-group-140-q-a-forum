@@ -296,7 +296,6 @@ public class ProfilePage extends javax.swing.JFrame {
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
         if(this.post==null){
             ArrayList<Course> courses = courseController.getAllCourses();
             CoursesForm coursesForm  = new CoursesForm(user, courses);
@@ -310,7 +309,7 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        MakeAReport makeAReport = new MakeAReport(this.viewUser);
+        MakeAReport makeAReport = new MakeAReport(this.user, this.viewUser);
         makeAReport.setVisible(true);
         this.setVisible(false);
     }
