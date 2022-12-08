@@ -7,7 +7,7 @@ public class Report implements Serializable {
     private String user;
     private int reportType;
     //ReportType: 0 report on User, 1 report on Post, 2 report on Course.
-    private Object content;
+    private String content;
 
     public Report(){
 
@@ -20,7 +20,7 @@ public class Report implements Serializable {
      * @param reportType
      * @param content
      */
-    public Report(String username, int reportType, Object content){
+    public Report(String username, int reportType, String content){
         this.user = username;
         this.reportType = reportType;
         this.content = content;
@@ -46,7 +46,7 @@ public class Report implements Serializable {
      * Get the content of the report
       * @return An Object representing content of the report
      */
-    public Object getContent() {
+    public String getContent() {
         return content;
     }
 

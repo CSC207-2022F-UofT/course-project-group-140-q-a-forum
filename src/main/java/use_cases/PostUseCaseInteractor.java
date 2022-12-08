@@ -159,6 +159,10 @@ public class PostUseCaseInteractor {
     public void likePost(Post post, User user){
         String email = user.getEmail();
 
+        if (post.getPostedBy() == user){
+            return;
+        }
+
         if (post.getLikeUser().contains(email)){
             throw new DuplicationException("like");
         }
@@ -186,6 +190,11 @@ public class PostUseCaseInteractor {
      */
     public void dislikePost(Post post, User user) {
         String email = user.getEmail();
+
+
+        if (post.getPostedBy() == user){
+            return;
+        }
 
         if (post.getDislikeUser().contains(email)) {
             throw new DuplicationException("dislike");
