@@ -9,6 +9,7 @@ import use_cases.PostUseCaseInteractor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class PostController {
 
@@ -48,7 +49,7 @@ public class PostController {
         try{
             postUseCaseInteractor.editPost(post);
         }
-        catch(EmptyEntryException e){
+        catch(NotFoundException e){
             return -1;
         }
         return 0;
@@ -64,18 +65,13 @@ public class PostController {
         return 0;
     }
 
-    public ArrayList<String> getAllPosts(HashMap<String, Object> info){
-        String code = (String) info.get("code");
-        return null;
-    }
-
     /**
      * Get all comments of the post with given post topic in the course with the given course code.
      * @param courseCode The course code of the course that this post is of.
      * @param postTopic The topic of the course.
      * @return If there is not such post, then return null; else, return an arraylist of comments.
      */
-    public ArrayList<Comment> getAllCommentFromPost(String courseCode, String postTopic){
+    public List<Comment> getAllCommentFromPost(String courseCode, String postTopic){
         return postUseCaseInteractor.getAllCommentFromPost(courseCode, postTopic);
     }
 
@@ -84,7 +80,7 @@ public class PostController {
      * @param comment The comment whose comments are to be returned.
      * @return An arraylist of comments.
      */
-    public ArrayList<Comment> getAllCommentFromComment(Comment comment){
+    public List<Comment> getAllCommentFromComment(Comment comment){
         return postUseCaseInteractor.getAllCommentFromComment(comment);
     }
 
@@ -105,5 +101,32 @@ public class PostController {
         return 1;
     }
 
+    /**
+     * Like a post
+     * @param post The post to be liked
+     * @param user The user that likes this post.
+     * @return An integer representing whether successfully liked a post.
+     * 1: Successfully liked a post;
+     * -1: The user has already liked this post.
+     */
+    public int likePost(Post post, User user){
+        try{postUseCaseInteractor.likePost(post, user);}
+        catch(DuplicationException e){return -1;}
+        return 1;
+    }
+
+    /**
+     * Dislike a post
+     * @param post The post to be disliked
+     * @param user The user that dislikes this post.
+     * @return An integer representing whether successfully liked a post.
+     * 1: Successfully disliked a post;
+     * -1: The user has already disliked this post.
+     */
+    public int dislikePost(Post post, User user){
+        try{postUseCaseInteractor.dislikePost(post, user);}
+        catch(DuplicationException e){return -1;}
+        return 1;
+    }
 
 }

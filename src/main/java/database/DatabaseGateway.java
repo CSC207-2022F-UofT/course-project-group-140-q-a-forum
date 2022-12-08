@@ -3,6 +3,7 @@ package database;
 import entities.*;
 import use_cases.DataBaseAccess.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +11,11 @@ import java.util.Map;
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
 
     final RuntimeDataHandler dataHandler;
+    final DatabaseDataHandler databaseHandler;
 
     public DatabaseGateway() {
         this.dataHandler = new RuntimeDataHandler();
+        this.databaseHandler = new DatabaseDataHandler();
     }
 
     @Override
@@ -47,7 +50,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
      */
     @Override
     public boolean userExists(String userName) {
-        return dataHandler.lookupUserfromName(userName) == null;
+        return dataHandler.lookupUserfromName(userName) != null;
     }
 
     @Override
@@ -66,12 +69,13 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     /**
      * Get user information by user's email, and change user's username by newUsername.
      * @param user  the user who needs to reset
-     * @param userName  the name of user
+     * @param newUsername the updated name of user
      */
     @Override
     public void resetUsername(User user, String newUsername) {
-        User user_entity = dataHandler.lookupUserfromName(user.getEmail());
-        user_entity.setUsername(newUsername);
+        User userEntity = dataHandler.lookupUserfromName(user.getEmail());
+        dataHandler.updateUsername(userEntity.getUsername(), newUsername);
+        userEntity.setUsername(newUsername);
     }
     /**
      * Get user information by user's email, and change user's password by newPassword.
@@ -80,8 +84,8 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
      */
     @Override
     public void resetPassword(String userName, String newPassword) {
-        User user_entity = dataHandler.lookupUserfromName(userName);
-        user_entity.setPassword(newPassword);
+        User userEntity = dataHandler.lookupUserfromName(userName);
+        userEntity.setPassword(newPassword);
     }
     /**
      * Get course by courseCode.
@@ -193,6 +197,14 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
         info.put("key", 2);
         info.put("data", report);
         dataHandler.deleteData(info);
+    }
+
+    public void saveToFile() throws IOException {
+        databaseHandler.saveToFile(dataHandler.getData());
+    }
+
+    public void readFromFile() throws IOException, ClassNotFoundException {
+        dataHandler.setData((HashMap<Integer, Object>) databaseHandler.readFromFile());
     }
 
 }

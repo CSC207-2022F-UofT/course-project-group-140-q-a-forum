@@ -52,25 +52,13 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2.setText("Password:");
 
         loginButton.setText("Login");
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginButtonActionPerformed(evt);
-            }
-        });
+        loginButton.addActionListener(this::LoginButtonActionPerformed);
 
         registerButton.setText("Register");
-        registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterButtonActionPerformed(evt);
-            }
-        });
+        registerButton.addActionListener(this::RegisterButtonActionPerformed);
 
         forgetButton.setText("Forget Password?");
-        forgetButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                forgetButtonActionPerformed(evt);
-            }
-        });
+        forgetButton.addActionListener(this::forgetButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,11 +161,7 @@ public class LoginForm extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginForm().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new LoginForm().setVisible(true));
     }
 
     private javax.swing.JPasswordField passText;

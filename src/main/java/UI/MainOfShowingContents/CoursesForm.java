@@ -2,12 +2,11 @@ package UI.MainOfShowingContents;
 
 import Presenter.GeneralPresenter;
 import UI.PostingStuff.MakeACourse;
+import UI.PostingStuff.MakeAReport;
 import UI.UserdataRelated.ProfilePage;
 import base.main;
 import controllers.CourseController;
-import controllers.PostController;
 import entities.Course;
-import entities.Post;
 import entities.User;
 
 import javax.swing.*;
@@ -22,7 +21,6 @@ public class CoursesForm extends javax.swing.JFrame {
     private final ArrayList<Course> courses ;
     private final CourseController courseController = main.courseController;
 
-    private final PostController postController = main.postController;
 
     private Course viewCourse;
     /**
@@ -43,15 +41,15 @@ public class CoursesForm extends javax.swing.JFrame {
     private void initComponents() {
 
         JLabel jLabel1 = new JLabel();
-        coursenameLabel = new javax.swing.JLabel();
-        registerButton = new javax.swing.JButton();
+        JLabel coursenameLabel = new JLabel();
+        JButton registerButton = new JButton();
         jList2 = new javax.swing.JList();
         JPanel jPanel7 = new JPanel();
         JLabel jLabel8 = new JLabel();
         nameLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
-        showPostsButton = new javax.swing.JButton();
-        reportButton = new javax.swing.JButton();
+        JButton showPostsButton = new JButton();
+        JButton reportButton = new JButton();
         JLabel jLabel9 = new JLabel();
         codeLabel = new javax.swing.JLabel();
         JLabel jLabel11 = new JLabel();
@@ -62,8 +60,8 @@ public class CoursesForm extends javax.swing.JFrame {
         postsLabel = new javax.swing.JLabel();
         JLabel jLabel17 = new JLabel();
         JLabel jLabel2 = new JLabel();
-        userLabel = new javax.swing.JLabel();
-        profileButton = new javax.swing.JButton();
+        JLabel userLabel = new JLabel();
+        JButton profileButton = new JButton();
         JLabel jLabel4 = new JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,15 +71,11 @@ public class CoursesForm extends javax.swing.JFrame {
         coursenameLabel.setText("courses name");
 
         registerButton.setText("Register A new Course");
-        registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerButtonActionPerformed(evt);
-            }
-        });
+        registerButton.addActionListener(this::registerButtonActionPerformed);
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Course"));
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = courseController.getAllCoursesName().toArray(new String[0]);
+            final String[] strings = courseController.getAllCoursesName().toArray(new String[0]);
 
 
             public int getSize() { return strings.length; }
@@ -89,12 +83,7 @@ public class CoursesForm extends javax.swing.JFrame {
         });
         jList2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
-            }
-        });
-        jList2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jList2KeyPressed(evt);
+                jList2MouseClicked();
             }
         });
 
@@ -104,21 +93,13 @@ public class CoursesForm extends javax.swing.JFrame {
 
         nameLabel.setText("Name of the Course");
 
-        descriptionLabel.setText("jLabel4");
+        descriptionLabel.setText("Description of the Course");
 
         showPostsButton.setText("show all posts under this course");
-        showPostsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showPostsButtonActionPerformed(evt);
-            }
-        });
+        showPostsButton.addActionListener(this::showPostsButtonActionPerformed);
 
         reportButton.setText("Report this course");
-        reportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportButtonActionPerformed(evt);
-            }
-        });
+        reportButton.addActionListener(this::reportButtonActionPerformed);
 
         jLabel9.setText("Course Code");
 
@@ -207,11 +188,7 @@ public class CoursesForm extends javax.swing.JFrame {
         userLabel.setText(user.getUsername());
 
         profileButton.setText("Profile Page");
-        profileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profileButtonActionPerformed(evt);
-            }
-        });
+        profileButton.addActionListener(this::profileButtonActionPerformed);
 
         jLabel4.setText("User");
 
@@ -266,6 +243,13 @@ public class CoursesForm extends javax.swing.JFrame {
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        if (this.viewCourse == null){
+            GeneralPresenter.showNotSelectError("Course");
+        } else {
+            MakeAReport makeAReport = new MakeAReport(this.user, this.viewCourse);
+            makeAReport.setVisible(true);
+            this.setVisible(false);
+        }
     }
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,15 +260,11 @@ public class CoursesForm extends javax.swing.JFrame {
 
     }
 
-    private void jList2KeyPressed(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
 
-    }
-
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
+    private void jList2MouseClicked() {
         int chosenCourseIndex = jList2.getSelectedIndex();
         if(chosenCourseIndex==-1){
-            GeneralPresenter.showEmptyEntryError();
+            GeneralPresenter.showNotSelectError("Course");
         }
         else {
             Course selectCourse = courses.get(chosenCourseIndex);
@@ -299,24 +279,19 @@ public class CoursesForm extends javax.swing.JFrame {
         semesterLabel.setText(course.getSemester());
         instructorLabel.setText(String.valueOf(course.getInstructor()));
         postsLabel.setText(String.valueOf(course.getPosts().size()));
-        descriptionLabel.setText(course.getDescription());
+        descriptionLabel.setText("<html>"+course.getDescription()+ "</html>");
     }
 
     private void showPostsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         if (this.viewCourse == null){
-            GeneralPresenter.showNotSelectError();
+            GeneralPresenter.showNotSelectError("Course");
         } else {
-        System.out.println(this.viewCourse);
-        ArrayList<Post> posts = courseController.getAllPosts(viewCourse.getCode());
-        PostForm postForm = new PostForm(user, viewCourse, posts);
+        PostForm postForm = new PostForm(user, viewCourse);
         postForm.setVisible(true);
         this.setVisible(false);
-
         }
     }
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         ProfilePage profilePage = new ProfilePage(this.user);
         profilePage.setVisible(true);
         this.setVisible(false);
@@ -324,45 +299,13 @@ public class CoursesForm extends javax.swing.JFrame {
     }
 
 
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CoursesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            }
-        });
-    }
-
     // Variables declaration - do not modify
     private javax.swing.JLabel codeLabel;
-    private javax.swing.JButton showPostsButton;
-    private javax.swing.JLabel coursenameLabel;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel instructorLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JList jList2;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel postsLabel;
-    private javax.swing.JButton registerButton;
-    private javax.swing.JButton reportButton;
-    private javax.swing.JButton profileButton;
     private javax.swing.JLabel semesterLabel;
-    private javax.swing.JLabel userLabel;
     // End of variables declaration
 }

@@ -17,6 +17,7 @@ import java.util.HashMap;
  */
 public class MakeAnAccount extends  javax.swing.JFrame {
     private final UserController userController = main.userController;
+    private String correctVerification;
     /**
      * Creates new form RegisterForm
      */
@@ -58,11 +59,7 @@ public class MakeAnAccount extends  javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Set Up a Account"));
 
-        userNameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameTextActionPerformed(evt);
-            }
-        });
+        userNameText.addActionListener(this::userNameTextActionPerformed);
 
         jLabel6.setText("UserName:");
 
@@ -75,26 +72,14 @@ public class MakeAnAccount extends  javax.swing.JFrame {
         jLabel10.setText("Verification:");
 
         sendButton.setText("Send Verification");
-        sendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendButtonActionPerformed(evt);
-            }
-        });
+        sendButton.addActionListener(this::sendButtonActionPerformed);
 
 
         backButton.setText("Back to Login Page");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         registerButton.setText("Register");
-        registerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerButtonActionPerformed(evt);
-            }
-        });
+        registerButton.addActionListener(this::registerButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -245,9 +230,19 @@ public class MakeAnAccount extends  javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         String email = emailText.getText();
-
-        showingSeding.setText("Verification Send");
-
+        int resultOrCode = userController.sendEmail(email);
+        switch (resultOrCode){
+            case -1 ->{
+                RegisterPresenter.showNonValidEmailError();
+            }
+            case -2 ->{
+                RegisterPresenter.showVerificationError();
+            }
+            default -> {
+                this.correctVerification = String.valueOf(resultOrCode);
+                showingSeding.setText("Verification Send");
+            }
+        }
     }
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,7 +258,9 @@ public class MakeAnAccount extends  javax.swing.JFrame {
         RegInfo.put("Email", email);
         String isAdmin = null;
         RegInfo.put("isAdmin", isAdmin);
-        int result = userController.registerUser(RegInfo);
+        String verification = verificationText.getText();
+        RegInfo.put("Verification", verification);
+        int result = userController.registerUser(RegInfo, correctVerification);
         switch (result) {
             case 1 -> {
                 RegisterPresenter.showRegisterSuccess();
@@ -298,19 +295,6 @@ public class MakeAnAccount extends  javax.swing.JFrame {
                 verificationText.setFocusable(true);
             }
         }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MakeAnAccount().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify
