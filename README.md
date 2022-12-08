@@ -76,39 +76,17 @@ The posts has the following attributes.
 All of the information of the Report object, once created, are immutable.
 ## 2. Use cases
 ### 2.1 Course use case
-The course use case provides interface to create, modify, and delete course information. It has following functions:
+Course contains all relevant posts.
+### 2.2 User use case
+User can be registered with account name, password and email but not duplicate with other users.
 
-* `getAllCourses()`
-  * Fetch all courses previously registered. No input parameters is needed.
-* `addCourse()`
-  * Takes in the course information, attempts to create the course and
-    return `true` if succeeds. If the course already exists, it will throw
-  an `DuplicationException`; if the course information are invalid, it will throw
-  an EmptyEntryException.
-
-
-* `modifyCourse()`
-  * Takes in the course information, attempts to modify the course. 
-  * If the course does not exist, do nothing and throw an exception.
-
-
-* **deleteCourse()**
-  * Takes in the course information, attempts to delete the course and
-    return *true* if succeeds. If the course information does not match, 
-  do nothing and throw an exception
-
-### 2.2 Login use case
-// TODO
-
-### 2.3 User use case
-// TODO
-
-### 2.4 Post use case
-// TODO
-
-### 2.5 Report use case
-// TODO
-
+There is verified_email feature, which can auto sent a random code email to the user. The verified code serves as the 
+Random method to protect user accounts.
+### 2.3 Post use case
+Uses can post a Post under a course, and Post can contain the numbers of like and unlike, so that user can judge what 
+the best relevant post is. 
+### 2.4 Report use case
+Administrator can send a report to modify some issue in the software.
 ## 3. Database
 ### 3.1 Data storage
 We used three classes to handle the data, being `DatabaseDataHandler`, `RuntimeDataHandler`, and `DatabaseGateway`. \
@@ -154,6 +132,30 @@ The a
 
 
 ## 4. Controllers
+
+###4.1 CourseController
+
+CourseController can get the judgement from Course UseCase and return different integers to UI.
+For example, there is three states in `removeInstructor`. The method will call course UseCase to judge the exception. If 
+return -1, which means not found the instructor in the course, and return 1, which means successfully remove the instructor.
+
+###4.2 PostController
+PostController can get the judgement from Post UseCase and return different integers to UI.
+For example, there is three states in `editPost`. The method will call Post UseCase to judge the exception. If
+return -1, which means not found the Post in the course, and return 1, which means successfully edit the instructor.
+
+###4.3 ReportController
+ReportController can get the judgement from Report UseCase and return different integers to UI.
+
+###4.4 UserController
+UserController can get the judgement from User UseCase and return different integers to UI.
+For example, there is three states in `registerUser`. The method will call User UseCase to judge the exception. If
+return -6, which means the message contains email, otherwise return -1.
+if return -2, which means password is not correct.
+if return -3, which means is the error email format.
+if return -4, which means Wrong re-entered password !
+if return -5, which means wrong verification number.
+if return 1, which means successfully register.
 ## 5. Graphical User Interface (GUI)
 
 ### Figure 1.1 Login InterFace

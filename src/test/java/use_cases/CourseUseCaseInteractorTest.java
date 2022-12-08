@@ -16,18 +16,28 @@ import java.util.HashMap;
 
 public class CourseUseCaseInteractorTest  {
 
-    private final DatabaseGateway gateway = new DatabaseGateway();
+    static DatabaseGateway gateway;
 
-    private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
-    private final CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
-    private final PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
+    static   UserUseCaseInteractor userInteractor;
+    static CourseUseCaseInteractor courseInteractor;
+    static PostUseCaseInteractor postInteractor;
 
-    private final CourseController courseController = new CourseController(courseInteractor);
-    private final PostController postController = new PostController(postInteractor);
-    private final UserController userController = new UserController(userInteractor);
+    static CourseController courseController;
+    static PostController postController;
+    static UserController userController;
 
     @BeforeEach
     public void setup(){
+         gateway = new DatabaseGateway();
+
+         userInteractor = new UserUseCaseInteractor(gateway);
+         courseInteractor = new CourseUseCaseInteractor((gateway));
+         postInteractor = new PostUseCaseInteractor(gateway);
+
+         courseController = new CourseController(courseInteractor);
+         postController = new PostController(postInteractor);
+         userController = new UserController(userInteractor);
+
         File orgFile = new File("data.ser");
         File newFile = new File("protected_data.ser");
         if (orgFile.exists()) {
