@@ -52,15 +52,18 @@ public class PostUseCaseInteractor {
 
     /**
      * Edit the given post using the post information.
-     * Return true is the post can be edited, and false otherwise.
-     * @param post_info
-     * @return boo
+     * Throws a NotFoundException if the original post cannot be found
+     * @param post_info Information related to the post that we want to edit,
+     *                  including new info
      */
     public void editPost(HashMap<String, Object> post_info){
         String orgTitle = (String) post_info.get("orgTitle");
         Course course = (Course) post_info.get("course");
         if (checkTopicExist(course, orgTitle)){
-            course.lookupPostFromTopic(orgTitle).modifyPost((String) post_info.get("title"), (String) post_info.get("text"));
+            System.out.println(course.lookupPostFromTopic(orgTitle).getTopic());
+            System.out.println("here!");
+            course.lookupPostFromTopic(orgTitle).modifyPost((String) post_info.get("title"),
+                    (String) post_info.get("text"));
         }
         else {
             throw new NotFoundException("Post");
@@ -73,6 +76,12 @@ public class PostUseCaseInteractor {
         }
     }
 
+    /**
+     * Remove the given post using the post information.
+     * Throws a NotFoundException if the original post cannot be found
+     * @param post_info Information related to the post that we want to edit,
+     *                  including new info
+     */
     public void removePost(HashMap<String, Object> post_info){
         String title = post_info.get("title").toString();
         Course course = (Course) post_info.get("course");
@@ -157,11 +166,11 @@ public class PostUseCaseInteractor {
      * @param user The user that likes this post.
      */
     public void likePost(Post post, User user){
-        String email = user.getEmail();
-
         if (post.getPostedBy() == user){
             return;
         }
+
+        String email = user.getEmail();
 
         if (post.getLikeUser().contains(email)){
             throw new DuplicationException("like");
@@ -172,6 +181,7 @@ public class PostUseCaseInteractor {
         if (found){
             author.like();
         }
+
 
         author.like();
         post.like(email);
@@ -189,12 +199,11 @@ public class PostUseCaseInteractor {
      * @param user The user that dislikes this post.
      */
     public void dislikePost(Post post, User user) {
-        String email = user.getEmail();
-
-
         if (post.getPostedBy() == user){
             return;
         }
+
+        String email = user.getEmail();
 
         if (post.getDislikeUser().contains(email)) {
             throw new DuplicationException("dislike");

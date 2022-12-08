@@ -1,4 +1,5 @@
 package controllers;
+
 import entities.Comment;
 import entities.Post;
 import entities.User;
@@ -7,7 +8,6 @@ import exceptions.EmptyEntryException;
 import exceptions.NotFoundException;
 import use_cases.PostUseCaseInteractor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class PostController {
 
     /**
      * pass all post data from UI.
-     * Get the return of EditPost and justify if get False, return "meaningless post".
+     * Get the return of EditPost and justify if it gets False, return "meaningless post".
      * else, return "successfully post"
      * @param post information will be stored at the HashMap
      * @return  String for each state.
@@ -55,7 +55,10 @@ public class PostController {
         return 0;
     }
 
-    public int removePost(HashMap<String, Object> post, String courseCode){
+    public int removePost(HashMap<String, Object> post){
+        /*
+         * For admin use
+         */
         try{
             postUseCaseInteractor.removePost(post);
         }
@@ -73,15 +76,6 @@ public class PostController {
      */
     public List<Comment> getAllCommentFromPost(String courseCode, String postTopic){
         return postUseCaseInteractor.getAllCommentFromPost(courseCode, postTopic);
-    }
-
-    /**
-     * Get all comment from a comment.
-     * @param comment The comment whose comments are to be returned.
-     * @return An arraylist of comments.
-     */
-    public List<Comment> getAllCommentFromComment(Comment comment){
-        return postUseCaseInteractor.getAllCommentFromComment(comment);
     }
 
     /**

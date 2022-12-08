@@ -56,10 +56,6 @@ public class DatabaseDataHandler{
 
      * Get the current information in the database, and send it back to the datahandler.
 
-     * @throws IOException
-
-     * @throws ClassNotFoundException
-
      */
 
 

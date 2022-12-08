@@ -1,6 +1,5 @@
 package entities;
 
-import javax.lang.model.type.UnionType;
 import java.io.Serializable;
 
 public class Report implements Serializable {
@@ -18,9 +17,10 @@ public class Report implements Serializable {
 
     /**
      * Create a report to a post. ReportType: User, Post, Course
-     * @param user
-     * @param reportType
-     * @param content
+     * @param user User who made the report
+     * @param reportType Whicih type of entity is the report made to
+     * @param content Content of the report
+     * @param attachedTo The reported subject
      */
     public Report(User user, String reportType, String content, String attachedTo){
         this.user = user;

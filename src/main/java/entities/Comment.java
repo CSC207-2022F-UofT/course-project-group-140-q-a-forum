@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Comment implements Serializable {
-    private User postedBy;
-    private String texts;
-    private List<Comment> comments;
+    private final User postedBy;
+    private final String texts;
+    private final List<Comment> comments;
     /**
      * Create a comment to a Post, with only text.
      * The comment can be commented (nest) as well
@@ -35,20 +35,5 @@ public class Comment implements Serializable {
         return postedBy;
     }
 
-    public void setTexts(String texts) {
-        this.texts = texts;
-    }
-
-    public void setPostedBy(User postedBy) {
-        this.postedBy = postedBy;
-    }
-
-    public void addComment(Comment comment){
-        this.comments.add(comment);
-    }
-
-    public void removeComment(Comment comment){
-        this.comments.remove(comment);
-    }
 
 }

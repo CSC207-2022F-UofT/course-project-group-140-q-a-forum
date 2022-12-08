@@ -3,12 +3,10 @@ package database;
 import entities.*;
 import use_cases.DataBaseAccess.*;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
 

@@ -1,11 +1,15 @@
 package controllers;
 
-import java.util.*;
 
+import entities.Course;
+import entities.Post;
 import entities.Report;
-import exceptions.*;
-import entities.*;
+import entities.User;
+import exceptions.NotFoundException;
 import use_cases.ReportUseCaseInteractor;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class ReportController {
     private final ReportUseCaseInteractor reportUseCaseInteractor;
