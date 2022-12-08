@@ -2,10 +2,12 @@ package UI.UserdataRelated;
 
 import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.CoursesForm;
+import UI.MainOfShowingContents.PostForm;
 import base.main;
 import controllers.CourseController;
 import controllers.UserController;
 import entities.Course;
+import entities.Post;
 import entities.User;
 
 import javax.swing.*;
@@ -20,15 +22,26 @@ import java.util.ArrayList;
 public class ProfilePage extends javax.swing.JFrame {
     private final User user;
     private final User viewUser;
+    private final Course course;
+    private final Post post;
     private final CourseController courseController =main.courseController;
     private final UserController userController = main.userController;
 
     /**
      * Creates new form ProfilePage
      */
-    public ProfilePage(User user, User viewUser) {
+    public ProfilePage(User user, User viewUser, Course course) {
         this.user = user;
         this.viewUser = viewUser;
+        this.course = course;
+        this.post = null;
+        initComponents();
+    }
+    public ProfilePage(User user, User viewUser, Course course, Post post){
+        this.user = user;
+        this.viewUser = viewUser;
+        this.course = course;
+        this.post = post;
         initComponents();
     }
 
@@ -46,7 +59,7 @@ public class ProfilePage extends javax.swing.JFrame {
         passLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
         reputationLabel = new javax.swing.JLabel();
-        javax.swing.JButton editUserButton = new javax.swing.JButton();
+        editUserButton = new javax.swing.JButton();
         // Variables declaration - do not modify
         javax.swing.JButton backButton = new javax.swing.JButton();
         changeUserNameText = new javax.swing.JTextField();
@@ -103,18 +116,10 @@ public class ProfilePage extends javax.swing.JFrame {
         totalLikeLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         reportButton.setText("report this user");
-        reportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportButtonActionPerformed(evt);
-            }
-        });
+        reportButton.addActionListener(this::reportButtonActionPerformed);
 
         showReportButton.setText("Show All Report");
-        showReportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showReportButtonActionPerformed(evt);
-            }
-        });
+        showReportButton.addActionListener(this::showReportButtonActionPerformed);
 
         javax.swing.GroupLayout showReportPanelLayout = new javax.swing.GroupLayout(showReportPanel);
         showReportPanel.setLayout(showReportPanelLayout);
@@ -235,6 +240,7 @@ public class ProfilePage extends javax.swing.JFrame {
     public void initialPanel(){
         if(this.user.equals(viewUser)){
             setPassVisible(true);
+            editUserButton.setVisible(true);
             if(this.user.isAdmin()){
                 showReportPanel.setVisible(true);
             }
@@ -242,17 +248,11 @@ public class ProfilePage extends javax.swing.JFrame {
         else {
             setPassVisible(false);
             showReportPanel.setVisible(false);
+            editUserButton.setVisible(false);
         }
     }
-    public void setPassVisible(boolean result){
-        jLabel7.setVisible(result);
-        passLabel.setVisible(result);
-        changeButton.setVisible(result);
-    }
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        jLabel1.setVisible(true);
-        changeUserNameText.setVisible(true);
-        doneButton.setVisible(true);
+       setChangeUserVisible(true);
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,23 +275,29 @@ public class ProfilePage extends javax.swing.JFrame {
             changeUserNameText.setFocusable(true);
         }else {
             GeneralPresenter.showSuccessMessage("reset username");
-            this.setVisible(false);
-            ProfilePage profilePage = new ProfilePage(user, viewUser);
-            profilePage.setVisible(true);
+            setChangeUserVisible(false);
         }
     }
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ArrayList<Course> courses = courseController.getAllCourses();
-        CoursesForm coursesForm  = new CoursesForm(user, courses);
-        coursesForm.setVisible(true);
+
+        if(this.post==null){
+            ArrayList<Course> courses = courseController.getAllCourses();
+            CoursesForm coursesForm  = new CoursesForm(user, courses);
+            coursesForm.setVisible(true);
+        }else {
+            PostForm postForm = new PostForm(this.user, this.course);
+            postForm.setVisible(true);
+        }
+
         this.setVisible(false);
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
+
     private void setInitial() {
         userLabel.setText(this.viewUser.getUsername());
         passLabel.setText(this.viewUser.getPassword());
@@ -308,7 +314,19 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
 
+    public void setPassVisible(boolean result){
+        jLabel7.setVisible(result);
+        passLabel.setVisible(result);
+        changeButton.setVisible(result);
+    }
+
+    public void setChangeUserVisible(boolean result){
+        jLabel1.setVisible(result);
+        changeUserNameText.setVisible(result);
+        doneButton.setVisible(result);
+    }
     private javax.swing.JTextField changeUserNameText;
+    private javax.swing.JButton editUserButton;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JButton changeButton;
     private javax.swing.JButton doneButton;
