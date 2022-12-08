@@ -20,15 +20,17 @@ import static base.main.courseController;
 public class ChangePasswordForm extends javax.swing.JFrame {
     private final User user;
     private final User viewUser;
+    private final Course course;
     private final UserController userController = main.userController;
 
     /**
      * Creates new form ChangePasswordForm
      */
 
-    public ChangePasswordForm(User user, User viewUser) {
+    public ChangePasswordForm(User user, User viewUser, Course course) {
         this.user = user;
         this.viewUser = viewUser;
+        this.course = course;
         initComponents();
     }
 
@@ -155,10 +157,7 @@ public class ChangePasswordForm extends javax.swing.JFrame {
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ArrayList<Course> courses = courseController.getAllCourses();
-        CoursesForm coursesForm = new CoursesForm(this.user, courses);
-        coursesForm.setVisible(true);
-        this.setVisible(false);
+       goBackProfile();
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,8 +170,17 @@ public class ChangePasswordForm extends javax.swing.JFrame {
             case -2 -> RegisterPresenter.showWrongPasswordError();
             case -3-> LoginPresenter.showPasswordNotMatch();
             case -4 -> RegisterPresenter.showWrongRePassError();
-            case 1 -> GeneralPresenter.showSuccessMessage("Reset Password");
+            case 1 -> {
+                GeneralPresenter.showSuccessMessage("Reset Password");
+                goBackProfile();
+            }
         }
+
+    }
+    private void goBackProfile(){
+        ProfilePage profilePage = new ProfilePage(this.user, this.viewUser, this.course);
+        profilePage.setVisible(true);
+        this.setVisible(false);
 
     }
 

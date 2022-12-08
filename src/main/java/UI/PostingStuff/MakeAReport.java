@@ -70,9 +70,6 @@ public class MakeAReport extends javax.swing.JFrame {
         javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         reasonText = new javax.swing.JTextArea();
         javax.swing.JButton reportButton = new javax.swing.JButton();
-        javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
-        javax.swing.JRadioButton userButton = new javax.swing.JRadioButton();
-        javax.swing.JRadioButton anonymousButton = new javax.swing.JRadioButton();
         javax.swing.JButton backButton = new javax.swing.JButton();
         javax.swing.JLabel typeLabel = new javax.swing.JLabel();
 
@@ -107,14 +104,6 @@ public class MakeAReport extends javax.swing.JFrame {
         reportButton.setText("Report ");
         reportButton.addActionListener(this::reportButtonActionPerformed);
 
-        jLabel5.setText("Post as: ");
-
-        userButton.setText("User");
-        userButton.addActionListener(this::userButtonActionPerformed);
-
-        anonymousButton.setText("Anonymous");
-        anonymousButton.addActionListener(this::anonymousButtonActionPerformed);
-
         backButton.setText("Back to the page");
         backButton.addActionListener(this::backButtonActionPerformed);
 
@@ -137,14 +126,13 @@ public class MakeAReport extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(jLabel2)
                                                         .addComponent(jLabel1)
-                                                        .addComponent(jLabel5))
+                                                        )
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                                 .addGap(6, 6, 6)
-                                                                .addComponent(userButton)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(anonymousButton))
+                                                               )
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                                         .addComponent(reportButton)
@@ -174,9 +162,7 @@ public class MakeAReport extends javax.swing.JFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(userButton)
-                                        .addComponent(anonymousButton)
-                                        .addComponent(jLabel5))
+                                    )
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(reportButton)
@@ -235,13 +221,6 @@ public class MakeAReport extends javax.swing.JFrame {
         }
     }
 
-    private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void anonymousButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
     private void goBackUpper(){
         if (this.reportType.equals( "User")){

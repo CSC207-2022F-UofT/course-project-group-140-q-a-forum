@@ -57,7 +57,6 @@ public class MakeAComment extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
-        buttonGroup1 = new javax.swing.ButtonGroup();
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
@@ -65,10 +64,6 @@ public class MakeAComment extends javax.swing.JFrame {
         javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         contentTextA = new javax.swing.JTextArea();
         javax.swing.JButton commentButton = new javax.swing.JButton();
-        javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
-        javax.swing.JRadioButton userButton = new javax.swing.JRadioButton();
-        // Variables declaration - do not modify
-        javax.swing.JRadioButton anonymousButton = new javax.swing.JRadioButton();
         javax.swing.JButton backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,20 +78,12 @@ public class MakeAComment extends javax.swing.JFrame {
 
         contentTextA.setColumns(20);
         contentTextA.setRows(5);
+        contentTextA.setLineWrap(true);
         jScrollPane1.setViewportView(contentTextA);
 
         commentButton.setText("Make the comment");
         commentButton.addActionListener(this::commentButtonActionPerformed);
 
-        jLabel5.setText("Post as: ");
-
-        buttonGroup1.add(userButton);
-        userButton.setText("User");
-        userButton.setActionCommand("user");
-
-        buttonGroup1.add(anonymousButton);
-        anonymousButton.setText("Anonymous");
-        anonymousButton.setActionCommand("anonymous");
 
 
         backButton.setText("Back to the page");
@@ -116,14 +103,13 @@ public class MakeAComment extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(jLabel2)
-                                                        .addComponent(jLabel5))
+                                                        )
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                                 .addGap(6, 6, 6)
-                                                                .addComponent(userButton)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(anonymousButton))
+                                                                )
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                                         .addComponent(commentButton)
@@ -148,9 +134,7 @@ public class MakeAComment extends javax.swing.JFrame {
                                                 .addComponent(jLabel2)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(userButton)
-                                        .addComponent(anonymousButton)
-                                        .addComponent(jLabel5))
+                                        )
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(commentButton)
@@ -180,16 +164,8 @@ public class MakeAComment extends javax.swing.JFrame {
 
 
     private void commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        String getSelect = buttonGroup1.getSelection().getActionCommand();
-        User postby;
-        if(getSelect.equals("user")){
-            postby = user;
-        }else {
-            postby = userController.getUser("Anonymous");
-        }
-
         String content = contentTextA.getText();
-        int result = postController.makeComment(post, postby, content);
+        int result = postController.makeComment(post, this.user, content);
         if(result == 1){
             PostForm postForm = new PostForm(user, course);
             postForm.setVisible(true);
@@ -213,14 +189,11 @@ public class MakeAComment extends javax.swing.JFrame {
         }else{
             commentLabel.setText("comment");
         }
-
-
     }
 
 
     private javax.swing.JTextArea contentTextA;
     private javax.swing.JLabel commentLabel;
-    private  javax.swing.ButtonGroup buttonGroup1;
 
     // End of variables declaration
 }

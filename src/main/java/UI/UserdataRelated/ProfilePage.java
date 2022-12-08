@@ -118,7 +118,7 @@ public class ProfilePage extends javax.swing.JFrame {
         reportButton.setText("report this user");
         reportButton.addActionListener(this::reportButtonActionPerformed);
 
-        showReportButton.setText("Show All Report");
+        showReportButton.setText("Show All Report(Admin Only )");
         showReportButton.addActionListener(this::showReportButtonActionPerformed);
 
         javax.swing.GroupLayout showReportPanelLayout = new javax.swing.GroupLayout(showReportPanel);
@@ -268,7 +268,7 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ChangePasswordForm changePasswordForm = new ChangePasswordForm(this.user, this.viewUser);
+        ChangePasswordForm changePasswordForm = new ChangePasswordForm(this.user, this.viewUser, this.course);
         changePasswordForm.setVisible(true);
         this.setVisible(false);
     }
@@ -288,6 +288,9 @@ public class ProfilePage extends javax.swing.JFrame {
         }else {
             GeneralPresenter.showSuccessMessage("reset username");
             setChangeUserVisible(false);
+            ProfilePage profilePage = new ProfilePage(this.user, this.viewUser, this.course);
+            profilePage.setVisible(true);
+            this.setVisible(false);
         }
     }
 

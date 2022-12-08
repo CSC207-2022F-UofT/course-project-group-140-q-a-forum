@@ -153,11 +153,15 @@ public class ReportForm extends javax.swing.JFrame {
         pack();
     }
     private void resolveButtonActionPerformed(java.awt.event.ActionEvent evt) {
+       if(this.viewReport==null){
+           GeneralPresenter.showNotSelectError("Post");
+       }else{
         main.reportController.removeAReport(viewReport);
         GeneralPresenter.showSuccessMessage("Report");
         ReportForm reportForm = new ReportForm(this.user, this.viewUser, this.course);
         reportForm.setVisible(true);
         this.setVisible(false);
+        }
     }
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
@@ -176,7 +180,7 @@ public class ReportForm extends javax.swing.JFrame {
     private void changePanel(Report report){
         titleLabel.setText(report.getAttachedTo());
         typeLabel.setText(report.getReportType());
-        contentLabel.setText(report.getContent());
+        contentLabel.setText("<html>"+report.getContent()+"</html>");
     }
 
 

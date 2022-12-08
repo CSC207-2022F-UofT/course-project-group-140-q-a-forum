@@ -55,10 +55,6 @@ public class MakeAPost extends javax.swing.JFrame {
         javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         contentTextA = new javax.swing.JTextArea();
         javax.swing.JButton postButton = new javax.swing.JButton();
-        javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
-        javax.swing.JRadioButton userButton = new javax.swing.JRadioButton();
-        // Variables declaration - do not modify
-        javax.swing.JRadioButton anoymousButton = new javax.swing.JRadioButton();
         javax.swing.JButton backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,15 +77,6 @@ public class MakeAPost extends javax.swing.JFrame {
         postButton.setText("Post the post");
         postButton.addActionListener(this::postButtonActionPerformed);
 
-        jLabel5.setText("Post as: ");
-
-        buttonGroup1.add(userButton);
-        userButton.setText("User");
-        userButton.setActionCommand("user");
-
-        buttonGroup1.add(anoymousButton);
-        anoymousButton.setText("Anonymous");
-        anoymousButton.setActionCommand("anonymous");
 
         backButton.setText("Back to the post");
         backButton.addActionListener(this::backButtonActionPerformed);
@@ -109,23 +96,21 @@ public class MakeAPost extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(jLabel2)
                                                         .addComponent(jLabel1)
-                                                        .addComponent(jLabel5))
+                                                      )
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                                 .addGap(6, 6, 6)
-                                                                .addComponent(userButton)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(anoymousButton))
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                                         .addComponent(postButton)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                                                                         .addComponent(backButton))
                                                                 .addComponent(titleText, javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))))
+                                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))))
                                 .addContainerGap(132, Short.MAX_VALUE))
-        );
+        )));
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -143,9 +128,7 @@ public class MakeAPost extends javax.swing.JFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(userButton)
-                                        .addComponent(anoymousButton)
-                                        .addComponent(jLabel5))
+                                      )
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(postButton)
@@ -178,16 +161,7 @@ public class MakeAPost extends javax.swing.JFrame {
         HashMap<String, Object> PostInfo = new HashMap<>();
         PostInfo.put("title", titleText.getText());
         PostInfo.put("text", contentTextA.getText());
-        String getSelect = buttonGroup1.getSelection().getActionCommand();
-
-        if(getSelect.equals("user")){
-            PostInfo.put("user", user);
-        }else {
-            User anonymous = userController.getUser("Anonymous");
-            PostInfo.put("user", anonymous);
-        }
-
-        PostInfo.put("images", null);
+        PostInfo.put("user", user);
         PostInfo.put("course", course);
         int result = postControllers.createPost(PostInfo);
         switch (result){

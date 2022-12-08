@@ -3,6 +3,7 @@ package database;
 import entities.*;
 import use_cases.DataBaseAccess.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,7 +80,9 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
      */
     @Override
     public void resetUsername(User user, String newUsername) {
-        User userEntity = dataHandler.lookupUserfromName(user.getEmail());
+        System.out.println(user.getUsername());
+        System.out.println(newUsername);
+        User userEntity = dataHandler.lookupUserfromEmail(user.getEmail());
         dataHandler.updateUsername(userEntity.getUsername(), newUsername);
         userEntity.setUsername(newUsername);
     }

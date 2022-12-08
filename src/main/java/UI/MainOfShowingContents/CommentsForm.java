@@ -53,7 +53,6 @@ public class CommentsForm extends javax.swing.JFrame {
         showingUserLabel16 = new javax.swing.JLabel();
         showContentLabel16 = new javax.swing.JLabel();
         javax.swing.JButton commentButton11 = new javax.swing.JButton();
-        javax.swing.JButton reportButton11 = new javax.swing.JButton();
         javax.swing.JLabel jLabel28 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
@@ -100,8 +99,6 @@ public class CommentsForm extends javax.swing.JFrame {
         commentButton11.setText("Comment on this comment");
         commentButton11.addActionListener(this::commentButton11commentButtonActionPerformed);
 
-        reportButton11.setText("Report this comment");
-        reportButton11.addActionListener(this::reportButton11reportButtonActionPerformed);
 
         jLabel28.setText("Content:");
 
@@ -115,7 +112,7 @@ public class CommentsForm extends javax.swing.JFrame {
                                                 .addContainerGap()
                                                 .addComponent(commentButton11)
                                                 .addGap(58, 58, 58)
-                                                .addComponent(reportButton11))
+                                        )
                                         .addGroup(jPanel18Layout.createSequentialGroup()
                                                 .addGap(14, 14, 14)
                                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -141,7 +138,7 @@ public class CommentsForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(commentButton11)
-                                        .addComponent(reportButton11))
+                                      )
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -192,7 +189,6 @@ public class CommentsForm extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void commentButton11commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         if (this.viewComment == null) {
             GeneralPresenter.showNotSelectError("Post");
         } else {
@@ -203,15 +199,6 @@ public class CommentsForm extends javax.swing.JFrame {
 
     }
 
-    private void reportButton11reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-//        if (viewComment == null){
-//            GeneralPresenter.showNotSelectError("Comment");
-//        }else {
-//            MakeAReport makeAReport = new MakeAReport(this.user, this.course, this.post, viewComment);
-//            makeAReport.setVisible(true);
-//            this.setVisible(false);
-//        }
-    }
 
     private void gobackButtonActionPerformed(java.awt.event.ActionEvent evt) {
         PostForm postForm = new PostForm(user, course);

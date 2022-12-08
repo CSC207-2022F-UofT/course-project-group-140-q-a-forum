@@ -245,7 +245,7 @@ public class PostForm extends javax.swing.JFrame {
 
         jLabel4.setText("Course:");
 
-        courseNameLabel.setText("CoursesName");
+        courseNameLabel.setText(this.course.getName());
 
         postButton.setText("Post a Post");
         postButton.addActionListener(this::postButtonActionPerformed);
@@ -370,32 +370,42 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void checkProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(this.user, viewPost.getPostedBy(), this.course, this.viewPost);
-        profilePage.setVisible(true);
-        this.setVisible(false);
+        if(this.viewPost==null){
+            GeneralPresenter.showNotFoundError("Post");
+        }else {
+            ProfilePage profilePage = new ProfilePage(this.user, viewPost.getPostedBy(), this.course, this.viewPost);
+            profilePage.setVisible(true);
+            this.setVisible(false);
+        }
     }
 
     private void likeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        int result = postController.likePost(viewPost, this.user);
-        if(result == -1){
-            GeneralPresenter.showDuplicateLikeError("like");
-        }else{
-            likesLabel.setText(String.valueOf(viewPost.getLikeNumber()));
-        }
+       if(this.viewPost==null){
+           GeneralPresenter.showNotFoundError("Post");
+       }else{
+           int result = postController.likePost(viewPost, this.user);
+           if(result == -1){
+               GeneralPresenter.showDuplicateLikeError("like");
+           }else{
+               likesLabel.setText(String.valueOf(viewPost.getLikeNumber()));
+           }
+       }
+
     }
 
     private void dislikeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        int result = postController.dislikePost(viewPost, this.user);
-        if(result == -1){
-            GeneralPresenter.showDuplicateLikeError("dislike");
-        }else{
-            likesLabel.setText(String.valueOf(viewPost.getLikeNumber()));
+        if(this.viewPost==null){
+            GeneralPresenter.showNotFoundError("Post");
+        }else {
+            int result = postController.dislikePost(viewPost, this.user);
+            if (result == -1) {
+                GeneralPresenter.showDuplicateLikeError("dislike");
+            } else {
+                likesLabel.setText(String.valueOf(viewPost.getLikeNumber()));
+            }
         }
     }
 
-
-
-    // Variables declaration - do not modify
     private javax.swing.JLabel authorLabel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel descriptionLabel;
