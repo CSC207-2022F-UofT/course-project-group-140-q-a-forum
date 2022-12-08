@@ -1,5 +1,6 @@
 package controllers;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import entities.Report;
@@ -57,9 +58,13 @@ public class ReportController {
                     reportInformation.get("Content"));
             reportUseCaseInteractor.removeReport(report);
         } catch (RuntimeException e) {
-
+            return -1;
         } return 0;
 
+    }
+
+    public ArrayList<Report> getAllReport(){
+        return reportUseCaseInteractor.getAllReport();
     }
 
 

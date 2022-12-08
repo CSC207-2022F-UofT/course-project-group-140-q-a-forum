@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class ReportUseCaseInteractor {
+public class ReportUseCaseInteractor{
     final ReportDataInterface reportDataInterface;
     final UserDataInterface userDataInterface;
 
@@ -61,5 +61,8 @@ public class ReportUseCaseInteractor {
         }
     }
 
+    public ArrayList<Report> getAllReport(){
+        return reportDataInterface.getAllReport();
+    }
 
 }
