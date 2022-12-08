@@ -8,7 +8,6 @@ import base.main;
 import controllers.CourseController;
 import entities.Course;
 import entities.User;
-
 import javax.swing.*;
 import java.util.ArrayList;
 

@@ -74,8 +74,10 @@ public class main {
         debug();
 //       CoursesForm coursesForm =new CoursesForm(user, courses);
 //       coursesForm.setVisible(true);
-        MakeAnAccount makeAnAccount = new MakeAnAccount();
-        makeAnAccount.setVisible(true);
+        LoginForm loginForm = new LoginForm();
+        loginForm.setVisible(true);
+//        MakeAnAccount makeAnAccount = new MakeAnAccount();
+//        makeAnAccount.setVisible(true);
     }
 
     public static void debug(){
@@ -91,6 +93,7 @@ public class main {
             System.out.println("Username: " + user.getUsername()) ;
             System.out.println("Email: " + user.getEmail()) ;
             System.out.println("Password: " + user.getPassword()) ;
+            System.out.println("Admin?" + user.isAdmin());
             System.out.println("================================================");
         }
 

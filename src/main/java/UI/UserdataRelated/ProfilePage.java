@@ -101,8 +101,6 @@ public class ProfilePage extends javax.swing.JFrame {
         // reputationLabel.setText("Reputation Level");
         reputationLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        setInitial();
-
         editUserButton.setText("Edit");
         editUserButton.addActionListener(this::editUserButtonActionPerformed);
 
@@ -203,7 +201,7 @@ public class ProfilePage extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
                                         .addComponent(totalLikeLabel))
-                                .addGap(28, 28, 28)
+                                .addGap(38, 38, 38)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(reputationTitle)
                                         .addComponent(reputationLabel))
@@ -236,18 +234,28 @@ public class ProfilePage extends javax.swing.JFrame {
         pack();
        initialPanel();
     }// </editor-fold>
+    private void setSelfInitial() {
+        userLabel.setText(this.viewUser.getUsername());
+        passLabel.setText(this.viewUser.getPassword());
+        emailLabel.setText(this.viewUser.getEmail());
+        totalLikeLabel.setText(String.valueOf(this.viewUser.getLikeNumber()));
+        reputationLabel.setText(this.viewUser.getReputation());
+        changeUserNameText.setVisible(false);
+        jLabel1.setVisible(false);
+        doneButton.setVisible(false);
+        showReportPanel.setVisible(false);
+    }
 
     public void initialPanel(){
         if(this.user.equals(viewUser)){
+            setSelfInitial();
             setPassVisible(true);
-            editUserButton.setVisible(true);
             if(this.user.isAdmin()){
                 showReportPanel.setVisible(true);
             }
         }
         else {
             setPassVisible(false);
-            showReportPanel.setVisible(false);
             editUserButton.setVisible(false);
         }
     }
@@ -298,16 +306,7 @@ public class ProfilePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void setInitial() {
-        userLabel.setText(this.viewUser.getUsername());
-        passLabel.setText(this.viewUser.getPassword());
-        emailLabel.setText(this.viewUser.getEmail());
-        totalLikeLabel.setText(String.valueOf(this.viewUser.getLikeNumber()));
-        reputationLabel.setText(this.viewUser.getReputation());
-        changeUserNameText.setVisible(false);
-        jLabel1.setVisible(false);
-        doneButton.setVisible(false);
-    }
+
 
     private void showReportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
