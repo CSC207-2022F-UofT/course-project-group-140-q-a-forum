@@ -187,14 +187,10 @@ public class CourseUseCaseInteractor {
 
     /**
      * Get all posts of the course with the given course code.
-     * @param courseCode The course code of the course.
+     * @param course The course code
      * @return An arraylist of posts that are under this course.
      */
-    public ArrayList<Post> getAllPosts(String courseCode){
-        if (!courseDataInterface.courseExists(courseCode)){
-            throw new NotFoundException("The course "+ courseCode);
-        }
-        Course course = courseDataInterface.getCourse(courseCode);
+    public ArrayList<Post> getAllPosts(Course course){
         return course.getPosts();
     }
 

@@ -122,14 +122,17 @@ public class PostUseCaseInteractorTest {
         System.out.println(courseController.getAllCourses().get(0));
         System.out.println("see");
         HashMap<String, Object> postInfo = new HashMap<>();
+
+        Course course = courseController.getAllCourses().get(0);
+
         postInfo.put("orgTitle", "Test2");
         postInfo.put("title", "NewTest");
         postInfo.put("text", "Second meaningful question");
         postInfo.put("user", userController.getUser("admin"));
         postInfo.put("course", courseController.getAllCourses().get(0));
         assertEquals(-1, postController.editPost(postInfo));
-        assertEquals("Test", courseController.getAllPosts("CSC207").get(0).getTopic());
-        assertEquals("A meaningful question", courseController.getAllPosts("CSC207").get(0).getTexts());
+        assertEquals("Test", courseController.getAllPosts(course).get(0).getTopic());
+        assertEquals("A meaningful question", courseController.getAllPosts(course).get(0).getTexts());
 
     }
 
@@ -137,14 +140,17 @@ public class PostUseCaseInteractorTest {
     // try to edit a post successfully
     void editPostSuccessfully(){
         HashMap<String, Object> postInfo = new HashMap<>();
+
+        Course course = courseController.getAllCourses().get(0);
+
         postInfo.put("orgTitle", "Test");
         postInfo.put("title", "Test2");
         postInfo.put("text", "Second meaningful question");
         postInfo.put("user", userController.getUser("admin"));
         postInfo.put("course", courseController.getAllCourses().get(0));
         assertEquals(0, postController.editPost(postInfo));
-        assertEquals("Test2", courseController.getAllPosts("CSC207").get(0).getTopic());
-        assertEquals("Second meaningful question", courseController.getAllPosts("CSC207").get(0).getTexts());
+        assertEquals("Test2", courseController.getAllPosts(course).get(0).getTopic());
+        assertEquals("Second meaningful question", courseController.getAllPosts(course).get(0).getTexts());
 
     }
 
@@ -172,8 +178,11 @@ public class PostUseCaseInteractorTest {
 
     @Test
     void likePostSuccess(){
+
+        Course course = courseController.getAllCourses().get(0);
+
         User user = userController.getUser("admin2");
-        Post post = courseController.getAllPosts("CSC207").get(0);
+        Post post = courseController.getAllPosts(course).get(0);
         postController.likePost(post, user);
         assertEquals(1,post.getPostedBy().getLikeNumber());
         assertEquals(1, post.getLikeNumber());
@@ -181,8 +190,11 @@ public class PostUseCaseInteractorTest {
 
     @Test
     void likePostDuplicate(){
+
+        Course course = courseController.getAllCourses().get(0);
+
         User user = userController.getUser("admin2");
-        Post post = courseController.getAllPosts("CSC207").get(0);
+        Post post = courseController.getAllPosts(course).get(0);
         postController.likePost(post, user);
 
         assertEquals(-1, postController.likePost(post, user));
@@ -191,8 +203,11 @@ public class PostUseCaseInteractorTest {
     }
     @Test
     void dislikePostSuccess(){
+
+        Course course = courseController.getAllCourses().get(0);
+
         User user = userController.getUser("admin2");
-        Post post = courseController.getAllPosts("CSC207").get(0);
+        Post post = courseController.getAllPosts(course).get(0);
 
         postController.dislikePost(post, user);
         System.out.println(post.getLikeNumber());
@@ -202,8 +217,11 @@ public class PostUseCaseInteractorTest {
 
     @Test
     void dislikePostDuplicate(){
+
+        Course course = courseController.getAllCourses().get(0);
+
         User user = userController.getUser("admin2");
-        Post post = courseController.getAllPosts("CSC207").get(0);
+        Post post = courseController.getAllPosts(course).get(0);
 
         postController.dislikePost(post, user);
         assertEquals(-1, postController.dislikePost(post, user));
@@ -213,8 +231,11 @@ public class PostUseCaseInteractorTest {
 
     @Test
     void dislikeToLike(){
+
+        Course course = courseController.getAllCourses().get(0);
+
         User user = userController.getUser("admin2");
-        Post post = courseController.getAllPosts("CSC207").get(0);
+        Post post = courseController.getAllPosts(course).get(0);
         postController.dislikePost(post, user);
         postController.likePost(post, user);
 
@@ -224,8 +245,11 @@ public class PostUseCaseInteractorTest {
 
     @Test
     void likeToDislike(){
+
+        Course course = courseController.getAllCourses().get(0);
+
         User user = userController.getUser("admin2");
-        Post post = courseController.getAllPosts("CSC207").get(0);
+        Post post = courseController.getAllPosts(course).get(0);
 
         postController.likePost(post, user);
         postController.dislikePost(post, user);

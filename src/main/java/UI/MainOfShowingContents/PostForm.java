@@ -330,7 +330,7 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());
+        ArrayList<Post> posts = courseController.getAllPosts(this.course);
         MakeAPost makeAPost = new MakeAPost(user, course, posts);
         makeAPost.setVisible(true);
         this.setVisible(false);
@@ -350,7 +350,7 @@ public class PostForm extends javax.swing.JFrame {
             GeneralPresenter.showNotSelectError("Post");
         }
         else {
-            ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());
+            ArrayList<Post> posts = courseController.getAllPosts(this.course);
             Post selectPost = posts.get(chosenPostIndex);
             this.viewPost = selectPost;
             changePanel(selectPost);

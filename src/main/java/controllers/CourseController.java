@@ -159,6 +159,9 @@ public class CourseController {
      * -1: The course with given course code is not found;
      */
     public int removePost(boolean isAdmin, Post post){
+        /*
+            For admin use
+         */
         if (!isAdmin){
             //Call presenter
             return 0;
@@ -181,12 +184,12 @@ public class CourseController {
 
     /**
      * Get all posts of the course with given course code
-     * @param courseCode The course code of the given course
+     * @param course The course
      * @return If the course is not found, then return an empty ArrayList, otherwise, return an array list
      * of the posts of the given course.
      */
-    public ArrayList<Post> getAllPosts(String courseCode){
-        try{return courseInteractor.getAllPosts(courseCode);}
+    public ArrayList<Post> getAllPosts(Course course){
+        try{return courseInteractor.getAllPosts(course);}
         catch(NotFoundException e){
             //call presenter
             return new ArrayList<>();

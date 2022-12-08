@@ -210,8 +210,8 @@ public class CommentsForm extends javax.swing.JFrame {
     }
 
     private void changePanel(Comment comment){
-       showingUserLabel16.setText(comment.postedBy().getUsername());
-       showContentLabel16.setText(comment.texts());
+       showingUserLabel16.setText(comment.getPostedBy().getUsername());
+       showContentLabel16.setText(comment.getTexts());
 
     }
 

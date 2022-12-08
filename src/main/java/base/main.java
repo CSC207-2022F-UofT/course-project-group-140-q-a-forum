@@ -69,10 +69,8 @@ public class main {
             adminInfo2.put("Verification", "DebugCode");
             userController1.registerUser(adminInfo2, "DebugCode");
 
-            // User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
-            ArrayList<Course> courses = courseController.getAllCourses();
         }
-        debug();
+        // debug();
         LoginForm loginForm = new LoginForm();
         loginForm.setVisible(true);
     }
