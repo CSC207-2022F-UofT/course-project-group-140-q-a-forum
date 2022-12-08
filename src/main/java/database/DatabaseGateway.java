@@ -14,9 +14,9 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     final RuntimeDataHandler dataHandler;
     final DatabaseDataHandler databaseHandler;
 
-    public DatabaseGateway() {
-        this.dataHandler = new RuntimeDataHandler();
-        this.databaseHandler = new DatabaseDataHandler();
+    public DatabaseGateway(RuntimeDataHandler<Object> dataHandler, DatabaseDataHandler databaseHandler) {
+        this.dataHandler = dataHandler;
+        this.databaseHandler = databaseHandler;
     }
 
     @Override

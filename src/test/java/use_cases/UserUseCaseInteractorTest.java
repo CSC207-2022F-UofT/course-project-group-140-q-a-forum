@@ -1,5 +1,7 @@
 package use_cases;
 
+import database.DatabaseDataHandler;
+import database.RuntimeDataHandler;
 import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
@@ -22,8 +24,9 @@ import java.util.HashMap;
 
 class UserUseCaseInteractorTest {
 
-    private final DatabaseGateway gateway = new DatabaseGateway();
-
+    static RuntimeDataHandler<Object> dataHandler = new RuntimeDataHandler<Object>();
+    static DatabaseDataHandler databaseDataHandler = new DatabaseDataHandler();
+    static DatabaseGateway gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
     private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");
     private final CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
     private final PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);

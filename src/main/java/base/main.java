@@ -7,7 +7,9 @@ import controllers.CourseController;
 import controllers.PostController;
 import controllers.ReportController;
 import controllers.UserController;
+import database.DatabaseDataHandler;
 import database.DatabaseGateway;
+import database.RuntimeDataHandler;
 import entities.Course;
 import entities.Post;
 import entities.Report;
@@ -23,7 +25,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class main {
-    static DatabaseGateway gateway = new DatabaseGateway();
+
+    static RuntimeDataHandler<Object> dataHandler = new RuntimeDataHandler<Object>();
+    static DatabaseDataHandler databaseDataHandler = new DatabaseDataHandler();
+    static DatabaseGateway gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
     static  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
     static  UserUseCaseInteractor userInteractor1 = new UserUseCaseInteractor(gateway,"DebugCode");
     static CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
