@@ -24,6 +24,8 @@ public interface UserDataInterface extends DataInterface{
      */
     boolean userExists(String userName);
 
+    boolean emailExists(String email);
+
 
     /**
      * delete a user in DataBase
