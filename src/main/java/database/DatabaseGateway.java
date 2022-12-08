@@ -6,6 +6,7 @@ import use_cases.DataBaseAccess.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DatabaseGateway implements CourseDataInterface, UserDataInterface, ReportDataInterface{
@@ -20,16 +21,16 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
 
     @Override
     public ArrayList<User> getAllUsers() {
-        return dataHandler.getData(1);
+        return (ArrayList<User>) dataHandler.getData(1);
     }
     @Override
     public ArrayList<Course> getAllCourses() {
-        return dataHandler.getData(2);
+        return (ArrayList<Course>) dataHandler.getData(2);
     }
 
     @Override
     public ArrayList<Report> getAllReport() {
-        return dataHandler.getData(3);
+        return (ArrayList<Report>) dataHandler.getData(3);
     }
 
 
@@ -51,6 +52,11 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     @Override
     public boolean userExists(String userName) {
         return dataHandler.lookupUserfromName(userName) != null;
+    }
+
+    @Override
+    public boolean emailExists(String email) {
+        return dataHandler.lookupUserfromEmail(email) != null;
     }
 
     @Override
@@ -204,7 +210,7 @@ public class DatabaseGateway implements CourseDataInterface, UserDataInterface, 
     }
 
     public void readFromFile() throws IOException, ClassNotFoundException {
-        dataHandler.setData((HashMap<Integer, Object>) databaseHandler.readFromFile());
+        dataHandler.setData((HashMap<Integer, List>) databaseHandler.readFromFile());
     }
 
 }
