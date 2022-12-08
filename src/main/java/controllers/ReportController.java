@@ -21,7 +21,7 @@ public class ReportController {
      *
      * @param reportInformation This is a Map that contains necessary information
      *                          needed to register a report. The keys must be
-     *                          "Username", "ReportType", "Content"
+     *                          "Username", "Type", "Content"
      * @return An integer indicating if successfully registered.
      * 1: Successfully registered.
      * 0: The user report does not exist.
@@ -46,7 +46,7 @@ public class ReportController {
      *
      * @param reportInformation This is a Map that contains necessary information
      *                          needed to remove a user. The keys must be
-     *                          "Username", "ReportType", "Content"
+     *                          "Username", "Type", "Content"
      * @return An integer indicating if successfully registered.
      * 0: Successfully removed the report.
      * -1:Some RuntimeException occur.

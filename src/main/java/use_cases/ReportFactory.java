@@ -21,18 +21,18 @@ public class ReportFactory {
      * @return the Report generated.
      */
     public Report getReport(Map<String, String> reportInfo) {
-        switch (reportInfo.get("ReportType")) {
-            case "user" -> {
+        switch (reportInfo.get("Type")) {
+            case "0" -> {
                 return new ReportOnUser(reportInfo.get("Username"),
                         reportInfo.get("Content"));
             }
 
-            case "post" -> {
+            case "1" -> {
                 return new ReportOnPost( reportInfo.get("Username"),
                         reportInfo.get("Content"));
             }
 
-            case "course" -> {
+            case "2" -> {
                 return new ReportOnCourse(reportInfo.get("Username"),
                         reportInfo.get("Content"));
             }

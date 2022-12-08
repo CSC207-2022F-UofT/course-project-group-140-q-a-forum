@@ -228,7 +228,7 @@ public class MakeAReport extends javax.swing.JFrame {
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt){
         HashMap<String, String> reportInfo = new HashMap<>();
         reportInfo.put("Username", user.getUsername());
-        reportInfo.put("Type", reportType);
+        reportInfo.put("Type", String.valueOf(reportType));
         reportInfo.put("Content", reasonText.getText());
         int result = reportController.createAReport(reportInfo);
     }
