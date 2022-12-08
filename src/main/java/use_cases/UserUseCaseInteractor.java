@@ -301,11 +301,13 @@ public class UserUseCaseInteractor {
      * Otherwise, it returns false.
      *
      * @param user              the user request password change.
-     * @param oldPassword       the old password user wants to change.
-     * @param newPassword       the new password user wants to change to.
-     * @param reenteredPassword reentered new password.
+     * @param passwordInfo      the information regarding the updating of password. It is a hashmap containing the keys:
+     *                          "oldPassword", "newPassword", and "reenteredPassword"
      */
-    public void resetPassword(User user, String oldPassword, String newPassword, String reenteredPassword) throws RuntimeException {
+    public void resetPassword(User user, HashMap<String, String> passwordInfo) throws RuntimeException {
+        String oldPassword = passwordInfo.get("oldPassword");
+        String newPassword = passwordInfo.get("newPassword");
+        String reenteredPassword =  passwordInfo.get("reenteredPassword");
         if (oldPassword.equals("") || newPassword.equals("") || reenteredPassword.equals("")) {
             throw new EmptyEntryException("password");
         }
@@ -320,7 +322,7 @@ public class UserUseCaseInteractor {
             throw new WrongInfoException("password");
         }
         // Reset the password.
-        userDataInterface.resetPassword(user.getUsername(), newPassword);
+        userDataInterface.resetPassword(user, newPassword);
 
 
         try{
@@ -336,16 +338,19 @@ public class UserUseCaseInteractor {
      * It first checks if the user exists, and removes it if so;
      * otherwise, it returns false.
      *
-     * @param userName username of the user to be removed.
+     * @param user user to be removed.
      */
-    public void removeAUser(String userName) {
+    public void removeAUser(User user) {
+        /*
+        For future administrator use
+         */
 
         // If the given user does not exist in the database, return false.
-        if (!userDataInterface.userExists(userName)) {
+        if (!userDataInterface.userExists(user.getUsername())) {
             throw new NotFoundException("user");
         }
 
-        userDataInterface.deleteUser(userName);
+        userDataInterface.deleteUser(user);
 
 
         try{

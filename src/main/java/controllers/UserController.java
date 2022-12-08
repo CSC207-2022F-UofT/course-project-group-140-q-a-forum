@@ -4,7 +4,9 @@ import entities.User;
 import exceptions.*;
 import use_cases.UserUseCaseInteractor;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class UserController {
     private final UserUseCaseInteractor userUseCaseInteractor;
@@ -129,8 +131,9 @@ public class UserController {
      *
      *
      */
-    public int changePassword(User user, String oldPassword, String newPassword, String reenteredPassword){
-        try{ userUseCaseInteractor.resetPassword(user, oldPassword, newPassword, reenteredPassword);}
+    public int changePassword(User user, HashMap<String, String> passwordInfo){
+
+        try{ userUseCaseInteractor.resetPassword(user, passwordInfo);}
         catch(EmptyEntryException e){
             return -1;
         }

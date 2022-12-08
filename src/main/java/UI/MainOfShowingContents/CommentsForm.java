@@ -52,8 +52,6 @@ public class CommentsForm extends javax.swing.JFrame {
         javax.swing.JLabel jLabel27 = new javax.swing.JLabel();
         showingUserLabel16 = new javax.swing.JLabel();
         showContentLabel16 = new javax.swing.JLabel();
-        javax.swing.JButton commentButton11 = new javax.swing.JButton();
-        javax.swing.JButton reportButton11 = new javax.swing.JButton();
         javax.swing.JLabel jLabel28 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
@@ -66,7 +64,7 @@ public class CommentsForm extends javax.swing.JFrame {
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Comments"));
         jList2.setModel(new javax.swing.AbstractListModel() {
-           final int commentsSize  = postController.getAllCommentFromPost(course.getCode(), post.getTopic()).size();
+           final int commentsSize  = postController.getAllCommentFromPost(post).size();
            final String[] strings = getCommentArray(commentsSize);
 
 //            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -97,12 +95,6 @@ public class CommentsForm extends javax.swing.JFrame {
 
         showContentLabel16.setText("Content of the comment");
 
-        commentButton11.setText("Comment on this comment");
-        commentButton11.addActionListener(this::commentButton11commentButtonActionPerformed);
-
-        reportButton11.setText("Report this comment");
-        reportButton11.addActionListener(this::reportButton11reportButtonActionPerformed);
-
         jLabel28.setText("Content:");
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -113,9 +105,8 @@ public class CommentsForm extends javax.swing.JFrame {
                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel18Layout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .addComponent(commentButton11)
                                                 .addGap(58, 58, 58)
-                                                .addComponent(reportButton11))
+                                        )
                                         .addGroup(jPanel18Layout.createSequentialGroup()
                                                 .addGap(14, 14, 14)
                                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -140,8 +131,7 @@ public class CommentsForm extends javax.swing.JFrame {
                                         .addComponent(showContentLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(commentButton11)
-                                        .addComponent(reportButton11))
+                                      )
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -189,29 +179,19 @@ public class CommentsForm extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>
-
-    private void commentButton11commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        if (this.viewComment == null) {
-            GeneralPresenter.showNotSelectError("Post");
-        } else {
-            MakeAComment makeAComment = new MakeAComment(user, course, this.viewComment);
-            makeAComment.setVisible(true);
-            this.setVisible(false);
-        }
-
     }
 
-    private void reportButton11reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-//        if (viewComment == null){
-//            GeneralPresenter.showNotSelectError("Comment");
-//        }else {
-//            MakeAReport makeAReport = new MakeAReport(this.user, this.course, this.post, viewComment);
-//            makeAReport.setVisible(true);
+//    private void commentButton11commentButtonActionPerformed(java.awt.event.ActionEvent evt) {
+//        if (this.viewComment == null) {
+//            GeneralPresenter.showNotSelectError("Post");
+//        } else {
+//            MakeAComment makeAComment = new MakeAComment(user, course, this.viewComment);
+//            makeAComment.setVisible(true);
 //            this.setVisible(false);
 //        }
-    }
+//
+//    }
+
 
     private void gobackButtonActionPerformed(java.awt.event.ActionEvent evt) {
         PostForm postForm = new PostForm(user, course);

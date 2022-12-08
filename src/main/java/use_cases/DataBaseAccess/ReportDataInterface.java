@@ -9,7 +9,12 @@ import java.util.*;
 public interface ReportDataInterface extends DataInterface{
     ArrayList<Report> getAllReport();
 
-    ArrayList<Report> getAllReportFromType(int type);
+    /**
+     * Get all reports from a specific type
+     * @param type
+     * @return
+     */
+    ArrayList<Report> getAllReportFromType(String type);
 
 
     /**

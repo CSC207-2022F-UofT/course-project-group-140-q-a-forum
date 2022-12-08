@@ -1,4 +1,5 @@
 package controllers;
+
 import entities.Comment;
 import entities.Post;
 import entities.User;
@@ -7,7 +8,6 @@ import exceptions.EmptyEntryException;
 import exceptions.NotFoundException;
 import use_cases.PostUseCaseInteractor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class PostController {
 
     /**
      * pass all post data from UI.
-     * Get the return of EditPost and justify if get False, return "meaningless post".
+     * Get the return of EditPost and justify if it gets False, return "meaningless post".
      * else, return "successfully post"
      * @param post information will be stored at the HashMap
      * @return  String for each state.
@@ -55,7 +55,10 @@ public class PostController {
         return 0;
     }
 
-    public int removePost(HashMap<String, Object> post, String courseCode){
+    public int removePost(HashMap<String, Object> post){
+        /*
+         * For admin use
+         */
         try{
             postUseCaseInteractor.removePost(post);
         }
@@ -67,22 +70,14 @@ public class PostController {
 
     /**
      * Get all comments of the post with given post topic in the course with the given course code.
-     * @param courseCode The course code of the course that this post is of.
-     * @param postTopic The topic of the course.
+     * @param post The post
      * @return If there is not such post, then return null; else, return an arraylist of comments.
      */
-    public List<Comment> getAllCommentFromPost(String courseCode, String postTopic){
-        return postUseCaseInteractor.getAllCommentFromPost(courseCode, postTopic);
+
+    public List<Comment> getAllCommentFromPost(Post post){
+        return postUseCaseInteractor.getAllCommentFromPost(post);
     }
 
-    /**
-     * Get all comment from a comment.
-     * @param comment The comment whose comments are to be returned.
-     * @return An arraylist of comments.
-     */
-    public List<Comment> getAllCommentFromComment(Comment comment){
-        return postUseCaseInteractor.getAllCommentFromComment(comment);
-    }
 
     /**
      * Make a post that is posted by the given user under the given post
@@ -123,6 +118,7 @@ public class PostController {
      * 1: Successfully disliked a post;
      * -1: The user has already disliked this post.
      */
+
     public int dislikePost(Post post, User user){
         try{postUseCaseInteractor.dislikePost(post, user);}
         catch(DuplicationException e){return -1;}

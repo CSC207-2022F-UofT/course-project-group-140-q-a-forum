@@ -29,9 +29,9 @@ public interface UserDataInterface extends DataInterface{
 
     /**
      * delete a user in DataBase
-     * @param userName the name of user to be deleted.
+     * @param user the user to be deleted.
      */
-    void deleteUser(String userName);
+    void deleteUser(User user);
 
     /**
      * Change username of a user in DataBase
@@ -42,9 +42,9 @@ public interface UserDataInterface extends DataInterface{
 
     /**
      * Change password of a user in DataBase
-     * @param userName the password of which to be changed.
+     * @param user The user to changepassword
      * @param newPassword the new password to be changed.
      */
-    void resetPassword(String userName, String newPassword);
+    void resetPassword(User user, String newPassword);
     
 }

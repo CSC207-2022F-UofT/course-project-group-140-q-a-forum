@@ -5,35 +5,52 @@ import static org.junit.jupiter.api.Assertions.*;
 import controllers.CourseController;
 import controllers.PostController;
 import controllers.UserController;
+import database.DatabaseDataHandler;
 import database.DatabaseGateway;
+import database.RuntimeDataHandler;
 import entities.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_cases.CourseUseCaseInteractor;
-import use_cases.PostUseCaseInteractor;
-import use_cases.UserUseCaseInteractor;
-
 import java.io.File;
 import java.util.HashMap;
 
 public class PostUseCaseInteractorTest {
-    private final DatabaseGateway gateway = new DatabaseGateway();
+    static RuntimeDataHandler<Object> dataHandler;
+    static DatabaseDataHandler databaseDataHandler;
+    static DatabaseGateway gateway;
 
-    private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");
-    private final CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
-    private final PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
+    static  UserUseCaseInteractor userInteractor;
+    static CourseUseCaseInteractor courseInteractor;
+    static PostUseCaseInteractor postInteractor;
 
-    private final CourseController courseController = new CourseController(courseInteractor);
-    private final PostController postController = new PostController(postInteractor);
-    private final UserController userController = new UserController(userInteractor);
+    static CourseController courseController;
+    static PostController postController;
+    static UserController userController;
 
     @BeforeEach
     public void setUp() {
+
+        System.out.println("TEST");
+
+        dataHandler = new RuntimeDataHandler<Object>();
+        databaseDataHandler = new DatabaseDataHandler();
+        gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
+
+        userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");
+        courseInteractor = new CourseUseCaseInteractor((gateway));
+        postInteractor = new PostUseCaseInteractor(gateway);
+
+        courseController = new CourseController(courseInteractor);
+        postController = new PostController(postInteractor);
+        userController = new UserController(userInteractor);
+
         File orgFile = new File("data.ser");
         File newFile = new File("protected_data.ser");
         if (orgFile.exists()) {
-            orgFile.renameTo(newFile);
+            if (! orgFile.renameTo(newFile)){
+                System.err.println("File not found!");
+            }
         }
         HashMap<String, String> user = new HashMap<>();
         user.put("Username", "admin");
@@ -43,6 +60,15 @@ public class PostUseCaseInteractorTest {
         user.put("isAdmin", "True");
         user.put("Verification", "DebugCode");
         userController.registerUser(user, "DebugCode");
+
+
+        HashMap<String, String> user2 = new HashMap<>();
+        user2.put("Username", "admin2");
+        user2.put("Password", "QNAForum140");
+        user2.put("Re-entered Password", "QNAForum140");
+        user2.put("Email", "loveblairsky@gmail.com");
+        user2.put("Verification", "DebugCode");
+        userController.registerUser(user2, "DebugCode");
 
         HashMap<String, String> course = new HashMap<>();
         course.put("Name", "Introduction to Software Design");
@@ -93,6 +119,8 @@ public class PostUseCaseInteractorTest {
     @Test
     // try to edit a post that is not in the database
     void editPostNotIn(){
+        System.out.println(courseController.getAllCourses().get(0));
+        System.out.println("seee");
         HashMap<String, Object> postInfo = new HashMap<>();
         postInfo.put("orgTitle", "Test2");
         postInfo.put("title", "NewTest");
@@ -144,63 +172,65 @@ public class PostUseCaseInteractorTest {
 
     @Test
     void likePostSuccess(){
-        User user = userController.getUser("admin");
+        User user = userController.getUser("admin2");
         Post post = courseController.getAllPosts("CSC207").get(0);
         postController.likePost(post, user);
-        assertEquals(1,user.getLikeNumber());
+        assertEquals(1,post.getPostedBy().getLikeNumber());
         assertEquals(1, post.getLikeNumber());
     }
 
     @Test
     void likePostDuplicate(){
-        User user = userController.getUser("admin");
+        User user = userController.getUser("admin2");
         Post post = courseController.getAllPosts("CSC207").get(0);
         postController.likePost(post, user);
 
         assertEquals(-1, postController.likePost(post, user));
-        assertEquals(1, user.getLikeNumber());
+        assertEquals(1, post.getPostedBy().getLikeNumber());
         assertEquals(1, post.getLikeNumber());
     }
     @Test
     void dislikePostSuccess(){
-        User user = userController.getUser("admin");
+        User user = userController.getUser("admin2");
         Post post = courseController.getAllPosts("CSC207").get(0);
+
         postController.dislikePost(post, user);
-        assertEquals(-1, user.getLikeNumber());
+        System.out.println(post.getLikeNumber());
+        assertEquals(-1, post.getPostedBy().getLikeNumber());
         assertEquals(-1, post.getLikeNumber());
     }
 
     @Test
     void dislikePostDuplicate(){
-        User user = userController.getUser("admin");
+        User user = userController.getUser("admin2");
         Post post = courseController.getAllPosts("CSC207").get(0);
-        postController.dislikePost(post, user);
 
+        postController.dislikePost(post, user);
         assertEquals(-1, postController.dislikePost(post, user));
-        assertEquals(-1, user.getLikeNumber());
+        assertEquals(-1, post.getPostedBy().getLikeNumber());
         assertEquals(-1, post.getLikeNumber());
     }
 
     @Test
     void dislikeToLike(){
-        User user = userController.getUser("admin");
+        User user = userController.getUser("admin2");
         Post post = courseController.getAllPosts("CSC207").get(0);
         postController.dislikePost(post, user);
         postController.likePost(post, user);
 
-        assertEquals(1, user.getLikeNumber());
+        assertEquals(1, post.getPostedBy().getLikeNumber());
         assertEquals(1, post.getLikeNumber());
     }
 
     @Test
     void likeToDislike(){
-        User user = userController.getUser("admin");
+        User user = userController.getUser("admin2");
         Post post = courseController.getAllPosts("CSC207").get(0);
 
         postController.likePost(post, user);
         postController.dislikePost(post, user);
 
-        assertEquals(-1, user.getLikeNumber());
+        assertEquals(-1, post.getPostedBy().getLikeNumber());
         assertEquals(-1, post.getLikeNumber());
     }
 
@@ -209,10 +239,14 @@ public class PostUseCaseInteractorTest {
         File orgFile = new File("protected_data.ser");
         File newFile = new File("data.ser");
 
-        newFile.delete();
+        if (! newFile.delete()){
+            System.err.println("File not found!");
+        }
 
         if (orgFile.exists()) {
-            orgFile.renameTo(newFile);
+            if (! orgFile.renameTo(newFile)){
+                System.err.println("File not found!");
+            }
         }
     }
 }

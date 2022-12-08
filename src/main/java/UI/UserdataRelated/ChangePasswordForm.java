@@ -10,6 +10,7 @@ import entities.Course;
 import entities.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static base.main.courseController;
 
@@ -20,15 +21,17 @@ import static base.main.courseController;
 public class ChangePasswordForm extends javax.swing.JFrame {
     private final User user;
     private final User viewUser;
+    private final Course course;
     private final UserController userController = main.userController;
 
     /**
      * Creates new form ChangePasswordForm
      */
 
-    public ChangePasswordForm(User user, User viewUser) {
+    public ChangePasswordForm(User user, User viewUser, Course course) {
         this.user = user;
         this.viewUser = viewUser;
+        this.course = course;
         initComponents();
     }
 
@@ -155,24 +158,36 @@ public class ChangePasswordForm extends javax.swing.JFrame {
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ArrayList<Course> courses = courseController.getAllCourses();
-        CoursesForm coursesForm = new CoursesForm(this.user, courses);
-        coursesForm.setVisible(true);
-        this.setVisible(false);
+       goBackProfile();
     }
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String oldPassword = jTextField1.getText();
         String newPassword = enterText.getText();
         String reenterPass = reText.getText();
-        int result = userController.changePassword(user, oldPassword,newPassword, reenterPass);
+
+        HashMap<String, String> passwordInfo = new HashMap<>();
+        passwordInfo.put("oldPassword", oldPassword);
+        passwordInfo.put("newPassword", newPassword);
+        passwordInfo.put("reenteredPassword", reenterPass);
+
+        int result = userController.changePassword(user, passwordInfo);
         switch (result){
             case -1-> GeneralPresenter.showEmptyEntryError();
             case -2 -> RegisterPresenter.showWrongPasswordError();
             case -3-> LoginPresenter.showPasswordNotMatch();
             case -4 -> RegisterPresenter.showWrongRePassError();
-            case 1 -> GeneralPresenter.showSuccessMessage("Reset Password");
+            case 1 -> {
+                GeneralPresenter.showSuccessMessage("Reset Password");
+                goBackProfile();
+            }
         }
+
+    }
+    private void goBackProfile(){
+        ProfilePage profilePage = new ProfilePage(this.user, this.viewUser, this.course);
+        profilePage.setVisible(true);
+        this.setVisible(false);
 
     }
 

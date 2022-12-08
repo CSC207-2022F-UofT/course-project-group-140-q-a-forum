@@ -6,9 +6,7 @@ import exceptions.*;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CourseUseCaseInteractor {
     final CourseDataInterface courseDataInterface;
@@ -73,15 +71,15 @@ public class CourseUseCaseInteractor {
      * This removes a course from the current Database.
      * It first checks if the course exists, and removes it if so;
      * otherwise, it returns false.
-     * @param courseCode Course code of the course to be removed.
+     * @param course Course to be removed
      */
-    public void removeACourse(String courseCode){
+    public void removeACourse(Course course){
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseCode)){
-            throw new NotFoundException("The course "+courseCode);
+        if (!courseDataInterface.courseExists(course.getCode())){
+            throw new NotFoundException("The course "+ course.getCode());
         }
 
-        courseDataInterface.deleteCourse(courseCode);
+        courseDataInterface.deleteCourse(course);
     }
 
     /**
@@ -142,11 +140,10 @@ public class CourseUseCaseInteractor {
 
     /**
      * Remove an instructor from a given course. Returns true if successfully removed, returns false otherwise.
-     * @param courseCode The course code of theh course to be added to.
+     * @param course The coursee to  remove.
      * @param instructor the instructor to be added to the course
      */
-    public void removeInstructor(String courseCode, String instructor){
-        Course course = courseDataInterface.getCourse(courseCode);
+    public void removeInstructor(Course course, String instructor){
         if (course.removeInstructor(instructor)){
             throw new NotFoundException("Instructor in " + course.getCode());
         }
@@ -159,31 +156,11 @@ public class CourseUseCaseInteractor {
     }
 
     /**
-     * Add the given post to the course with the given course code.
-     * @param courseCode The course to be added in.
-     * @param post The post to be added.
-     */
-    public void addPost(String courseCode, Post post){
-        Course course = courseDataInterface.getCourse(courseCode);
-
-        if (!course.addPost(post)){
-            throw new DuplicationException("Post");
-        }
-
-        try{
-            courseDataInterface.saveToFile();
-        }catch (IOException e){
-            System.err.println(e.getMessage());
-        }
-    }
-
-    /**
      * Remove the given post from the course with the given course code.
-     * @param courseCode The course to be removed from.
      * @param post The post to be removed.
      */
-    public void removePost(String courseCode, Post post){
-        Course course = courseDataInterface.getCourse(courseCode);
+    public void removePost(Post post){
+        Course course = post.getCourse();
 
         if (!course.removePost(post)){
             throw new NotFoundException("Post");
@@ -232,15 +209,14 @@ public class CourseUseCaseInteractor {
 
     /**
      * Get all titles of posts under the course with the given course code.
-     * @param courseCode The course code of the course.
+     * @param course The course
      * @return An arraylist of strings that represent the titles of the posts.
      */
-    public ArrayList<String> getAllPostTitles(String courseCode){
-        if (!courseDataInterface.courseExists(courseCode)){
-            throw new NotFoundException("The course "+courseCode);
+    public ArrayList<String> getAllPostTitles(Course course){
+        if (!courseDataInterface.courseExists(course.getCode())){
+            throw new NotFoundException("The course "+ course.getCode());
         }
 
-        Course course = courseDataInterface.getCourse(courseCode);
         Post[] posts = course.getPosts().toArray(new Post[0]);
         ArrayList<String> postName = new ArrayList<String>();
         for(Post post: posts){

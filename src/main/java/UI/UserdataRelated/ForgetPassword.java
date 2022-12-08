@@ -4,12 +4,12 @@
  */
 package UI.UserdataRelated;
 
-import Presenter.GeneralPresenter;
-import Presenter.LoginPresenter;
-import Presenter.RegisterPresenter;
+import Presenter.*;
 import base.main;
 import controllers.UserController;
 import entities.User;
+
+import java.util.HashMap;
 
 /**
  *
@@ -312,7 +312,12 @@ public class ForgetPassword extends javax.swing.JFrame {
         String password = passwordText.getText();
         String rePass = repassText.getText();
         String oldPass = this.user.getPassword();
-        int result = userController.changePassword(this.user, oldPass, password, rePass);
+        HashMap<String, String> passwordInfo = new HashMap<>();
+        passwordInfo.put("oldPassword", oldPass);
+        passwordInfo.put("newPassword", password);
+        passwordInfo.put("reenteredPassword", rePass);
+
+        int result = userController.changePassword(this.user, passwordInfo);
         switch (result){
             case -1->{
                 GeneralPresenter.showEmptyEntryError();

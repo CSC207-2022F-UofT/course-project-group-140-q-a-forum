@@ -1,6 +1,7 @@
 package use_cases;
 
-import org.junit.After;
+import database.DatabaseDataHandler;
+import database.RuntimeDataHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -12,34 +13,46 @@ import controllers.PostController;
 import controllers.UserController;
 import database.DatabaseGateway;
 import entities.*;
-import use_cases.CourseUseCaseInteractor;
-import use_cases.PostUseCaseInteractor;
-import use_cases.UserUseCaseInteractor;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 
 class UserUseCaseInteractorTest {
 
-    private final DatabaseGateway gateway = new DatabaseGateway();
+    static RuntimeDataHandler<Object> dataHandler;
+    static DatabaseDataHandler databaseDataHandler;
+    static DatabaseGateway gateway;
+    static  UserUseCaseInteractor userInteractor;
+    static CourseUseCaseInteractor courseInteractor;
+    static PostUseCaseInteractor postInteractor;
 
-    private final  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");
-    private final CourseUseCaseInteractor courseInteractor = new CourseUseCaseInteractor((gateway));
-    private final PostUseCaseInteractor postInteractor = new PostUseCaseInteractor(gateway);
+    static CourseController courseController;
 
-    private final CourseController courseController = new CourseController(courseInteractor);
-
-    private final PostController postController = new PostController(postInteractor);
-    private final UserController userController = new UserController(userInteractor);
+    static PostController postController;
+    static UserController userController;
 
 
     @BeforeEach
     public void setUp() {
+
+        dataHandler = new RuntimeDataHandler<Object>();
+        databaseDataHandler = new DatabaseDataHandler();
+        gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
+        userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");
+        courseInteractor = new CourseUseCaseInteractor((gateway));
+        postInteractor = new PostUseCaseInteractor(gateway);
+
+        courseController = new CourseController(courseInteractor);
+
+        postController = new PostController(postInteractor);
+        userController = new UserController(userInteractor);
+
         File orgFile = new File("data.ser");
         File newFile = new File("protected_data.ser");
         if (orgFile.exists()) {
-            orgFile.renameTo(newFile);
+            if (! orgFile.renameTo(newFile)){
+                System.err.println("File not found!");
+            }
         }
         HashMap<String, String> adminInfo = new HashMap<>();
         adminInfo.put("Username", "admin");
@@ -117,7 +130,7 @@ class UserUseCaseInteractorTest {
         userInfo.put("Username", "Jordan");
         userInfo.put("Password", "Jordan123");
         userInfo.put("Re-entered Password", "Jordan123");
-        userInfo.put("Email", "ThisIsNotAnEmail@email.com");
+        userInfo.put("Email", "ThisIsNotAnEmail2@email.com");
         userInfo.put("isAdmin", null);
         userInfo.put("Verification", "NotDebugCode");
         assertEquals(-5, userController.registerUser(userInfo, "DebugCode"));
@@ -167,10 +180,14 @@ class UserUseCaseInteractorTest {
         File orgFile = new File("protected_data.ser");
         File newFile = new File("data.ser");
 
-        newFile.delete();
+        if (! newFile.delete()){
+            System.err.println("File not found!");
+        }
 
         if (orgFile.exists()) {
-            orgFile.renameTo(newFile);
+            if (! orgFile.renameTo(newFile)){
+                System.err.println("File not found!");
+            }
         }
     }
 }

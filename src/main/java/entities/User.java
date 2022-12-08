@@ -50,7 +50,9 @@ public class User implements Serializable {
 
         this.password = password;
         this.email = email;
-        this.isAdmin = true;
+        if (isAdmin != null){
+            this.isAdmin = true;
+        }
         this.reputation = "mod";
 
     }

@@ -38,9 +38,7 @@ public class CoursesForm extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
-        JLabel jLabel1 = new JLabel();
-        JLabel coursenameLabel = new JLabel();
+        JLabel courseNameLabel = new JLabel();
         JButton registerButton = new JButton();
         jList2 = new javax.swing.JList();
         JPanel jPanel7 = new JPanel();
@@ -65,9 +63,7 @@ public class CoursesForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Courses Page");
-
-        coursenameLabel.setText("courses name");
+        courseNameLabel.setText("Q&A Forum");
 
         registerButton.setText("Register A new Course");
         registerButton.addActionListener(this::registerButtonActionPerformed);
@@ -207,9 +203,8 @@ public class CoursesForm extends javax.swing.JFrame {
                                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 72, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(coursenameLabel)
+                                                .addComponent(courseNameLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jLabel4)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -223,8 +218,7 @@ public class CoursesForm extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(coursenameLabel)
+                                        .addComponent(courseNameLabel)
                                         .addComponent(userLabel)
                                         .addComponent(profileButton)
                                         .addComponent(jLabel4))
