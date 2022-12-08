@@ -38,12 +38,13 @@ public class ReportForm extends javax.swing.JFrame {
 
         jPanel7 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        typeLabel = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
         contentLabel = new javax.swing.JLabel();
         resolveButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jList2 = new javax.swing.JList();
         backButton = new javax.swing.JButton();
+        typeLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +52,7 @@ public class ReportForm extends javax.swing.JFrame {
 
         jLabel8.setText("Report Type:");
 
-        typeLabel.setText("Report Type");
+        titleLabel.setText("Report Type");
 
         contentLabel.setText("Report Content");
 
@@ -63,6 +64,7 @@ public class ReportForm extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Report Content:");
+        typeLabel.setText("Type");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -78,7 +80,10 @@ public class ReportForm extends javax.swing.JFrame {
                                                         .addComponent(jLabel2))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(typeLabel)
+                                                        .addGroup(jPanel7Layout.createSequentialGroup()
+                                                                .addComponent(titleLabel)
+                                                                .addGap(136, 136, 136)
+                                                                .addComponent(typeLabel))
                                                         .addComponent(contentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -88,6 +93,7 @@ public class ReportForm extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel8)
+                                        .addComponent(titleLabel)
                                         .addComponent(typeLabel))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +170,7 @@ public class ReportForm extends javax.swing.JFrame {
     }
 
     private void changePanel(Report report){
-        typeLabel.setText(report.getReportType());
+        titleLabel.setText(report.getReportType());
         contentLabel.setText(report.getContent());
     }
 
@@ -185,6 +191,7 @@ public class ReportForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel contentLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;

@@ -87,7 +87,7 @@ public class MakeAReport extends javax.swing.JFrame {
         jLabel3.setText("Make the report for:");
 
 
-        if (this.reportType.equals( "User")) {
+        if (this.reportType.equals("User")) {
             titleLabel.setText("user");
             typeLabel.setText("User");
         }
@@ -209,19 +209,24 @@ public class MakeAReport extends javax.swing.JFrame {
         reportInfo.put("Username", user.getUsername());
         reportInfo.put("Type", reportType);
         reportInfo.put("Content", reasonText.getText());
-        int result = reportController.createAReport(reportInfo);
-        switch (result){
-            case 0-> GeneralPresenter.showNotFoundError("Report type");
-            case 1->{
-                GeneralPresenter.showSuccessMessage("Report");
-                goBackUpper();
-            }
-        }
+//        int result = reportController.(reportInfo);
+//        switch (result){
+//            case 0-> GeneralPresenter.showNotFoundError("Report type");
+//            case 1->{
+//                GeneralPresenter.showSuccessMessage("Report");
+//                goBackUpper();
+//            }
+//        }
 
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         goBackUpper();
+
+    }
+    private void reportBasedType(){
+
+
 
     }
 

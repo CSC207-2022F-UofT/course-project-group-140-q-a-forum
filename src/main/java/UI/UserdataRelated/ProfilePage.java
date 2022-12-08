@@ -4,6 +4,7 @@ import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.CoursesForm;
 import UI.MainOfShowingContents.PostForm;
 import UI.MainOfShowingContents.ReportForm;
+import UI.PostingStuff.MakeAReport;
 import base.main;
 import controllers.CourseController;
 import controllers.UserController;
@@ -47,7 +48,7 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void initComponents() {
-        javax.swing.JButton reportButton = new JButton();
+        reportButton = new JButton();
         javax.swing.JFormattedTextField jFormattedTextField1 = new javax.swing.JFormattedTextField();
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
@@ -251,11 +252,13 @@ public class ProfilePage extends javax.swing.JFrame {
         if(this.user.equals(viewUser)){
             setSelfInitial();
             setPassVisible(true);
+            reportButton.setVisible(false);
             if(this.user.isAdmin()){
                 showReportPanel.setVisible(true);
             }
         }
         else {
+            setSelfInitial();
             setPassVisible(false);
             editUserButton.setVisible(false);
         }
@@ -304,7 +307,9 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
+        MakeAReport makeAReport = new MakeAReport(this.viewUser);
+        makeAReport.setVisible(true);
+        this.setVisible(false);
     }
 
 
@@ -327,6 +332,7 @@ public class ProfilePage extends javax.swing.JFrame {
         changeUserNameText.setVisible(result);
         doneButton.setVisible(result);
     }
+    private javax.swing.JButton reportButton;
     private javax.swing.JTextField changeUserNameText;
     private javax.swing.JButton editUserButton;
     private javax.swing.JLabel jLabel7;
