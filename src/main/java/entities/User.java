@@ -19,7 +19,7 @@ public class User implements Serializable {
 
     /**
      * Create a normal user account, with username, password, and the email.
-     * userid is assigned by an usercase, and is IMMUTABLE
+     * userid is assigned by an UseCase, and is IMMUTABLE
      * @param username the name of the user created
      * @param password the password that set up by user
      * @param email the email address input by user
@@ -38,7 +38,7 @@ public class User implements Serializable {
     /**
      * Create an admin user account, with username, password, and the email,
      * and isAdmin
-     * userid is assigned by an usercase, and is IMMUTABLE
+     * userid is assigned by an UseCase, and is IMMUTABLE
      * @param username the name of the user created
      * @param password the password that set up by user
      * @param email the email address input by user

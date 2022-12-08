@@ -113,7 +113,7 @@ public class CourseUseCaseInteractor {
 
     /**
      * Add an instructor to a given course. Returns true if successfully added, returns false otherwise.
-     * @param courseCode The course code of theh course to be added to.
+     * @param courseCode The course code of the course to be added to.
      * @param instructor the instructor to be added to the course
      */
     public void addInstructor(String courseCode, String instructor){
@@ -131,7 +131,7 @@ public class CourseUseCaseInteractor {
 
     /**
      * Remove an instructor from a given course. Returns true if successfully removed, returns false otherwise.
-     * @param course The coursee to  remove.
+     * @param course The course to  remove.
      * @param instructor the instructor to be added to the course
      */
     public void removeInstructor(Course course, String instructor){
@@ -178,7 +178,7 @@ public class CourseUseCaseInteractor {
      */
     public ArrayList<String> getAllCoursesName(){
         ArrayList<Course> courses = courseDataInterface.getAllCourses();
-        ArrayList<String> coursesName = new ArrayList<String>();
+        ArrayList<String> coursesName = new ArrayList<>();
         for (Course course : courses) {
             coursesName.add(course.getName());
         }
@@ -209,7 +209,7 @@ public class CourseUseCaseInteractor {
         }
 
         Post[] posts = course.getPosts().toArray(new Post[0]);
-        ArrayList<String> postName = new ArrayList<String>();
+        ArrayList<String> postName = new ArrayList<>();
         for(Post post: posts){
             postName.add(post.getTopic());
         }

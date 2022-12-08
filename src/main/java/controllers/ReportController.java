@@ -21,7 +21,7 @@ public class ReportController {
 
     /**
      * Register a report.
-     * Returns the situation of registrati  on.
+     * Returns the situation of register  on.
      *
      * @param reportInformation This is a Map that contains necessary information
      *                          needed to register a report. The keys must be

@@ -18,7 +18,7 @@ public class Report implements Serializable {
     /**
      * Create a report to a post. ReportType: User, Post, Course
      * @param user User who made the report
-     * @param reportType Whicih type of entity is the report made to
+     * @param reportType Which type of entity is the report made to
      * @param content Content of the report
      * @param attachedTo The reported subject
      */

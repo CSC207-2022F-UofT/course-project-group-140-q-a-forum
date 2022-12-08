@@ -1,8 +1,6 @@
 package base;
 
-import UI.MainOfShowingContents.CoursesForm;
 import UI.UserdataRelated.LoginForm;
-import UI.UserdataRelated.MakeAnAccount;
 import controllers.CourseController;
 import controllers.PostController;
 import controllers.ReportController;
@@ -11,11 +9,9 @@ import database.DatabaseDataHandler;
 import database.DatabaseGateway;
 import database.RuntimeDataHandler;
 import entities.Course;
-import entities.Post;
 import entities.Report;
 import entities.User;
 import use_cases.CourseUseCaseInteractor;
-import use_cases.DataBaseAccess.ReportDataInterface;
 import use_cases.PostUseCaseInteractor;
 import use_cases.ReportUseCaseInteractor;
 import use_cases.UserUseCaseInteractor;
@@ -26,7 +22,7 @@ import java.util.HashMap;
 
 public class main {
 
-    static RuntimeDataHandler<Object> dataHandler = new RuntimeDataHandler<Object>();
+    static RuntimeDataHandler<Object> dataHandler = new RuntimeDataHandler<>();
     static DatabaseDataHandler databaseDataHandler = new DatabaseDataHandler();
     static DatabaseGateway gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
     static  UserUseCaseInteractor userInteractor = new UserUseCaseInteractor(gateway);
@@ -77,12 +73,8 @@ public class main {
             ArrayList<Course> courses = courseController.getAllCourses();
         }
         debug();
-//       CoursesForm coursesForm =new CoursesForm(user, courses);
-//       coursesForm.setVisible(true);
         LoginForm loginForm = new LoginForm();
         loginForm.setVisible(true);
-//        MakeAnAccount makeAnAccount = new MakeAnAccount();
-//        makeAnAccount.setVisible(true);
     }
 
     public static void debug(){

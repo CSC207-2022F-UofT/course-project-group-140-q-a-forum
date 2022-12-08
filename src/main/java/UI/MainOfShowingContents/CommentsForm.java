@@ -5,8 +5,6 @@
 package UI.MainOfShowingContents;
 
 import Presenter.GeneralPresenter;
-import UI.PostingStuff.MakeAComment;
-import UI.PostingStuff.MakeAReport;
 import base.main;
 import controllers.CourseController;
 import controllers.PostController;
@@ -212,8 +210,8 @@ public class CommentsForm extends javax.swing.JFrame {
     }
 
     private void changePanel(Comment comment){
-       showingUserLabel16.setText(comment.getPostedBy().getUsername());
-       showContentLabel16.setText(comment.getTexts());
+       showingUserLabel16.setText(comment.postedBy().getUsername());
+       showContentLabel16.setText(comment.texts());
 
     }
 

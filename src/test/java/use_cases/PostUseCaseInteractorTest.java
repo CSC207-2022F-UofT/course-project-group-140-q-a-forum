@@ -33,7 +33,7 @@ public class PostUseCaseInteractorTest {
 
         System.out.println("TEST");
 
-        dataHandler = new RuntimeDataHandler<Object>();
+        dataHandler = new RuntimeDataHandler<>();
         databaseDataHandler = new DatabaseDataHandler();
         gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
 
@@ -120,7 +120,7 @@ public class PostUseCaseInteractorTest {
     // try to edit a post that is not in the database
     void editPostNotIn(){
         System.out.println(courseController.getAllCourses().get(0));
-        System.out.println("seee");
+        System.out.println("see");
         HashMap<String, Object> postInfo = new HashMap<>();
         postInfo.put("orgTitle", "Test2");
         postInfo.put("title", "NewTest");

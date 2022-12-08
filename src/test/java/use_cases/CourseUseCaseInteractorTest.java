@@ -31,7 +31,7 @@ public class CourseUseCaseInteractorTest  {
 
     @BeforeEach
     public void setup(){
-        dataHandler = new RuntimeDataHandler<Object>();
+        dataHandler = new RuntimeDataHandler<>();
         databaseDataHandler = new DatabaseDataHandler();
         gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
 
@@ -47,7 +47,9 @@ public class CourseUseCaseInteractorTest  {
         File orgFile = new File("data.ser");
         File newFile = new File("protected_data.ser");
         if (orgFile.exists()) {
-            orgFile.renameTo(newFile);
+            if (! orgFile.renameTo(newFile)){
+                System.err.println("File not found!");
+            }
         }
         HashMap<String, String> user = new HashMap<>();
         user.put("Username", "admin");
@@ -152,14 +154,18 @@ public class CourseUseCaseInteractorTest  {
     }
 
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
         File orgFile = new File("protected_data.ser");
         File newFile = new File("data.ser");
 
-        newFile.delete();
+        if (!newFile.delete()) {
+            System.err.println("File not found!");
+        }
 
         if (orgFile.exists()) {
-            orgFile.renameTo(newFile);
+            if (!orgFile.renameTo(newFile)) {
+                System.err.println("File not found!");
+            }
         }
     }
 }
