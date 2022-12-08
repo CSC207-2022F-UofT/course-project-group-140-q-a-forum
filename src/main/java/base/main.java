@@ -9,6 +9,8 @@ import controllers.ReportController;
 import controllers.UserController;
 import database.DatabaseGateway;
 import entities.Course;
+import entities.Post;
+import entities.Report;
 import entities.User;
 import use_cases.CourseUseCaseInteractor;
 import use_cases.DataBaseAccess.ReportDataInterface;
@@ -39,7 +41,7 @@ public class main {
     public static void main(String[] args) {
         try{
             gateway.readFromFile();
-            System.out.println(gateway.getAllUsers());
+
         }catch (IOException | ClassNotFoundException e){
             // Create file
             try{
@@ -55,16 +57,76 @@ public class main {
             adminInfo.put("Email", "3232085039@qq.com");
             adminInfo.put("isAdmin", "True");
             adminInfo.put("Verification", "DebugCode");
-            //userController1.registerUser(adminInfo);
-            // System.out.println( userController1.registerUser(adminInfo));
-            User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
+            userController1.registerUser(adminInfo, "DebugCode");
+
+            HashMap<String, String> adminInfo2 = new HashMap<>();
+            adminInfo2.put("Username", "Teinble");
+            adminInfo2.put("Password", "qwer123456");
+            adminInfo2.put("Re-entered Password", "qwer123456");
+            adminInfo2.put("Email", "xinlingzhao16@gmail.com");
+            adminInfo2.put("isAdmin", "True");
+            adminInfo2.put("Verification", "DebugCode");
+            userController1.registerUser(adminInfo2, "DebugCode");
+
+            // User user = new User("DebugPurpose", "DebugPurpose", "DebugPurpose");
             ArrayList<Course> courses = courseController.getAllCourses();
         }
-
+        debug();
 //       CoursesForm coursesForm =new CoursesForm(user, courses);
 //       coursesForm.setVisible(true);
-        MakeAnAccount makeAnAccount = new MakeAnAccount();
-        makeAnAccount.setVisible(true);
+        LoginForm loginForm = new LoginForm();
+        loginForm.setVisible(true);
+//        MakeAnAccount makeAnAccount = new MakeAnAccount();
+//        makeAnAccount.setVisible(true);
+    }
+
+    public static void debug(){
+        ArrayList<User> users = gateway.getAllUsers();
+        ArrayList<Course> courses = gateway.getAllCourses();
+        ArrayList<Report> reports = gateway.getAllReport();
+
+        System.out.println("SERIALIZATION INFO");
+
+        System.out.println("================================================");
+        System.out.println("================================================");
+        for (User user: users){
+            System.out.println("Username: " + user.getUsername()) ;
+            System.out.println("Email: " + user.getEmail()) ;
+            System.out.println("Password: " + user.getPassword()) ;
+            System.out.println("Admin?" + user.isAdmin());
+            System.out.println("================================================");
+        }
+
+        System.out.println();
+
+        System.out.println("================================================");
+        System.out.println("================================================");
+
+        System.out.println();
+        for (Course course: courses){
+            System.out.println("Course:" + course.getCode() + " " + course.getName());
+
+            ArrayList<String> posts = course.getPostTitles();
+
+            System.out.println();
+            System.out.println("================================================");
+            System.out.println();
+
+            for (String post: posts){
+                System.out.println("Post: " + post);
+            }
+
+        }
+
+        System.out.println();
+        System.out.println("================================================");
+        System.out.println("================================================");
+        System.out.println();
+
+        for (Report report: reports){
+            System.out.println("Report: " + report.getContent());
+        }
+
     }
 
 }

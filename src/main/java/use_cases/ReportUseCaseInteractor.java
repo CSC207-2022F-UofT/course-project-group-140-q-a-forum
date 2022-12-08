@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class ReportUseCaseInteractor {
+public class ReportUseCaseInteractor{
     final ReportDataInterface reportDataInterface;
     final UserDataInterface userDataInterface;
 
@@ -23,19 +23,18 @@ public class ReportUseCaseInteractor {
      * Create a report and setting UserName, Report type, Report content.
      * Throw the UserNotExistException if the user does not exist in the database.
      *
-     * @param reportInfor This is a Map that contains necessary information
+     * @param reportInfo This is a Map that contains necessary information
      *                    needed to register a user. The keys must be
      *                    "Username", "ReportType", and "Content".
      */
-    public void createReport(Map<String, Object> reportInfor) {
+    public void createReport(Map<String, String> reportInfo) {
 
-        if (!userDataInterface.userExists((String) reportInfor.get("Username"))) {
+        if (!userDataInterface.userExists((String) reportInfo.get("Username"))) {
             throw new NotFoundException("Username");
         }
 
-        reportDataInterface.addReport(new Report((String) reportInfor.get("Username"),
-                (Integer) reportInfor.get("Type"),
-                reportInfor.get("Content")));
+        reportDataInterface.addReport(new Report(reportInfo.get("Username"),
+                reportInfo.get("Type"), reportInfo.get("Content")));
 
         try{
             reportDataInterface.saveToFile();
@@ -61,5 +60,8 @@ public class ReportUseCaseInteractor {
         }
     }
 
+    public ArrayList<Report> getAllReport(){
+        return reportDataInterface.getAllReport();
+    }
 
 }

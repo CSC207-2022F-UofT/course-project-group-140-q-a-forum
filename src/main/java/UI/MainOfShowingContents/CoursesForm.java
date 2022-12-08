@@ -8,7 +8,6 @@ import base.main;
 import controllers.CourseController;
 import entities.Course;
 import entities.User;
-
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -292,10 +291,9 @@ public class CoursesForm extends javax.swing.JFrame {
         }
     }
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(this.user);
+        ProfilePage profilePage = new ProfilePage(this.user, this.user, this.viewCourse);
         profilePage.setVisible(true);
         this.setVisible(false);
-
     }
 
 

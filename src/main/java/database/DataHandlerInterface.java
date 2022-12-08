@@ -2,17 +2,18 @@ package database;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public interface DataHandlerInterface {
-    void setData(HashMap<Integer, Object> info);
+public interface DataHandlerInterface <T>{
+    void setData(Map<Integer, T> info);
 
-    void addData(HashMap<String, Object> info);
+    void addData(Map<String, T> info);
 
-    void deleteData(HashMap<String, Object> info);
+    void deleteData(Map<String, T> info);
 
-    HashMap getData();
+    Map<Integer, List> getData();
 
-    ArrayList getData(int key);
+   List<Object> getData(int key);
 
 }

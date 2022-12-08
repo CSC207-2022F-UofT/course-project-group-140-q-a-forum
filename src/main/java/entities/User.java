@@ -51,6 +51,7 @@ public class User implements Serializable {
         this.password = password;
         this.email = email;
         this.isAdmin = true;
+        this.reputation = "mod";
 
     }
 
@@ -121,12 +122,14 @@ public class User implements Serializable {
     }
 
     public void updateReputation(){
-        if (likeNumber > 10){
-            this.reputation = "Popular";
-        }else if(likeNumber < 10){
-            this.reputation = "Notorious";
-        }else{
-            this.reputation = "Average";
+        if (!isAdmin){
+            if (likeNumber > 10){
+                this.reputation = "Popular";
+            }else if(likeNumber < -10){
+                this.reputation = "Notorious";
+            }else{
+                this.reputation = "Average";
+            }
         }
     }
 }

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI.UserdataRelated;
+import Presenter.GeneralPresenter;
 import Presenter.RegisterPresenter;
 import base.main;
 import controllers.UserController;
@@ -293,6 +294,11 @@ public class MakeAnAccount extends  javax.swing.JFrame {
                 RegisterPresenter.showVerificationError();
                 verificationText.setText("");
                 verificationText.setFocusable(true);
+            }
+            case -6 -> {
+                RegisterPresenter.showEMailDuplicationError();
+                emailText.setText("");
+                emailText.setFocusable(true);
             }
         }
     }

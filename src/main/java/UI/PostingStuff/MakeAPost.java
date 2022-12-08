@@ -75,6 +75,7 @@ public class MakeAPost extends javax.swing.JFrame {
 
         contentTextA.setColumns(20);
         contentTextA.setRows(5);
+        contentTextA.setLineWrap(true);
         jScrollPane1.setViewportView(contentTextA);
 
         postButton.setText("Post the post");

@@ -4,16 +4,27 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
+import java.util.List;
+import java.util.Map;
 
-public class RuntimeDataHandler implements DataHandlerInterface {
-    private ArrayList<User> users = new ArrayList<>();
-    private ArrayList<Course> courses = new ArrayList<>();
-    private ArrayList<Report> reports = new ArrayList<>();
-    private HashMap<String, User> name2User = new HashMap<>();
-    private HashMap<String, User> email2User = new HashMap<>();
-    private HashMap<String, Course> code2Course = new HashMap<>();
-    private HashMap<Integer, ArrayList<Report>> type2Report = new HashMap<>();
+public class RuntimeDataHandler<T> implements DataHandlerInterface<T> {
+    private List<User> users;
+    private List<Course> courses;
+    private List<Report> reports;
+    private Map<String, User> name2User;
+    private Map<String, User> email2User;
+    private final Map<String, Course> code2Course;
+    private final Map<String, ArrayList<Report>> type2Report;
+
+    public RuntimeDataHandler(){
+        users = new ArrayList<>();
+        courses = new ArrayList<>();
+        reports = new ArrayList<>();
+        name2User = new HashMap<>();
+        email2User = new HashMap<>();
+        code2Course = new HashMap<>();
+        type2Report = new HashMap<>();
+    }
 
     /**
      * The method accepts a hashmap from an integer-valued key to a data and replace the original arraylist with the
@@ -23,7 +34,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      *             arraylist}
      */
     @Override
-    public void setData(HashMap<Integer, Object> info) {
+    public void setData(Map<Integer, T> info) {
         /*
          * Value of key indicates the following type of data
          * 1: User
@@ -55,7 +66,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
         value = info.get(3);
         reports = (ArrayList<Report>) value;
         for (Report report : (ArrayList<Report>) value) {
-            int reportType = report.getReportType();
+            String reportType = report.getReportType();
             if (! type2Report.containsKey(reportType)){
                 type2Report.put(reportType, new ArrayList<Report>());
             }
@@ -80,7 +91,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      */
 
     @Override
-    public void addData(HashMap<String, Object> info) {
+    public void addData(Map<String, T> info) {
         /*
          * Value of key indicates the following type of data
          * 1: User
@@ -91,8 +102,8 @@ public class RuntimeDataHandler implements DataHandlerInterface {
          */
         int key = (int) info.get("key");
         Object value = info.get("data");
-        switch (key){
-            case 1:
+        switch (key) {
+            case 1 -> {
                 User user = (User) value;
                 users.add(user);
                 // Put into a dictionary for faster search and access
@@ -100,28 +111,26 @@ public class RuntimeDataHandler implements DataHandlerInterface {
                 String email = user.getEmail();
                 name2User.put(username, user);
                 email2User.put(email, user);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 Course course = (Course) value;
                 courses.add(course);
                 // Put into a dictionary for faster search and access
                 String code = course.getCode();
                 code2Course.put(code, course);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 Report report = (Report) value;
                 reports.add(report);
                 // Put into a dictionary for faster search and access
-                int reportType = report.getReportType();
-                if (! type2Report.containsKey(reportType)){
+                String reportType = report.getReportType();
+                if (!type2Report.containsKey(reportType)) {
                     type2Report.put(reportType, new ArrayList<Report>());
-                }
-                else{
+                } else {
                     type2Report.get(reportType).add(report);
                 }
-                break;
-            default:
-                throw new RuntimeException();
+            }
+            default -> throw new RuntimeException();
         }
     }
 
@@ -133,7 +142,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      */
 
     @Override
-    public void deleteData(HashMap<String, Object> info) {
+    public void deleteData(Map<String, T> info) {
         /*
          * Value of key indicates the following type of data
          * 1: User
@@ -169,7 +178,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      */
     @Override
 
-    public HashMap getData() {
+    public Map<Integer, List> getData() {
         /*
          * Value of key indicates the following type of data
          * 1: User
@@ -178,7 +187,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
          * All the other types of data (Post, Comment) are stored directly in its corresponding branching class
          * (i.e, Posts of a course are stored in Course. posts)
          */
-        HashMap<Integer, Object> map = new HashMap<Integer,Object>();
+        HashMap<Integer, List> map = new HashMap<Integer, List>();
         map.put(1, users);
         map.put(2, courses);
         map.put(3, reports);
@@ -187,11 +196,11 @@ public class RuntimeDataHandler implements DataHandlerInterface {
 
 
     /**
-     * @param key  get data by corrsponding key
+     * @param key get data by corrsponding key
      * @return users when key == 1, course when key==2, reports when key==3
      */
     @Override
-    public ArrayList getData(int key) {
+    public List getData(int key) {
         /*
          * Value of key indicates the following type of data
          * 1: User
@@ -200,16 +209,12 @@ public class RuntimeDataHandler implements DataHandlerInterface {
          * All the other types of data (Post, Comment) are stored directly in its corresponding branching class
          * (i.e, Posts of a course are stored in Course. posts)
          */
-        switch (key){
-            case 1:
-                return users;
-            case 2:
-                return courses;
-            case 3:
-                return reports;
-            default:
-                throw new RuntimeException();
-        }
+        return switch (key) {
+            case 1 -> users;
+            case 2 -> courses;
+            case 3 -> reports;
+            default -> throw new RuntimeException();
+        };
     }
 
     /**
@@ -218,12 +223,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      * @return if user is found return User user, otherwise null
      */
     public User lookupUserfromName(String username) {
-        if (name2User.containsKey(username)){
-            return name2User.get(username);
-         }
-        else{
-            return null;
-        }
+        return name2User.getOrDefault(username, null);
     }
 
     /**
@@ -232,12 +232,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      * @return if email is found return String email, otherwise null
      */
     public User lookupUserfromEmail(String email) {
-        if (email2User.containsKey(email)){
-            return email2User.get(email);
-        }
-        else{
-            return null;
-        }
+        return email2User.getOrDefault(email, null);
     }
 
 
@@ -247,12 +242,7 @@ public class RuntimeDataHandler implements DataHandlerInterface {
      * @return if course is found return Course course, otherwise null
      */
     public Course lookupCourse(String code) {
-        if (code2Course.containsKey(code)) {
-            return code2Course.get(code);
-        }
-        else {
-            return null;
-        }
+        return code2Course.getOrDefault(code, null);
     }
 
     public ArrayList<Report> getAllReportFromType(int key){
