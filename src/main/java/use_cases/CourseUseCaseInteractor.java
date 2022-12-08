@@ -87,7 +87,8 @@ public class CourseUseCaseInteractor {
     /**
      * This method modifies an existing course in the database.
      * @param courseCode Course Code of the course to be modified.
-     * @param part Which attribute of this course needs to be changed.
+     * @param part Which attribute of this course needs to be changed.The part must be "name",
+     *             "courseCode", "description", "semester".
      * @param newPart What it needs to be changed to.
      */
     public void modifyCourseContent(String courseCode, String part, String newPart){
@@ -97,22 +98,11 @@ public class CourseUseCaseInteractor {
         }
 
         Course course = courseDataInterface.getCourse(courseCode);
-        String[] attributes = {"name", "courseCode", "description", "semester"};
-
-        boolean found = false;
-        for (String attribute: attributes){
-            if (attribute.equals(part)) {
-                found = true;
-                break;
-            }
-        }
-
-        if (found) {
             boolean success = course.modifyCourseContent(part, newPart);
             if (!success) {
                 throw new WrongInfoException(part);
             }
-        }
+
 
         try{
             courseDataInterface.saveToFile();
@@ -147,7 +137,7 @@ public class CourseUseCaseInteractor {
      */
     public void removeInstructor(String courseCode, String instructor){
         Course course = courseDataInterface.getCourse(courseCode);
-        if (course.removeInstructor(instructor)){
+        if (!course.removeInstructor(instructor)){
             throw new NotFoundException("Instructor in " + course.getCode());
         }
 

@@ -2,6 +2,7 @@ package use_cases;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ import controllers.PostController;
 import controllers.UserController;
 import database.DatabaseGateway;
 
+import java.io.File;
 import java.util.HashMap;
 
 public class CourseUseCaseInteractorTest  {
@@ -26,13 +28,19 @@ public class CourseUseCaseInteractorTest  {
 
     @BeforeEach
     public void setup(){
+        File orgFile = new File("data.ser");
+        File newFile = new File("protected_data.ser");
+        if (orgFile.exists()) {
+            orgFile.renameTo(newFile);
+        }
         HashMap<String, String> user = new HashMap<>();
         user.put("Username", "admin");
         user.put("Password", "QNAForum140");
         user.put("Re-entered Password", "QNAForum140");
         user.put("Email", "3232085039@qq.com");
         user.put("isAdmin", "True");
-        userController.registerUser(user);
+        user.put("Verification", "DebugCode");
+        userController.registerUser(user, "DebugCode");
 
 
         HashMap<String, String> course = new HashMap<>();
@@ -43,12 +51,6 @@ public class CourseUseCaseInteractorTest  {
         course.put("Instructors", "Charlie");
         courseController.registerCourse(course);
 
-        HashMap<String, Object> adminInfo = new HashMap<>();
-        adminInfo.put("title", "Test");
-        adminInfo.put("text", "A meaningful question");
-        adminInfo.put("user", userController.getUser("admin"));
-        adminInfo.put("course", courseController.getAllCourses().get(0));
-        postController.createPost(adminInfo);
     }
 
     @Test
@@ -100,14 +102,10 @@ public class CourseUseCaseInteractorTest  {
         assertEquals(1,courseController.modifyCourse(true,"CSC207","name", "CSC373"));
     }
 
-    @Test
-    public void NotfoundModify(){
-        assertEquals(-1,courseController.modifyCourse(true,"CSC207","Semester", ""));
-    }
 
     @Test
     public void WrongInfoModify(){
-        assertEquals(-2,courseController.modifyCourse(true,"CSC148","name", "CSC373"));
+        assertEquals(-2,courseController.modifyCourse(true,"CSC207","email", "CSC373"));
     }
 
     @Test
@@ -132,6 +130,18 @@ public class CourseUseCaseInteractorTest  {
 
     @Test
     public void SuccessfulRemoveInstructor(){
-        assertEquals(-1,courseController.removeInstructor(true,"CSC207","Charlie"));
+        assertEquals(1,courseController.removeInstructor(true,"CSC207","Charlie"));
+    }
+
+    @AfterEach
+    public void tearDown(){
+        File orgFile = new File("protected_data.ser");
+        File newFile = new File("data.ser");
+
+        newFile.delete();
+
+        if (orgFile.exists()) {
+            orgFile.renameTo(newFile);
+        }
     }
 }

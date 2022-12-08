@@ -29,7 +29,7 @@ public class MakeAReport extends javax.swing.JFrame {
     private final Course course;
     private final Post post;
     private final Comment comment;
-    private final int reportType;
+    private final String reportType;
     private final CourseController courseController = main.courseController;
     private final ReportController reportController = main.reportController;
 
@@ -40,7 +40,7 @@ public class MakeAReport extends javax.swing.JFrame {
         this.post = null;
         this.course = null;
         this.comment = null;
-        this.reportType = 0;
+        this.reportType = "User";
         initComponents();
     }
 
@@ -49,7 +49,7 @@ public class MakeAReport extends javax.swing.JFrame {
         this.course= course;
         this.post = null;
         this.comment = null;
-        this.reportType = 2;
+        this.reportType = "Course";
         initComponents();
     }
 
@@ -58,7 +58,7 @@ public class MakeAReport extends javax.swing.JFrame {
         this.course= course;
         this.post = post;
         this.comment = null;
-        this.reportType = 1;
+        this.reportType = "Post";
         initComponents();
     }
 
@@ -100,15 +100,15 @@ public class MakeAReport extends javax.swing.JFrame {
         jLabel3.setText("Make the report for:");
 
 
-        if (this.reportType == 0) {
+        if (this.reportType == "User") {
             titleLabel.setText("user");
             typeLabel.setText("User");
         }
-        if (this.reportType == 1) {
+        if (this.reportType == "Post") {
             titleLabel.setText(this.post.getTopic());
             typeLabel.setText("Post");
         }
-        if (this.reportType == 2) {
+        if (this.reportType == "Course") {
             titleLabel.setText(this.course.getName());
             typeLabel.setText("Course");
         }
@@ -234,17 +234,17 @@ public class MakeAReport extends javax.swing.JFrame {
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        if (this.reportType == 0) {
+        if (this.reportType == "User") {
             CommentsForm commentsForm = new CommentsForm(this.user, this.course, this.post);
             commentsForm.setVisible(true);
             this.setVisible(false);
         }
-        if (this.reportType == 1) {
+        if (this.reportType == "Post") {
             PostForm postForm = new PostForm(this.user,this.course);
             postForm.setVisible(true);
             this.setVisible(false);
         }
-        if (this.reportType == 2) {
+        if (this.reportType == "Course") {
             ArrayList<Course> courses = courseController.getAllCourses();
             CoursesForm coursesForm = new CoursesForm(this.user, courses);
             coursesForm.setVisible(true);
