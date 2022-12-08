@@ -46,13 +46,13 @@ public class CourseController {
     /**
      * Delete a course.
      * @param isAdmin Whether the user taking action is an admin.
-     * @param courseCode The course to be deleted.
+     * @param course The course to be deleted.
      * @return An integer indicating whether the course has been
      * deleted successfully.
      * 0: The current user is not an admin and has no right to delete a course;
      * 1: The course has been deleted successfully.
      */
-    public int removeCourse(boolean isAdmin, String courseCode){
+    public int removeCourse(boolean isAdmin, Course course){
         /*
          * For admin use
          */
@@ -60,7 +60,7 @@ public class CourseController {
             return 0;
         }
 
-        courseInteractor.removeACourse(courseCode);
+        courseInteractor.removeACourse(course);
         return 1;
     }
 
@@ -123,14 +123,14 @@ public class CourseController {
     /**
      * Remove an instructor from the course.
      * @param isAdmin If the user is an admin.
-     * @param courseCode The course code of the course.
+     * @param course The course.
      * @param instructor The name of the instructor.
      * @return An integer representing the result of the method.
      * 1: Successfully removed;
      * 0: The user is not an admin so cannot remove this post;
      * -1: The instructor is not found in this course.
      */
-    public int removeInstructor(boolean isAdmin, String courseCode, String instructor){
+    public int removeInstructor(boolean isAdmin, Course course, String instructor){
 
         /*
          * For admin use
@@ -140,7 +140,7 @@ public class CourseController {
             //Call presenter
             return 0;
         }
-        try{courseInteractor.removeInstructor(courseCode, instructor);}
+        try{courseInteractor.removeInstructor(course, instructor);}
         catch(NotFoundException e){
             //Call presenter
             return -1;
@@ -152,20 +152,19 @@ public class CourseController {
     /**
      * Remove a post from the course with given course code.
      * @param isAdmin If the user is an admin.
-     * @param courseCode The course code of the course.
      * @param post the post wanted to be deleted.
      * @return An integer representing the state of the post.
      * 1: Successfully removed;
      * 0: The user is not an admin so cannot remove this post;
      * -1: The course with given course code is not found;
      */
-    public int removePost(boolean isAdmin, String courseCode, Post post){
+    public int removePost(boolean isAdmin, Post post){
         if (!isAdmin){
             //Call presenter
             return 0;
         }
 
-        try{courseInteractor.removePost(courseCode, post);}
+        try{courseInteractor.removePost(post);}
         catch(NotFoundException e){
             return -1;
         }
@@ -200,7 +199,7 @@ public class CourseController {
         return courseInteractor.getAllCoursesName();
     }
 
-    public ArrayList<String> getAllPostTitles(String courseCode){
-        return courseInteractor.getAllPostTitles(courseCode);
+    public ArrayList<String> getAllPostTitles(Course course){
+        return courseInteractor.getAllPostTitles(course);
     }
 }

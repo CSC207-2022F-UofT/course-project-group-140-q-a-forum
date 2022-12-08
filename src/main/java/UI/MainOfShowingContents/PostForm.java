@@ -70,7 +70,7 @@ public class PostForm extends javax.swing.JFrame {
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Posts"));
 
         jList2.setModel(new javax.swing.AbstractListModel() {
-            final String[] strings = courseController.getAllPostTitles(course.getCode()).toArray(new String[0]);
+            final String[] strings = courseController.getAllPostTitles(course).toArray(new String[0]);
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });

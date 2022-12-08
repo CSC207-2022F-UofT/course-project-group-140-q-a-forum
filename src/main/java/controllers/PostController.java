@@ -70,13 +70,14 @@ public class PostController {
 
     /**
      * Get all comments of the post with given post topic in the course with the given course code.
-     * @param courseCode The course code of the course that this post is of.
-     * @param postTopic The topic of the course.
+     * @param post The post
      * @return If there is not such post, then return null; else, return an arraylist of comments.
      */
-    public List<Comment> getAllCommentFromPost(String courseCode, String postTopic){
-        return postUseCaseInteractor.getAllCommentFromPost(courseCode, postTopic);
+
+    public List<Comment> getAllCommentFromPost(Post post){
+        return postUseCaseInteractor.getAllCommentFromPost(post);
     }
+
 
     /**
      * Make a post that is posted by the given user under the given post
@@ -117,6 +118,7 @@ public class PostController {
      * 1: Successfully disliked a post;
      * -1: The user has already disliked this post.
      */
+
     public int dislikePost(Post post, User user){
         try{postUseCaseInteractor.dislikePost(post, user);}
         catch(DuplicationException e){return -1;}

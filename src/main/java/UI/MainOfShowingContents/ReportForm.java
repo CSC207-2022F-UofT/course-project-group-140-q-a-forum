@@ -157,7 +157,7 @@ public class ReportForm extends javax.swing.JFrame {
            GeneralPresenter.showNotSelectError("Post");
        }else{
         main.reportController.removeAReport(viewReport);
-        GeneralPresenter.showSuccessMessage("Report");
+        GeneralPresenter.showSuccessMessage("Report resolution");
         ReportForm reportForm = new ReportForm(this.user, this.viewUser, this.course);
         reportForm.setVisible(true);
         this.setVisible(false);
