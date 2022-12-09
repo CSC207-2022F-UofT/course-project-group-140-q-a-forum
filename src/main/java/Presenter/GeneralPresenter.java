@@ -4,14 +4,10 @@ import javax.swing.*;
 
 public class GeneralPresenter extends JOptionPane {
     public static void showDuplicationError(String duplicationType){
-        JOptionPane.showMessageDialog(null, "This is" + duplicationType+ "already Exists",
+        JOptionPane.showMessageDialog(null, "This " + duplicationType+ " is already Exists.",
                 "already exists",ERROR_MESSAGE);
     }
 
-    public static void showRemoveError(){
-        JOptionPane.showMessageDialog(null, "This course has not been register yet, thus cannot be removed",
-                "Remove Error",ERROR_MESSAGE);
-    }
 
     public static void showNotFoundError(String notFoundType){
         JOptionPane.showMessageDialog(null, "This " + notFoundType +" is not found in the system, please check",
@@ -20,7 +16,7 @@ public class GeneralPresenter extends JOptionPane {
 
     public static void showNotSelectError(String selectType){
         JOptionPane.showMessageDialog(null, "Please select a "  + selectType +
-                        " in the List or register a " + selectType + " first", "Not Select Error",
+                        " in the List or get a " + selectType + " first", "Not Select Error",
                 ERROR_MESSAGE);
     }
 

@@ -50,9 +50,9 @@ public class MakeAnAccount extends  javax.swing.JFrame {
         JLabel jLabel7 = new JLabel();
         JLabel jLabel8 = new JLabel();
         JLabel jLabel9 = new JLabel();
-        JLabel jLabel10 = new JLabel();
+        jLabel10 = new JLabel();
         JButton sendButton = new JButton();
-        JButton registerButton = new JButton();
+        registerButton = new JButton();
         JLabel showVeriLabel = new JLabel();
 
 
@@ -60,7 +60,6 @@ public class MakeAnAccount extends  javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Set Up a Account"));
 
-        userNameText.addActionListener(this::userNameTextActionPerformed);
 
         jLabel6.setText("UserName:");
 
@@ -215,21 +214,18 @@ public class MakeAnAccount extends  javax.swing.JFrame {
         );
 
         pack();
+        verificationText.setVisible(false);
+        jLabel10.setVisible(false);
+        registerButton.setVisible(false);
     }// </editor-fold>
 
     private void backButtonActionPerformed(ActionEvent evt) {
         this.setVisible(false);
         LoginForm loginForm = new LoginForm();
         loginForm.setVisible(true);
-
-    }
-
-    private void userNameTextActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
     }
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         String email = emailText.getText();
         int resultOrCode = userController.sendEmail(email);
         switch (resultOrCode){
@@ -240,14 +236,16 @@ public class MakeAnAccount extends  javax.swing.JFrame {
                 RegisterPresenter.showVerificationError();
             }
             default -> {
-                this.correctVerification = String.valueOf(resultOrCode);
+                correctVerification = String.valueOf(resultOrCode);
                 showingSeding.setText("Verification Send");
+                verificationText.setVisible(true);
+                jLabel10.setVisible(true);
+                registerButton.setVisible(true);
             }
         }
     }
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         HashMap<String, String> RegInfo = new HashMap<>();
         String userName = userNameText.getText();
         RegInfo.put("Username", userName);
@@ -307,6 +305,8 @@ public class MakeAnAccount extends  javax.swing.JFrame {
     private javax.swing.JTextField emailText;
     private javax.swing.JTextField passWordText;
     private javax.swing.JTextField rePassText;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JButton registerButton;
     private javax.swing.JLabel showingSeding;
     private javax.swing.JTextField userNameText;
     private javax.swing.JTextField verificationText;

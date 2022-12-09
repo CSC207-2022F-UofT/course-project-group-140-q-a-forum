@@ -36,32 +36,29 @@ public class ReportForm extends javax.swing.JFrame {
 
     private void initComponents() {
 
-        jPanel7 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel7 = new javax.swing.JPanel();
+        javax.swing.JLabel jLabel8 = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
         contentLabel = new javax.swing.JLabel();
-        resolveButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        javax.swing.JButton resolveButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         jList2 = new javax.swing.JList();
-        backButton = new javax.swing.JButton();
+        // Variables declaration - do not modify
+        javax.swing.JButton backButton = new javax.swing.JButton();
         typeLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Report Description"));
 
-        jLabel8.setText("Report Type:");
+        jLabel8.setText("Report on:");
 
         titleLabel.setText("Report Type");
 
         contentLabel.setText("Report Content");
 
         resolveButton.setText("resolve this report");
-        resolveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resolveButtonActionPerformed(evt);
-            }
-        });
+        resolveButton.addActionListener(this::resolveButtonActionPerformed);
 
         jLabel2.setText("Report Content:");
         typeLabel.setText("Type");
@@ -118,11 +115,7 @@ public class ReportForm extends javax.swing.JFrame {
         });
 
         backButton.setText("Back to Profile Page");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +147,7 @@ public class ReportForm extends javax.swing.JFrame {
     }
     private void resolveButtonActionPerformed(java.awt.event.ActionEvent evt) {
        if(this.viewReport==null){
-           GeneralPresenter.showNotSelectError("Post");
+           GeneralPresenter.showNotSelectError("Report");
        }else{
         main.reportController.removeAReport(viewReport);
         GeneralPresenter.showSuccessMessage("Report resolution");
@@ -167,7 +160,7 @@ public class ReportForm extends javax.swing.JFrame {
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {
         int chosenReportIndex = jList2.getSelectedIndex();
         if (chosenReportIndex == - 1){
-            GeneralPresenter.showNotSelectError("Comment");
+            GeneralPresenter.showNotSelectError("Report");
         }
         else {
             ArrayList<Report> reports = main.reportController.getAllReport();
@@ -185,7 +178,7 @@ public class ReportForm extends javax.swing.JFrame {
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(this.user,this.viewUser, this.course);
+        ProfilePage profilePage = new ProfilePage(this.user,this.viewUser);
         profilePage.setVisible(true);
         this.setVisible(false);
     }
@@ -198,15 +191,9 @@ public class ReportForm extends javax.swing.JFrame {
         return comments;
     }
 
-    // Variables declaration - do not modify
-    private javax.swing.JButton backButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel contentLabel;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JList jList2;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JButton resolveButton;
     private javax.swing.JLabel typeLabel;
     // End of variables declaration
 }

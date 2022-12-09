@@ -32,13 +32,14 @@ public class ProfilePage extends javax.swing.JFrame {
     /**
      * Creates new form ProfilePage
      */
-    public ProfilePage(User user, User viewUser, Course course) {
+    public ProfilePage(User user, User viewUser) {
         this.user = user;
         this.viewUser = viewUser;
-        this.course = course;
         this.post = null;
+        this.course = null;
         initComponents();
     }
+
     public ProfilePage(User user, User viewUser, Course course, Post post){
         this.user = user;
         this.viewUser = viewUser;
@@ -69,7 +70,8 @@ public class ProfilePage extends javax.swing.JFrame {
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         totalLikeLabel = new javax.swing.JLabel();
         showReportPanel = new javax.swing.JPanel();
-        showReportButton = new javax.swing.JButton();
+        JButton showReportButton = new JButton();
+        logoutButton = new javax.swing.JButton();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -137,6 +139,9 @@ public class ProfilePage extends javax.swing.JFrame {
                                 .addComponent(showReportButton))
         );
 
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(this::logoutButtonActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -150,14 +155,20 @@ public class ProfilePage extends javax.swing.JFrame {
                                 .addComponent(reportButton)
                                 .addGap(245, 245, 245))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(reputationTitle)
-                                        .addComponent(jLabel8)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel1))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(20, 20, 20)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(reputationTitle)
+                                                        .addComponent(jLabel8)
+                                                        .addComponent(jLabel7)
+                                                        .addComponent(jLabel1)))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(logoutButton)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel6)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -166,9 +177,9 @@ public class ProfilePage extends javax.swing.JFrame {
                                                 .addComponent(editUserButton))
                                         .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(changeUserNameText, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(passLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(changeUserNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(passLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(changeButton)
@@ -180,11 +191,14 @@ public class ProfilePage extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(userLabel)
-                                        .addComponent(editUserButton))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel6)
+                                                        .addComponent(userLabel)
+                                                        .addComponent(editUserButton)))
+                                        .addComponent(logoutButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(changeUserNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,11 +217,11 @@ public class ProfilePage extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
                                         .addComponent(totalLikeLabel))
-                                .addGap(38, 38, 38)
+                                .addGap(42, 42, 42)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(reputationTitle)
-                                        .addComponent(reputationLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                        .addComponent(reputationLabel)
+                                        .addComponent(reputationTitle))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(backButton)
@@ -246,6 +260,7 @@ public class ProfilePage extends javax.swing.JFrame {
         jLabel1.setVisible(false);
         doneButton.setVisible(false);
         showReportPanel.setVisible(false);
+        logoutButton.setVisible(true);
     }
 
     public void initialPanel(){
@@ -261,6 +276,7 @@ public class ProfilePage extends javax.swing.JFrame {
             setSelfInitial();
             setPassVisible(false);
             editUserButton.setVisible(false);
+            logoutButton.setVisible(false);
         }
     }
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +304,7 @@ public class ProfilePage extends javax.swing.JFrame {
         }else {
             GeneralPresenter.showSuccessMessage("reset username");
             setChangeUserVisible(false);
-            ProfilePage profilePage = new ProfilePage(this.user, this.viewUser, this.course);
+            ProfilePage profilePage = new ProfilePage(this.user, this.viewUser);
             profilePage.setVisible(true);
             this.setVisible(false);
         }
@@ -314,8 +330,6 @@ public class ProfilePage extends javax.swing.JFrame {
         this.setVisible(false);
     }
 
-
-
     private void showReportButtonActionPerformed(java.awt.event.ActionEvent evt) {
         ReportForm reportForm = new ReportForm(this.user, this.viewUser, this.course);
         reportForm.setVisible(true);
@@ -334,7 +348,14 @@ public class ProfilePage extends javax.swing.JFrame {
         changeUserNameText.setVisible(result);
         doneButton.setVisible(result);
     }
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        LoginForm loginForm = new LoginForm();
+        loginForm.setVisible(true);
+        this.setVisible(false);
+    }
     private javax.swing.JButton reportButton;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JTextField changeUserNameText;
     private javax.swing.JButton editUserButton;
     private javax.swing.JLabel jLabel7;
@@ -344,7 +365,6 @@ public class ProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel passLabel;
     private javax.swing.JLabel reputationLabel;
-    private javax.swing.JButton showReportButton;
     private javax.swing.JPanel showReportPanel;
     private javax.swing.JLabel totalLikeLabel;
     private javax.swing.JLabel userLabel;
