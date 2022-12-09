@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import database.DatabaseDataHandler;
 import database.RuntimeDataHandler;
+import entities.Course;
+import entities.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,6 +62,14 @@ public class CourseUseCaseInteractorTest  {
         user.put("Verification", "DebugCode");
         userController.registerUser(user, "DebugCode");
 
+        HashMap<String, String> user2 = new HashMap<>();
+        user2.put("Username", "non-admin2");
+        user2.put("Password", "QNAForum140");
+        user2.put("Re-entered Password", "QNAForum140");
+        user2.put("Email", "loveblairsky@gmail.com");
+        user2.put("Verification", "DebugCode");
+        userController.registerUser(user2, "DebugCode");
+
 
         HashMap<String, String> course = new HashMap<>();
         course.put("Name", "Introduction to Software Design");
@@ -103,54 +113,89 @@ public class CourseUseCaseInteractorTest  {
     }
     @Test
     public  void UnsuccessfulRemove(){
-        assertEquals(0, courseController.removeCourse(false, courseController.getAllCourses().get(0)));
+        User user = userController.getUser("non-admin2");
+        assertEquals(0, courseController.removeCourse(user, courseController.getAllCourses().get(0)));
     }
     @Test
     public void SuccessfulRemove(){
-        assertEquals(1,courseController.removeCourse(true,courseController.getAllCourses().get(0)));
+        User user = userController.getUser("admin");
+        assertEquals(1,courseController.removeCourse(user,courseController.getAllCourses().get(0)));
     }
 
     @Test
     public void UnsuccessfulModify(){
-        assertEquals(0,courseController.modifyCourse(false,"CSC207","name", "CSC373"));
+        HashMap<String, String> info = new HashMap<>();
+        info.put("where", "name");
+        info.put("what", "CSC373");
+        Course course = courseController.getAllCourses().get(0);
+
+        User user = userController.getUser("non-admin2");
+
+        assertEquals(0,courseController.modifyCourse(user,course,info));
     }
 
     @Test
     public void SuccessfulModify(){
-        assertEquals(1,courseController.modifyCourse(true,"CSC207","name", "CSC373"));
+        HashMap<String, String> info = new HashMap<>();
+        info.put("where", "name");
+        info.put("what", "CSC373");
+        Course course = courseController.getAllCourses().get(0);
+
+        User user = userController.getUser("admin");
+
+        assertEquals(1,courseController.modifyCourse(user,course, info));
     }
 
 
     @Test
     public void WrongInfoModify(){
-        assertEquals(-2,courseController.modifyCourse(true,"CSC207","email", "CSC373"));
+        HashMap<String, String> info = new HashMap<>();
+        info.put("where", "email");
+        info.put("what", "CSC373");
+        Course course = courseController.getAllCourses().get(0);
+
+        User user = userController.getUser("admin");
+
+        assertEquals(-2,courseController.modifyCourse(user,course,info));
     }
 
     @Test
     public void SuccessfulInstructor(){
-        assertEquals(1, courseController.addInstructor("CSC207","Ray Huong"));
+        Course course = courseController.getAllCourses().get(0);
+        assertEquals(1, courseController.addInstructor(course,"Ray Huong"));
     }
 
     @Test
     public void DuplicatedInstructor(){
-        assertEquals(-1, courseController.addInstructor("CSC207","Charlie"));
+        Course course = courseController.getAllCourses().get(0);
+        assertEquals(-1, courseController.addInstructor(course,"Charlie"));
     }
 
     @Test
     public void UnsuccessfulRemoveInstructor(){
-        assertEquals(0,courseController.removeInstructor(false,courseController.getAllCourses().get(0),"Ray Huong"));
+
+        User user = userController.getUser("non-admin2");
+
+        assertEquals(0,courseController.removeInstructor(user,courseController.getAllCourses().get(0),"Ray Huong"));
     }
 
     @Test
     public void NotfoundInstructor(){
         System.err.println(courseController.getAllCourses().get(0).getInstructor());
-        assertEquals(-1,courseController.removeInstructor(true,courseController.getAllCourses().get(0),"Ray"));
+
+        User user = userController.getUser("admin");
+
+        assertEquals(-1,courseController.removeInstructor(user,courseController.getAllCourses().get(0),"Ray"));
     }
 
     @Test
     public void SuccessfulRemoveInstructor(){
+
         System.err.println(courseController.getAllCourses().get(0).getInstructor());
-        assertEquals(1,courseController.removeInstructor(true,courseController.getAllCourses().get(0),"Charlie"));
+
+        User user = userController.getUser("admin");
+
+        assertEquals(1,courseController.removeInstructor(user,courseController.getAllCourses().get(0),"Charlie"));
     }
 
     @AfterEach

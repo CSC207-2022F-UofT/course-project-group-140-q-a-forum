@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Course;
 import entities.Post;
+import entities.User;
 import exceptions.DuplicationException;
 import exceptions.EmptyEntryException;
 import exceptions.NotFoundException;
@@ -45,18 +46,19 @@ public class CourseController {
 
     /**
      * Delete a course.
-     * @param isAdmin Whether the user taking action is an admin.
+     * @param user the user
      * @param course The course to be deleted.
      * @return An integer indicating whether the course has been
      * deleted successfully.
      * 0: The current user is not an admin and has no right to delete a course;
      * 1: The course has been deleted successfully.
      */
-    public int removeCourse(boolean isAdmin, Course course){
+    public int removeCourse(User user, Course course){
         /*
          * For admin use
          */
-        if (!isAdmin){
+
+        if (!user.isAdmin()){
             return 0;
         }
 
@@ -66,10 +68,10 @@ public class CourseController {
 
     /**
      * Modify a course.
-     * @param isAdmin Whether the user is an admin.
-     * @param courseCode The course code of the course needs to be modified.
-     * @param part The part of the course to be modified.
-     * @param changeTo The content of the part to be changed to.
+     * @param user the user
+     * @param course The course
+     * @param info Which attribute of this course needs to be changed and what it needed to
+     *             be changed two, marked by "where" and "what.
      * @return An integer representing the state of modifying this course.
      * 1: Successfully modified;
      * 0: The user is not an admin so cannot modify this course;
@@ -77,18 +79,19 @@ public class CourseController {
      * -2: The input part does not correspond to an attribute of the course that can
      * be modified.
      */
-    public int modifyCourse(boolean isAdmin, String courseCode,
-                            String part, String changeTo){
+    public int modifyCourse(User user, Course course, HashMap<String, String> info){
         /*
          * For admin use
          */
 
-        if (!isAdmin){
+        if (!user.isAdmin()){
             //Call presenter
             return 0;
         }
 
-        try{courseInteractor.modifyCourseContent(courseCode, part, changeTo);}
+        try{
+            courseInteractor.modifyCourseContent(course, info);
+        }
         catch(NotFoundException e){
             //Call presenter
             return -1;
@@ -101,17 +104,17 @@ public class CourseController {
 
     /**
      * Add an instructor to the course.
-     * @param courseCode The course code of the course.
+     * @param course The course
      * @param instructor The name of the instructor.
      * @return An integer representing the result of the method.
      * 1: Successfully added;
      * -1: The instructor is already in this course.
      */
-    public int addInstructor(String courseCode, String instructor){
+    public int addInstructor(Course course, String instructor){
         /*
             For admin use
          */
-        try{courseInteractor.addInstructor(courseCode, instructor);}
+        try{courseInteractor.addInstructor(course, instructor);}
         catch(DuplicationException e){
             //Call presenter
             return -1;
@@ -122,7 +125,7 @@ public class CourseController {
 
     /**
      * Remove an instructor from the course.
-     * @param isAdmin If the user is an admin.
+     * @param user the user
      * @param course The course.
      * @param instructor The name of the instructor.
      * @return An integer representing the result of the method.
@@ -130,13 +133,13 @@ public class CourseController {
      * 0: The user is not an admin so cannot remove this post;
      * -1: The instructor is not found in this course.
      */
-    public int removeInstructor(boolean isAdmin, Course course, String instructor){
+    public int removeInstructor(User user, Course course, String instructor){
 
         /*
          * For admin use
          */
 
-        if (!isAdmin){
+        if (!user.isAdmin()){
             //Call presenter
             return 0;
         }
@@ -151,18 +154,18 @@ public class CourseController {
 
     /**
      * Remove a post from the course with given course code.
-     * @param isAdmin If the user is an admin.
+     * @param user the user
      * @param post the post wanted to be deleted.
      * @return An integer representing the state of the post.
      * 1: Successfully removed;
      * 0: The user is not an admin so cannot remove this post;
      * -1: The course with given course code is not found;
      */
-    public int removePost(boolean isAdmin, Post post){
+    public int removePost(User user, Post post){
         /*
             For admin use
          */
-        if (!isAdmin){
+        if (!user.isAdmin()){
             //Call presenter
             return 0;
         }

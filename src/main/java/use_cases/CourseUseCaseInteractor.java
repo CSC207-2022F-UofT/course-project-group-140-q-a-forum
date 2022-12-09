@@ -84,18 +84,17 @@ public class CourseUseCaseInteractor {
 
     /**
      * This method modifies an existing course in the database.
-     * @param courseCode Course Code of the course to be modified.
-     * @param part Which attribute of this course needs to be changed.
-     * @param newPart What it needs to be changed to.
+     * @param course The course
+     * @param info Which attribute of this course needs to be changed and what it needed to
+     *             be changed two, marked by "where" and "what.
      */
-    public void modifyCourseContent(String courseCode, String part, String newPart){
+    public void modifyCourseContent(Course course, HashMap<String, String> info){
+        String part = info.get("where");
+        String newPart = info.get("what");
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseCode)){
-            throw new NotFoundException("The course "+courseCode);
+        if (!courseDataInterface.courseExists(course.getCode())){
+            throw new NotFoundException("The course "+ course.getCode());
         }
-
-        Course course = courseDataInterface.getCourse(courseCode);
-
 
         boolean success = course.modifyCourseContent(part, newPart);
         if (!success) {
@@ -113,11 +112,10 @@ public class CourseUseCaseInteractor {
 
     /**
      * Add an instructor to a given course. Returns true if successfully added, returns false otherwise.
-     * @param courseCode The course code of the course to be added to.
+     * @param course The course
      * @param instructor the instructor to be added to the course
      */
-    public void addInstructor(String courseCode, String instructor){
-        Course course = courseDataInterface.getCourse(courseCode);
+    public void addInstructor(Course course, String instructor){
         if (!course.addInstructor(instructor)){
             throw new DuplicationException("instructor");
         }
