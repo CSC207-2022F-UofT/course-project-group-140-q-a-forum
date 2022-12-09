@@ -76,7 +76,7 @@ various reports. We could use a simple factory pattern here to implement this in
 Every class in our project has only one responsibility. Every non-attributive data
 - Open and Closed Principle: 
 \
-Our project align with the pinciple, as the program is easily modifiable.
+Our project align with the principle, as the program is easily modifiable.
 - Liskov Substitution Principle: 
 \
 Our subclasses do not alter the behavior of the general inherited behavior. Therefore, we can safely substitute objects of the super classes by the subclasses.
