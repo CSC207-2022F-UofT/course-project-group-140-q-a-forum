@@ -12,7 +12,7 @@
 - Jiajie Zhu ([Christinjiajie](https://github.com/Christinjiajie))
 
 # Introduction
-
+YOU NEED TO DOWN LOAD THE JAVX.MAIL package.
 ## 0. Design patterns
 We used the following design patterns in our project.
 * Dependency injection
