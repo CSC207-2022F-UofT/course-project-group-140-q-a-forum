@@ -30,7 +30,6 @@ public class ReportUseCaseInteractor{
      */
     public void createReport(Map<String, Object> reportInfo) {
 
-        System.out.println(reportInfo.get("User"));
 
         if(reportInfo.get("Content").equals("") ||
                 reportInfo.get("Content").equals("")){
@@ -60,7 +59,6 @@ public class ReportUseCaseInteractor{
      */
 
     public void removeReport(Report reportToDelete) {
-        System.out.println(reportToDelete.getContent());
         reportDataInterface.removeReport(reportToDelete);
         
         try{

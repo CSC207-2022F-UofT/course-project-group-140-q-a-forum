@@ -31,7 +31,6 @@ public class PostUseCaseInteractorTest {
     @BeforeEach
     public void setUp() {
 
-        System.out.println("TEST");
 
         dataHandler = new RuntimeDataHandler<>();
         databaseDataHandler = new DatabaseDataHandler();
@@ -119,8 +118,6 @@ public class PostUseCaseInteractorTest {
     @Test
     // try to edit a post that is not in the database
     void editPostNotIn(){
-        System.out.println(courseController.getAllCourses().get(0));
-        System.out.println("see");
         HashMap<String, Object> postInfo = new HashMap<>();
 
         Course course = courseController.getAllCourses().get(0);
@@ -210,7 +207,6 @@ public class PostUseCaseInteractorTest {
         Post post = courseController.getAllPosts(course).get(0);
 
         postController.dislikePost(post, user);
-        System.out.println(post.getLikeNumber());
         assertEquals(-1, post.getPostedBy().getLikeNumber());
         assertEquals(-1, post.getLikeNumber());
     }
