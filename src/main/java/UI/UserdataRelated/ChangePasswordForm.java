@@ -3,17 +3,12 @@ package UI.UserdataRelated;
 import Presenter.GeneralPresenter;
 import Presenter.LoginPresenter;
 import Presenter.RegisterPresenter;
-import UI.MainOfShowingContents.CoursesForm;
-import base.main;
+import base.Main;
 import controllers.UserController;
 import entities.Course;
 import entities.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import static base.main.courseController;
-
 /**
  *
  * @author zhaoxiling
@@ -21,8 +16,7 @@ import static base.main.courseController;
 public class ChangePasswordForm extends javax.swing.JFrame {
     private final User user;
     private final User viewUser;
-    private final Course course;
-    private final UserController userController = main.userController;
+    private final UserController userController = Main.userController;
 
     /**
      * Creates new form ChangePasswordForm
@@ -31,7 +25,6 @@ public class ChangePasswordForm extends javax.swing.JFrame {
     public ChangePasswordForm(User user, User viewUser, Course course) {
         this.user = user;
         this.viewUser = viewUser;
-        this.course = course;
         initComponents();
     }
 
@@ -185,7 +178,7 @@ public class ChangePasswordForm extends javax.swing.JFrame {
 
     }
     private void goBackProfile(){
-        ProfilePage profilePage = new ProfilePage(this.user, this.viewUser, this.course);
+        ProfilePage profilePage = new ProfilePage(this.user, this.viewUser);
         profilePage.setVisible(true);
         this.setVisible(false);
 

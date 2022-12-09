@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class main {
+public class Main {
 
     static RuntimeDataHandler<Object> dataHandler = new RuntimeDataHandler<Object>();
     static DatabaseDataHandler databaseDataHandler = new DatabaseDataHandler();

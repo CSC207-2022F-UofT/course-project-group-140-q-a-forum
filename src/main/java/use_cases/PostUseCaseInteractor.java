@@ -60,8 +60,6 @@ public class PostUseCaseInteractor {
         String orgTitle = (String) post_info.get("orgTitle");
         Course course = (Course) post_info.get("course");
         if (checkTopicExist(course, orgTitle)){
-            System.out.println(course.lookupPostFromTopic(orgTitle).getTopic());
-            System.out.println("here!");
             course.lookupPostFromTopic(orgTitle).modifyPost((String) post_info.get("title"),
                     (String) post_info.get("text"));
         }

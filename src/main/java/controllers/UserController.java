@@ -118,10 +118,10 @@ public class UserController {
 
     /**
      * Change the Password of the User if the user knows their oldPassword and want to change it
-     * @param user          User wait to be changed the password
-     * @param oldPassword   String, the old password
-     * @param newPassword   String, new Password
-     * @param reenteredPassword String, make sure user doesn't type the wrong pass
+     * @param passwordInfo       User wait to be changed the password
+     * oldPassword   String, the old password
+     * newPassword   String, new Password
+     * reenteredPassword String, make sure user doesn't type the wrong pass
      * @return  int
      *          1: change password successfully
      *          -1: Some entries left as empty

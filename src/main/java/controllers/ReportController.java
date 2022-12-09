@@ -5,6 +5,7 @@ import entities.Course;
 import entities.Post;
 import entities.Report;
 import entities.User;
+import exceptions.EmptyEntryException;
 import exceptions.NotFoundException;
 import use_cases.ReportUseCaseInteractor;
 
@@ -21,7 +22,7 @@ public class ReportController {
 
     /**
      * Register a report.
-     * Returns the situation of registrati  on.
+     * Returns the situation of register  on.
      *
      * @param reportInformation This is a Map that contains necessary information
      *                          needed to register a report. The keys must be
@@ -48,7 +49,10 @@ public class ReportController {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
             return 0;
+        }catch ( EmptyEntryException e){
+            return -1;
         }
+
         return 1;
 
     }
@@ -59,8 +63,10 @@ public class ReportController {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
             return 0;
+        }catch (EmptyEntryException e){
+            return -1;
         }
-        return 1;
+       return 1;
 
     }
 

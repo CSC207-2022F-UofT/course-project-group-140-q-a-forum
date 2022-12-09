@@ -243,15 +243,7 @@ public class UserUseCaseInteractor {
         return message;
     }
 
-//    /**
-//     * Take in the email, and send a random verify number to the email.
-//     *
-//     * @param verifyNumber verify number user provided.
-//     * @return if the verify number is the same as verifyNum generated.
-//     */
-//    public boolean verifyEmail(String verifyNumber) {
-//        return verifyNumber.equals(verifyNum);
-//    }
+
 
 
     /**

@@ -8,15 +8,88 @@
 - Jiawei Yu ([JY3150](https://github.com/JY3150))
 - Gangquan Zhang ([jasongangquanzhang](https://github.com/jasongangquanzhang))
 - Xiling Zhao ([Teinble](https://github.com/Teinble))
-- Yuyang Zhao ([NerverSoGoodStart](https://github.com/NeverSoGoodStart))
 - Jiajie Zhu ([Christinjiajie](https://github.com/Christinjiajie))
+- Yuyang Zhao ([NerverSoGoodStart](https://github.com/NeverSoGoodStart)) (***Dropped***)
+
+## Delivery details
+This ia a [link](https://utoronto-my.sharepoint.com/:p:/g/personal/scott_cui_mail_utoronto_ca/EaNCM-AuGAxLndhFiNJ-MIEBdH_ihSm2f20GNEqeOrXTew?e=fpbJAZ)
+to our presentation file.
+### Package Organization
+Our code splitted the code into several compartments (packages), by clean architecture, being:
+- Package `entities` contains all entity level classes 
+- Package `database` contains all database-related classes 
+- Package `use_cases` contains all use case level classes 
+- Package `controllers` contains all controller classes 
+- Package `presenter` contains all presenter classes 
+- Package `UI` contains all UI level classes 
+- Package `Exception` contains all exceptions
+- Package `base` contains `Main` class
+
+### Testing details
+Our code has implemented the following test suites:
+```
+- CourseUsecaseInteractorTest
+- UserUsecaseInteractorTest
+- ReportUsecaseInteractorTest
+```
+
+### Use of GitHub Features
+#### Issues 
+- We used **issues** along with pull requests.
+- Issues are addressed during discuss, and are resolved after suscessful
+implementation.
+- We also used issues to assign tasks to team members.
+
+
+#### Pull Request
+- We use **pull request** to discuss and determine whether the code is in good manner and
+should be merged into Main.
+- We also used it to perform code review to ensure code quality.
+#### Auto Grading
+- We used auto-grading to run the tests to ensure that our code is bug-free.
+
+### Design patterns
+We used the following design patterns in our project.
+#### Observer pattern
+Add ActionListener and MouseListener to the UI. When the user clicks the button, our program would use the
+corresponding controller to call the functions related to that action.  For example, in `LoginForm`, when we click
+`Login`, it will call `UserController` `loginUser` method without calling any other methods besides what methods are 
+used in the `loginUser`.
+
+#### Dependency injection
+All of our posts are stored in some courses. But when we add a post to a course, we do not pass in relevant information 
+and create a new post is inside of the course; rather, we pass in a post directly. This is also exhibited in posts and
+comments. Additionally, in the database gateway, we need two `dataHandlers` to create a gateway, instead of creating 
+those `dataHandlers` inside this `gateway`, we create them in Main class and inject them into the gateway.
+
+#### Simple Factory Pattern *(not used)*
+Since we have many report types, it makes more sense if we could have a Report factory responsible for creating 
+various reports. We could use a simple factory pattern here to implement this in the future.
+
+### Clean Architecture
+- Our code follows a strict MVC Clean architecture, as mentioned in our slides.
+
+### SOLID
+
+- Single Responsibility Principle: 
+\
+Every class in our project has only one responsibility. Every non-attributive data
+- Open and Closed Principle: 
+\
+Our project align with the principle, as the program is easily modifiable.
+- Liskov Substitution Principle: 
+\
+Our subclasses do not alter the behavior of the general inherited behavior. Therefore, we can safely substitute objects of the super classes by the subclasses.
+- Interface Segregation Principle:
+\
+We have specific interface for each task. The interfaces are small, concise.
+- Dependency Inversion Principle: 
+\
+As long as the interface methods are implement correctly, our program runs without error.
 
 # Introduction
+YOU NEED TO DOWNLOAD THE JAVX.MAIL package. 
 
-## 0. Design patterns
-We used the following design patterns in our project.
-* Dependency injection
-* Observer
 
 ## 1. Entities
 
@@ -76,39 +149,17 @@ The posts has the following attributes.
 All of the information of the Report object, once created, are immutable.
 ## 2. Use cases
 ### 2.1 Course use case
-The course use case provides interface to create, modify, and delete course information. It has following functions:
+Course contains all relevant posts.
+### 2.2 User use case
+User can be registered with account name, password and email but not duplicate with other users.
 
-* `getAllCourses()`
-  * Fetch all courses previously registered. No input parameters is needed.
-* `addCourse()`
-  * Takes in the course information, attempts to create the course and
-    return `true` if succeeds. If the course already exists, it will throw
-  an `DuplicationException`; if the course information are invalid, it will throw
-  an EmptyEntryException.
-
-
-* `modifyCourse()`
-  * Takes in the course information, attempts to modify the course. 
-  * If the course does not exist, do nothing and throw an exception.
-
-
-* **deleteCourse()**
-  * Takes in the course information, attempts to delete the course and
-    return *true* if succeeds. If the course information does not match, 
-  do nothing and throw an exception
-
-### 2.2 Login use case
-// TODO
-
-### 2.3 User use case
-// TODO
-
-### 2.4 Post use case
-// TODO
-
-### 2.5 Report use case
-// TODO
-
+There is verified_email feature, which can auto sent a random code email to the user. The verified code serves as the 
+Random method to protect user accounts.
+### 2.3 Post use case
+Uses can post a Post under a course, and Post can contain the numbers of like and unlike, so that user can judge what 
+the best relevant post is. 
+### 2.4 Report use case
+Administrator can send a report to modify some issue in the software.
 ## 3. Database
 ### 3.1 Data storage
 We used three classes to handle the data, being `DatabaseDataHandler`, `RuntimeDataHandler`, and `DatabaseGateway`. \
@@ -150,163 +201,31 @@ We serialized the data as a single object called
 | `1`   | all users   | `ArrayList<User>`   | `User`              | `null`                                  |
 | `2`   | all courses | `ArrayList<Course>` | `Course`            | `null`                                  |
 | `3`   | all reports | `ArrayList<Report>` | `Report`            | `user`, `course`, `Arraylist<Comments>` |
-The a
-
 
 ## 4. Controllers
-## 5. Graphical User Interface (GUI)
 
-### Figure 1.1 Login InterFace
-![Picture of the Login Form](ScreenShot/LoginForm.png)
-
-This is the first interface showed when opening the project.
-The `User` should enter his/her **UserName** and his/her **Password**, then he/she needs to press `Login` to enter `Courses Page`.
-
-If this is the first time that the user is opening this application, the user should press `Register` to enter `RegisterPage`.
-
-### Figure 1.2 Register InterFace
-![Picture of the Register Form](ScreenShot/RegisterForm/RegisterAUser.png)
-
-After clicking **Register** and entering `RegisterPage`, user should fill
-the first four information into the TextField, including Username, Password, Re-EnterPassword and Email.
-
-After entering the Email, the user should click **Send Verification**, Then, it will check
-whether the entered email is valid or not. If valid, there will be text under **Send Verification** to
-tell the user that an email containing verification code has already been sent to the given email address.
-Then the user needs to enter the verification code and clicks `Register`.
-If the verification code matches with the sending code, the user account would be created and go back to  
-`LoginPage`. Otherwise, an error message would be raised.
-
-### Figure 2.1 Courses Page
-![Picture of selecting courses](ScreenShot/MainForm(showingContent)/CoursesForm.png)
-After successfully logging in, the user will enter the `Courses Page`.
-
-In the left panel of the page, it shows all the courses with their titles stored in the system.
-Click one of the courses, the description of the course will appear on the right.
-
-To see all posts in the chosen course, click **Show all Posts** to enter `Postpage`.
-
-If there are any problem of the courses, click **Report this Course** to enter `ReportPage`.
-
-
-In this page, User could click the top left button, **Register A new Course** and go to `MakeACourse Page`.
-
-
-
-
-### Figure 2.2 Post Page
-![Picture of a Post Form](ScreenShot/MainForm(showingContent)/PostForm.png)
-
-In the top left of `Post Page`, it shows this is the posts page of the chosen course.
-
-In the left panel of the page, it shows all the posts in the course.
-
-Click one of the post, the information of that post would appear on the right.
-
-To see all comments in the chosen course, click **Show all comments** to enter `CommentPage`.
-
-If the user want to have more discussion, he/she could click **Comment this Post** button to go to `CommentPage`.
-
-If there are any problems of the posts, click **Report this post** to enter `ReportPage`.
-
-
-In this page, user could click the top button, **Post a Post**, and go to `MakeAPost Page`.
-
-### Figure 2.3 Comments Page
-![Picture of a Comments Form](ScreenShot/MainForm(showingContent)/CommentsForm.png)
-
-In the top left of this page, it shows this is the comments page of the chosen post or comment.
-
-In the left panel of the page, it shows all the comments with their title in post/comment.
-
-Click one of the comment, the information of that comment would appear on the right.
-
-If the user wants to do more discussion, he/she could click **Comment this Post** button to go to `Make A Comment`.
-
-If there are any problems of the comment, click **Report this Comment** to enter `ReportPage`.
-
-
-In this page, User could click the top button, **Back to upper-level** and go to `MakeAPost Page`.
-
-
-### Figure 3.1 Register A Course
-![Picture of Making a Course form](ScreenShot/RegisterForm/MakeACourse.png)
-
-User enter all needed information and select one of "Fall", "Winter", "Summer"
-from the Semester ComboBox.
-
-After filling in all the correct information, the user could click the **Register the Course** to get enrolled in the Course
-and go back to `Course Page`.
-
-If the user wants to skip registering the course, he/she also could go back to `CoursePage` by clicking **Back to the Course Page**.
-
-
-### Figure 3.2 Make A Post
-![Picture of Making a Post form](ScreenShot/RegisterForm/MakeAPost.png)
-
-In this page, the user needs to fill in all needed information for a post.
-
-In the top label, it shows the course that this post will belong to.
-
-After filling in all the information, the user could click **Post the post**
-and go back to `Course Page`.
-
-The user also could choose to post anonymously or not by selecting the comboButtons.
-
-If the user wants to skip making the post, he/she also could go back to `PostPage` by clicking **Back to the Course Page**.
-
-
-### Figure 3.3 Make A Comment
-![Picture of making a comment form](ScreenShot/RegisterForm/MakeAComment.png)
-
-In this page, the user needs to fill in all needed information for a comment.
-
-In the top label, it shows it is under which post/comment.
-
-After filling in all the information, the user could click **Make the comment** to make a comment
-and go back to PostPage/CommentPage.
-
-The user also could choose to post anonymously or not by selecting the comboButtons.
-
-
-If the user wants to skip making the comment, he/she also could go back to `PostPage` by clicking **Back to the Course Page**.
-
-
-
-### Figure 3.4 Make A Report
-![Picture of making a report Form](ScreenShot/RegisterForm/MakeAReport.png)
-
-In this page, the user needs to enter all needed information for a report.
-
-In the top label, it shows it is under which course/post/comment.
-
-After filling in all information, the user could click **Report** to send the report
-and go back to `CoursePage`.
-
-The user also could choose to post anonymously or not by selecting the comboButtons.
-
-
-If the user wants to skip making the report, he/she also could go back to `CoursePage` by clicking **Back to the Course Page**.
-
-
-### 4.1 Profile Page
-![Picture of a profile page](ScreenShot/ProfilePage.png)
-
-This page shows all profile information related to the user.
-
-Moreover, it supports editing the username by clicking
-**Edit**.
-
-Also, it could change the password by clicking **Change Password**. Then it will go to `Change Password`.
-
-User can go back to the main page by clicking button **Back to Main Page**.
-
-
-### Figure 4.2 Change Password
-![Picture of change a password form](ScreenShot/ChangePassWordForm.png)
-
-If the user doesn't feel good about his/her password, he/she could just type his/her **OldPassword**
-and enter twice of his/her **NewPassword**. After clicking **Change Password**, if all
-passwords are valid, the password would be updated. Then it will return to `Profile Page`.
-
-If the user doesn't want to change, he/she also could go back by clicking **Back to Profile Page**.
+### 4.1 CourseController
+
+CourseController can get the judgement from Course UseCase and return different integers to UI.
+For example, there is three states in `removeInstructor`. The method will call course UseCase to judge the exception. 
+- If return -1, it means not found the instructor in the courss.
+- If return 1, it means successfully remove the instructor.
+
+### 4.2 PostController
+PostController can get the judgement from Post UseCase and return different integers to UI.
+For example, there is three states in `editPost`. The method will call Post UseCase to judge the exception. 
+- If return -1, it means not found the Post in the course
+- If return 1, it means successfully edit the instructor.
+
+### 4.3 ReportController
+ReportController can get the judgement from Report UseCase and return different integers to UI.
+
+### 4.4 UserController
+UserController can get the judgement from User UseCase and return different integers to UI.
+For example, there is three states in `registerUser`. The method will call User UseCase to judge the exception. If
+return -6, which means the message contains email, otherwise return -1.
+- if return -2, which means password is not correct.
+- if return -3, which means is the error email format.
+- if return -4, which means Wrong re-entered password !
+- if return -5, which means wrong verification number.
+- if return 1, which means successfully register.

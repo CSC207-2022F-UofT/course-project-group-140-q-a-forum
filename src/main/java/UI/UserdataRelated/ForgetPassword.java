@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package UI.UserdataRelated;
 
 import Presenter.*;
-import base.main;
+import base.Main;
 import controllers.UserController;
 import entities.User;
 
@@ -16,7 +13,7 @@ import java.util.HashMap;
  * @author zhaoxiling
  */
 public class ForgetPassword extends javax.swing.JFrame {
-    private final UserController userController = main.userController;
+    private final UserController userController = Main.userController;
     private User user;
     private String correctVerification;
 
@@ -35,31 +32,32 @@ public class ForgetPassword extends javax.swing.JFrame {
 
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel4 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
         showingSeding = new javax.swing.JLabel();
-        showVeriLabel = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        javax.swing.JLabel showVeriLabel = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel8 = new javax.swing.JLabel();
         usernameText = new javax.swing.JTextField();
-        checkUserButton = new javax.swing.JButton();
+        javax.swing.JButton checkUserButton = new javax.swing.JButton();
         emailPanel = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        checkVeriButton = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel10 = new javax.swing.JLabel();
+        javax.swing.JButton checkVeriButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel9 = new javax.swing.JLabel();
         verificationText = new javax.swing.JTextField();
-        sendButton = new javax.swing.JButton();
+        javax.swing.JButton sendButton = new javax.swing.JButton();
         emailLabel = new javax.swing.JLabel();
         passwordPanel = new javax.swing.JPanel();
         repassText = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        changeButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
+        javax.swing.JButton changeButton = new javax.swing.JButton();
         passwordText = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        backButton = new javax.swing.JButton();
+        javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
+        // Variables declaration - do not modify
+        javax.swing.JButton backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,29 +66,17 @@ public class ForgetPassword extends javax.swing.JFrame {
         jLabel8.setText("Username:");
 
         checkUserButton.setText("Check");
-        checkUserButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkUserButtonActionPerformed(evt);
-            }
-        });
+        checkUserButton.addActionListener(this::checkUserButtonActionPerformed);
 
         jLabel10.setText("Verification:");
 
         checkVeriButton.setText("Check Verification");
-        checkVeriButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkVeriButtonActionPerformed(evt);
-            }
-        });
+        checkVeriButton.addActionListener(this::checkVeriButtonActionPerformed);
 
         jLabel9.setText("Email:");
 
         sendButton.setText("Send Verification");
-        sendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendButtonActionPerformed(evt);
-            }
-        });
+        sendButton.addActionListener(this::sendButtonActionPerformed);
 
         emailLabel.setText("Showing Email");
 
@@ -137,11 +123,7 @@ public class ForgetPassword extends javax.swing.JFrame {
         jLabel6.setText("Enter new Password:");
 
         changeButton.setText("Change Password");
-        changeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeButtonActionPerformed(evt);
-            }
-        });
+        changeButton.addActionListener(this::changeButtonActionPerformed);
 
         jLabel7.setText("Enter new Password:");
 
@@ -256,11 +238,7 @@ public class ForgetPassword extends javax.swing.JFrame {
         );
 
         backButton.setText("Back to Login Page");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        backButton.addActionListener(this::backButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -294,12 +272,8 @@ public class ForgetPassword extends javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int resultOrCode = userController.sendEmail(this.user.getEmail());
         switch (resultOrCode){
-            case -1 ->{
-                RegisterPresenter.showNonValidEmailError();
-            }
-            case -2 ->{
-                RegisterPresenter.showVerificationError();
-            }
+            case -1 -> RegisterPresenter.showNonValidEmailError();
+            case -2 -> RegisterPresenter.showVerificationError();
             default -> {
                 this.correctVerification = String.valueOf(resultOrCode);
                 showingSeding.setText("Verification Send");
@@ -319,17 +293,12 @@ public class ForgetPassword extends javax.swing.JFrame {
 
         int result = userController.changePassword(this.user, passwordInfo);
         switch (result){
-            case -1->{
-                GeneralPresenter.showEmptyEntryError();
-            }
-            case -2 ->{
-                RegisterPresenter.showWrongPasswordError();
-            }
-            case -4 ->{
-                RegisterPresenter.showWrongRePassError();
-            }
-            case 1 ->{
+            case -1-> GeneralPresenter.showEmptyEntryError();
+            case -2 -> RegisterPresenter.showWrongPasswordError();
+            case -4 -> RegisterPresenter.showWrongRePassError();
+            case 1 -> {
                 GeneralPresenter.showSuccessMessage("Reset Password");
+                new LoginForm().setVisible(true);
             }
         }
 
@@ -347,6 +316,7 @@ public class ForgetPassword extends javax.swing.JFrame {
            RegisterPresenter.showVerificationError();
         }else{
             passwordPanel.setVisible(true);
+            showingSeding.setVisible(false);
         }
     }
 
@@ -363,64 +333,12 @@ public class ForgetPassword extends javax.swing.JFrame {
 
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ForgetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ForgetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ForgetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ForgetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ForgetPassword().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify
-    private javax.swing.JButton backButton;
-    private javax.swing.JButton changeButton;
-    private javax.swing.JButton checkUserButton;
-    private javax.swing.JButton checkVeriButton;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JPanel emailPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel passwordPanel;
     private javax.swing.JTextField passwordText;
     private javax.swing.JTextField repassText;
-    private javax.swing.JButton sendButton;
-    private javax.swing.JLabel showVeriLabel;
     private javax.swing.JLabel showingSeding;
     private javax.swing.JTextField usernameText;
     private javax.swing.JTextField verificationText;

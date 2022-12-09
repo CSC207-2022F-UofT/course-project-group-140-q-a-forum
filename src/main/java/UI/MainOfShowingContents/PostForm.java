@@ -5,7 +5,7 @@ import UI.PostingStuff.MakeAComment;
 import UI.PostingStuff.MakeAPost;
 import UI.PostingStuff.MakeAReport;
 import UI.UserdataRelated.ProfilePage;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import controllers.PostController;
 import entities.Course;
@@ -23,8 +23,8 @@ public class PostForm extends javax.swing.JFrame {
     private final Course course;
 
     private Post viewPost = null;
-    private final CourseController courseController = main.courseController;
-    private final PostController postController = main.postController;
+    private final CourseController courseController = Main.courseController;
+    private final PostController postController = Main.postController;
     /**
      * Creates new form PostForm
      */
@@ -330,7 +330,7 @@ public class PostForm extends javax.swing.JFrame {
     }
 
     private void postButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());
+        ArrayList<Post> posts = courseController.getAllPosts(this.course);
         MakeAPost makeAPost = new MakeAPost(user, course, posts);
         makeAPost.setVisible(true);
         this.setVisible(false);
@@ -350,28 +350,16 @@ public class PostForm extends javax.swing.JFrame {
             GeneralPresenter.showNotSelectError("Post");
         }
         else {
-            ArrayList<Post> posts = courseController.getAllPosts(this.course.getCode());
+            ArrayList<Post> posts = courseController.getAllPosts(this.course);
             Post selectPost = posts.get(chosenPostIndex);
             this.viewPost = selectPost;
             changePanel(selectPost);
         }
     }
 
-    private void changePanel(Post post){
-        nameLabel.setText(post.getTopic());
-        authorLabel.setText(post.getPostedBy().getUsername());
-        //descriptionLabel.setText("fajowefpoajwpo");
-        descriptionLabel.setText("<html><p align=\"center\">"+post.getTexts()+ "</p></html>");
-        String numberComments = String.valueOf(viewPost.getComments().size());
-        commentNumberLabel.setText(numberComments);
-        likesLabel.setText(String.valueOf(post.getLikeNumber()));
-        reputationLabel.setText(post.getPostedBy().getReputation());
-        buttonGroup1.clearSelection();
-    }
-
     private void checkProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(this.viewPost==null){
-            GeneralPresenter.showNotFoundError("Post");
+            GeneralPresenter.showNotSelectError("Post");
         }else {
             ProfilePage profilePage = new ProfilePage(this.user, viewPost.getPostedBy(), this.course, this.viewPost);
             profilePage.setVisible(true);
@@ -381,7 +369,7 @@ public class PostForm extends javax.swing.JFrame {
 
     private void likeButtonActionPerformed(java.awt.event.ActionEvent evt) {
        if(this.viewPost==null){
-           GeneralPresenter.showNotFoundError("Post");
+           GeneralPresenter.showNotSelectError("Post");
        }else{
            int result = postController.likePost(viewPost, this.user);
            if(result == -1){
@@ -404,6 +392,18 @@ public class PostForm extends javax.swing.JFrame {
                 likesLabel.setText(String.valueOf(viewPost.getLikeNumber()));
             }
         }
+    }
+
+    private void changePanel(Post post){
+        nameLabel.setText(post.getTopic());
+        authorLabel.setText(post.getPostedBy().getUsername());
+        //descriptionLabel.setText("fajowefpoajwpo");
+        descriptionLabel.setText("<html>"+post.getTexts()+ "</html>");
+        String numberComments = String.valueOf(viewPost.getComments().size());
+        commentNumberLabel.setText(numberComments);
+        likesLabel.setText(String.valueOf(post.getLikeNumber()));
+        reputationLabel.setText(post.getPostedBy().getReputation());
+        buttonGroup1.clearSelection();
     }
 
     private javax.swing.JLabel authorLabel;

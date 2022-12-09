@@ -6,7 +6,7 @@ package UI.PostingStuff;
 
 import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.PostForm;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import controllers.PostController;
 import entities.Comment;
@@ -14,7 +14,7 @@ import entities.Course;
 import entities.Post;
 import entities.User;
 
-import static base.main.userController;
+import static base.Main.userController;
 
 /**
  *
@@ -26,8 +26,8 @@ public class MakeAComment extends javax.swing.JFrame {
     private final Comment comment;
     private final String commentType;
     private final Post post;
-    private final CourseController courseController = main.courseController;
-    private final PostController postController = main.postController;
+    private final CourseController courseController = Main.courseController;
+    private final PostController postController = Main.postController;
 
     /**
      * Creates new form MakeAComment

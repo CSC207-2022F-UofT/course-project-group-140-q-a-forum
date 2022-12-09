@@ -84,33 +84,23 @@ public class CourseUseCaseInteractor {
 
     /**
      * This method modifies an existing course in the database.
-     * @param courseCode Course Code of the course to be modified.
-     * @param part Which attribute of this course needs to be changed.
-     * @param newPart What it needs to be changed to.
+     * @param course The course
+     * @param info Which attribute of this course needs to be changed and what it needed to
+     *             be changed two, marked by "where" and "what.
      */
-    public void modifyCourseContent(String courseCode, String part, String newPart){
+    public void modifyCourseContent(Course course, HashMap<String, String> info){
+        String part = info.get("where");
+        String newPart = info.get("what");
         // if the given course does not exist in the database, return false.
-        if (!courseDataInterface.courseExists(courseCode)){
-            throw new NotFoundException("The course "+courseCode);
+        if (!courseDataInterface.courseExists(course.getCode())){
+            throw new NotFoundException("The course "+ course.getCode());
         }
 
-        Course course = courseDataInterface.getCourse(courseCode);
-        String[] attributes = {"name", "courseCode", "description", "semester"};
-
-        boolean found = false;
-        for (String attribute: attributes){
-            if (attribute.equals(part)) {
-                found = true;
-                break;
-            }
+        boolean success = course.modifyCourseContent(part, newPart);
+        if (!success) {
+            throw new WrongInfoException(part);
         }
 
-        if (found) {
-            boolean success = course.modifyCourseContent(part, newPart);
-            if (!success) {
-                throw new WrongInfoException(part);
-            }
-        }
 
         try{
             courseDataInterface.saveToFile();
@@ -122,11 +112,10 @@ public class CourseUseCaseInteractor {
 
     /**
      * Add an instructor to a given course. Returns true if successfully added, returns false otherwise.
-     * @param courseCode The course code of theh course to be added to.
+     * @param course The course
      * @param instructor the instructor to be added to the course
      */
-    public void addInstructor(String courseCode, String instructor){
-        Course course = courseDataInterface.getCourse(courseCode);
+    public void addInstructor(Course course, String instructor){
         if (!course.addInstructor(instructor)){
             throw new DuplicationException("instructor");
         }
@@ -140,11 +129,11 @@ public class CourseUseCaseInteractor {
 
     /**
      * Remove an instructor from a given course. Returns true if successfully removed, returns false otherwise.
-     * @param course The coursee to  remove.
+     * @param course The course to  remove.
      * @param instructor the instructor to be added to the course
      */
     public void removeInstructor(Course course, String instructor){
-        if (course.removeInstructor(instructor)){
+        if (!course.removeInstructor(instructor)){
             throw new NotFoundException("Instructor in " + course.getCode());
         }
 
@@ -187,7 +176,7 @@ public class CourseUseCaseInteractor {
      */
     public ArrayList<String> getAllCoursesName(){
         ArrayList<Course> courses = courseDataInterface.getAllCourses();
-        ArrayList<String> coursesName = new ArrayList<String>();
+        ArrayList<String> coursesName = new ArrayList<>();
         for (Course course : courses) {
             coursesName.add(course.getName());
         }
@@ -196,14 +185,10 @@ public class CourseUseCaseInteractor {
 
     /**
      * Get all posts of the course with the given course code.
-     * @param courseCode The course code of the course.
+     * @param course The course code
      * @return An arraylist of posts that are under this course.
      */
-    public ArrayList<Post> getAllPosts(String courseCode){
-        if (!courseDataInterface.courseExists(courseCode)){
-            throw new NotFoundException("The course "+ courseCode);
-        }
-        Course course = courseDataInterface.getCourse(courseCode);
+    public ArrayList<Post> getAllPosts(Course course){
         return course.getPosts();
     }
 
@@ -218,7 +203,7 @@ public class CourseUseCaseInteractor {
         }
 
         Post[] posts = course.getPosts().toArray(new Post[0]);
-        ArrayList<String> postName = new ArrayList<String>();
+        ArrayList<String> postName = new ArrayList<>();
         for(Post post: posts){
             postName.add(post.getTopic());
         }

@@ -35,7 +35,7 @@ class UserUseCaseInteractorTest {
     @BeforeEach
     public void setUp() {
 
-        dataHandler = new RuntimeDataHandler<Object>();
+        dataHandler = new RuntimeDataHandler<>();
         databaseDataHandler = new DatabaseDataHandler();
         gateway = new DatabaseGateway(dataHandler, databaseDataHandler);
         userInteractor = new UserUseCaseInteractor(gateway, "DebugCode");

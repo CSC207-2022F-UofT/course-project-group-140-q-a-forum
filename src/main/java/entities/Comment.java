@@ -2,12 +2,17 @@ package entities;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Comment implements Serializable {
     private final User postedBy;
     private final String texts;
+
+    public Comment(){
+        postedBy = null;
+        texts = null;
+    }
+
     /**
      * Create a comment to a Post, with only text.
      * The comment can be commented (nest) as well

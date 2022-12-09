@@ -6,7 +6,7 @@ package UI.PostingStuff;
 
 import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.CoursesForm;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import entities.Course;
 import entities.User;
@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class MakeACourse extends javax.swing.JFrame {
     private final User user;
-    private final CourseController courseController =main.courseController;
+    private final CourseController courseController =Main.courseController;
     /**
      * Creates new form RegACourse
      */
@@ -171,7 +171,6 @@ public class MakeACourse extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         HashMap<String,String> CourseInfo = new HashMap<>();
         CourseInfo.put("Name", topicText.getText());
         CourseInfo.put("Course Code", codeText.getText());
@@ -182,11 +181,7 @@ public class MakeACourse extends javax.swing.JFrame {
         int result = courseController.registerCourse(CourseInfo);
 
         switch (result){
-            case -1 ->{
-                GeneralPresenter.showDuplicationError("Course");
-                topicText.setText("");
-                topicText.setFocusable(true);
-            }
+            case -1 -> GeneralPresenter.showDuplicationError("Course");
             case -2 -> GeneralPresenter.showEmptyEntryError();
             case 1 ->{
                 GeneralPresenter.showSuccessMessage(topicText.getText());
@@ -201,7 +196,6 @@ public class MakeACourse extends javax.swing.JFrame {
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         ArrayList<Course> courses = courseController.getAllCourses();
         CoursesForm coursesForm = new CoursesForm(this.user, courses);
         coursesForm.setVisible(true);

@@ -5,9 +5,7 @@
 package UI.MainOfShowingContents;
 
 import Presenter.GeneralPresenter;
-import UI.PostingStuff.MakeAComment;
-import UI.PostingStuff.MakeAReport;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import controllers.PostController;
 import entities.Comment;
@@ -25,8 +23,8 @@ public class CommentsForm extends javax.swing.JFrame {
 
     private final Post post;
     private Comment viewComment = null;
-    private final CourseController courseController = main.courseController;
-    private final PostController postController = main.postController;
+    private final CourseController courseController = Main.courseController;
+    private final PostController postController = Main.postController;
 
     /**
      * Creates new form CommentsForm
@@ -213,7 +211,7 @@ public class CommentsForm extends javax.swing.JFrame {
 
     private void changePanel(Comment comment){
        showingUserLabel16.setText(comment.getPostedBy().getUsername());
-       showContentLabel16.setText(comment.getTexts());
+       showContentLabel16.setText("<html>"+comment.getTexts() + "</html>");
 
     }
 
