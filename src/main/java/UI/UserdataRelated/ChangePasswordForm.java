@@ -3,7 +3,7 @@ package UI.UserdataRelated;
 import Presenter.GeneralPresenter;
 import Presenter.LoginPresenter;
 import Presenter.RegisterPresenter;
-import base.main;
+import base.Main;
 import controllers.UserController;
 import entities.Course;
 import entities.User;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class ChangePasswordForm extends javax.swing.JFrame {
     private final User user;
     private final User viewUser;
-    private final UserController userController = main.userController;
+    private final UserController userController = Main.userController;
 
     /**
      * Creates new form ChangePasswordForm

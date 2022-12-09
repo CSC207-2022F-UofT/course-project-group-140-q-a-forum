@@ -38,7 +38,7 @@ As a part of the project planning, you are required to record all features formu
 
 
 ## Feature Development
-When you work on a feature, you are always required to create a **branch** for the feature and **merge** the branch back to the main branch with **pull requests** when the feature is completed. Note: the below should remind you of the "workflow" we covered in the first lab this term. Please review the details of that document in addition to the below, which provides additional details about how the process works on GitHub. 
+When you work on a feature, you are always required to create a **branch** for the feature and **merge** the branch back to the Main branch with **pull requests** when the feature is completed. Note: the below should remind you of the "workflow" we covered in the first lab this term. Please review the details of that document in addition to the below, which provides additional details about how the process works on GitHub. 
 
 1. To create a new branch, navigate to the issue you are assigned to, and click **Create branch** on the right side bar.
 
@@ -55,7 +55,7 @@ When you work on a feature, you are always required to create a **branch** for t
 
 
 ## Merge Feature Branch to Main Branch
-When you finish working on a feature, you are required to merge the feature branch back to the main branch with a **pull request**.
+When you finish working on a feature, you are required to merge the feature branch back to the Main branch with a **pull request**.
 
 1. After you make changes to the code and commit them to the feature branch, you will see a **Compare & pull request** button on the repository page. Click it to create a pull request.
 
@@ -65,7 +65,7 @@ When you finish working on a feature, you are required to merge the feature bran
 
 2. Give a meaningful title and description for the pull request, remember please make the name consistent. 
    
-   2.1 First make sure that you are merging from the feature branch to the main branch (see blue box).
+   2.1 First make sure that you are merging from the feature branch to the Main branch (see blue box).
    
    2.2 Make sure that you set the correct fields as issues (see red box).
 

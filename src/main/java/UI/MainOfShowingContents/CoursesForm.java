@@ -4,7 +4,7 @@ import Presenter.GeneralPresenter;
 import UI.PostingStuff.MakeACourse;
 import UI.PostingStuff.MakeAReport;
 import UI.UserdataRelated.ProfilePage;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import entities.Course;
 import entities.User;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class CoursesForm extends javax.swing.JFrame {
     private final User user;
     private final ArrayList<Course> courses ;
-    private final CourseController courseController = main.courseController;
+    private final CourseController courseController = Main.courseController;
 
 
     private Course viewCourse;

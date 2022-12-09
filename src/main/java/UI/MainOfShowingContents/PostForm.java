@@ -5,7 +5,7 @@ import UI.PostingStuff.MakeAComment;
 import UI.PostingStuff.MakeAPost;
 import UI.PostingStuff.MakeAReport;
 import UI.UserdataRelated.ProfilePage;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import controllers.PostController;
 import entities.Course;
@@ -23,8 +23,8 @@ public class PostForm extends javax.swing.JFrame {
     private final Course course;
 
     private Post viewPost = null;
-    private final CourseController courseController = main.courseController;
-    private final PostController postController = main.postController;
+    private final CourseController courseController = Main.courseController;
+    private final PostController postController = Main.postController;
     /**
      * Creates new form PostForm
      */

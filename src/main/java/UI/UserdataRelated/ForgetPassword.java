@@ -2,7 +2,7 @@
 package UI.UserdataRelated;
 
 import Presenter.*;
-import base.main;
+import base.Main;
 import controllers.UserController;
 import entities.User;
 
@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @author zhaoxiling
  */
 public class ForgetPassword extends javax.swing.JFrame {
-    private final UserController userController = main.userController;
+    private final UserController userController = Main.userController;
     private User user;
     private String correctVerification;
 

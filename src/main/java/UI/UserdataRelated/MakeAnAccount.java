@@ -5,7 +5,7 @@
 package UI.UserdataRelated;
 import Presenter.GeneralPresenter;
 import Presenter.RegisterPresenter;
-import base.main;
+import base.Main;
 import controllers.UserController;
 
 import javax.swing.*;
@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @author zhaoxiling
  */
 public class MakeAnAccount extends  javax.swing.JFrame {
-    private final UserController userController = main.userController;
+    private final UserController userController = Main.userController;
     private String correctVerification;
     /**
      * Creates new form RegisterForm

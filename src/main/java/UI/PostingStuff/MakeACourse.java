@@ -6,7 +6,7 @@ package UI.PostingStuff;
 
 import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.CoursesForm;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import entities.Course;
 import entities.User;
@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class MakeACourse extends javax.swing.JFrame {
     private final User user;
-    private final CourseController courseController =main.courseController;
+    private final CourseController courseController =Main.courseController;
     /**
      * Creates new form RegACourse
      */

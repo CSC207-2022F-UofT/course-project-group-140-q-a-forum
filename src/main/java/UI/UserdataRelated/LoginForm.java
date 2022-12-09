@@ -1,6 +1,6 @@
 package UI.UserdataRelated;
 import UI.MainOfShowingContents.CoursesForm;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import controllers.UserController;
 
@@ -20,8 +20,8 @@ public class LoginForm extends javax.swing.JFrame {
      * Creates new form LoginForm
      */
 
-    private final UserController userController =  main.userController;
-    private final CourseController courseController = main.courseController;
+    private final UserController userController =  Main.userController;
+    private final CourseController courseController = Main.courseController;
     public LoginForm() {
         initComponents();
     }

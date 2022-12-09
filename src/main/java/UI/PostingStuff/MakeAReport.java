@@ -8,7 +8,7 @@ import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.CoursesForm;
 import UI.MainOfShowingContents.PostForm;
 import UI.UserdataRelated.ProfilePage;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import controllers.ReportController;
 import entities.Course;
@@ -29,8 +29,8 @@ public class MakeAReport extends javax.swing.JFrame {
     private final Course course;
     private final Post post;
     private final String reportType;
-    private final CourseController courseController = main.courseController;
-    private final ReportController reportController = main.reportController;
+    private final CourseController courseController = Main.courseController;
+    private final ReportController reportController = Main.reportController;
 
     /**
      *

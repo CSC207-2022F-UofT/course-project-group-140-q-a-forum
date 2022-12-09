@@ -103,7 +103,7 @@ public class ReportForm extends javax.swing.JFrame {
 
         jList2.setBorder(javax.swing.BorderFactory.createTitledBorder("List of All Reports"));
         jList2.setModel(new javax.swing.AbstractListModel() {
-            final int size = main.reportController.getAllReport().size();
+            final int size = Main.reportController.getAllReport().size();
             final String[] strings = getReportArray(size);
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -149,7 +149,7 @@ public class ReportForm extends javax.swing.JFrame {
        if(this.viewReport==null){
            GeneralPresenter.showNotSelectError("Report");
        }else{
-        main.reportController.removeAReport(viewReport);
+        Main.reportController.removeAReport(viewReport);
         GeneralPresenter.showSuccessMessage("Report resolution");
         ReportForm reportForm = new ReportForm(this.user, this.viewUser, this.course);
         reportForm.setVisible(true);
@@ -163,7 +163,7 @@ public class ReportForm extends javax.swing.JFrame {
             GeneralPresenter.showNotSelectError("Report");
         }
         else {
-            ArrayList<Report> reports = main.reportController.getAllReport();
+            ArrayList<Report> reports = Main.reportController.getAllReport();
             Report selectReport = reports.get(chosenReportIndex);
             this.viewReport = selectReport;
             changePanel(selectReport);

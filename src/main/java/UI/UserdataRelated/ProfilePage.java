@@ -5,7 +5,7 @@ import UI.MainOfShowingContents.CoursesForm;
 import UI.MainOfShowingContents.PostForm;
 import UI.MainOfShowingContents.ReportForm;
 import UI.PostingStuff.MakeAReport;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import controllers.UserController;
 import entities.Course;
@@ -26,8 +26,8 @@ public class ProfilePage extends javax.swing.JFrame {
     private final User viewUser;
     private final Course course;
     private final Post post;
-    private final CourseController courseController =main.courseController;
-    private final UserController userController = main.userController;
+    private final CourseController courseController =Main.courseController;
+    private final UserController userController = Main.userController;
 
     /**
      * Creates new form ProfilePage

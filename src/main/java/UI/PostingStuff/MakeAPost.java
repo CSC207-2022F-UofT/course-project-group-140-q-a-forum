@@ -2,7 +2,7 @@ package UI.PostingStuff;
 
 import Presenter.GeneralPresenter;
 import UI.MainOfShowingContents.PostForm;
-import base.main;
+import base.Main;
 import controllers.CourseController;
 import controllers.PostController;
 
@@ -22,8 +22,8 @@ public class MakeAPost extends javax.swing.JFrame {
     private final User user;
     private final Course course;
     private final ArrayList<Post> posts;
-    private final UserController userController = main.userController;
-    private final PostController postControllers = main.postController;
+    private final UserController userController = Main.userController;
+    private final PostController postControllers = Main.postController;
 
 
     /**
