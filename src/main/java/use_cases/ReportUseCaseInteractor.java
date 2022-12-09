@@ -30,11 +30,18 @@ public class ReportUseCaseInteractor{
      */
     public void createReport(Map<String, Object> reportInfo) {
 
-        if (!userDataInterface.userExists(((User) reportInfo.get("Username")).getUsername())) {
-            throw new NotFoundException("Username");
+        System.out.println(reportInfo.get("User"));
+
+        if(reportInfo.get("Content").equals("") ||
+                reportInfo.get("Content").equals("")){
+            throw new EmptyEntryException("report");
         }
 
-        reportDataInterface.addReport(new Report((User) reportInfo.get("Username"),
+        if (!userDataInterface.userExists(((User) reportInfo.get("User")).getUsername())) {
+            throw new NotFoundException("User");
+        }
+
+        reportDataInterface.addReport(new Report((User) reportInfo.get("User"),
                 (String) reportInfo.get("Type"), (String) reportInfo.get("Content"),
                 (String) reportInfo.get("attachedTo")));
 

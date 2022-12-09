@@ -235,7 +235,6 @@ public class CoursesForm extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         if (this.viewCourse == null){
             GeneralPresenter.showNotSelectError("Course");
         } else {
@@ -246,7 +245,6 @@ public class CoursesForm extends javax.swing.JFrame {
     }
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         MakeACourse makeACourse = new MakeACourse(this.user);
         makeACourse.setVisible(true);
         this.setVisible(false);
@@ -285,7 +283,7 @@ public class CoursesForm extends javax.swing.JFrame {
         }
     }
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        ProfilePage profilePage = new ProfilePage(this.user, this.user, this.viewCourse);
+        ProfilePage profilePage = new ProfilePage(this.user, this.user);
         profilePage.setVisible(true);
         this.setVisible(false);
     }

@@ -32,13 +32,14 @@ public class ProfilePage extends javax.swing.JFrame {
     /**
      * Creates new form ProfilePage
      */
-    public ProfilePage(User user, User viewUser, Course course) {
+    public ProfilePage(User user, User viewUser) {
         this.user = user;
         this.viewUser = viewUser;
-        this.course = course;
         this.post = null;
+        this.course = null;
         initComponents();
     }
+
     public ProfilePage(User user, User viewUser, Course course, Post post){
         this.user = user;
         this.viewUser = viewUser;
@@ -69,7 +70,7 @@ public class ProfilePage extends javax.swing.JFrame {
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         totalLikeLabel = new javax.swing.JLabel();
         showReportPanel = new javax.swing.JPanel();
-        showReportButton = new javax.swing.JButton();
+        JButton showReportButton = new JButton();
         logoutButton = new javax.swing.JButton();
 
         jFormattedTextField1.setText("jFormattedTextField1");
@@ -303,7 +304,7 @@ public class ProfilePage extends javax.swing.JFrame {
         }else {
             GeneralPresenter.showSuccessMessage("reset username");
             setChangeUserVisible(false);
-            ProfilePage profilePage = new ProfilePage(this.user, this.viewUser, this.course);
+            ProfilePage profilePage = new ProfilePage(this.user, this.viewUser);
             profilePage.setVisible(true);
             this.setVisible(false);
         }
@@ -364,7 +365,6 @@ public class ProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel passLabel;
     private javax.swing.JLabel reputationLabel;
-    private javax.swing.JButton showReportButton;
     private javax.swing.JPanel showReportPanel;
     private javax.swing.JLabel totalLikeLabel;
     private javax.swing.JLabel userLabel;

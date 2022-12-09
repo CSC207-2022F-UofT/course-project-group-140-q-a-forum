@@ -357,21 +357,9 @@ public class PostForm extends javax.swing.JFrame {
         }
     }
 
-    private void changePanel(Post post){
-        nameLabel.setText(post.getTopic());
-        authorLabel.setText(post.getPostedBy().getUsername());
-        //descriptionLabel.setText("fajowefpoajwpo");
-        descriptionLabel.setText("<html>"+post.getTexts()+ "</html>");
-        String numberComments = String.valueOf(viewPost.getComments().size());
-        commentNumberLabel.setText(numberComments);
-        likesLabel.setText(String.valueOf(post.getLikeNumber()));
-        reputationLabel.setText(post.getPostedBy().getReputation());
-        buttonGroup1.clearSelection();
-    }
-
     private void checkProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(this.viewPost==null){
-            GeneralPresenter.showNotFoundError("Post");
+            GeneralPresenter.showNotSelectError("Post");
         }else {
             ProfilePage profilePage = new ProfilePage(this.user, viewPost.getPostedBy(), this.course, this.viewPost);
             profilePage.setVisible(true);
@@ -381,7 +369,7 @@ public class PostForm extends javax.swing.JFrame {
 
     private void likeButtonActionPerformed(java.awt.event.ActionEvent evt) {
        if(this.viewPost==null){
-           GeneralPresenter.showNotFoundError("Post");
+           GeneralPresenter.showNotSelectError("Post");
        }else{
            int result = postController.likePost(viewPost, this.user);
            if(result == -1){
@@ -404,6 +392,18 @@ public class PostForm extends javax.swing.JFrame {
                 likesLabel.setText(String.valueOf(viewPost.getLikeNumber()));
             }
         }
+    }
+
+    private void changePanel(Post post){
+        nameLabel.setText(post.getTopic());
+        authorLabel.setText(post.getPostedBy().getUsername());
+        //descriptionLabel.setText("fajowefpoajwpo");
+        descriptionLabel.setText("<html>"+post.getTexts()+ "</html>");
+        String numberComments = String.valueOf(viewPost.getComments().size());
+        commentNumberLabel.setText(numberComments);
+        likesLabel.setText(String.valueOf(post.getLikeNumber()));
+        reputationLabel.setText(post.getPostedBy().getReputation());
+        buttonGroup1.clearSelection();
     }
 
     private javax.swing.JLabel authorLabel;

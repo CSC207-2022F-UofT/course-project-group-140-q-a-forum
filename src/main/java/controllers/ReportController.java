@@ -5,6 +5,7 @@ import entities.Course;
 import entities.Post;
 import entities.Report;
 import entities.User;
+import exceptions.EmptyEntryException;
 import exceptions.NotFoundException;
 import use_cases.ReportUseCaseInteractor;
 
@@ -48,7 +49,10 @@ public class ReportController {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
             return 0;
+        }catch ( EmptyEntryException e){
+            return -1;
         }
+
         return 1;
 
     }
@@ -59,8 +63,10 @@ public class ReportController {
             reportUseCaseInteractor.createReport(reportInformation);
         } catch (NotFoundException e) {
             return 0;
+        }catch (EmptyEntryException e){
+            return -1;
         }
-        return 1;
+       return 1;
 
     }
 

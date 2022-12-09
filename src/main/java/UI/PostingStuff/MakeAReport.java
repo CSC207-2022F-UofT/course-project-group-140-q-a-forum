@@ -5,7 +5,6 @@
 package UI.PostingStuff;
 
 import Presenter.GeneralPresenter;
-import UI.MainOfShowingContents.CommentsForm;
 import UI.MainOfShowingContents.CoursesForm;
 import UI.MainOfShowingContents.PostForm;
 import UI.UserdataRelated.ProfilePage;
@@ -26,6 +25,7 @@ import java.util.HashMap;
 public class MakeAReport extends javax.swing.JFrame {
 
     private final User user;
+    private  User viewUser;
     private final Course course;
     private final Post post;
     private final String reportType;
@@ -39,6 +39,7 @@ public class MakeAReport extends javax.swing.JFrame {
      */
     public MakeAReport(User user, User viewUser) {
         this.user = user;
+        this.viewUser = viewUser;
         this.post = null;
         this.course = null;
         this.reportType = "User";
@@ -89,7 +90,7 @@ public class MakeAReport extends javax.swing.JFrame {
 
 
         if (this.reportType.equals("User")) {
-            titleLabel.setText("user");
+            titleLabel.setText(this.viewUser.getUsername());
             typeLabel.setText("User");
         }
         if (this.reportType.equals("Post")) {
@@ -198,8 +199,9 @@ public class MakeAReport extends javax.swing.JFrame {
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt){
         int result = reportBasedType();
         switch (result){
-            case 0-> GeneralPresenter.showNotFoundError("Report type");
-            case 1->{
+            case 0-> GeneralPresenter.showNotFoundError(this.reportType);
+            case -1 -> GeneralPresenter.showEmptyEntryError();
+            case 1  ->{
                 GeneralPresenter.showSuccessMessage("Report");
                 goBackUpper();
             }
@@ -213,7 +215,7 @@ public class MakeAReport extends javax.swing.JFrame {
     }
     private int reportBasedType(){
         HashMap<String, Object> reportInfo = new HashMap<>();
-        reportInfo.put("Username", this.user);
+        reportInfo.put("User", this.user);
         reportInfo.put("Type", reportType);
         reportInfo.put("Content", reasonText.getText());
         if (post != null){
@@ -222,23 +224,28 @@ public class MakeAReport extends javax.swing.JFrame {
             return reportController.createReportForCourse(reportInfo, this.course);
         }
         else{
-            return  reportController.createReportForUser(reportInfo, this.user);
+            return  reportController.createReportForUser(reportInfo, this.viewUser);
         }
     }
 
 
     private void goBackUpper(){
-        if (this.reportType.equals("Post") || this.reportType.equals( "User")) {
+
+        if (this.reportType.equals("Post") ) {
             PostForm postForm = new PostForm(this.user,this.course);
             postForm.setVisible(true);
             this.setVisible(false);
-        }
-        if (this.reportType.equals("Course")) {
+        }else if (this.reportType.equals("Course")) {
             ArrayList<Course> courses = courseController.getAllCourses();
             CoursesForm coursesForm = new CoursesForm(this.user, courses);
             coursesForm.setVisible(true);
             this.setVisible(false);
+        }else{
+            ProfilePage profilePage = new ProfilePage(this.user, this.viewUser);
+            profilePage.setVisible(true);
+            this.setVisible(false);
         }
+
     }
 
     private javax.swing.JTextArea reasonText;
